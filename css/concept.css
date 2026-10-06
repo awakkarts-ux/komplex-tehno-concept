@@ -1,0 +1,454 @@
+/* ==========================================================================
+   Комплекс-Техно — концепт главной, десктоп. Версия 2 (29.09).
+   Идея учетстоков.рф: серый фон страницы, секции собраны из белых плашек,
+   как пазл. Изменения: углы прямые, зазор между плашками 8 или 6 px
+   (переключатель), сайт во всю ширину, всё в rem.
+   rem: 1rem = 16px при ширине 1440, дальше масштаб пропорционально экрану.
+   Шрифт — Inter Tight. Шкала типографики — из Figma-макета дизайнера
+   (файл «Дизайн мебельной компании», страница Page 6 → Главная).
+   Нейтрали — NTL: #FFFFFF / #F1F1F1 / #181C21. Акцент не выбран.
+   ========================================================================== */
+
+:root {
+  --page: #E8EAEC;            /* фон страницы между плашками — как на учетстоков.рф */
+  --tile: #FFFFFF;
+  --surface: #F1F1F1;         /* плашки внутри плашек: пункты меню, стрелки, кнопки */
+  --line: #E2E3E5;
+  --ink: #181C21;
+  --muted: #808080;           /* вторичный текст — из макета */
+  --muted-2: #B3B3B3;
+  --dark: #181C21;
+  --on-dark: #FFFFFF;
+  --on-dark-2: rgba(255, 255, 255, .62);
+  --line-dark: rgba(255, 255, 255, .14);
+  --accent: #E3262F;
+
+  --gap: .5rem;               /* зазор между плашками: 8px, вариант — 6px (.375rem) */
+  --tp: 2rem;                 /* внутренний отступ плашки */
+  --header: 4rem;
+  --font: "Inter Tight", Arial, sans-serif;
+}
+html[data-gap="6"] { --gap: .375rem; }
+
+/* 1rem = 16px на 1440. Переключатель «База 1200» — те же пропорции, что в Figma-макете шириной 1200 */
+html { font-size: calc(100vw / 90); -webkit-text-size-adjust: 100%; }
+html[data-base="1200"] { font-size: calc(100vw / 75); }
+@media (max-width: 1023px) { html, html[data-base="1200"] { font-size: 16px; } }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: .875rem;         /* Body 4: 14 / 140% / −1% */
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  background: var(--page);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; color: var(--ink); }
+button { font: inherit; color: inherit; letter-spacing: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- Шкала типографики (из макета) ----------
+   H1       56 / 100% / −3%   600
+   H2       40 / 100% / −3%   600
+   Title 2  32 / 100% / −2%   600
+   Title 3  28 / 110% / −3%   500
+   Цифры    64 / 100% / −3%   500
+   Title 4  20 / 100% / −2%   500
+   Body 3   16 / 130% / −3%   500
+   Body 4   14 / 140% / −1%   500
+   Body 5   12 / 140% /  0    500
+   Body 6   10 / 130% /  0    500 — кнопки                                   */
+h1 { font-size: 3.5rem; line-height: 1; font-weight: 600; letter-spacing: -.03em; }
+h2 { font-size: 2.5rem; line-height: 1; font-weight: 600; letter-spacing: -.03em; }
+.t-title2 { font-size: 2rem; line-height: 1; font-weight: 600; letter-spacing: -.02em; }
+.t-title3 { font-size: 1.75rem; line-height: 1.1; font-weight: 500; letter-spacing: -.03em; }
+.t-title4 { font-size: 1.25rem; line-height: 1.1; font-weight: 500; letter-spacing: -.02em; }
+.t-body3 { font-size: 1rem; line-height: 1.3; font-weight: 500; letter-spacing: -.03em; }
+.t-lead { font-size: 1.25rem; line-height: 1.3; font-weight: 500; letter-spacing: -.02em; }
+.t-body5 { font-size: .75rem; line-height: 1.4; letter-spacing: 0; }
+.muted { color: var(--muted); }
+
+.ic { width: .75rem; height: .75rem; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.6; }
+
+/* ---------- Пазл: страница, сетка, плашки ---------- */
+.page { display: flex; flex-direction: column; gap: var(--gap); padding: calc(var(--header) + var(--gap) * 2) var(--gap) var(--gap); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); }
+.tile { position: relative; min-width: 0; padding: var(--tp); background: var(--tile); }
+.tile--dark { overflow: hidden; background: var(--dark); color: var(--on-dark-2); }
+.tile--dark h1, .tile--dark h2, .tile--dark h3 { color: var(--on-dark); }
+.tile--flush { padding: 0; overflow: hidden; }
+.s-4 { grid-column: span 4; }
+.s-5 { grid-column: span 5; }
+.s-7 { grid-column: span 7; }
+.s-12 { grid-column: span 12; }
+
+/* Колонтитул секции: подпись слева, номер справа, тонкая линия */
+.runner {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: .75rem; margin-bottom: 3rem;
+  border-bottom: 1px solid var(--line);
+  font-size: .75rem; line-height: 1.4; letter-spacing: 0; color: var(--muted);
+}
+.tile--dark .runner { border-bottom-color: var(--line-dark); color: rgba(255, 255, 255, .5); }
+
+.head { display: grid; grid-template-columns: 7fr 5fr; gap: 2rem; align-items: end; }
+.head h2 { max-width: 44rem; }
+.head__side { justify-self: end; display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; max-width: 26rem; color: var(--muted); }
+
+/* ---------- Кнопки: Body 6, высота 36, стрелка за разделителем ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: .75rem;
+  height: 2.25rem; padding: 0 .75rem; border: 1px solid transparent; border-radius: 0;
+  font: 500 .625rem/1.3 var(--font); letter-spacing: 0;
+  white-space: nowrap; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s;
+}
+.btn .ic { box-sizing: content-box; padding-left: .75rem; border-left: 1px solid rgba(24, 28, 33, .14); color: var(--accent); transition: transform .2s; }
+.btn:hover .ic { transform: translate(2px, -2px); }
+.btn--dark { background: var(--ink); color: #fff; }
+.btn--dark .ic { border-left-color: rgba(255, 255, 255, .2); }
+.btn--dark:hover { background: #000; }
+.btn--light { background: var(--surface); color: var(--ink); }
+.btn--light:hover { background: var(--line); }
+.btn--white { background: #fff; color: var(--ink); }
+.btn--white:hover { background: var(--surface); }
+.btn--outline-w { border-color: rgba(255, 255, 255, .4); color: #fff; }
+.btn--outline-w .ic { color: #fff; border-left-color: rgba(255, 255, 255, .3); }
+.btn--outline-w:hover { border-color: #fff; }
+
+.arrows { display: flex; gap: .25rem; }
+.arrow {
+  width: 2.25rem; height: 2.25rem; display: grid; place-items: center; border: 0; cursor: pointer;
+  background: var(--surface); color: var(--ink); transition: background-color .2s, color .2s;
+}
+.arrow--next { background: var(--ink); color: #fff; }
+.arrow:hover { background: var(--accent); color: #fff; }
+.arrow:disabled { opacity: .35; cursor: default; background: var(--surface); color: var(--ink); }
+.arrow svg { width: .625rem; height: .625rem; fill: currentColor; }
+
+/* ---------- Заглушка под фото: описание кадра для будущей генерации ---------- */
+.ph { position: relative; overflow: hidden; background: #D6D8DB; }  /* темнее фона страницы, чтобы плашка-фото читалась */
+.ph--dark { background: #262B32; }
+.ph__cap {
+  position: absolute; left: 1rem; bottom: .875rem; right: 1rem; max-width: 26rem;
+  font-size: .6875rem; line-height: 1.45; letter-spacing: 0; color: rgba(24, 28, 33, .55);
+}
+.ph__cap b { display: block; margin-bottom: .125rem; font-weight: 600; }
+.ph--dark .ph__cap { color: rgba(255, 255, 255, .42); }
+
+/* ---------- Шапка — плашка, закреплена сверху ---------- */
+.header-wrap { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: var(--gap) var(--gap) 0; background: var(--page); }
+.header { display: flex; align-items: center; gap: 1.5rem; height: var(--header); padding: 0 var(--tp); background: var(--tile); }
+.logo { display: flex; flex-direction: column; margin-right: auto; line-height: 1.3; }
+.logo b { font-size: 1rem; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+.logo span { font-size: .75rem; letter-spacing: 0; color: var(--muted); }
+.nav { display: flex; gap: .25rem; }
+.nav__item {
+  display: inline-flex; align-items: center; gap: .5rem; height: 2.25rem; padding: 0 .875rem;
+  background: var(--surface); border: 0; cursor: pointer;
+  font-size: .75rem; letter-spacing: 0; color: var(--ink);
+  transition: background-color .2s;
+}
+.nav__item:hover { background: var(--line); }
+.nav__tri { width: 0; height: 0; border-left: .25rem solid transparent; border-right: .25rem solid transparent; border-top: .3125rem solid var(--accent); transition: transform .2s; }
+.nav__drop { position: relative; }
+.nav__drop:hover .nav__tri, .nav__drop:focus-within .nav__tri { transform: rotate(180deg); }
+.nav__menu {
+  position: absolute; top: 100%; left: 0; min-width: 21rem; padding-top: var(--gap);
+  visibility: hidden; opacity: 0; transform: translateY(.25rem); transition: opacity .15s, transform .15s, visibility .15s;
+}
+.nav__menu-in { display: grid; gap: 1px; padding: .375rem; background: #fff; box-shadow: 0 0 0 var(--gap) var(--page); }
+.nav__drop:hover .nav__menu, .nav__drop:focus-within .nav__menu { visibility: visible; opacity: 1; transform: none; }
+.nav__menu a { display: flex; justify-content: space-between; align-items: center; padding: .75rem .875rem; font-size: .875rem; color: var(--ink); background: #fff; transition: background-color .2s; }
+.nav__menu a:hover { background: var(--surface); }
+.nav__menu a .ic { color: var(--accent); }
+.header__phone { font-size: 1rem; font-weight: 600; letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
+.header__phone:hover { color: var(--accent); }
+
+/* ---------- Прелоадер — по референсу 24ist.ru ----------
+   html.is-preloader: прокрутки нет, шапка стоит по центру экрана на шторке цвета фона, её закрывает полоса
+   цвета акцента, по ней слева растёт белая со счётчиком. html.is-leaving: шторка гаснет за .4s, шапка уезжает
+   наверх за 1s, счётчик проваливается вниз, полоса растворяется через 1s и открывает пункты шапки.          */
+.preloader { display: none; }
+html.is-preloader, html.is-leaving { overflow: hidden; }
+html.is-preloader .preloader, html.is-leaving .preloader { display: block; position: fixed; inset: 0; z-index: 49; background: var(--page); }
+html.is-leaving .preloader { opacity: 0; transition: opacity .4s ease-in-out; }
+html.is-preloader .header-wrap { background: transparent; transform: translateY(calc(50vh - var(--header) / 2 - var(--gap))); }
+html.is-leaving .header-wrap { transform: none; transition: transform 1s cubic-bezier(.3, 0, .2, 1); }
+.header { position: relative; }
+.header__loader { display: none; }
+html.is-preloader .header__loader, html.is-leaving .header__loader { display: block; position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; background: var(--accent); }
+html.is-leaving .header__loader { opacity: 0; visibility: hidden; transition: opacity .25s ease-out 1s, visibility .25s ease-out 1s; }
+.header__loader-inner { display: flex; align-items: center; justify-content: flex-end; height: 100%; padding-right: var(--tp); background: #fff; transform: translateX(var(--loader, -100%)); transition: transform .5s ease-out; }
+.header__loader-count { overflow: hidden; font-size: 1.75rem; line-height: 1.1; font-weight: 500; letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+html.is-leaving .header__loader-count > * , html.is-leaving .header__loader-count { transform: translateY(110%); transition: transform .8s ease-out .3s; }
+/* первый экран проявляется после ухода шторки */
+html.is-preloader .hero__content > *, html.is-leaving .hero__content > * { opacity: 0; transform: translateY(2rem); }
+html.is-leaving .hero__content > * { opacity: 1; transform: none; transition: opacity .9s ease-out, transform .9s cubic-bezier(.2, .7, .2, 1); }
+html.is-leaving .hero__content > :nth-child(1) { transition-delay: .7s; }
+html.is-leaving .hero__content > :nth-child(2) { transition-delay: .8s; }
+html.is-leaving .hero__content > :nth-child(3) { transition-delay: .95s; }
+html.is-preloader .hero__img { transform: scale(1.08); }
+html.is-leaving .hero__img { transform: none; transition: transform 1.6s cubic-bezier(.2, .7, .2, 1) .4s; }
+
+/* ---------- Переход между страницами — по референсу 24ist.ru (.page-animate-bg) ----------
+   Белая панель 0.95 на весь экран с отступом зазора, под шапкой. Уход: раскрывается вниз из-под шапки
+   (clip-path, .6s ease-in-out), затем scale 1.2 и непрозрачность (.6s circ-in) — переход по ссылке.
+   Приход (html.is-page-in, ставится в <head>): scale 1.2 → 1 и 0.95 (.6s), затем втягивается под шапку
+   (.6s), заголовок выезжает по словам. Анимации — Web Animations API в concept.js.                     */
+.page-veil { position: fixed; top: var(--gap); left: var(--gap); right: var(--gap); bottom: var(--gap); z-index: 45; background: #fff; border: 1px solid rgba(169, 173, 185, .3); opacity: 0; pointer-events: none; clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); will-change: clip-path, transform, opacity; }
+html.is-page-in .page-veil { opacity: 1; transform: scale(1.2); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+html.is-page-out { overflow: hidden; }
+html.is-page-out .page-veil, html.is-page-in .page-veil { pointer-events: auto; }
+/* заголовок по словам: слово в маске, внутри выезжает снизу */
+.js-page-title .w { display: inline-block; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; vertical-align: top; }
+.js-page-title .w > span { display: inline-block; will-change: transform; }
+
+/* ---------- Заглушка страницы услуги — только для показа перехода ---------- */
+.svc-page { overflow: hidden; padding-top: 2.8125rem; padding-bottom: 2.8125rem; }
+.svc-page__title { grid-column: 2 / span 3; grid-row: 1; }
+.svc-page__descr { grid-column: 2 / span 2; grid-row: 2; }
+.svc-page__back { grid-column: 2; grid-row: 3; justify-self: start; }
+.svc-page__image { height: 36rem; }
+.svc-page__todo { display: grid; grid-template-columns: 1fr 3fr; gap: var(--col-gap); padding-top: 2.8125rem; padding-bottom: 2.8125rem; }
+
+/* ---------- 1. Первый экран — тёмная плашка ---------- */
+.hero { display: flex; align-items: flex-end; min-height: calc(100vh - var(--header) - var(--gap) * 3); color: #fff; }
+.hero .ph { position: absolute; inset: 0; }
+.hero .ph__cap { top: 1.5rem; bottom: auto; left: auto; right: var(--tp); text-align: right; }
+/* Фото: приборы справа, левая часть кадра тёмная — прижимаем к правому краю */
+.hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% 40%; }
+/* Затемнение: снизу — под заголовок и кнопки, слева — сводит фото в тёмный фон плашки */
+.hero__shade { position: absolute; inset: 0; background:
+  linear-gradient(180deg, rgba(24, 28, 33, 0) 0%, rgba(24, 28, 33, .2) 40%, rgba(24, 28, 33, .88) 100%),
+  linear-gradient(90deg, rgba(24, 28, 33, .8) 0%, rgba(24, 28, 33, .45) 40%, rgba(24, 28, 33, 0) 70%); }
+.particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero__content { position: relative; z-index: 1; width: 100%; padding-top: 8rem; }
+.hero .runner { margin-bottom: 2rem; }
+.hero h1 { max-width: 62rem; }
+.hero__bottom { display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: end; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line-dark); }
+.hero__bottom p { max-width: 34rem; color: rgba(255, 255, 255, .78); }
+.hero__actions { display: flex; gap: var(--gap); }
+
+/* ---------- Общая сетка на 4 колонки с тонкими линиями — из Figma-референса ----------
+   Макет 1200: 4 колонки по 275 с зазором 20, линии по центру зазора (#E0E0E0 50%), между строками 40.
+   Метка раздела — квадрат 6×6 цветом акцента + 12px серым.                                          */
+.tile { --col-gap: 1.25rem; }
+.cols, .lines { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--col-gap); }
+.lines { position: absolute; inset: 0 var(--tp); pointer-events: none; }
+.lines i + i { position: relative; }
+.lines i + i::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(var(--col-gap) / -2); width: 1px; background: rgba(224, 224, 224, .5); }
+.cols { position: relative; z-index: 1; row-gap: 2.5rem; align-items: start; }
+.tag { display: flex; align-items: center; gap: .625rem; margin: 0; padding: .25rem 0; font-size: .75rem; font-weight: 500; line-height: 1.25rem; letter-spacing: 0; color: var(--muted); }
+.tag::before { content: ""; width: .375rem; height: .375rem; flex-shrink: 0; background: var(--accent); }
+.cols > .tag { grid-column: 1; grid-row: 1; }
+.hl { color: var(--muted); }
+
+/* ---------- 2. О компании — по референсу AIS: фото во всю ширину, снизу наезжает белая панель ---------- */
+.about { position: relative; }
+.about__photo { height: 40rem; }
+.about__photo .ph__cap { top: 1.5rem; bottom: auto; }
+.about__panel { position: relative; margin: -14rem 1.25rem 0; padding-top: 1.5rem; padding-bottom: 2.8125rem; }
+.about__title { grid-column: 2 / span 3; grid-row: 1; }
+/* линия над абзацем — до правого края, как в референсе; текст — на две колонки */
+.about__lead { grid-column: 2 / span 3; grid-row: 2; padding-top: 1.25rem; padding-right: calc((100% - var(--col-gap) * 2) / 3 + var(--col-gap)); border-top: 1px solid #E4E4E4; }
+.about__mtitle { grid-column: 2; grid-row: 3; }
+.about__mintro { grid-column: 3; grid-row: 3; }
+.mitem { grid-row: 4; }
+.mitem__num { display: block; margin-right: 2.5rem; padding: 1.25rem 0; border-bottom: 1px solid #E4E4E4; font-size: 4rem; line-height: 1; font-weight: 500; letter-spacing: -.03em; color: var(--muted-2); font-variant-numeric: tabular-nums; }
+.mitem p { margin-top: 1.25rem; }
+
+/* ---------- Наш подход — по референсу AIS: слева закреплено, справа стопка карточек ---------- */
+.approach { display: grid; grid-template-columns: 1fr 1fr; gap: var(--col-gap); padding-top: 2.8125rem; padding-bottom: 2.8125rem; }
+.approach__side { min-width: 0; }
+.approach__sticky { position: sticky; top: calc(var(--header) + var(--gap) * 2 + 1.5rem); display: flex; flex-direction: column; gap: 2.5rem; }
+.approach__lead { max-width: 34rem; }
+.approach__art { aspect-ratio: 4 / 3; max-width: 38rem; }
+.approach__list { display: grid; gap: var(--gap); }
+.acard { display: flex; flex-direction: column; justify-content: space-between; gap: 4rem; min-height: 15rem; padding: 1.25rem 1.5rem 1.75rem; background: #F7F7F7; }
+.acard__top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: .75rem; letter-spacing: 0; color: var(--muted); }
+.acard__top h3 { font-size: .75rem; font-weight: 500; line-height: 1.4; color: var(--muted); }
+.acard p { max-width: 36rem; line-height: 1.3; }
+
+/* ---------- О нас в цифрах — по фрагменту Figma-референса ----------
+   Заголовок 40 на три колонки, первая строка сдвинута на колонку. Цифры 64 / 500 / −3% цветом
+   акцента, под ними линия #E4E4E4 (ячейка 235 из 275 — линия короче колонки на 40).                */
+.stats { overflow: hidden; padding-top: 2.8125rem; padding-bottom: 2.8125rem; }
+.stats__title { grid-column: 1 / span 3; grid-row: 1; text-indent: calc((100% - var(--col-gap) * 2) / 3 + var(--col-gap)); }
+.stats__intro { grid-row: 2; }
+.stats__intro:nth-of-type(2) { grid-column: 2; }
+.stats__intro:nth-of-type(3) { grid-column: 3; }
+.stat { grid-row: 3; display: flex; align-items: baseline; gap: .5rem; margin-right: 2.5rem; padding: 1.25rem 0; border-bottom: 1px solid #E4E4E4; color: var(--accent); }
+.stat:nth-of-type(1) { grid-column: 2; }
+.stat:nth-of-type(2) { grid-column: 3; }
+.stat:nth-of-type(3) { grid-column: 4; }
+.stat b { font-size: 4rem; line-height: 1; font-weight: 500; letter-spacing: -.03em; }
+.stat small { font-size: 1.25rem; letter-spacing: -.02em; color: var(--ink); }
+.stat__text { grid-row: 4; }
+.stat__text:nth-of-type(4) { grid-column: 2; }
+.stat__text:nth-of-type(5) { grid-column: 3; }
+.stat__text:nth-of-type(6) { grid-column: 4; }
+
+/* ---------- 3. Услуги — по референсу delta.ava-case.com ----------
+   Сцена закрепляется на время прокрутки (sticky + JS, без GSAP): на одну услугу — 70vh прокрутки,
+   в конце 40vh задержки на последней. Точка 11px цветом акцента едет по линии к активной услуге,
+   подписи неактивных — 40%. Справа серая карточка #F1F1F1: текущая гаснет, следующая выезжает снизу
+   (как у них: opacity 1→0 и yPercent 120→0 одновременно). Слева графика поворачивается на 90° за шаг. */
+.services { padding-top: 2.8125rem; padding-bottom: var(--tp); --stage-top: calc(var(--header) + var(--gap) * 2); --stage-h: calc(100vh - var(--stage-top) - var(--gap) - var(--tp)); }
+.services__title { grid-column: 2 / span 3; grid-row: 1; }
+.services__intro { grid-column: 3; grid-row: 2; color: var(--muted); }
+.svc-track { position: relative; height: calc(var(--stage-h) + (var(--n) - 1) * 70vh + 40vh); margin-top: 3rem; }
+.svc-stage { position: sticky; top: var(--stage-top); display: flex; flex-direction: column; height: var(--stage-h); min-height: 34rem; }
+.svc-nav__line { position: relative; height: 1px; background: rgba(24, 28, 33, .2); }
+.svc-nav__ball { position: absolute; top: -.3125rem; left: 0; width: .6875rem; height: .6875rem; border-radius: 50%; background: var(--accent); will-change: transform; }
+.svc-nav__items { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); column-gap: var(--col-gap); }
+.svc-nav__items button { display: flex; flex-direction: column; gap: .5rem; width: 100%; padding: 1.25rem .5rem 0 0; border: 0; background: none; text-align: left; cursor: pointer; font-size: .875rem; line-height: 1.3; letter-spacing: -.01em; color: var(--ink); opacity: .4; transition: opacity .2s; }
+.svc-nav__items button:hover { opacity: 1; }
+.svc-nav__items span { font-variant-numeric: tabular-nums; }
+.svc-body { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--col-gap); margin-top: 2.5rem; }
+.svc-art { display: grid; place-items: center; background: none; }
+.svc-art__shape { width: min(78%, 30rem); height: auto; fill: none; stroke: var(--accent); stroke-width: .8; will-change: transform; }
+.svc-art .ph__cap { left: 0; bottom: 0; }
+.svc-art .ph__cap span { display: block; }
+.svc-cards { position: relative; overflow: hidden; }
+.svc-card { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 2.5rem 3.5rem 2.5rem 2.5rem; background: #F1F1F1; will-change: transform, opacity; }
+.svc-card + .svc-card { transform: translateY(120%); }
+.svc-card h3 { max-width: 34rem; font-size: 2.5rem; line-height: 1.05; font-weight: 500; letter-spacing: -.03em; }
+.svc-card p { max-width: 38rem; margin-top: 2rem; font-size: 1rem; line-height: 1.45; letter-spacing: -.01em; }
+.svc-card__more { align-self: flex-start; margin-top: auto; }
+
+/* ---------- 4. Этапы — по референсу 24ist.ru (блок «Наш принцип») ----------
+   Сцена закрепляется, по прокрутке вниз всё содержимое едет влево (вертикальная прокрутка 1:1 = сдвиг ленты,
+   плюс 20vh задержки в конце). Слева метка, крупный заголовок и кнопка на высоту карточки.
+   Карточки квадратные (у них 540 при 1440, радиус 14 — у нас углы прямые), фон #F1F1F1, зазор 16:
+   номер цветом акцента, название, описание прижато вниз. При появлении лента въезжает на 160px.        */
+.hs { padding-top: 0; padding-bottom: 0; --stage-top: calc(var(--header) + var(--gap) * 2); --stage-h: calc(100vh - var(--stage-top) - var(--gap)); --card: min(33.75rem, calc(var(--stage-h) - 4rem)); }
+.hs-track { position: relative; }
+.hs-stage { position: sticky; top: var(--stage-top); display: flex; align-items: center; height: var(--stage-h); margin: 0 calc(var(--tp) * -1); padding: 0 var(--tp); overflow: hidden; }
+.hs-wrap { display: flex; will-change: transform; }
+.hs-left { flex: none; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; width: calc((100vw - var(--gap) * 2 - var(--tp) * 2) / 2); height: var(--card); padding-right: 4rem; }
+.hs-title { font-size: 4.5rem; line-height: .95; letter-spacing: -.035em; }
+.hs-list { display: flex; gap: 1rem; opacity: 0; transform: translate3d(10rem, 0, 0); transition: transform .6s cubic-bezier(.37, 0, .63, 1) .4s, opacity .6s cubic-bezier(.37, 0, .63, 1) .4s; }
+.hs.is-revealed .hs-list { opacity: 1; transform: none; }
+.hs-card { flex: none; display: flex; flex-direction: column; width: var(--card); height: var(--card); padding: 2rem 2.75rem 2rem 2rem; background: #F1F1F1; }  /* у них справа 8% — у нас в rem: проценты считаются от всей ленты */
+.hs-card__num { margin-bottom: 1.25rem; font-size: 4rem; line-height: 1; font-weight: 500; letter-spacing: -.03em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.hs-card p { margin-top: auto; font-size: 1rem; line-height: 1.45; letter-spacing: -.01em; color: var(--muted); }
+
+/* ---------- Высокая кнопка — по референсу instituteofhealth.com ----------
+   Подпись слева сверху, стрелка ↳ справа снизу. У них 243×65, отступы 12/12/8, радиус 4 — у нас углы прямые.
+   Тёмная (#181C21) и контурная (линия 1px). Наведение: стрелка сдвигается, тёмная — чернее, контурная — заливается */
+.btn-tall { position: relative; display: flex; flex-direction: column; justify-content: space-between; width: 15.25rem; height: 4rem; padding: .75rem .75rem .5rem; border: 1px solid var(--ink); font-size: 1rem; line-height: 1.1; letter-spacing: -.03em; text-align: left; cursor: pointer; transition: background-color .45s, color .45s; }
+.btn-tall svg { align-self: flex-end; width: .75rem; height: .75rem; fill: none; stroke: currentColor; stroke-width: 1.4; transition: transform .45s cubic-bezier(.165, .84, .44, 1); }
+.btn-tall:hover svg { transform: translate(.125rem, .125rem); }
+.btn-tall--dark { background: var(--ink); color: #fff; }
+.btn-tall--dark:hover { background: #000; }
+.btn-tall--line { background: transparent; color: var(--ink); }
+.btn-tall--line:hover { background: var(--ink); color: #fff; }
+
+/* ---------- 5. Наши работы — по референсу instituteofhealth.com (карточки /events) ----------
+   Слева (треть) закреплены метка, заголовок, подводка, кнопка. Справа карточки #F1F1F1 друг под другом с зазором 16:
+   внутри отступ 14, фото слева ~45% ширины, справа метаданные через точку (серым), название 28, характеристики,
+   кнопка-контур внизу на половину ширины.                                                                  */
+.wk { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; padding-top: 2.8125rem; padding-bottom: 2.8125rem; }
+.wk__sticky { position: sticky; top: calc(var(--header) + var(--gap) * 2 + 1.5rem); display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+.wk__lead { max-width: 24rem; color: var(--muted); }
+.wk__sticky .btn-tall { margin-top: 1rem; }
+.wk__list { display: grid; gap: 1rem; }
+.wcard { display: grid; grid-template-columns: 45% 1fr; gap: 1.25rem; padding: .875rem; background: #F1F1F1; }
+.wcard__img { display: block; aspect-ratio: 447 / 346; }
+.wcard__body { display: flex; flex-direction: column; min-width: 0; padding: .25rem .5rem 0 0; }
+.wcard__meta { display: flex; flex-wrap: wrap; font-size: .9375rem; line-height: 1.3; letter-spacing: -.01em; color: var(--muted); }
+.wcard__meta span + span::before { content: "•"; margin: 0 .375rem; }
+.wcard__title { margin-top: .75rem; font-size: 1.75rem; line-height: 1.1; font-weight: 500; letter-spacing: -.03em; transition: color .3s; }
+.wcard:hover .wcard__title { color: var(--accent); }
+.wcard__actions { display: flex; gap: .875rem; margin-top: auto; padding-top: 1.5rem; }
+.wcard__actions .btn-tall { width: calc(50% - .4375rem); }
+.spec { margin: 1rem 0 0; }
+.spec div { display: flex; align-items: baseline; gap: .5rem; padding: .375rem 0; font-size: .875rem; letter-spacing: -.01em; }
+.spec dt { color: var(--muted); white-space: nowrap; }
+.spec i { flex: 1; border-bottom: 1px dotted #BFC2C6; transform: translateY(-.1875rem); }
+.spec dd { margin: 0; text-align: right; color: var(--ink); }
+
+/* ---------- 6. Вопросы — по референсу instituteofhealth.com (блок FAQ) ----------
+   Две половины: слева закреплены метка, заголовок и кнопка; справа вопросы на линиях rgba(24,28,33,.25),
+   отступ 12 сверху и снизу, вопрос 16/500, плюс 36×36 на сером. Раскрытие — в concept.js.                  */
+.qa { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding-top: 7rem; padding-bottom: 7rem; }
+.qa__sticky { position: sticky; top: calc(var(--header) + var(--gap) * 2 + 1.5rem); display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+.qa__sticky h2 { max-width: 34rem; }
+.qa__sticky .btn-tall { margin-top: 2rem; }
+.qa__list { border-bottom: 1px solid rgba(24, 28, 33, .25); }
+.qa-item { border-top: 1px solid rgba(24, 28, 33, .25); }
+.qa-item h3 { margin: 0; font: inherit; }
+.qa-item__head { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; width: 100%; padding: .75rem 0; border: 0; background: none; text-align: left; cursor: pointer; font-size: 1rem; line-height: 1.25; font-weight: 500; letter-spacing: -.02em; color: var(--ink); }
+.qa-item__icon { position: relative; flex: none; width: 2.25rem; height: 2.25rem; background: #E8E8E8; transition: background-color .3s; }
+.qa-item__icon::before, .qa-item__icon::after { content: ""; position: absolute; left: 50%; top: 50%; width: .75rem; height: 1px; margin: -.5px 0 0 -.375rem; background: currentColor; transition: transform .6s cubic-bezier(.165, .84, .44, 1); }
+.qa-item__icon::after { transform: rotate(90deg); }
+.qa-item__head:hover .qa-item__icon { background: #DCDCDC; }
+.qa-item.is-open .qa-item__icon::before { transform: rotate(45deg); }
+.qa-item.is-open .qa-item__icon::after { transform: rotate(135deg); }
+.qa-item__body { height: 0; overflow: hidden; }
+.qa-item.is-open .qa-item__body { height: auto; }
+.qa-item__text { padding: .25rem 4rem 1.25rem 0; font-size: .9375rem; line-height: 1.5; letter-spacing: -.01em; color: var(--ink); }
+
+/* ---------- 7. Призыв к действию: текст + контакты ---------- */
+.cta { display: flex; flex-direction: column; justify-content: space-between; gap: 4rem; }
+.cta .t-lead { max-width: 44rem; color: var(--muted); }
+.cta__side { display: flex; flex-direction: column; }
+.cta__contacts a { display: flex; justify-content: space-between; align-items: baseline; padding: 1.25rem 0; border-bottom: 1px solid var(--line); color: var(--ink); transition: color .2s; }
+.cta__contacts a:first-child { padding-top: 0; }
+.cta__contacts a:hover { color: var(--accent); }
+.cta__contacts span { font-size: .75rem; letter-spacing: 0; color: var(--muted); }
+.cta__side .btn { margin-top: 3rem; width: 100%; height: 3rem; }
+
+/* ---------- Футер — тёмная плашка ---------- */
+.footer { padding-top: 4rem; padding-bottom: 1.5rem; }
+.footer__grid { display: grid; grid-template-columns: 2.2fr 1fr 1.4fr 1.4fr; gap: 3rem; }
+.footer .logo b { color: #fff; }
+.footer .logo span { color: var(--on-dark-2); }
+.footer__about { margin-top: 1.5rem; max-width: 26rem; }
+.footer h4 { margin: 0 0 1.25rem; padding-bottom: .75rem; border-bottom: 1px solid var(--line-dark); font-size: .625rem; font-weight: 500; line-height: 1.3; letter-spacing: 0; color: rgba(255, 255, 255, .45); }
+.footer ul { display: grid; gap: .5rem; }
+.footer a:hover { color: #fff; }
+.footer__bottom { display: flex; justify-content: space-between; margin-top: 5rem; padding-top: 1.25rem; border-top: 1px solid var(--line-dark); font-size: .75rem; letter-spacing: 0; color: rgba(255, 255, 255, .45); }
+
+/* ---------- Попап «Получить консультацию» — без формы ---------- */
+.modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 1.5rem; }
+.modal[hidden] { display: none; }
+.modal__overlay { position: absolute; inset: 0; background: rgba(24, 28, 33, .62); }
+.modal__panel { position: relative; width: 100%; max-width: 32rem; padding: 3rem 2.5rem 2.5rem; background: #fff; }
+.modal__close { position: absolute; top: 1rem; right: 1rem; width: 2.25rem; height: 2.25rem; display: grid; place-items: center; border: 0; background: var(--surface); cursor: pointer; }
+.modal__close:hover { background: var(--line); }
+.modal__close svg { width: .75rem; height: .75rem; stroke: var(--ink); stroke-width: 1.6; }
+.modal h2 { max-width: 22rem; }
+.modal p { margin-top: 1.25rem; color: var(--muted); }
+.modal p b { color: var(--ink); font-weight: 500; }
+.modal__links { display: grid; gap: var(--gap); margin-top: 2rem; }
+.modal__links .btn { width: 100%; height: 3.25rem; font-size: 1rem; letter-spacing: -.03em; }
+
+/* ---------- Панель концепта — сравнить варианты. На сайт не переносится ---------- */
+.concept-bar { position: fixed; left: 12px; bottom: 12px; z-index: 90; display: flex; align-items: center; gap: 14px; padding: 8px 12px; background: rgba(255, 255, 255, .96); box-shadow: 0 0 0 1px var(--line); font: 500 11px/1 var(--font); letter-spacing: 0; color: var(--muted); opacity: .4; transition: opacity .2s; }
+.concept-bar:hover, .concept-bar:focus-within { opacity: 1; }
+.concept-bar__grp { display: flex; align-items: center; gap: 6px; }
+.concept-bar button { height: 20px; min-width: 20px; padding: 0 6px; border: 0; background: var(--surface); font: 500 11px/1 var(--font); color: var(--ink); cursor: pointer; }
+.concept-bar button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.concept-bar [data-accent] { width: 18px; min-width: 18px; height: 18px; padding: 0; border: 2px solid #fff; outline: 1px solid var(--line); }
+.concept-bar [data-accent][aria-pressed="true"] { outline: 2px solid var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Появление заголовков и плавная прокрутка — по instituteofhealth.com ---------- */
+.rw { display: inline-block; will-change: transform, opacity, filter; }
+main h2, .wcard__title { perspective: 600px; }
+.rv-wait .rw { opacity: 0; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }

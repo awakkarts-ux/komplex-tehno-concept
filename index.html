@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Установка узлов учета тепловой энергии «под ключ» — ООО «Комплекс-Техно»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/concept.css">
+<script>
+  // До отрисовки: первый заход — прелоадер, приход по ссылке с другой страницы сайта — вход страницы
+  // (белая панель закрывает экран и уходит под шапку). Оба — по референсу 24ist.ru
+  (function () {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var via = null;
+    try { via = sessionStorage.getItem('kt-page-veil'); sessionStorage.removeItem('kt-page-veil'); } catch (e) {}
+    document.documentElement.classList.add(via ? 'is-page-in' : 'is-preloader');
+  })();
+</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="turn" viewBox="0 0 12 12"><path d="M2.5 1.5v6h7M7 5l2.5 2.5L7 10"/></symbol>
+  <symbol id="arr" viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></symbol>
+  <symbol id="x" viewBox="0 0 12 12"><path d="M1 1l10 10M11 1 1 11" fill="none"/></symbol>
+  <symbol id="tri-l" viewBox="0 0 10 10"><path d="M7 1 2 5l5 4z"/></symbol>
+  <symbol id="tri-r" viewBox="0 0 10 10"><path d="M3 1l5 4-5 4z"/></symbol>
+</svg>
+
+<!-- 0. Хедер — плашка, закреплена сверху. Телефон справа обязателен -->
+<!-- Прелоадер — по референсу 24ist.ru: шторка цвета фона, шапка по центру, на ней полоса загрузки со счётчиком.
+     После загрузки шторка гаснет, шапка уезжает наверх, полоса растворяется. Элементы удаляются скриптом -->
+<div class="preloader" aria-hidden="true"></div>
+<!-- Панель перехода между страницами — по референсу 24ist.ru (.page-animate-bg) -->
+<div class="page-veil" aria-hidden="true"></div>
+<div class="header-wrap">
+  <header class="header">
+    <div class="header__loader" aria-hidden="true"><div class="header__loader-inner"><div class="header__loader-count"><span data-loader-count>0</span>%</div></div></div>
+    <a class="logo" href="#top">
+      <b>ООО «Комплекс-Техно»</b>
+      <span>Учет тепловой энергии – современные возможности</span>
+    </a>
+    <nav class="nav" aria-label="Основное меню">
+      <div class="nav__drop">
+        <a class="nav__item" href="#services">Услуги <span class="nav__tri"></span></a>
+        <div class="nav__menu">
+          <div class="nav__menu-in">
+            <a href="usluga-obsledovanie.html">Обследование объектов <svg class="ic"><use href="#arr"/></svg></a>
+            <a href="#services">Проектирование <svg class="ic"><use href="#arr"/></svg></a>
+            <a href="#services">Установка <svg class="ic"><use href="#arr"/></svg></a>
+            <a href="#services">Сервисное обслуживание <svg class="ic"><use href="#arr"/></svg></a>
+            <a href="#services">Ремонт, замена и реконструкция <svg class="ic"><use href="#arr"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <a class="nav__item" href="#works">Объекты</a>
+      <a class="nav__item" href="#contacts">Контакты</a>
+    </nav>
+    <a class="header__phone" href="tel:+74991107701">+7 (499) 110-77-01</a>
+    <button class="btn btn--dark" type="button" data-modal>Консультация <svg class="ic"><use href="#arr"/></svg></button>
+  </header>
+</div>
+
+<main class="page" id="top">
+
+  <!-- 1 Блок — Первый экран. Фон — анимация (просьба клиента, референс promstoki.ru) -->
+  <section class="tile tile--dark hero" aria-labelledby="hero-title">
+    <!-- Фото сгенерировано 06.10: приборы справа, слева тёмное место под заголовок. Исходник 1280×714 — нужен апскейл -->
+    <img class="hero__img js-page-image" src="img/hero.png" alt="" width="1280" height="714">
+    <div class="hero__shade"></div>
+    <canvas class="particles" data-particles aria-hidden="true"></canvas>
+    <div class="hero__content">
+      <div class="runner"><span>ООО «Комплекс-Техно»</span><span>с 2007 года</span></div>
+      <h1 class="js-page-title" id="hero-title">Установка узлов учета тепловой энергии (УУТЭ) «под ключ» в Москве и Московской области.</h1>
+      <div class="hero__bottom">
+        <p class="t-body3 js-page-description">Профессиональная установка узлов учета тепловой энергии. Работаем с 2007 года. Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.</p>
+        <div class="hero__actions">
+          <button class="btn btn--white" type="button" data-modal>Получить консультацию <svg class="ic"><use href="#arr"/></svg></button>
+          <a class="btn btn--outline-w" href="#services">Услуги <svg class="ic"><use href="#arr"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 Блок — О компании. Начало — по референсу AIS: фото во всю ширину, снизу на него наезжает белая панель.
+       Дальше внутри панели — сетка на 4 колонки с линиями, как в блоке «О нас в цифрах» -->
+  <section class="about" aria-labelledby="about-title">
+    <div class="ph about__photo"><p class="ph__cap"><b>Фото</b>Инженер настраивает тепловычислитель в индивидуальном тепловом пункте, спецодежда, реальная обстановка</p></div>
+    <div class="tile about__panel">
+      <div class="lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="cols">
+        <p class="tag">О компании</p>
+        <h2 class="about__title" id="about-title">ООО «Комплекс-Техно» — ваш экспертный партнёр в области учёта тепловой энергии.</h2>
+        <p class="about__lead t-body3">С 2007 года предоставляем комплексные услуги по установке коммерческих узлов учёта тепловой энергии для промышленных предприятий, управляющих компаний, ТСЖ, коммунальных служб и коммерческих объектов в Москве и Московской области.</p>
+        <h3 class="about__mtitle t-title4">Наша миссия</h3>
+        <p class="about__mintro">Помогать клиентам оптимизировать затраты на тепловую энергию за счёт:</p>
+        <div class="mitem" style="grid-column:2"><span class="mitem__num">01</span><p>грамотного подбора оборудования для узлов учёта тепловой энергии (баланс цены и качества);</p></div>
+        <div class="mitem" style="grid-column:3"><span class="mitem__num">02</span><p>профессионального монтажа и сервисного обслуживания;</p></div>
+        <div class="mitem" style="grid-column:4"><span class="mitem__num">03</span><p>минимизации сроков окупаемости узлов учёта тепла.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Наш подход к работе — по референсу AIS: слева закреплены метка, вводная фраза и графика,
+       справа стопка светлых карточек: подпись и номер сверху, крупный текст снизу.
+       Заголовок клиента «Наш подход к работе» — это метка (h2), чтобы не дублировать его крупным текстом -->
+  <section class="tile approach" aria-labelledby="approach-title">
+    <div class="approach__side">
+      <div class="approach__sticky">
+        <h2 class="tag" id="approach-title">Наш подход к работе</h2>
+        <p class="approach__lead t-title2">Ответственно и полноценно выполняем любую задачу, независимо от сложности.</p>
+        <div class="ph approach__art"><p class="ph__cap"><b>Графика</b>Сгенерируем позже — крупный знак или объект на белом, как логотип в референсе</p></div>
+      </div>
+    </div>
+    <ol class="approach__list">
+      <li class="acard"><div class="acard__top"><h3>Большой опыт</h3><span>01</span></div><p class="t-title4">Работаем с 2007 года и знаем многие тонкости и нюансы учёта тепловой энергии.</p></li>
+      <li class="acard"><div class="acard__top"><h3>Работа «под ключ»</h3><span>02</span></div><p class="t-title4">Берём на себя все этапы: от обследования объекта, поставки оборудования до установки, пуско-наладки и сервисного (технического) обслуживания узлов учёта тепловой энергии.</p></li>
+      <li class="acard"><div class="acard__top"><h3>Точно в срок</h3><span>03</span></div><p class="t-title4">Все работы по установке узлов учёта тепловой энергии выполняются в точно оговорённые сроки. Мы держим вас в курсе каждого этапа работ.</p></li>
+      <li class="acard"><div class="acard__top"><h3>Собственный автопарк</h3><span>04</span></div><p class="t-title4">Быстрый выезд на объект и своевременная доставка оборудования без зависимости от сторонних перевозчиков.</p></li>
+      <li class="acard"><div class="acard__top"><h3>Сертифицированное оборудование</h3><span>05</span></div><p class="t-title4">Сотрудничаем с ведущими российскими производителями оборудования для учёта тепловой энергии, поэтому гарантируем поставку и установку сертифицированного оборудования, внесённого в Государственный реестр средств измерений.</p></li>
+      <li class="acard"><div class="acard__top"><h3>Прозрачные цены</h3><span>06</span></div><p class="t-title4">Стоимость установки узла учёта тепловой энергии фиксируется в договоре, никаких скрытых платежей и доплат.</p></li>
+      <li class="acard"><div class="acard__top"><h3>Гарантия допуска</h3><span>07</span></div><p class="t-title4">Гарантируем допуск установленного узла учёта тепловой энергии в эксплуатацию в качестве коммерческого узла учёта.</p></li>
+      <li class="acard"><div class="acard__top"><h3>Бесплатные консультации</h3><span>08</span></div><p class="t-title4">Оперативно поможем подобрать оборудование и определить подходящее место для установки узла учёта тепловой энергии на вашем объекте.</p></li>
+      <li class="acard"><div class="acard__top"><h3>Бесплатный выезд</h3><span>09</span></div><p class="t-title4">В случае необходимости организуем бесплатный выезд нашего специалиста на ваш объект.</p></li>
+    </ol>
+  </section>
+
+  <!-- О нас в цифрах — по фрагменту Figma-референса дизайнера (Page 6 → Главная, блок «О компании»):
+       4 колонки с тонкими вертикальными линиями, метка в первой колонке, заголовок с отступом первой строки,
+       цифры цветом акцента с линией снизу. Фон — анимация (просьба клиента): тёмные частицы на белом -->
+  <section class="tile stats" aria-labelledby="num-title">
+    <canvas class="particles" data-particles="dark" aria-hidden="true"></canvas>
+    <div class="lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="cols">
+      <p class="tag">О нас в цифрах</p>
+      <h2 class="stats__title" id="num-title">Наши цифры — <span class="hl">это опыт</span>, который гарантирует результат и экономит ваши деньги.</h2>
+      <p class="stats__intro">За годы работы мы научились главному: у каждого объекта — от многоквартирного дома до промышленного предприятия — есть оптимальное решение по установке узла учёта тепловой энергии.</p>
+      <p class="stats__intro">Наша задача — найти его через детальный анализ исходных данных и честное сравнение вариантов. Мы не навязываем оборудование, а предлагаем то, что реально закроет задачу, пройдёт согласование и будет принято в коммерческий учёт.</p>
+      <div class="stat"><b>19+</b><small>лет</small></div>
+      <div class="stat"><b>100+</b></div>
+      <div class="stat"><b>300+</b></div>
+      <p class="stat__text">Практического опыта в сфере приборного учёта тепловой энергии. Знаем многие нюансы и тонкости согласования проектной документации и требования инспекторов РСО.</p>
+      <p class="stat__text">Реализованных проектов в Москве и Московской области: многоквартирные дома, бизнес-центры, промышленные объекты. Каждый объект — это сдача узла учёта РСО и ввод в коммерческую эксплуатацию.</p>
+      <p class="stat__text">Установленных приборов учёта тепловой энергии. Отработанные схемы монтажа и проверенные модели оборудования снижают риски ошибок и обеспечивают точность коммерческого учёта тепловой энергии.</p>
+    </div>
+  </section>
+
+  <!-- 3 Блок — Услуги — по референсу delta.ava-case.com (блок «Услуги»): сцена закрепляется на время прокрутки.
+       Точка едет по линии к активной услуге, карточка гаснет, следующая выезжает снизу, графика слева поворачивается.
+       Подписи на линии — короткие названия из меню. «Подробнее» у всех, кроме «Поставки оборудования» и «Поверки» -->
+  <section class="tile services" id="services" aria-labelledby="svc-title">
+    <div class="cols services__head">
+      <p class="tag">Услуги</p>
+      <h2 class="services__title" id="svc-title">Комплексные решения для учёта тепловой энергии</h2>
+      <p class="services__intro">Полный спектр услуг — от обследования, проектирования и установки до поверки и сервисного обслуживания узлов учёта тепловой энергии.</p>
+    </div>
+    <div class="svc-track" data-svc style="--n:7">
+      <div class="svc-stage">
+        <div class="svc-nav">
+          <div class="svc-nav__line"><span class="svc-nav__ball"></span></div>
+          <ol class="svc-nav__items">
+            <li><button type="button" data-svc-go="0"><span>01</span>Обследование объектов</button></li>
+            <li><button type="button" data-svc-go="1"><span>02</span>Проектирование</button></li>
+            <li><button type="button" data-svc-go="2"><span>03</span>Поставка оборудования</button></li>
+            <li><button type="button" data-svc-go="3"><span>04</span>Установка</button></li>
+            <li><button type="button" data-svc-go="4"><span>05</span>Сервисное обслуживание</button></li>
+            <li><button type="button" data-svc-go="5"><span>06</span>Поверка</button></li>
+            <li><button type="button" data-svc-go="6"><span>07</span>Ремонт, замена и реконструкция</button></li>
+          </ol>
+        </div>
+        <div class="svc-body">
+          <div class="ph svc-art" aria-hidden="true">
+            <svg class="svc-art__shape" viewBox="0 0 200 200"><circle cx="100" cy="100" r="96"/><path d="M58 62v76l52-38zM142 62v76l-52-38z"/></svg>
+            <p class="ph__cap"><b>Графика — сгенерируем</b><span data-svc-cap>01 · Обследование объектов</span></p>
+          </div>
+          <div class="svc-cards">
+            <article class="svc-card">
+              <h3>Обследование объектов</h3>
+              <p>После получения заявки мы в кратчайшие сроки проведем комплексное обследование Вашего объекта. Наши специалисты определят оптимальные места для установки узла учета тепловой энергии, подберут подходящий тип прибора учета и подготовят для Вас развернутое коммерческое предложение с точной стоимостью и сроками выполнения работ. Выезд инженера и подготовка сметы — бесплатно и без обязательств с Вашей стороны.</p>
+              <a class="btn btn--dark svc-card__more" href="usluga-obsledovanie.html">Подробнее <svg class="ic"><use href="#arr"/></svg></a>
+            </article>
+            <article class="svc-card">
+              <h3>Проектирование узлов учета тепловой энергии</h3>
+              <p>Разработаем проект узла учета тепловой энергии, который гарантированно пройдет согласование в ресурсоснабжающей организации: он будет полностью соответствовать действующим ГОСТам, СНиПам, нормативно-правовым актам и регламентам РСО. В проекте учитываются все требования к узлам учёта тепловой энергии и теплоносителя. Средний срок разработки проекта: от 5 до 10 рабочих дней в зависимости от сложности.</p>
+              <a class="btn btn--dark svc-card__more" href="#services">Подробнее <svg class="ic"><use href="#arr"/></svg></a>
+            </article>
+            <article class="svc-card">
+              <h3>Поставка оборудования</h3>
+              <p>Мы предлагаем широкий выбор сертифицированных приборов учета тепловой энергии от ведущих российских производителей — под любой бюджет и технические требования. Приобретая оборудование у нас, Вы получаете сертифицированные и поверенные приборы, внесенные в Государственный реестр средств измерений (что является обязательным условием для коммерческого учета), с гарантией от производителя и по выгодным ценам.</p>
+              
+            </article>
+            <article class="svc-card">
+              <h3>Установка узлов учета тепловой энергии</h3>
+              <p>Мы берем на себя полный цикл работ по установке узла учета тепловой энергии «под ключ»: от монтажа оборудования до пусконаладочных работ и сдачи узла учета в коммерческую эксплуатацию представителям ресурсоснабжающей организации (РСО). Все этапы выполняются с соблюдением проектной документации и действующих нормативов.</p>
+              <a class="btn btn--dark svc-card__more" href="#services">Подробнее <svg class="ic"><use href="#arr"/></svg></a>
+            </article>
+            <article class="svc-card">
+              <h3>Сервисное обслуживание узлов учета тепловой энергии</h3>
+              <p>Мы выстраиваем процесс обслуживания так, чтобы вы всегда знали, что происходит с вашим оборудованием. Наши специалисты регулярно проверяют работоспособность тепловычислителя и первичных преобразователей расхода, контролируют состояние кабельных соединений и сроки межповерочных интервалов, проверяют целостность пломб, проводят очистку фильтров и первичных преобразователей. При обнаружении неисправностей оперативно информируем службу эксплуатации. По итогам каждого визита предоставляем акт обслуживания с рекомендациями по дальнейшей эксплуатации оборудования.</p>
+              <a class="btn btn--dark svc-card__more" href="#services">Подробнее <svg class="ic"><use href="#arr"/></svg></a>
+            </article>
+            <article class="svc-card">
+              <h3>Поверка приборов учёта тепловой энергии</h3>
+              <p>Проводим поверку приборов учета тепловой энергии «под ключ». Берём на себя весь комплекс работ: аккуратный демонтаж и очистку от загрязнений, доставку в аккредитованную лабораторию, контроль поверочных процедур (с оперативным ремонтом при необходимости), монтаж и пуско-наладку после поверки. Обеспечиваем точность измерений с сохранением заводской гарантии и внесение данных о поверке в систему ФГИС «АРШИН».</p>
+              
+            </article>
+            <article class="svc-card">
+              <h3>Ремонт, замена и реконструкция узлов учёта тепловой энергии</h3>
+              <p>Не просто чиним, а возвращаем узлу учёта проектную точность и соответствие требованиям РСО. Проводим ремонт узлов учёта тепловой энергии, замену устаревших приборов и реконструкцию узла под актуальные нормы. Меняем расходомеры, теплосчётчики, шкафы учёта, выполняем пуско-наладку и добиваемся допуска в коммерческий учёт.</p>
+              <a class="btn btn--dark svc-card__more" href="#services">Подробнее <svg class="ic"><use href="#arr"/></svg></a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Блок — Этапы работы — по референсу 24ist.ru (блок «Наш принцип»): секция закрепляется,
+       по прокрутке вниз всё содержимое едет влево — слева заголовок, дальше квадратные карточки этапов.
+       Плавность — догонялка к цели (у них пружина framer-motion). Карточки въезжают на 160px при появлении -->
+  <section class="tile hs" aria-labelledby="steps-title">
+    <div class="hs-track" data-hs>
+      <div class="hs-stage">
+        <div class="hs-wrap">
+          <div class="hs-left">
+            <p class="tag">Этапы работы</p>
+            <h2 class="hs-title" id="steps-title">Этапы работы</h2>
+            <button class="btn btn--dark" type="button" data-modal>Получить консультацию <svg class="ic"><use href="#arr"/></svg></button>
+          </div>
+          <ol class="hs-list">
+            <li class="hs-card"><span class="hs-card__num">01</span><h3 class="t-title4">Звонок и консультация</h3><p>Бесплатная консультация: разбираемся в вашей задаче — тип объекта, система теплоснабжения, требования РСО. Подсказываем, какой узел учёта тепловой энергии подойдёт и что нужно для согласования.</p></li>
+            <li class="hs-card"><span class="hs-card__num">02</span><h3 class="t-title4">Выезд на объект</h3><p>Бесплатное обследование вашего объекта: определяем оптимальное место установки узла учёта тепловой энергии, оцениваем диаметры трубопроводов, систему отопления и ГВС, подбираем подходящий тип приборов учёта.</p></li>
+            <li class="hs-card"><span class="hs-card__num">03</span><h3 class="t-title4">Коммерческое предложение</h3><p>Предоставим оптимальное предложение с подробной сметой, сроками и стоимостью оборудования для узла учёта тепловой энергии. Расчёт — бесплатно и без обязательств.</p></li>
+            <li class="hs-card"><span class="hs-card__num">04</span><h3 class="t-title4">Заключение договора</h3><p>Фиксированная цена без скрытых платежей, чётко обозначенные сроки и гарантия на выполненные работы. Стоимость установки узла учёта тепловой энергии закрепляем в договоре.</p></li>
+            <li class="hs-card"><span class="hs-card__num">05</span><h3 class="t-title4">Разработка проекта</h3><p>Мы не просто «рисуем бумаги» — наша задача разработать такой проект узла учёта тепловой энергии, который без труда пройдёт согласование в теплоснабжающей организации.</p></li>
+            <li class="hs-card"><span class="hs-card__num">06</span><h3 class="t-title4">Поставка оборудования</h3><p>Берём на себя всю логистику и доставим оборудование для узла учёта тепловой энергии (расходомеры, тепловычислители, датчики, шкафы учёта) на ваш объект в полной сохранности и в чётко оговорённые сроки.</p></li>
+            <li class="hs-card"><span class="hs-card__num">07</span><h3 class="t-title4">Монтаж, наладка и сдача узла учёта тепловой энергии</h3><p>Наш результат — это не просто смонтированный узел учёта тепловой энергии, а его надёжная работа, полный пакет исполнительной документации и гарантированный акт допуска в коммерческую эксплуатацию от РСО.</p></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Блок — Наши работы — по референсу instituteofhealth.com (карточки на /events): слева заголовок, подводка
+       и кнопка, справа карточки строкой — фото слева, справа метаданные через точку, название, характеристики,
+       кнопка внизу. Поля карточки — от клиента: объект и местоположение — в строке метаданных, остальные — характеристиками.
+       Объекты — заглушки: клиент пришлёт 10–11 -->
+  <section class="tile wk" id="works" aria-labelledby="works-title">
+    <div class="wk__side">
+      <div class="wk__sticky">
+        <p class="tag">Объекты</p>
+        <h2 id="works-title">Наши работы</h2>
+        <p class="wk__lead t-body3">Профессионализм и ответственность — в каждом сданном узле учёта тепловой энергии.</p>
+        <a class="btn-tall btn-tall--dark" href="#works">Все работы <svg><use href="#turn"/></svg></a>
+      </div>
+    </div>
+    <div class="wk__list">
+      <article class="wcard">
+        <a class="ph wcard__img" href="#works" tabindex="-1" aria-hidden="true"><p class="ph__cap"><b>Фото объекта</b>ИТП жилого комплекса: смонтированный узел учёта, тепловычислитель и расходомеры на трубах</p></a>
+        <div class="wcard__body">
+          <p class="wcard__meta"><span>Жилой комплекс</span><span>г. Москва</span></p>
+          <h3 class="wcard__title">Установка узла учёта тепловой энергии в ИТП жилого комплекса</h3>
+          <dl class="spec">
+            <div><dt>Система теплоснабжения</dt><i></i><dd>Независимая, закрытая</dd></div>
+            <div><dt>Состав учёта</dt><i></i><dd>Отопление, ГВС, подпитка</dd></div>
+          </dl>
+          <div class="wcard__actions"><a class="btn-tall btn-tall--line" href="#works">Подробнее <svg><use href="#turn"/></svg></a></div>
+        </div>
+      </article>
+      <article class="wcard">
+        <a class="ph wcard__img" href="#works" tabindex="-1" aria-hidden="true"><p class="ph__cap"><b>Фото объекта</b>Центральный тепловой пункт бизнес-центра: шкаф учёта, приборы, трубопроводы</p></a>
+        <div class="wcard__body">
+          <p class="wcard__meta"><span>Бизнес-центр</span><span>г. Химки</span></p>
+          <h3 class="wcard__title">Реконструкция узла учёта тепловой энергии в центральном тепловом пункте бизнес-центра</h3>
+          <dl class="spec">
+            <div><dt>Система теплоснабжения</dt><i></i><dd>Зависимая, закрытая</dd></div>
+            <div><dt>Состав учёта</dt><i></i><dd>Отопление, ГВС</dd></div>
+          </dl>
+          <div class="wcard__actions"><a class="btn-tall btn-tall--line" href="#works">Подробнее <svg><use href="#turn"/></svg></a></div>
+        </div>
+      </article>
+      <article class="wcard">
+        <a class="ph wcard__img" href="#works" tabindex="-1" aria-hidden="true"><p class="ph__cap"><b>Фото объекта</b>Тепловой ввод промышленного предприятия: узел учёта в цеху, крупные трубы</p></a>
+        <div class="wcard__body">
+          <p class="wcard__meta"><span>Промышленное предприятие</span><span>г. Подольск</span></p>
+          <h3 class="wcard__title">Узел учёта тепловой энергии на вводе промышленного предприятия</h3>
+          <dl class="spec">
+            <div><dt>Система теплоснабжения</dt><i></i><dd>Независимая, открытая</dd></div>
+            <div><dt>Состав учёта</dt><i></i><dd>Отопление, вентиляция</dd></div>
+          </dl>
+          <div class="wcard__actions"><a class="btn-tall btn-tall--line" href="#works">Подробнее <svg><use href="#turn"/></svg></a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 6 Блок — Отвечаем на популярные вопросы клиентов — по референсу instituteofhealth.com (блок FAQ):
+       слева закреплены заголовок и кнопка, справа вопросы на тонких линиях, плюс в квадрате.
+       Раскрытие как у них: высота 0 → по содержимому, текст поднимается с 20% и проявляется, плюс поворачивается в крестик -->
+  <section class="tile qa" aria-labelledby="faq-title">
+    <div class="qa__side">
+      <div class="qa__sticky">
+        <p class="tag">Вопросы и ответы</p>
+        <h2 id="faq-title">Отвечаем на популярные вопросы клиентов</h2>
+        <button class="btn-tall btn-tall--dark" type="button" data-modal>Задать вопрос <svg><use href="#turn"/></svg></button>
+      </div>
+    </div>
+    <div class="qa__list">
+      <div class="qa-item">
+        <h3><button class="qa-item__head" type="button" aria-expanded="false" aria-controls="qa-1"><span>Что такое коммерческий узел учёта тепловой энергии и зачем он нужен?</span><i class="qa-item__icon" aria-hidden="true"></i></button></h3>
+        <div class="qa-item__body" id="qa-1" role="region" inert><div class="qa-item__text"><p>Коммерческий узел учёта тепловой энергии (КУУТЭ) — это комплекс приборов, который измеряет количество потреблённого тепла и используется для расчётов с ресурсоснабжающей организацией. В отличие от технического учёта, данные коммерческого узла — основание для выставления счетов. Организация узла учёта тепловой энергии позволяет платить за фактическое потребление, а не по нормативу, и контролировать потери.</p></div></div>
+      </div>
+      <div class="qa-item">
+        <h3><button class="qa-item__head" type="button" aria-expanded="false" aria-controls="qa-2"><span>Какое оборудование входит в состав узла учёта тепловой энергии?</span><i class="qa-item__icon" aria-hidden="true"></i></button></h3>
+        <div class="qa-item__body" id="qa-2" role="region" inert><div class="qa-item__text"><p>В состав узла учёта тепловой энергии входят: тепловычислитель, расходомеры, датчики температуры и давления, шкафы учёта и линии связи. Оборудование узлов учёта тепловой энергии подбирается под параметры вашего объекта: диаметр трубопроводов, тип системы (отопление, ГВС) и требования РСО.</p></div></div>
+      </div>
+      <div class="qa-item">
+        <h3><button class="qa-item__head" type="button" aria-expanded="false" aria-controls="qa-3"><span>Сколько стоит установка узла учёта тепловой энергии?</span><i class="qa-item__icon" aria-hidden="true"></i></button></h3>
+        <div class="qa-item__body" id="qa-3" role="region" inert><div class="qa-item__text"><p>Стоимость установки зависит от диаметра трубопроводов, количества систем (отопление, ГВС), сложности монтажа и требований ресурсоснабжающей организации. В стоимость входит проектирование и согласование проекта, поставка оборудования, монтаж, пусконаладочные работы и ввод в эксплуатацию. Точную цену можно узнать после бесплатного выезда и проведения детального обследования объекта.</p></div></div>
+      </div>
+      <div class="qa-item">
+        <h3><button class="qa-item__head" type="button" aria-expanded="false" aria-controls="qa-4"><span>Сколько времени занимает установка узла учёта тепловой энергии?</span><i class="qa-item__icon" aria-hidden="true"></i></button></h3>
+        <div class="qa-item__body" id="qa-4" role="region" inert><div class="qa-item__text"><p>В среднем полный цикл — от обследования до ввода в эксплуатацию — занимает от 20 до 45 рабочих дней. Проектирование и согласование с РСО — 10–14 дней, поставка оборудования — 7–20 дней, монтаж и пуско-наладка узла учёта тепловой энергии — 3–7 дней, сдача узла учёта в эксплуатацию — до 10 дней.</p></div></div>
+      </div>
+      <div class="qa-item">
+        <h3><button class="qa-item__head" type="button" aria-expanded="false" aria-controls="qa-5"><span>Нужно ли обслуживать узел учёта после установки?</span><i class="qa-item__icon" aria-hidden="true"></i></button></h3>
+        <div class="qa-item__body" id="qa-5" role="region" inert><div class="qa-item__text"><p>Да, как показывает практика, регулярное техническое обслуживание узлов учёта тепловой энергии необходимо для поддержания его работоспособности и позволяет не только снизить эксплуатационные расходы и минимизировать риск возникновения поломок, но и существенно уменьшить риск возможных недоразумений, при несоответствии между расчетным и фактическим потреблением.</p></div></div>
+      </div>
+      <div class="qa-item">
+        <h3><button class="qa-item__head" type="button" aria-expanded="false" aria-controls="qa-6"><span>Можно ли установить узел учёта тепловой энергии зимой?</span><i class="qa-item__icon" aria-hidden="true"></i></button></h3>
+        <div class="qa-item__body" id="qa-6" role="region" inert><div class="qa-item__text"><p>Да, монтаж возможен в любой сезон. Для отключения системы теплоснабжения требуется согласование с эксплуатирующей организацией. Реконструкция узла учёта тепловой энергии и замена оборудования также проводятся круглогодично, с минимальным перерывом в подаче тепла.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Блок — Призыв к действию: текст + контакты -->
+  <section class="grid" id="contacts" aria-labelledby="cta-title">
+    <div class="tile s-7 cta">
+      <h2 id="cta-title">Остались вопросы? Будем рады помочь!</h2>
+      <p class="t-lead">Установка узла учёта тепловой энергии может казаться сложной задачей. Свяжитесь с нами, и мы с радостью поможем разобраться в требованиях к узлу учёта, подскажем, как пройти согласование и на что обратить внимание при подборе и установке оборудования.</p>
+    </div>
+    <div class="tile s-5 cta__side">
+      <div class="cta__contacts">
+        <a href="tel:+74991107701"><span>Телефон</span><b class="t-title2">+7 (499) 110-77-01</b></a>
+        <a href="mailto:Complex-T@yandex.ru"><span>Почта</span><b class="t-title4">Complex-T@yandex.ru</b></a>
+      </div>
+      <button class="btn btn--dark" type="button" data-modal>Получить консультацию <svg class="ic"><use href="#arr"/></svg></button>
+    </div>
+  </section>
+
+  <!-- 8. Футер — тёмная плашка, по образцу учетстоков.рф, тексты клиента -->
+  <footer class="tile tile--dark footer">
+    <div class="footer__grid">
+      <div>
+        <a class="logo" href="#top"><b>ООО «Комплекс-Техно»</b><span>Учет тепловой энергии – современные возможности</span></a>
+        <p class="footer__about">Помогаем промышленным предприятиям, бюджетным организациям, УК, ТСЖ и теплоснабжающим организациям оптимизировать расходы на тепло. Профессиональная установка, поверка и обслуживание узлов учёта тепловой энергии.</p>
+      </div>
+      <div>
+        <h4>Меню</h4>
+        <ul><li><a href="#services">Услуги</a></li><li><a href="#works">Объекты</a></li><li><a href="#contacts">Контакты</a></li></ul>
+      </div>
+      <div>
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="usluga-obsledovanie.html">Обследование объектов</a></li>
+          <li><a href="#services">Проектирование</a></li>
+          <li><a href="#services">Установка</a></li>
+          <li><a href="#services">Сервисное обслуживание</a></li>
+          <li><a href="#services">Ремонт и реконструкция</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+74991107701">+7 (499) 110-77-01</a></li>
+          <li><a href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru</a></li>
+          <!-- адрес — со старого сайта, для теплового направления не подтверждён -->
+          <li>129337, г. Москва, Ярославское шоссе, д. 42, пом. 1/4</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom"><span>© 2007–2026 ООО «Комплекс-Техно»</span><a href="#top">Политика конфиденциальности</a></div>
+  </footer>
+
+</main>
+
+<!-- Попап «Получить консультацию» — как на учетстоков.рф: без формы -->
+<div class="modal" id="consult" role="dialog" aria-modal="true" aria-labelledby="consult-title" hidden>
+  <div class="modal__overlay" data-close></div>
+  <div class="modal__panel">
+    <button class="modal__close" type="button" aria-label="Закрыть" data-close><svg><use href="#x"/></svg></button>
+    <h2 id="consult-title">Получить консультацию</h2>
+    <p>Свяжитесь с нами — мы бесплатно проконсультируем вас без сложных терминов и навязчивых предложений. <b>Просто позвоните или напишите:</b></p>
+    <div class="modal__links">
+      <a class="btn btn--dark" href="tel:+74991107701">+7 (499) 110-77-01 <svg class="ic"><use href="#arr"/></svg></a>
+      <a class="btn btn--light" href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru <svg class="ic"><use href="#arr"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- Инструмент концепта: сравнить варианты. На сайт не переносится -->
+<div class="concept-bar">
+  <div class="concept-bar__grp" aria-label="Цвет акцента">Акцент
+    <button type="button" data-accent="#E3262F" aria-label="Красный, как в кейсе NTL"></button>
+    <button type="button" data-accent="#E8671C" aria-label="Тёплый оранжевый"></button>
+    <button type="button" data-accent="#213A6A" aria-label="Синий учетстоков.рф"></button>
+  </div>
+  <div class="concept-bar__grp" aria-label="Зазор между плашками">Зазор
+    <button type="button" data-set="gap" data-val="8">8</button>
+    <button type="button" data-set="gap" data-val="6">6</button>
+  </div>
+  <div class="concept-bar__grp" aria-label="Базовая ширина для rem">База
+    <button type="button" data-set="base" data-val="1440">1440</button>
+    <button type="button" data-set="base" data-val="1200">1200</button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="js/concept.js"></script>
+</body>
+</html>
