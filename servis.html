@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Техническое и сервисное обслуживание узлов учёта тепловой энергии — ООО «Комплекс-Техно»</title>
+<meta name="description" content="Техническое и сервисное обслуживание узлов учёта тепловой энергии: выезд в течение 24 часов, контроль сроков поверки.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/concept.css?v=43">
+<link rel="stylesheet" href="css/schemes.css?v=2">
+<link rel="stylesheet" href="css/service.css?v=14">
+<script>
+  // 15.10 — переход между страницами, как на olympic.no: пришли по ссылке с другой страницы сайта —
+  // до отрисовки ставим is-page-in, чёрная панель закрывает экран и уходит вверх шторкой. Прелоадера первого захода нет
+  (function () {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]shot/.test(location.search)) return;
+    var via = null;
+    try { via = sessionStorage.getItem('kt-page-veil'); sessionStorage.removeItem('kt-page-veil'); } catch (e) {}
+    if (via) document.documentElement.classList.add('is-page-in');
+    // 15.10 — прелоадер, как у образца polihim: только первый заход за сессию (переходы по сайту — без него)
+    try { if (!via && !sessionStorage.getItem('kt-seen')) document.documentElement.classList.add('is-preload'); sessionStorage.setItem('kt-seen', '1'); } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="chev2" viewBox="0 0 24 24"><path d="m6 17 5-5-5-5M13 17l5-5-5-5"/></symbol>
+  <symbol id="chev-r" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="chev-l" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="chev-d" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="arr-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><path d="M8.4 4.6 7 3.2a1.5 1.5 0 0 0-2.1 0L3.6 4.5c-.9.9-1 2.3-.4 3.4a30 30 0 0 0 12.9 12.9c1.1.6 2.5.5 3.4-.4l1.3-1.3a1.5 1.5 0 0 0 0-2.1l-1.4-1.4a1.5 1.5 0 0 0-2.1 0l-1 1a12 12 0 0 1-6-6l1-1a1.5 1.5 0 0 0 0-2.1Z"/></symbol>
+  <symbol id="ap-award" viewBox="0 0 64 64" fill="none"><path opacity="0.12" d="M45.3334 40.2402C41.795 43.4072 37.1224 45.3329 32.0001 45.3329C26.8777 45.3329 22.2051 43.4072 18.6667 40.2402V58.6662L31.2078 53.6498C31.5005 53.5327 31.6468 53.4742 31.7979 53.451C31.9319 53.4304 32.0682 53.4304 32.2022 53.451C32.3533 53.4742 32.4997 53.5327 32.7924 53.6498L45.3334 58.6662V40.2402Z" fill="currentColor"/>
+<path d="M18.6667 40.2414V58.6673L31.2077 53.6509C31.5004 53.5338 31.6467 53.4753 31.7978 53.4521C31.9318 53.4316 32.0682 53.4316 32.2022 53.4521C32.3533 53.4753 32.4996 53.5338 32.7923 53.6509L45.3333 58.6673V40.2414M52 25.334C52 36.3797 43.0457 45.334 32 45.334C20.9543 45.334 12 36.3797 12 25.334C12 14.2883 20.9543 5.33398 32 5.33398C43.0457 5.33398 52 14.2883 52 25.334Z" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M30.6065 29.1272L40.3617 19.6914L41.8462 21.1274L30.6065 31.9991L24.6155 26.2042L26.1 24.7683L30.6065 29.1272Z" fill="currentColor"/></symbol>
+  <symbol id="ap-tool" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M26.0523 12.7196C25.3923 12.0596 25.0623 11.7296 24.9386 11.349C24.8299 11.0143 24.8299 10.6537 24.9386 10.319C25.0623 9.93841 25.3923 9.60839 26.0523 8.94837L30.783 4.21775C29.5276 3.65002 28.1341 3.33398 26.6667 3.33398C21.1439 3.33398 16.6667 7.81114 16.6667 13.334C16.6667 14.1524 16.765 14.9478 16.9505 15.7091C17.1491 16.5244 17.2484 16.932 17.2308 17.1895C17.2123 17.4591 17.1721 17.6026 17.0478 17.8425C16.929 18.0717 16.7015 18.2992 16.2464 18.7543L5.83338 29.1673C4.45267 30.548 4.45267 32.7866 5.83339 34.1673C7.2141 35.548 9.45267 35.548 10.8334 34.1673L21.2464 23.7543C21.7015 23.2992 21.929 23.0717 22.1582 22.9529C22.3981 22.8286 22.5416 22.7884 22.8112 22.7699C23.0687 22.7523 23.4763 22.8516 24.2916 23.0502C25.0529 23.2357 25.8483 23.334 26.6667 23.334C32.1896 23.334 36.6667 18.8568 36.6667 13.334C36.6667 11.8666 36.3507 10.4731 35.783 9.21775L31.0523 13.9484C30.3923 14.6084 30.0623 14.9384 29.6817 15.0621C29.347 15.1708 28.9864 15.1708 28.6517 15.0621C28.2711 14.9384 27.9411 14.6084 27.2811 13.9484L26.0523 12.7196Z" fill="currentColor"/>
+<path d="M26.0523 12.7196C25.3923 12.0596 25.0623 11.7296 24.9386 11.349C24.8299 11.0143 24.8299 10.6537 24.9386 10.319C25.0623 9.93841 25.3923 9.60839 26.0523 8.94837L30.783 4.21775C29.5276 3.65002 28.1341 3.33398 26.6667 3.33398C21.1439 3.33398 16.6667 7.81114 16.6667 13.334C16.6667 14.1524 16.765 14.9478 16.9505 15.7091C17.1491 16.5244 17.2484 16.932 17.2308 17.1895C17.2123 17.4591 17.1721 17.6026 17.0478 17.8425C16.929 18.0717 16.7015 18.2992 16.2464 18.7543L5.83338 29.1673C4.45267 30.548 4.45267 32.7866 5.83339 34.1673C7.2141 35.548 9.45267 35.548 10.8334 34.1673L21.2464 23.7543C21.7015 23.2992 21.929 23.0717 22.1582 22.9529C22.3981 22.8286 22.5416 22.7884 22.8112 22.7699C23.0687 22.7523 23.4763 22.8516 24.2916 23.0502C25.0529 23.2357 25.8483 23.334 26.6667 23.334C32.1896 23.334 36.6667 18.8568 36.6667 13.334C36.6667 11.8666 36.3507 10.4731 35.783 9.21775L31.0523 13.9484C30.3923 14.6084 30.0623 14.9384 29.6817 15.0621C29.347 15.1708 28.9864 15.1708 28.6517 15.0621C28.2711 14.9384 27.9411 14.6084 27.2811 13.9484L26.0523 12.7196Z" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ap-calendar" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M5 14.666C5 11.8658 5 10.4656 5.54497 9.39606C6.02433 8.45525 6.78924 7.69035 7.73005 7.21098C8.79961 6.66602 10.1997 6.66602 13 6.66602H27C29.8003 6.66602 31.2004 6.66602 32.27 7.21098C33.2108 7.69035 33.9757 8.45525 34.455 9.39606C35 10.4656 35 11.8658 35 14.666V16.666H5V14.666Z" fill="currentColor"/>
+<path d="M35 16.6673H5M26.6667 3.33398V10.0007M13.3333 3.33398V10.0007M17.5 23.334L20 21.6673V30.0007M17.9167 30.0007H22.0833M13 36.6673H27C29.8003 36.6673 31.2004 36.6673 32.27 36.1224C33.2108 35.643 33.9757 34.8781 34.455 33.9373C35 32.8677 35 31.4676 35 28.6673V14.6673C35 11.8671 35 10.4669 34.455 9.39737C33.9757 8.45655 33.2108 7.69165 32.27 7.21229C31.2004 6.66732 29.8003 6.66732 27 6.66732H13C10.1997 6.66732 8.79961 6.66732 7.73005 7.21229C6.78924 7.69165 6.02433 8.45655 5.54497 9.39737C5 10.4669 5 11.8671 5 14.6673V28.6673C5 31.4676 5 32.8677 5.54497 33.9373C6.02433 34.8781 6.78924 35.643 7.73005 36.1224C8.79961 36.6673 10.1997 36.6673 13 36.6673Z" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ap-ruble" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M19.9999 36.6673C29.2047 36.6673 36.6666 29.2054 36.6666 20.0007C36.6666 10.7959 29.2047 3.33398 19.9999 3.33398C10.7952 3.33398 3.33325 10.7959 3.33325 20.0007C3.33325 29.2054 10.7952 36.6673 19.9999 36.6673Z" fill="currentColor"/>
+<path d="M23.26 23.864H20.246V28H17.32V23.864H16.11V22.016H17.32V21.444H16.11V19.596H17.32V11.632H21.5C22.6587 11.632 23.4433 11.896 23.854 12.424C24.2793 12.952 24.492 13.766 24.492 14.866V18.122C24.492 20.3367 23.5387 21.444 21.632 21.444H20.246V22.016H23.26V23.864ZM20.246 14.162V19.002H20.796C21.104 19.002 21.302 18.9287 21.39 18.782C21.4927 18.6207 21.544 18.386 21.544 18.078V15.108C21.544 14.7853 21.4927 14.5507 21.39 14.404C21.302 14.2427 21.104 14.162 20.796 14.162H20.246Z" fill="currentColor"/>
+<path d="M19.9999 36.6673C29.2047 36.6673 36.6666 29.2054 36.6666 20.0007C36.6666 10.7959 29.2047 3.33398 19.9999 3.33398C10.7952 3.33398 3.33325 10.7959 3.33325 20.0007C3.33325 29.2054 10.7952 36.6673 19.9999 36.6673Z" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ap-check" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M19.9999 36.6673C29.2047 36.6673 36.6666 29.2054 36.6666 20.0007C36.6666 10.7959 29.2047 3.33398 19.9999 3.33398C10.7952 3.33398 3.33325 10.7959 3.33325 20.0007C3.33325 29.2054 10.7952 36.6673 19.9999 36.6673Z" fill="currentColor"/>
+<path d="M36.6666 18.4769V20.0102C36.6645 23.6042 35.5008 27.1013 33.3488 29.9799C31.1969 32.8585 28.1721 34.9643 24.7255 35.9834C21.279 37.0024 17.5954 36.88 14.224 35.6345C10.8527 34.389 7.97434 32.087 6.01819 29.072C4.06203 26.0569 3.1329 22.4903 3.36938 18.904C3.60586 15.3178 4.99526 11.9041 7.33039 9.17198C9.66551 6.43989 12.8212 4.53583 16.3269 3.74377C19.8326 2.95171 23.5004 3.31409 26.7833 4.77686M36.6666 6.66732L19.9999 23.3507L14.9999 18.3507" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ap-phone" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M12.3012 16.4216C13.4612 18.8376 15.0425 21.102 17.0452 23.1047C19.0478 25.1073 21.3122 26.6886 23.7282 27.8486C23.9361 27.9484 24.04 27.9983 24.1715 28.0366C24.6387 28.1728 25.2125 28.075 25.6082 27.7916C25.7195 27.7119 25.8148 27.6166 26.0053 27.4261C26.588 26.8434 26.8793 26.5521 27.1723 26.3616C28.2771 25.6433 29.7014 25.6433 30.8062 26.3616C31.0992 26.5521 31.3905 26.8434 31.9732 27.4261L32.298 27.7509C33.1837 28.6366 33.6266 29.0795 33.8672 29.5551C34.3456 30.5011 34.3456 31.6182 33.8672 32.5641C33.6266 33.0397 33.1837 33.4826 32.298 34.3684L32.0353 34.6311C31.1526 35.5138 30.7112 35.9551 30.1112 36.2922C29.4453 36.6662 28.4112 36.9352 27.6475 36.9329C26.9592 36.9309 26.4888 36.7974 25.5481 36.5303C20.4924 35.0954 15.7218 32.3879 11.7419 28.408C7.76191 24.428 5.05445 19.6574 3.6195 14.6017C3.35249 13.661 3.21898 13.1906 3.21693 12.5024C3.21466 11.7387 3.4836 10.7045 3.85763 10.0387C4.19471 9.43863 4.63606 8.99728 5.51877 8.11457L5.78149 7.85185C6.66723 6.96611 7.1101 6.52324 7.58573 6.28267C8.53167 5.80422 9.64878 5.80422 10.5947 6.28267C11.0703 6.52324 11.5132 6.96611 12.399 7.85185L12.7237 8.17663C13.3064 8.75931 13.5978 9.05064 13.7882 9.34361C14.5066 10.4484 14.5066 11.8727 13.7882 12.9775C13.5978 13.2705 13.3064 13.5618 12.7237 14.1445C12.5332 14.335 12.438 14.4303 12.3582 14.5417C12.0749 14.9374 11.977 15.5111 12.1132 15.9784C12.1516 16.1099 12.2015 16.2138 12.3012 16.4216Z" fill="currentColor"/>
+<path d="M23.4169 10.0007C25.0448 10.3183 26.5409 11.1144 27.7136 12.2872C28.8864 13.46 29.6826 14.9561 30.0002 16.584M23.4169 3.33398C26.799 3.70971 29.9529 5.22428 32.3606 7.629C34.7684 10.0337 36.2869 13.1857 36.6669 16.5673M17.0452 23.1058C15.0425 21.1031 13.4612 18.8387 12.3012 16.4227C12.2015 16.2149 12.1516 16.111 12.1132 15.9795C11.977 15.5122 12.0749 14.9385 12.3582 14.5428C12.438 14.4314 12.5332 14.3361 12.7237 14.1456C13.3064 13.5629 13.5978 13.2716 13.7882 12.9786C14.5066 11.8738 14.5066 10.4495 13.7882 9.3447C13.5978 9.05174 13.3064 8.7604 12.7237 8.17773L12.399 7.85294C11.5132 6.9672 11.0703 6.52434 10.5947 6.28376C9.64878 5.80531 8.53167 5.80531 7.58573 6.28376C7.1101 6.52434 6.66723 6.96721 5.78149 7.85294L5.51877 8.11567C4.63606 8.99837 4.19471 9.43973 3.85763 10.0398C3.4836 10.7056 3.21466 11.7398 3.21693 12.5035C3.21898 13.1917 3.35249 13.6621 3.6195 14.6028C5.05445 19.6585 7.76191 24.4291 11.7419 28.4091C15.7218 32.389 20.4924 35.0965 25.5481 36.5314C26.4888 36.7985 26.9592 36.932 27.6475 36.934C28.4112 36.9363 29.4453 36.6673 30.1112 36.2933C30.7112 35.9562 31.1526 35.5149 32.0353 34.6322L32.298 34.3694C33.1837 33.4837 33.6266 33.0408 33.8672 32.5652C34.3456 31.6193 34.3456 30.5022 33.8672 29.5562C33.6266 29.0806 33.1837 28.6377 32.298 27.752L31.9732 27.4272C31.3905 26.8445 31.0992 26.5532 30.8062 26.3627C29.7014 25.6444 28.2771 25.6444 27.1723 26.3627C26.8793 26.5532 26.588 26.8445 26.0053 27.4272C25.8148 27.6177 25.7195 27.713 25.6082 27.7927C25.2125 28.0761 24.6387 28.1739 24.1714 28.0377C24.04 27.9994 23.9361 27.9495 23.7282 27.8497C21.3122 26.6897 19.0478 25.1084 17.0452 23.1058Z" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ap-pin" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M20 28.334C22.5 23.334 30 20.1068 30 13.334C30 7.81114 25.5228 3.33398 20 3.33398C14.4772 3.33398 10 7.81114 10 13.334C10 20.1068 17.5 23.334 20 28.334Z" fill="currentColor"/>
+<path d="M8.33337 23.8112C5.24777 25.1724 3.33337 27.0693 3.33337 29.1673C3.33337 33.3095 10.7953 36.6673 20 36.6673C29.2048 36.6673 36.6667 33.3095 36.6667 29.1673C36.6667 27.0693 34.7523 25.1724 31.6667 23.8112M30 13.334C30 20.1068 22.5 23.334 20 28.334C17.5 23.334 10 20.1068 10 13.334C10 7.81114 14.4772 3.33398 20 3.33398C25.5229 3.33398 30 7.81114 30 13.334ZM21.6667 13.334C21.6667 14.2545 20.9205 15.0007 20 15.0007C19.0796 15.0007 18.3334 14.2545 18.3334 13.334C18.3334 12.4135 19.0796 11.6673 20 11.6673C20.9205 11.6673 21.6667 12.4135 21.6667 13.334Z" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ap-truck" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M23.3 11.7H3.3V28.3H23.3Z" fill="currentColor"/><path d="M23.3 11.7H3.3V28.3H23.3M23.3 11.7V28.3M23.3 16.7H30L36.7 23.3V28.3H23.3" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="30" r="3.3" fill="#F6F5F8" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="30" r="3.3" fill="#F6F5F8" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ap-cert" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M20 3.3 33.3 8.3V18.3C33.3 26.7 27.5 33.3 20 36.7 12.5 33.3 6.7 26.7 6.7 18.3V8.3Z" fill="currentColor"/><path d="M20 3.3 33.3 8.3V18.3C33.3 26.7 27.5 33.3 20 36.7 12.5 33.3 6.7 26.7 6.7 18.3V8.3Z" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/><path d="m14.2 19.2 4.2 4.1 7.5-7.5" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <!-- 13.10 — иконки услуг (хаб). Стиль учетстоков: сетка 40, обводка 3.33, заливка 12%. svc-1, svc-2, svc-5 — как у стоков
+       (Обследование, Проектирование, Сервис); Установка — ap-tool (тот же гаечный ключ стоков); svc-3, svc-6, svc-7 — нарисованы в том же стиле -->
+  <symbol id="i-svc-1" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M4 46H60"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M20 46V31"/><circle vector-effect="non-scaling-stroke" style="stroke:var(--text)" cx="20" cy="22" r="9"/><path vector-effect="non-scaling-stroke" d="M20 22l5-5"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M44 46V16"/><circle vector-effect="non-scaling-stroke" cx="44" cy="40" r="3" fill="currentColor"/></symbol>
+  <symbol id="i-svc-2" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M4 28H20M44 28H60" stroke-dasharray="4 4"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M20 19V37L44 19V37Z"/><path vector-effect="non-scaling-stroke" d="M6 48H58M6 43v10M58 43v10M11 45.5l-5 2.5 5 2.5M53 45.5l5 2.5-5 2.5"/></symbol>
+  <symbol id="i-svc-3" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect vector-effect="non-scaling-stroke" style="stroke:var(--text)" x="6" y="8" width="52" height="48" stroke-dasharray="4 4"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M13 13V23L25 13V23Z"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M31 18H51"/><circle vector-effect="non-scaling-stroke" cx="19" cy="32" r="5"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M31 32H51"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M19 40V52"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M31 46H45"/></symbol>
+  <symbol id="i-svc-4" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M4 32H17M47 32H60"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M17 22v20M22 22v20M42 22v20M47 22v20"/><circle vector-effect="non-scaling-stroke" cx="32" cy="32" r="9"/><path vector-effect="non-scaling-stroke" d="M27 32h10M33 28l4 4-4 4"/></symbol>
+  <symbol id="i-svc-5" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M4 50H60"/><circle vector-effect="non-scaling-stroke" style="stroke:var(--text)" cx="16" cy="50" r="6"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M16 44V19H32" stroke-dasharray="3 4"/><rect vector-effect="non-scaling-stroke" style="stroke:var(--text)" x="32" y="9" width="26" height="20"/><path vector-effect="non-scaling-stroke" d="M37 15h16M37 21h9"/></symbol>
+  <symbol id="i-svc-6" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M4 34H11M29 34H35M53 34H60"/><circle vector-effect="non-scaling-stroke" style="stroke:var(--text)" cx="20" cy="34" r="9"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M15 34h10"/><circle vector-effect="non-scaling-stroke" cx="44" cy="34" r="9"/><path vector-effect="non-scaling-stroke" d="M39.5 34.5l3 3 6-7"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M20 25V14H44V25" stroke-dasharray="3 4"/></symbol>
+  <symbol id="i-svc-7" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M4 48H18M46 48H60"/><path vector-effect="non-scaling-stroke" style="stroke:var(--text)" d="M18 40v16M46 40v16"/><circle vector-effect="non-scaling-stroke" style="stroke:var(--text)" cx="32" cy="48" r="8" stroke-dasharray="3 4"/><circle vector-effect="non-scaling-stroke" cx="32" cy="14" r="8"/><path vector-effect="non-scaling-stroke" d="M32 25v10M28 31l4 4 4-4"/></symbol>
+  <symbol id="st-doc" viewBox="0 0 40 40" fill="none"><path opacity="0.12" d="M8.33 3.33H23.33L31.67 11.67V36.67H8.33Z" fill="currentColor"/><path d="M23.33 3.33H8.33V36.67H31.67V11.67ZM23.33 3.33V11.67H31.67M13.33 18.33H26.67M13.33 23.33H20M13.33 31.67C15 29.17 16.67 29.17 18.33 31.67 20 34.17 21.67 34.17 23.33 31.67" stroke="currentColor" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+</svg>
+
+<!-- Шапка — UI Kit учетстоков «Menu / Desktop»: лого с подписью направления, меню, кнопка телефона. Телефон справа обязателен -->
+<!-- Панель перехода между страницами — как в концепте v3 (.page-animate-bg 24ist.ru) -->
+<div class="page-veil" aria-hidden="true"></div>
+<div class="header-wrap">
+  <header class="header">
+    <a class="logo" href="index.html">
+      <!-- Знак — логотип клиента. Цветовая вариация под тепло — вне договора, пока заглушка -->
+      <span class="logo__mark" aria-hidden="true">лого</span>
+      <span><b>ООО «Комплекс-Техно»</b><span>Учет тепловой энергии — современные возможности</span></span>
+    </a>
+    <nav class="nav" aria-label="Основное меню">
+      <button class="nav__btn mnav__trigger" type="button" aria-expanded="false" aria-controls="mnav-uslugi" data-mnav="uslugi">Услуги <svg class="ic"><use href="#chev-d"/></svg></button>
+      <a href="obekty.html">Объекты</a>
+      <a href="kontakty.html">Контакты</a>
+      <!-- «Направления» — три сайта семейства, компонент общего UI-kit (решение 08.10). Подписи — черновик -->
+      <button class="nav__btn mnav__trigger" type="button" aria-expanded="false" aria-controls="mnav-dirs" data-mnav="dirs">Направления <svg class="ic"><use href="#chev-d"/></svg></button>
+    </nav>
+    <!-- 13.10 — выпадающее меню по референсу дизайнера (unlumen-ui «Motion Navigation Menu»): одна общая панель меняет размер
+         на пружине (350/32), содержимое при переходе между пунктами уезжает в сторону движения. Механика — js/concept.js.
+         Подписи услуг — цифры клиента с первых экранов страниц услуг (формулировки — черновик) -->
+    <div class="mnav__viewport">
+      <div class="mnav__panel" id="mnav-uslugi" data-panel="uslugi">
+        <a class="mnav__feature" href="uslugi.html"><span class="ic-box mnav__fic"><svg class="sic"><use href="#ap-check"/></svg></span><b>Все услуги</b><span>Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.</span></a>
+        <div class="mnav__grid">
+          <a class="mnav__link" href="obsledovanie.html"><b>Обследование объектов <svg class="ic"><use href="#arr-ne"/></svg></b><span>Бесплатно — выезд инженера, замеры и коммерческое предложение</span></a>
+          <a class="mnav__link" href="proektirovanie.html"><b>Проектирование <svg class="ic"><use href="#arr-ne"/></svg></b><span>92% проектов согласуются с первого раза</span></a>
+          <a class="mnav__link" href="ustanovka.html"><b>Установка <svg class="ic"><use href="#arr-ne"/></svg></b><span>1–3 дня — стандартный монтаж в тепловом пункте МКД</span></a>
+          <a class="mnav__link" href="servis.html"><b>Сервисное обслуживание <svg class="ic"><use href="#arr-ne"/></svg></b><span>24 часа — выезд при некорректных показаниях</span></a>
+          <a class="mnav__link" href="remont.html"><b>Ремонт, замена и реконструкция <svg class="ic"><use href="#arr-ne"/></svg></b><span>Бесплатно — выезд и диагностика</span></a>
+          <a class="mnav__also" href="uslugi.html">Также: поставка оборудования и поверка приборов учёта <svg class="ic"><use href="#arr-ne"/></svg></a>
+        </div>
+      </div>
+      <div class="mnav__panel mnav__panel--dirs" id="mnav-dirs" data-panel="dirs">
+        <a class="dir-link" href="https://xn--b1afppbpgbf4b.xn--p1ai/"><i class="dir-dot dir-dot--stoki"></i><span><b>Учёт сточных вод</b><small>учетстоков.рф</small></span><svg class="ic"><use href="#chev2"/></svg></a>
+            <span class="dir-link is-current" aria-current="page"><i class="dir-dot dir-dot--teplo"></i><span><b>Учёт тепловой энергии</b><small>Вы здесь</small></span></span>
+            <span class="dir-link is-soon"><i class="dir-dot dir-dot--voda"></i><span><b>Учёт воды</b><small>учётводы.рф — скоро</small></span></span>
+      </div>
+    </div>
+    <a class="phone-btn" href="tel:+74991107701"><svg class="ic"><use href="#phone"/></svg>+7 (499) 110-77-01</a>
+  </header>
+</div>
+
+<main class="page sv2" id="top">
+  <!-- Страница услуги «Сервисное обслуживание» — текст клиента 09.10 дословно. Раскладка — Figma 87:9037 (27.10): hero 592 | 1208, схема «Год обслуживания», body 608 | 1288 из семи плашек. Собрано tools/port_service_servis.mjs -->
+  <section class="plate sv2-hero sv2-hero--snug" aria-labelledby="sp-title">
+    <div class="sv2-hero__side">
+      <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span>/</span><a href="uslugi.html">Услуги</a><span>/</span><span aria-current="page">Сервисное обслуживание</span></nav>
+      <!-- Цифры — из текста клиента, формулировки подписей — черновик -->
+      <ul class="sv2-facts"><li><b>24 часа</b><span>выезд при некорректных показаниях</span></li><li><b>За 30 дней</b><span>предупреждаем об истечении срока поверки</span></li></ul>
+    </div>
+    <div class="sv2-hero__main">
+      <div class="sv2-hero__head">
+        <h1 class="sv2-h1" id="sp-title">Техническое и сервисное обслуживание узлов учёта <span>тепловой энергии (УУТЭ)</span></h1>
+        <p class="sv2-p sv2-hero__lead">Узел учёта тепловой энергии — это измерительная система, от точности которой зависят ваши расчёты с ресурсоснабжающей организацией. Даже правильно смонтированный и допущенный узел со временем накапливает погрешность: загрязняются первичные преобразователи расходомеров, уходит настройка тепловычислителя, окисляются контакты, выходят из строя датчики. Пока это не привело к сбою, вы ничего не замечаете. А когда РСО перестаёт принимать показания и переводит расчёт на норматив, платить приходится больше, чем вы фактически потребляете. Техническое и сервисное обслуживание решает эту задачу: мы контролируем состояние узла, устраняем неисправности до того, как они станут проблемой, и отвечаем за то, чтобы система работала в пределах нормированной погрешности весь срок эксплуатации.</p>
+      </div>
+      <div class="sv2-hero__foot">
+        <div class="btns">
+          <!-- надпись кнопки — как в Figma 87:9037 («Заказать проект»); в баннере слева — «Заключить договор» -->
+          <button class="btn-tall btn-tall--wide" type="button" data-modal data-modal-lead="Расскажем об условиях обслуживания и подготовим договор под ваш узел учёта.">Заказать проект <svg class="ic"><use href="#chev2"/></svg></button>
+          <a class="btn-tall btn-tall--wide btn-tall--line" href="tel:+74991107701">+7 (499) 110-77-01 <svg class="ic"><use href="#chev2"/></svg></a>
+        </div>
+        <div class="sx-ugo" data-sx-on aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M4 50H60"/><circle cx="16" cy="50" r="6"/><path d="M16 44V19H32" stroke-dasharray="3 4"/><rect x="32" y="9" width="26" height="20"/><path class="a" pathLength="1" d="M37 15h16M37 21h9"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 27.10 — схема вместо фото (графика-метафора, отбор дизайнера 27.10). Подпись к схеме — черновик -->
+  <figure class="plate sx sx-hero">
+    <div class="sx-bar"><figcaption class="sx-cap"><b>Год обслуживания узла учёта.</b> Для МКД достаточно ежеквартальных выездов, плюс обязательный предсезонный — перед отопительным периодом. Ведите курсором по шкале.</figcaption></div>
+    <div class="sx-season" data-sx="season"></div>
+    <ul class="sx-sleg">
+      <li><i class="sx-lg-hatch"></i><p><b>Отопительный период</b><span>Октябрь — апрель, границы на шкале условные</span></p></li>
+      <li><i class="sx-lg-visit"></i><p><b>Ежеквартальный выезд</b><span>Для промышленных предприятий и котельных — ежемесячно</span></p></li>
+      <li><i class="sx-lg-pre"></i><p><b>Предсезонный выезд</b><span>Комиссия проверяет целостность пломб, работоспособность каналов, актуальность настроечной базы</span></p></li>
+    </ul>
+  </figure>
+
+  <div class="sp-split sv2-split--blocks">
+    <aside class="sp-side" aria-label="Содержание страницы">
+      <div class="plate sp-side__toc">
+        <p class="sp-toc__h"><svg class="ic"><use href="#menu"/></svg>На этой странице</p>
+        <ol class="sp-toc__list">
+          <li><a href="#why" data-toc="why">Почему нужно даже новому узлу</a></li>
+          <li><a href="#to" data-toc="to">Техническое обслуживание</a></li>
+          <li><a href="#service" data-toc="service">Сервисное обслуживание</a></li>
+          <li><a href="#critical" data-toc="critical">Когда обслуживание критично</a></li>
+          <li><a href="#steps" data-toc="steps">Как мы работаем</a></li>
+          <li><a href="#objects" data-toc="objects">Особенности для объектов</a></li>
+          <li><a href="#risk" data-toc="risk">Цена ошибки</a></li>
+          <li><a href="#result" data-toc="result">Что вы получаете</a></li>
+          <li><a href="#faq" data-toc="faq">Вопросы</a></li>
+        </ol>
+      </div>
+      <!-- оранжевый баннер-призыв (Figma 87:9250); кнопка — вариант дизайнера с 9:66: полупрозрачная белая, не белая -->
+      <div class="plate plate--accent sp-cta sp-cta--76">
+        <p class="sv2-h5">Готовы работать с надёжным партнёром?</p>
+        <p class="sp-cta__p">Свяжитесь с нами — мы бесплатно проконсультируем вас без сложных терминов и навязчивых предложений.</p>
+        <button class="btn-tall btn-tall--glass btn-tall--wide" type="button" data-modal data-modal-lead="Расскажем об условиях обслуживания и подготовим договор под ваш узел учёта.">Заключить договор <svg class="ic"><use href="#chev2"/></svg></button>
+      </div>
+    </aside>
+    <div class="sp-main sv2-blocks">
+      <div class="plate sv2-block">
+      <section class="sp-sec sv2-sec--32" id="why" aria-labelledby="why-t">
+        <div class="sv2-sec__part">
+          <h2 class="sp-h2" id="why-t">Почему обслуживание нужно даже новому узлу учёта</h2>
+          <p class="sv2-p sv2-w900 sv2-muted">Распространённое заблуждение: узел учёта тепловой энергии только что смонтирован и допущен — значит, обслуживание не требуется как минимум до поверки. На практике всё иначе.</p>
+        </div>
+        <!-- 27.10 — погрешность с обслуживанием и без: иллюстрация к «Погрешность накапливается незаметно», числа условные -->
+        <figure class="sx sx-block">
+  <div class="sx-bar"><figcaption class="sx-cap"><b>Погрешность накапливается незаметно.</b> Без обслуживания показания уходят за предел — с ним выезд возвращает их к норме.</figcaption>
+    <ul class="sx-dleg"><li><i></i>С обслуживанием</li><li><i class="k"></i>Без обслуживания</li><li><i class="h"></i>Претензии РСО</li></ul></div>
+  <div class="sx-drift" data-sx="drift"></div>
+</figure>
+        <div class="sv2-q-grid sv2-q-grid--tight"><div class="sv2-q"><h3 class="sv2-h5">Погрешность накапливается незаметно</h3><p class="sv2-p">Загрязнение преобразователей, отложения на гильзах термопреобразователей, окисление клемм — всё это постепенно уводит показания от фактических значений. Вы не увидите этого, пока не получите счёт с расхождением или претензию от РСО.</p></div>
+<div class="sv2-q"><h3 class="sv2-h5">Сбои происходят внезапно</h3><p class="sv2-p">Скачок напряжения, гидроудар, засорение фильтра, выход из строя блока питания тепловычислителя — любая из этих ситуаций может обнулить архив или заблокировать учёт. Без обслуживания вы узнаете об этом только тогда, когда РСО запросит показания.</p></div>
+<div class="sv2-q"><h3 class="sv2-h5">РСО проверяет состояние узла</h3><p class="sv2-p">При ежегодной проверке готовности к отопительному сезону комиссия проверяет целостность пломб, работоспособность каналов, актуальность настроечной базы. Если узел учёта не обслуживается — замечания почти гарантированы.</p></div>
+<div class="sv2-q"><h3 class="sv2-h5">Ремонт после сбоя дороже обслуживания</h3><p class="sv2-p">Замена вышедшего из строя расходомера или тепловычислителя обходится в разы дороже, чем плановое техобслуживание в течение года. А если сбой привёл к перерасчёту по нормативу — потери ещё больше.</p></div></div>
+      </section>
+      </div>
+      <div class="plate sv2-block">
+      <section class="sp-sec sv2-sec--36" id="to" aria-labelledby="to-t">
+        <div class="sv2-sec__part">
+          <h2 class="sp-h2" id="to-t">Что входит в техническое обслуживание узлов учёта</h2>
+          <p class="sv2-p sv2-w900 sv2-muted">Техническое обслуживание обеспечивает метрологическую исправность узла учёта и соответствие нормативам. Все работы выполняем строго по регламенту, разработанному с учётом метрологических требований производителей оборудования.</p>
+        </div>
+        <div class="sv2-subs">
+<div class="sv2-sub"><h3 class="sv2-label">Регулярные выезды на объект:</h3><ol class="sv2-rows"><li><span class="sv2-no">01</span><p class="sv2-p">Визуальный осмотр узла: состояние оборудования, пломб, кабельных линий, шкафа учёта.</p></li><li><span class="sv2-no">02</span><p class="sv2-p">Проверка работоспособности каналов измерений — расходомеров, термопреобразователей, датчиков давления.</p></li><li><span class="sv2-no">03</span><p class="sv2-p">Контроль состояния первичных преобразователей — очистка от загрязнений, проверка отсутствия отложений на гильзах.</p></li><li><span class="sv2-no">04</span><p class="sv2-p">Проверка герметичности соединений, состояния запорной арматуры.</p></li><li><span class="sv2-no">05</span><p class="sv2-p">Контроль сроков межповерочных интервалов — напоминаем заранее.</p></li></ol></div>
+<div class="sv2-sub"><h3 class="sv2-label">Работа с тепловычислителем:</h3><ol class="sv2-rows"><li><span class="sv2-no">01</span><p class="sv2-p">Проверка настроечной базы данных — соответствие текущим параметрам теплоносителя и температурному графику.</p></li><li><span class="sv2-no">02</span><p class="sv2-p">Контроль архивов: часовых, суточных, месячных. Проверяем, что данные не теряются.</p></li><li><span class="sv2-no">03</span><p class="sv2-p">Проверка часов реального времени тепловычислителя.</p></li><li><span class="sv2-no">04</span><p class="sv2-p">Считывание и передача показаний в РСО (по согласованию).</p></li><li><span class="sv2-no">05</span><p class="sv2-p">Обновление настроек при переходе на летний и зимний режимы.</p></li></ol></div>
+<div class="sv2-sub-wrap"><div class="sv2-sub"><h3 class="sv2-label">Устранение неисправностей:</h3><ol class="sv2-rows"><li><span class="sv2-no">01</span><p class="sv2-p">Диагностика при выявлении отклонений в работе узла учёта тепловой энергии.</p></li><li><span class="sv2-no">02</span><p class="sv2-p">Регламентные профилактические работы — очистка, проверка контактов, контроль герметичности, проверка работоспособности каналов.</p></li><li><span class="sv2-no">03</span><p class="sv2-p">Формирование дефектной ведомости — если выявлена неисправность, фиксируем её и указываем, что требуется: замена датчика, поверка, замена расходомера или тепловычислителя.</p></li><li><span class="sv2-no">04</span><p class="sv2-p">Внеплановые выезды при аварийных ситуациях — по условиям договора.</p></li><li><span class="sv2-no">05</span><p class="sv2-p">Организация замены и поверки — при необходимости берём на себя замену вышедших из строя приборов и организацию поверки «под ключ» с переоформлением всех документов и внесением данных о поверке в базу ФГИС «АРШИН».</p></li></ol></div><div class="sv2-note"><p class="sv2-p"><b>Важно:</b> мы не «ремонтируем» средства измерений — это требует отдельной лицензии и выполняется только специализированными организациями. Наша задача — вовремя выявить проблему и дать вам готовое решение.</p><p class="sv2-p">Если оборудование вышло из строя, мы <b>отправляем его на завод-изготовитель или в аккредитованную сервисную организацию</b> — там ремонт выполнят по заводской технологии, с проверкой всех параметров и сохранением гарантии. После ремонта прибор проходит поверку, возвращается на объект, монтируется и вводится в эксплуатацию. Вы получаете работающий узел учёта и полный комплект документов.</p></div></div>
+        </div>
+      </section>
+      </div>
+      <div class="plate sv2-block">
+      <section class="sp-sec sv2-sec--36" id="service" aria-labelledby="service-t">
+        <div class="sv2-sec__part">
+          <h2 class="sp-h2" id="service-t">Что входит в сервисное обслуживание узлов учёта</h2>
+          <p class="sv2-p sv2-w900 sv2-muted">Сервисное обслуживание — это то, что выходит за рамки регламентных работ и делает эксплуатацию узла удобной для вас.</p>
+        </div>
+        <div class="sv2-subs">
+<div class="sv2-sub"><h3 class="sv2-label">Диспетчеризация и удалённый мониторинг:</h3><ol class="sv2-rows"><li><span class="sv2-no">01</span><p class="sv2-p">Настройка и поддержка диспетчеризации — передача данных на сервер или в диспетчерский пункт.</p></li><li><span class="sv2-no">02</span><p class="sv2-p">Удалённый мониторинг состояния узла в реальном времени (при наличии оборудования).</p></li><li><span class="sv2-no">03</span><p class="sv2-p">Оперативное оповещение при выходе параметров за допустимые границы.</p></li><li><span class="sv2-no">04</span><p class="sv2-p">Интеграция в АСУ ТП предприятия — по требованиям технических условий.</p></li></ol></div>
+<div class="sv2-sub"><h3 class="sv2-label">Документальное сопровождение:</h3><ol class="sv2-rows"><li><span class="sv2-no">01</span><p class="sv2-p">Акт обслуживания по итогам каждого визита — с перечнем выполненных работ и рекомендациями.</p></li><li><span class="sv2-no">02</span><p class="sv2-p">Ведомость показаний для передачи в РСО.</p></li><li><span class="sv2-no">03</span><p class="sv2-p">Контроль сроков поверки — напоминание и организация поверки «под ключ».</p></li><li><span class="sv2-no">04</span><p class="sv2-p">Подготовка к проверкам РСО — комплект документов и, при необходимости, присутствие нашего специалиста.</p></li></ol></div>
+<div class="sv2-sub"><h3 class="sv2-label">Консультации и обучение:</h3><ol class="sv2-rows"><li><span class="sv2-no">01</span><p class="sv2-p">Консультации по эксплуатации узла учёта для службы эксплуатации.</p></li><li><span class="sv2-no">02</span><p class="sv2-p">Обучение персонала работе с тепловычислителем и снятию показаний.</p></li><li><span class="sv2-no">03</span><p class="sv2-p">Помощь при взаимодействии с РСО по вопросам учёта.</p></li></ol></div>
+        </div>
+      </section>
+      </div>
+      <div class="plate sv2-block">
+      <section class="sp-sec" id="critical" aria-labelledby="critical-t">
+        <h2 class="sp-h2" id="critical-t">Когда обслуживание критично</h2>
+<div class="sv2-lcards"><article class="sv2-lcard"><h3 class="sv2-h5">Подготовка к отопительному сезону</h3><div class="sv2-lcard__body"><p class="sv2-p">Перед сезоном узел учёта должен быть готов к максимальным расходам и температурам, именно поэтому и проводится предсезонная диагностика:</p><ul class="sv2-bul"><li>Проверяем настройки тепловычислителя на зимний режим.</li><li>Тестируем расходомеры при высоких расходах.</li><li>Контролируем термопреобразователи при высоких температурах.</li><li>Проверяем глубину хранения архивов.</li></ul><p class="sv2-p">Если узел не готов — РСО может начислить по нормативу за весь период неисправности. Предсезонная диагностика исключает этот риск.</p></div></article>
+<article class="sv2-lcard"><h3 class="sv2-h5">Внеплановый сбой</h3><div class="sv2-lcard__body"><p class="sv2-p">Если тепловычислитель «завис», показания выглядят некорректно или РСО прислала уведомление о неисправности — мы выезжаем в течение 24–48 часов и на месте:</p><ul class="sv2-bul"><li>Диагностируем причину: аппаратная неисправность, потеря питания, программный сбой, механическое повреждение.</li><li>Восстанавливаем работоспособность: перезагрузка, замена неисправного компонента, обновление базы.</li><li>Формируем акт о причинах сбоя и проведённых работах — документ для РСО.</li></ul></div></article>
+<article class="sv2-lcard"><h3 class="sv2-h5">Подготовка к поверке или замене оборудования</h3><div class="sv2-lcard__body"><p class="sv2-p">Без действующей поверки РСО переводит на норматив — поэтому мы:</p><ul class="sv2-bul"><li>Отслеживаем сроки поверки по каждой единице оборудования.</li><li>За 30 дней уведомляем заказчика.</li><li>Планируем окно для замены — с минимальным отключением и согласованием с РСО.</li><li>После поверки или установки новых приборов вводим узел в эксплуатацию заново, с подачей документов в РСО и сопровождением комиссии.</li></ul></div></article></div>
+      </section>
+      </div>
+      <div class="plate sv2-block">
+      <section class="sp-sec" id="steps" aria-labelledby="steps-t">
+        <h2 class="sp-h2" id="steps-t">Как мы работаем</h2>
+<ol class="sp-steps sv2-pipe sv2-pipe--line"><li class="sp-step"><i class="sv2-t1" aria-hidden="true"></i><i class="sv2-t2" aria-hidden="true"></i><i class="sv2-tap" aria-hidden="true"></i><i class="sv2-j1" aria-hidden="true"></i><i class="sv2-j2" aria-hidden="true"></i><span class="sp-step__no">1</span><div class="sp-step__body sp-step__body--tight"><h3 class="sv2-lg">Первичный аудит узла учёта</h3><p class="sv2-p sp-step__text">Перед заключением договора проводим первичный аудит: проверяем состояние оборудования, настроечную базу, архивы, соответствие проекту. Фиксируем исходное состояние и составляем план обслуживания.</p></div></li>
+<li class="sp-step"><i class="sv2-t1" aria-hidden="true"></i><i class="sv2-t2" aria-hidden="true"></i><i class="sv2-tap" aria-hidden="true"></i><i class="sv2-j1" aria-hidden="true"></i><i class="sv2-j2" aria-hidden="true"></i><span class="sp-step__no">2</span><div class="sp-step__body sp-step__body--tight"><h3 class="sv2-lg">Заключение договора</h3><p class="sv2-p sp-step__text">Договор на техническое обслуживание заключается на год с указанием периодичности выездов, состава работ и сроков реагирования на аварийные ситуации. Стоимость фиксируется и не меняется в течение срока договора.</p></div></li>
+<li class="sp-step"><i class="sv2-t1" aria-hidden="true"></i><i class="sv2-t2" aria-hidden="true"></i><i class="sv2-tap" aria-hidden="true"></i><i class="sv2-j1" aria-hidden="true"></i><i class="sv2-j2" aria-hidden="true"></i><span class="sp-step__no">3</span><div class="sp-step__body sp-step__body--tight"><h3 class="sv2-lg">Плановые выезды по регламенту</h3><p class="sv2-p sp-step__text">Периодичность выездов — от одного раза в квартал до ежемесячных, в зависимости от типа объекта и требований РСО. Для МКД — обычно раз в квартал, для промышленных объектов и котельных — чаще.</p></div></li>
+<li class="sp-step"><i class="sv2-t1" aria-hidden="true"></i><i class="sv2-t2" aria-hidden="true"></i><i class="sv2-tap" aria-hidden="true"></i><i class="sv2-j1" aria-hidden="true"></i><i class="sv2-j2" aria-hidden="true"></i><span class="sp-step__no">4</span><div class="sp-step__body sp-step__body--tight"><h3 class="sv2-lg">Внеплановые выезды</h3><p class="sv2-p sp-step__text">При выявлении неисправности или по заявке заказчика выезжаем в срок, указанный в договоре: обычно от 1 до 3 рабочих дней, при аварии — в течение 24 часов.</p></div></li>
+<li class="sp-step"><i class="sv2-t1" aria-hidden="true"></i><i class="sv2-t2" aria-hidden="true"></i><i class="sv2-tap" aria-hidden="true"></i><i class="sv2-j1" aria-hidden="true"></i><i class="sv2-j2" aria-hidden="true"></i><span class="sp-step__no">5</span><div class="sp-step__body sp-step__body--tight"><h3 class="sv2-lg">Подготовка к отопительному сезону</h3><p class="sv2-p sp-step__text">Перед началом сезона проводим расширенную проверку узла и готовим документы для РСО.</p></div></li></ol>
+      </section>
+      </div>
+      <div class="plate sv2-block">
+      <section class="sp-sec" id="objects" aria-labelledby="objects-t">
+        <h2 class="sp-h2" id="objects-t">Особенности обслуживания узлов учёта для разных объектов</h2>
+<div class="sv2-objs sv2-objs--flush sv2-objs--s" data-sx="objs" data-objs="mkd prom kot"><article class="sv2-obj"><div class="sv2-obj__text"><h3 class="sv2-h5">Обслуживание УУТЭ в МКД</h3><p class="sv2-p">Для многоквартирных домов обслуживание включает проверку общедомового потребления, контроль корректности расчётов с учётом ГВС и циркуляции. Согласовываем выезды с УК или ТСЖ, работаем без неудобств для жильцов. По итогам каждого визита предоставляем акт обслуживания для управляющей организации. Периодичность обслуживания — ежеквартально и обязательный предсезонный выезд.</p></div></article>
+<article class="sv2-obj"><div class="sv2-obj__text"><h3 class="sv2-h5">Обслуживание УУТЭ на промышленных предприятиях</h3><p class="sv2-p">На предприятиях обслуживание включает контроль нескольких контуров учёта, проверку интеграции с АСУ ТП, диагностику каналов передачи данных. Работаем по согласованному графику, без остановки производства. Периодичность обслуживания — ежемесячно, с расширенным отчётом по каждому контуру.</p></div></article>
+<article class="sv2-obj"><div class="sv2-obj__text"><h3 class="sv2-h5">Обслуживание УУТЭ в котельных и ЦТП</h3><p class="sv2-p">В котельных и ЦТП узлы учёта могут быть как коммерческими, так и технологическими. Поэтому обслуживание включает проверку дублирующих каналов измерений, контроль архивации данных с глубиной не менее 60 суток, проверку работы в условиях высоких температур и давлений. Учитываем требования РСО для источников тепловой энергии. Периодичность обслуживания — ежемесячно.</p></div></article></div>
+      </section>
+      </div>
+      <div class="plate sv2-block">
+      <section class="sp-sec" id="risk" aria-labelledby="risk-t">
+        <h2 class="sp-h2" id="risk-t">Цена ошибки: что происходит, если узел учёта не обслуживать</h2>
+<div class="sp-table" role="table"><div class="sp-table__row sp-table__head"><span>Что происходит без обслуживания</span><span>Последствия</span></div>
+<div class="sp-table__row"><b>Загрязнение первичных преобразователей расходомеров</b><span>Систематическая погрешность, недоучёт или переучёт тепловой энергии. РСО доначисляет по нормативу за весь период искажения.</span></div>
+<div class="sp-table__row"><b>Отложения на гильзах термопреобразователей, разность температур искажена</b><span>Систематическая погрешность учёта тепла</span></div>
+<div class="sp-table__row"><b>Окисление контактов и клемм</b><span>Зависание тепловычислителя, потеря архивов, сбой учёта</span></div>
+<div class="sp-table__row"><b>Архивы тепловычислителя обнулились после сбоя питания</b><span>Неверный расчёт, расхождение с данными РСО, перерасчёт.</span></div>
+<div class="sp-table__row"><b>Истёк срок поверки</b><span>РСО не принимает показания, расчёт ведётся по нормативу до ввода узла учёта в эксплуатацию после поверки.</span></div>
+<div class="sp-table__row"><b>Засор грязевика, рост гидравлического сопротивления</b><span>Снижение расхода теплоносителя через узел учёта, нарушение гидравлического режима системы, риск аварийной остановки</span></div>
+<div class="sp-table__row"><b>Канал передачи данных в ГИС ЖКХ не работает</b><span>Штрафы за непредоставление данных, претензии от надзорных органов</span></div>
+<div class="sp-table__row"><b>Пломба РСО повреждена, факт не зафиксирован своевременно</b><span>РСО может признать несанкционированное вмешательство — доначисление по нормативу с момента последней проверки</span></div></div>
+      </section>
+      <div class="sv2-hatch" aria-hidden="true"></div>
+      <section class="sp-sec" id="result" aria-labelledby="result-t">
+        <h2 class="sp-h2" id="result-t">Что вы получаете по итогам обслуживания</h2>
+<ul class="sp-check sp-check--top"><li><svg class="ic"><use href="#check"/></svg><span>Работающий узел учёта тепловой энергии с нормированной погрешностью в течение всего срока договора.</span></li><li><svg class="ic"><use href="#check"/></svg><span>Актуальную настроечную базу тепловычислителя — зимний и летний режимы.</span></li><li><svg class="ic"><use href="#check"/></svg><span>Акты обслуживания по каждому визиту — для отчётности и проверок РСО.</span></li><li><svg class="ic"><use href="#check"/></svg><span>Контроль сроков поверки — напоминание и организация поверки «под ключ».</span></li><li><svg class="ic"><use href="#check"/></svg><span>Оперативное устранение неисправностей — без простоев и перерасчётов.</span></li><li><svg class="ic"><use href="#check"/></svg><span>Подготовку к отопительному сезону — узел готов к работе под нагрузкой.</span></li><li><svg class="ic"><use href="#check"/></svg><span>Сопровождение при проверках РСО — комплект документов и присутствие специалиста.</span></li></ul>
+      </section>
+      </div>
+    </div>
+  </div>
+
+  <section class="plate faq" id="faq" aria-labelledby="faq-title">
+    <h2 class="faq__title" id="faq-title">Отвечаем на частые <span>вопросы клиентов</span></h2>
+    <div class="faq__list">
+      <div class="faq__item">
+        <button class="faq__button" type="button" aria-expanded="false" aria-controls="qa-1"><span class="faq__icon" aria-hidden="true"><svg class="ic"><use href="#plus"/></svg></span><span>Как часто нужно обслуживать узел учёта тепловой энергии?</span></button>
+        <div class="faq__content" id="qa-1" inert><div class="faq__in"><div class="faq__wrapper"><div class="faq__text"><p class="sp-p">Для МКД достаточно ежеквартальных выездов, плюс обязательный предсезонный — перед отопительным периодом. Для промышленных предприятий и котельных — ежемесячно. Точный график определяем после обследования узла и фиксируем в договоре.</p></div></div></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__button" type="button" aria-expanded="false" aria-controls="qa-2"><span class="faq__icon" aria-hidden="true"><svg class="ic"><use href="#plus"/></svg></span><span>Сколько стоит обслуживание?</span></button>
+        <div class="faq__content" id="qa-2" inert><div class="faq__in"><div class="faq__wrapper"><div class="faq__text"><p class="sp-p">Стоимость зависит от типа объекта, количества узлов учёта и периодичности выездов. После обследования узла готовим коммерческое предложение с фиксированной ценой на весь период действия договора обслуживания.</p></div></div></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__button" type="button" aria-expanded="false" aria-controls="qa-3"><span class="faq__icon" aria-hidden="true"><svg class="ic"><use href="#plus"/></svg></span><span>Вы обслуживаете узлы учёта, которые устанавливали не вы?</span></button>
+        <div class="faq__content" id="qa-3" inert><div class="faq__in"><div class="faq__wrapper"><div class="faq__text"><p class="sp-p">Да. Мы обслуживаем узлы учёта тепловой энергии любых производителей, независимо от того, кто выполнял монтаж. При заключении договора проводим первичный аудит и фиксируем его исходное состояние.</p></div></div></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__button" type="button" aria-expanded="false" aria-controls="qa-4"><span class="faq__icon" aria-hidden="true"><svg class="ic"><use href="#plus"/></svg></span><span>Вы следите за сроками поверки приборов?</span></button>
+        <div class="faq__content" id="qa-4" inert><div class="faq__in"><div class="faq__wrapper"><div class="faq__text"><p class="sp-p">Да. Ведём реестр оборудования с датами поверок по каждому узлу. За 30 дней до истечения срока уведомляем заказчика и планируем замену или демонтаж на поверку. После установки поверенных приборов заново вводим узел в эксплуатацию — с подачей документов в РСО и сопровождением комиссии.</p></div></div></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__button" type="button" aria-expanded="false" aria-controls="qa-5"><span class="faq__icon" aria-hidden="true"><svg class="ic"><use href="#plus"/></svg></span><span>Что делать, если узел учёта показал некорректные данные?</span></button>
+        <div class="faq__content" id="qa-5" inert><div class="faq__in"><div class="faq__wrapper"><div class="faq__text"><p class="sp-p">Свяжитесь с нами — выезжаем в течение 24 часов. На месте определяем причину, восстанавливаем работоспособность узла (перезагрузка, корректировка настроек, замена неисправного компонента) и формируем акт для РСО с описанием причины и проведённых работ. Если искажение данных привело к переплате — поможем подготовить документы для перерасчёта в РСО.</p></div></div></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__button" type="button" aria-expanded="false" aria-controls="qa-6"><span class="faq__icon" aria-hidden="true"><svg class="ic"><use href="#plus"/></svg></span><span>Какие документы вы предоставляете после каждого выезда?</span></button>
+        <div class="faq__content" id="qa-6" inert><div class="faq__in"><div class="faq__wrapper"><div class="faq__text"><p class="sp-p">После каждого планового и внепланового выезда вы получаете: акт технического состояния узла учёта, ведомость показаний и архивов, отчёт об отклонениях и рекомендации по дальнейшей эксплуатации. При подготовке к проверке РСО — комплект подтверждающих документов: акты, протоколы, данные архивов, уведомления о сроках поверки. Если проверка выявила неисправность — оперативно устраняем причину и готовим акт о восстановлении работоспособности.</p></div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="plate sv2-cta sv2-cta--long" id="contacts" aria-labelledby="cta-title">
+    <div class="sv2-cta__text">
+      <div class="sv2-cta__copy">
+        <div class="sv2-cta__head"><h2 class="sv2-h2" id="cta-title">Готовы работать с надёжным партнёром?</h2><p class="sv2-p">Не допускайте сбоев в работе узла учёта: ведь они ведут к доначислениям и штрафам. Доверьте его обслуживание нам — и сосредоточьтесь на решении своих главных задач.</p></div>
+      </div>
+      <div class="btns">
+        <a class="btn-tall" href="tel:+74991107701">+7 (499) 110-77-01 <svg class="ic"><use href="#chev2"/></svg></a>
+        <a class="btn-tall btn-tall--mail" href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru <svg class="ic"><use href="#chev2"/></svg></a>
+      </div>
+    </div>
+    <div class="ph sv2-cta__ph" aria-hidden="true"><p class="ph__cap"><b>Фото</b>Специалист в тепловом пункте после сдачи узла учёта: опломбированный шкаф, работающий тепловычислитель</p></div>
+  </section>
+</main>
+
+  <!-- Футер — плашка цвета акцента, как синий футер учетстоков. Тексты клиента -->
+  <footer class="plate plate--accent footer">
+    <div class="footer__grid">
+      <div>
+        <a class="logo" href="index.html"><span class="logo__mark" aria-hidden="true">лого</span><span><b>ООО «Комплекс-Техно»</b><span>Учет тепловой энергии — современные возможности</span></span></a>
+        <p class="footer__about">Помогаем промышленным предприятиям, бюджетным организациям, УК, ТСЖ и теплоснабжающим организациям оптимизировать расходы на тепло. Профессиональная установка, поверка и обслуживание узлов учёта тепловой энергии.</p>
+      </div>
+      <div>
+        <h2 class="footer__h">Меню</h2>
+        <ul><li><a href="uslugi.html">Услуги</a></li><li><a href="obekty.html">Объекты</a></li><li><a href="kontakty.html">Контакты</a></li></ul>
+      </div>
+      <div>
+        <h2 class="footer__h">Услуги</h2>
+        <ul>
+          <li><a href="obsledovanie.html">Обследование объектов</a></li>
+          <li><a href="proektirovanie.html">Проектирование</a></li>
+          <li><a href="ustanovka.html">Установка</a></li>
+          <li><a href="servis.html">Сервисное обслуживание</a></li>
+          <li><a href="remont.html">Ремонт и реконструкция</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer__h">Контакты</h2>
+        <ul>
+          <li><a href="tel:+74991107701">+7 (499) 110-77-01</a></li>
+          <li><a href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru</a></li>
+          <!-- 12.10: адрес убран до ответа клиента (UX-аудит, п.6). На стоках: 129337, г. Москва, Ярославское шоссе, д. 42, пом. 1/4 -->
+        </ul>
+      </div>
+    </div>
+    <!-- Перелинковка, решение 08.10: «Наши направления» в футере всех трёх сайтов -->
+    <div class="footer__dirs">
+      <h2 class="footer__h">Наши направления</h2>
+      <div class="footer__dirs-row">
+        <a class="fdir" href="https://xn--b1afppbpgbf4b.xn--p1ai/"><i class="dir-dot dir-dot--stoki"></i><span><b>Учёт сточных вод</b><small>учетстоков.рф</small></span><svg class="ic"><use href="#chev2"/></svg></a>
+        <span class="fdir is-current" aria-current="page"><i class="dir-dot dir-dot--teplo"></i><span><b>Учёт тепловой энергии</b><small>Вы здесь</small></span></span>
+        <span class="fdir is-soon"><i class="dir-dot dir-dot--voda"></i><span><b>Учёт воды</b><small>учётводы.рф — скоро</small></span></span>
+      </div>
+    </div>
+    <div class="footer__bottom"><span>© 2007–2026 ООО «Комплекс-Техно»</span><a href="politika.html">Политика конфиденциальности</a></div>
+  </footer>
+
+
+<!-- Попап «Получить консультацию» — как на учетстоков.рф: без формы -->
+<div class="modal" id="consult" role="dialog" aria-modal="true" aria-labelledby="consult-title" hidden>
+  <div class="modal__overlay" data-close></div>
+  <div class="modal__panel">
+    <button class="sq sq--line modal__close" type="button" aria-label="Закрыть" data-close><svg class="ic"><use href="#x"/></svg></button>
+    <h2 class="t-28" id="consult-title">Получить консультацию</h2>
+    <p class="t-16">Свяжитесь с нами — мы бесплатно проконсультируем вас без сложных терминов и навязчивых предложений. <b>Просто позвоните или напишите:</b></p>
+    <div class="btns">
+      <a class="btn-tall" href="tel:+74991107701">+7 (499) 110-77-01 <svg class="ic"><use href="#chev2"/></svg></a>
+      <a class="btn-tall btn-tall--line" href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru <svg class="ic"><use href="#chev2"/></svg></a>
+    </div>
+  </div>
+</div>
+
+
+<script src="js/concept.js?v=42"></script>
+<script src="js/schemes.js?v=3"></script>
+</body>
+</html>
