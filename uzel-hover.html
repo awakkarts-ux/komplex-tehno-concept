@@ -121,10 +121,9 @@ path.hit:hover,path.hit.on{fill:none;stroke:rgba(194,65,12,.55);stroke-width:22}
 .dot-c{fill:#C2410C;stroke:#fff;stroke-width:1.5}
 .dot-r{fill:none;stroke:#C2410C;stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:pulse 2s ease-out infinite}
 @keyframes pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.2);opacity:0}}
-.dots{transition:opacity .3s}.stage.seen .dots{opacity:0}
+.dot{transition:opacity .2s}.dot.off{opacity:0}
 .hintpill{position:absolute;left:50%;transform:translateX(-50%);bottom:1.25rem;z-index:2;display:flex;align-items:center;gap:.625rem;background:#fff;border-radius:2rem;padding:.625rem 1rem .625rem .75rem;font:600 max(.875rem,13px)/1.2 var(--B);box-shadow:0 2px 12px rgba(0,0,0,.08);transition:opacity .3s}
 .hintpill i{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--acc);display:grid;place-items:center;flex:none}
-.stage.seen .hintpill{opacity:0}
 @media (prefers-reduced-motion:reduce){.dot-r{animation:none}}
 .tip{position:absolute;z-index:3;width:24rem;background:#fff;border-radius:.5rem;padding:1rem 1.25rem;box-shadow:0 8px 32px rgba(0,0,0,.14);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s}
 .tip.on{opacity:1;transform:none}
@@ -137,9 +136,9 @@ function show(el){const k=+el.dataset.k,it=ITEMS[k];tip.innerHTML='<b>'+it.t+'</
  const r=el.getBoundingClientRect(),s=st.getBoundingClientRect();
  const cx=r.left+r.width/2-s.left;let left=cx-tip.offsetWidth/2;left=Math.max(12,Math.min(left,s.width-tip.offsetWidth-12));
  const below=r.top-s.top<tip.offsetHeight+24;
- tip.style.left=left+'px';tip.style.top=(below?r.bottom-s.top+10:r.top-s.top-tip.offsetHeight-10)+'px';tip.classList.add('on');st.classList.add('seen');
+ tip.style.left=left+'px';tip.style.top=(below?r.bottom-s.top+10:r.top-s.top-tip.offsetHeight-10)+'px';tip.classList.add('on');const H=[...document.querySelectorAll('.hit')],D=[...document.querySelectorAll('.dot')],n=H.indexOf(el);D.forEach((d,k)=>d.classList.toggle('off',k===n));
 }
-document.querySelectorAll('.hit').forEach(h=>{h.addEventListener('mouseenter',()=>show(h));h.addEventListener('mouseleave',()=>tip.classList.remove('on'));
- h.addEventListener('focus',()=>show(h));h.addEventListener('click',()=>show(h));h.setAttribute('tabindex','0');h.addEventListener('blur',()=>tip.classList.remove('on'))});
+document.querySelectorAll('.hit').forEach(h=>{h.addEventListener('mouseenter',()=>show(h));h.addEventListener('mouseleave',()=>{tip.classList.remove('on');document.querySelectorAll('.dot').forEach(d=>d.classList.remove('off'))});
+ h.addEventListener('focus',()=>show(h));h.addEventListener('click',()=>show(h));h.setAttribute('tabindex','0');h.addEventListener('blur',()=>{tip.classList.remove('on');document.querySelectorAll('.dot').forEach(d=>d.classList.remove('off'))})});
 if(location.hash=='#t'){const h=document.querySelectorAll('.hit')[4];h.classList.add('on');show(h)}
 </script></body></html>
