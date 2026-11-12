@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Главная — «Этапы работы»: 3 варианта</title>
+<style>
+:root{--white:#fff;--card:#F5F5F7;--text:#424242;--text-2:#6A6A6A;--stroke:#C4C4C4;--accent:#C2410C;--pad:40px;--gap:24px}
+*{box-sizing:border-box;margin:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--text);background:#e9e9ec;padding:24px 0 80px}
+.note{max-width:1904px;margin:0 auto 16px;padding:0 var(--pad);font-size:14px;color:var(--text-2);line-height:1.5}
+.note b{color:var(--text)}
+.tag{max-width:1904px;margin:40px auto 8px;padding:0 var(--pad);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.plate{max-width:1904px;margin:0 auto;background:var(--white);border-radius:8px;padding:var(--pad)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.label{font-size:16px;font-weight:400}
+h3{font-size:22px;line-height:1.2;font-weight:400;letter-spacing:-.02em}
+p{font-size:14px;line-height:1.5;color:var(--text-2)}
+.num{display:inline-grid;place-items:center;min-width:36px;height:36px;padding:0 6px;border:1px solid var(--stroke);border-radius:6px;background:#fff;font-size:13px;color:var(--text-2);font-variant-numeric:tabular-nums}
+.head{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-bottom:40px}
+.head h2{grid-column:1}
+.head p{grid-column:2/4;max-width:640px;font-size:16px}
+
+/* A — сетка 4+3 */
+.a{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.a .c{background:var(--card);border-radius:8px;padding:24px;min-height:300px;display:flex;flex-direction:column;gap:12px;position:relative}
+.a .c .num{background:#fff;margin-bottom:auto;align-self:flex-start}
+.a .c.cta{background:var(--accent);color:#fff;justify-content:flex-end}
+.a .c.cta h3{color:#fff}.a .c.cta p{color:rgba(255,255,255,.85)}
+.a .c.cta a{display:inline-block;margin-top:8px;padding:10px 16px;border-radius:6px;background:#fff;color:var(--accent);font-size:14px;text-decoration:none;align-self:flex-start}
+
+/* Б — магистраль Т1/Т2, два ряда */
+.b .row{position:relative;display:grid;gap:var(--gap);padding-top:64px;margin-bottom:48px}
+.b .row.r4{grid-template-columns:repeat(4,1fr)}
+.b .row.r3{grid-template-columns:repeat(4,1fr)}
+.b .pipe{position:absolute;left:0;right:0;top:12px;height:20px;border-top:2px solid var(--accent);border-bottom:2px solid #8a8a90}
+.b .pipe i{position:absolute;top:-22px;font-style:normal;font-size:12px;color:var(--accent)}
+.b .pipe i+i{top:auto;bottom:-22px;color:#8a8a90}
+.b .st{position:relative}
+.b .st .num{position:absolute;top:-64px;left:0;transform:translateY(0);margin-top:4px;z-index:1}
+.b .st::before{content:"";position:absolute;left:18px;top:-30px;height:30px;width:1px;background:var(--accent)}
+.b .st h3{margin-bottom:8px}
+.b .row .pipe::after{content:"";position:absolute;right:0;top:-2px;width:0}
+
+/* В — две колонки списком с вертикальной магистралью */
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:0 calc(var(--gap)*2)}
+.c2 ol{list-style:none;padding:0;position:relative}
+.c2 li{position:relative;display:grid;grid-template-columns:36px 1fr;gap:24px;padding-bottom:32px}
+.c2 li:last-child{padding-bottom:0}
+.c2 li:not(:last-child)::after{content:"";position:absolute;left:18px;top:36px;bottom:0;width:1px;background:var(--accent)}
+.c2 li .num{position:relative;z-index:1}
+.c2 li h3{font-size:20px;margin-bottom:6px;margin-top:4px}
+.c2 li p{max-width:520px}
+</style>
+</head>
+<body>
+<div class="note"><b>Главная · «Этапы работы» (Stages 99:5119).</b> Что не так сейчас: из 7 шагов виден 3, лента 3070 px, слева пустая колонка, градиент в карточках. Здесь все 7 шагов сразу, без прокрутки и градиента, тексты клиента без изменений. Три варианта — выберите, перенесу в Figma.</div>
+
+<div class="tag">Вариант А · сетка 4 + 3</div>
+<section class="plate">
+  <div class="head"><h2 class="label">Этапы работы</h2></div>
+  <div class="a" id="a"></div>
+</section>
+
+<div class="tag">Вариант Б · магистраль Т1 / Т2, два ряда</div>
+<section class="plate b">
+  <div class="head"><h2 class="label">Этапы работы</h2></div>
+  <div id="b"></div>
+</section>
+
+<div class="tag">Вариант В · две колонки, вертикальная линия</div>
+<section class="plate">
+  <div class="head"><h2 class="label">Этапы работы</h2></div>
+  <div class="c2"><ol id="c1"></ol><ol id="c2"></ol></div>
+</section>
+
+<script>
+const S=[
+["Звонок и консультация","Бесплатная консультация: разбираемся в вашей задаче — тип объекта, система теплоснабжения, требования РСО. Подсказываем, какой узел учёта тепловой энергии подойдёт и что нужно для согласования."],
+["Выезд на объект","Бесплатное обследование вашего объекта: определяем оптимальное место установки узла учёта тепловой энергии, оцениваем диаметры трубопроводов, систему отопления и ГВС, подбираем подходящий тип приборов учёта."],
+["Коммерческое предложение","Предоставим оптимальное предложение с подробной сметой, сроками и стоимостью оборудования для узла учёта тепловой энергии. Расчёт — бесплатно и без обязательств."],
+["Заключение договора","Фиксированная цена без скрытых платежей, чётко обозначенные сроки и гарантия на выполненные работы. Стоимость установки узла учёта тепловой энергии закрепляем в договоре."],
+["Разработка проекта","Мы не просто «рисуем бумаги» — наша задача разработать такой проект узла учёта тепловой энергии, который без труда пройдёт согласование в теплоснабжающей организации."],
+["Поставка оборудования","Берём на себя всю логистику и доставим оборудование для узла учёта тепловой энергии (расходомеры, тепловычислители, датчики, шкафы учёта) на ваш объект в полной сохранности и в чётко оговорённые сроки."],
+["Монтаж, наладка и сдача узла учёта тепловой энергии","Наш результат — это не просто смонтированный узел учёта тепловой энергии, а его надёжная работа, полный пакет исполнительной документации и гарантированный акт допуска в коммерческую эксплуатацию от РСО."]];
+const n=i=>String(i+1).padStart(2,"0");
+document.getElementById("a").innerHTML=S.map((s,i)=>`<div class="c"><span class="num">${n(i)}</span><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("")+
+ `<div class="c cta"><h3>Начнём с консультации</h3><p>Первый шаг бесплатный и ни к чему не обязывает.</p><a href="#">Заказать звонок</a></div>`;
+const st=(s,i)=>`<div class="st"><span class="num">${n(i)}</span><h3>${s[0]}</h3><p>${s[1]}</p></div>`;
+const pipe=`<div class="pipe"><i style="left:56px">Т1</i><i style="left:56px">Т2</i></div>`;
+document.getElementById("b").innerHTML=
+ `<div class="row r4">${pipe}${S.slice(0,4).map((s,i)=>st(s,i)).join("")}</div>`+
+ `<div class="row r3">${pipe}${S.slice(4).map((s,i)=>st(s,i+4)).join("")}</div>`;
+const li=(s,i)=>`<li><span class="num">${n(i)}</span><div><h3>${s[0]}</h3><p>${s[1]}</p></div></li>`;
+document.getElementById("c1").innerHTML=S.slice(0,4).map((s,i)=>li(s,i)).join("");
+document.getElementById("c2").innerHTML=S.slice(4).map((s,i)=>li(s,i+4)).join("");
+</script>
+</body>
+</html>
