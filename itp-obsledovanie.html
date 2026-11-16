@@ -1,0 +1,157 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Что проверяет инженер на объекте — учёттепла.рф</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sofia+Sans+Extra+Condensed:wght@700;800&display=swap" rel="stylesheet"><style>
+:root{--bg:#E8EAEC;--card:#F5F5F7;--text:#3A3D42;--text-2:#6A6A6A;--stroke:#C4C4C4;--hair:#DADCDF;--acc:#C2410C;
+ --H:'Sofia Sans Extra Condensed','Arial Narrow',sans-serif;--B:Inter,Arial,sans-serif}
+*{box-sizing:border-box}html{font-size:calc(100vw/120)}@media(max-width:1200px){html{font-size:10px}}
+body{margin:0;background:var(--bg);color:var(--text);font:400 max(1rem,15px)/1.5 var(--B);letter-spacing:-.015em;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ol,ul,figure{margin:0}ol,ul{padding:0;list-style:none}button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.wrap{padding:.5rem;display:grid;gap:.5rem}
+.card{background:#fff;border-radius:.75rem;padding:2.5rem}
+.grid{display:grid;grid-template-columns:37rem minmax(0,1fr);column-gap:1.5rem}
+.lbl{font:600 max(.8125rem,13px)/1.5 var(--B);letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
+.h1{font:800 4rem/1 var(--H);text-transform:uppercase;letter-spacing:-.03em}.h1 b{color:var(--acc)}
+.h4{font:800 2.5rem/1 var(--H);text-transform:uppercase;letter-spacing:-.03em;text-wrap:balance}
+.h5{font:800 2rem/1 var(--H);text-transform:uppercase;letter-spacing:-.03em}
+.h4 b,.h5 b{color:var(--acc)}
+.p{max-width:62ch}.p+.p{margin-top:.75rem}.mut{color:var(--text-2)}
+.s{font-size:max(.875rem,13px);line-height:1.45}
+svg{display:block;width:100%;height:auto}
+svg .mk{cursor:pointer}svg .mk-h{fill:var(--acc);opacity:0;transition:opacity .2s}
+svg .mk-c,svg .mk text{transition:fill .2s,stroke .2s}
+svg .mk.on .mk-h{opacity:.15}svg .mk.on .mk-c{fill:var(--acc);stroke:var(--acc)}svg .mk.on text{fill:#fff}
+
+/* служебное: разделы страницы согласования */
+.intro{background:#fff;border-radius:.75rem;padding:2.5rem}
+.intro .h1{margin-bottom:1.25rem}
+.diag{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-top:2rem}
+.diag li{background:var(--card);border-radius:.5rem;padding:1.25rem}
+.diag b{display:block;font:800 1.5rem/1 var(--H);text-transform:uppercase;margin-bottom:.5rem}
+.diag b i{font-style:normal;color:var(--acc)}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem 1.5rem;margin-top:1.5rem;counter-reset:r}
+.rules li{counter-increment:r;padding-top:.75rem;border-top:1px solid var(--stroke)}
+.rules li::before{content:counter(r,decimal-leading-zero);display:inline-grid;place-items:center;width:1.75rem;height:1.75rem;border:1px solid var(--acc);color:var(--acc);border-radius:.25rem;font:700 max(.75rem,12px) var(--B);margin-right:.75rem}
+.vh{display:flex;align-items:baseline;gap:1.5rem;padding:3rem 2.5rem 1rem}
+.vh .tag{font:800 4rem/1 var(--H);color:var(--acc)}
+.vh .h4{margin-bottom:.5rem}
+.vh .pro{display:flex;gap:2rem;margin-top:.5rem}.vh .pro span::before{content:'+ ';color:var(--acc);font-weight:700}.vh .pro span.m::before{content:'− ';color:var(--text-2)}
+.stub{background:#fff;border-radius:.75rem;padding:2.5rem;display:grid;grid-template-columns:37rem 1fr;column-gap:1.5rem;opacity:.55}
+.stub i{display:block;height:.75rem;border-radius:.375rem;background:#E3E5E8;margin:.6rem 0}
+.stub .t{height:2.5rem;width:70%;background:#D9DCE0}
+.rec{background:var(--acc);color:#fff;border-radius:.75rem;padding:2.5rem}
+.rec .h4{color:#fff;margin-bottom:1rem}.rec .p{max-width:90ch}
+
+/* ── общий «стол» под схему ── */
+.stage{background:var(--card);border-radius:.5rem;position:relative;overflow:hidden}
+
+/* ── A. Секция в сетке ── */
+.a-head{align-items:start}
+.a-stage{margin-top:2.5rem;padding:3.5rem 4rem 3rem 0}
+.leg{display:grid;grid-template-columns:repeat(9,1fr);gap:1rem;margin-top:1.5rem}
+.leg li{display:flex;gap:.625rem;align-items:center;padding-top:1rem;border-top:1px solid var(--stroke);font-size:max(.875rem,13px);line-height:1.25;cursor:default;transition:border-color .2s,color .2s}
+.num{flex:none;display:inline-grid;place-items:center;width:1.75rem;height:1.75rem;border:1px solid var(--stroke);border-radius:.25rem;font:700 max(.75rem,12px) var(--B);background:#fff;transition:all .2s}
+.leg li.on{border-color:var(--acc);color:var(--acc)}.leg li.on .num{background:var(--acc);border-color:var(--acc);color:#fff}
+
+/* ── B. Чертёжный лист ── */
+.sheet{margin-top:2.5rem;border:1px solid var(--stroke);border-radius:.5rem;background:#fff;
+ background-image:linear-gradient(#EEF0F2 1px,transparent 1px),linear-gradient(90deg,#EEF0F2 1px,transparent 1px);background-size:1.5rem 1.5rem;background-position:-1px -1px;
+ display:grid;grid-template-columns:minmax(0,1fr) 22rem}
+.sheet .draw{padding:3rem 2rem 2.5rem 2.5rem;border-right:1px solid var(--stroke)}
+.spec{display:flex;flex-direction:column;background:#fff;border-radius:0 .5rem .5rem 0}
+.spec table{border-collapse:collapse;width:100%;font-size:max(.8125rem,13px)}
+.spec th{font:600 max(.75rem,12px)/1 var(--B);letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);text-align:left;padding:1rem 1rem .75rem;border-bottom:1px solid var(--stroke)}
+.spec td{padding:.625rem 1rem;border-bottom:1px solid var(--hair);transition:background .2s,color .2s;cursor:default}
+.spec td:first-child{width:3.5rem;font-weight:700;color:var(--text-2);border-right:1px solid var(--hair)}
+.spec tr.on td{background:#FCEFE8;color:var(--acc)}
+.stamp{margin-top:auto;border-top:1px solid var(--stroke);display:grid;grid-template-columns:1fr auto;font-size:max(.75rem,12px)}
+.stamp div{padding:.75rem 1rem;border-bottom:1px solid var(--hair)}.stamp div:nth-child(odd){border-right:1px solid var(--hair)}
+.stamp div:nth-last-child(-n+2){border-bottom:0}
+.stamp .big{grid-column:1/-1;border-right:0!important;font:800 1.5rem/1 var(--H);text-transform:uppercase;padding:1rem}
+.stamp .big b{color:var(--acc)}
+
+/* ── C. Разбор по элементам ── */
+.c-stage{margin-top:2.5rem;padding:3.5rem 4rem 3rem 0}
+.c-bar{display:grid;grid-template-columns:37rem minmax(0,1fr);column-gap:1.5rem;margin-top:1.5rem;align-items:start}
+.c-info{min-height:9rem}
+.c-info .h5{margin:.5rem 0 .75rem}.c-info .h5 span{color:var(--acc)}
+.c-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.c-tabs button{display:flex;align-items:center;gap:.75rem;padding:.75rem;border:1px solid var(--stroke);border-radius:.5rem;background:#fff;text-align:left;font-size:max(.875rem,13px);font-weight:600;transition:all .2s}
+.c-tabs button:hover{border-color:var(--text)}
+.c-tabs button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.c-tabs button[aria-pressed=true] .num{background:#fff;color:var(--acc);border-color:#fff}
+.draft{display:inline-block;margin-left:.5rem;font:600 11px/1 var(--B);letter-spacing:.04em;text-transform:uppercase;color:var(--acc);border:1px dashed var(--acc);border-radius:.25rem;padding:.25rem .375rem;vertical-align:middle}
+
+/* ── Ремонт R1: переключатель ── */
+.seg{display:inline-flex;border:1px solid var(--stroke);border-radius:.5rem;overflow:hidden}
+.seg button{padding:.875rem 1.5rem;font-weight:600;font-size:max(.875rem,13px);background:#fff;transition:background .2s,color .2s}
+.seg button+button{border-left:1px solid var(--stroke)}
+.seg button[aria-pressed=true]{background:var(--acc);color:#fff}
+.r1-top{display:flex;justify-content:space-between;align-items:end;gap:2rem}
+.r1-stage{margin-top:2rem;padding:3rem 0 2.5rem;display:grid}
+.r1-stage>div{grid-area:1/1;transition:opacity .35s}.r1-stage>div.off{opacity:0;pointer-events:none}
+.r1-notes{display:grid;margin-top:1.5rem}.r1-notes>ol{grid-area:1/1;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;transition:opacity .35s}.r1-notes>ol.off{opacity:0}
+.r1-notes li{display:flex;gap:.625rem;align-items:center;padding-top:1rem;border-top:1px solid var(--stroke);font-size:max(.875rem,13px);line-height:1.3}
+.r1-notes .bad .num{border-color:var(--text-2);color:var(--text-2)}
+.r1-notes .good .num{border-color:var(--acc);color:var(--acc)}
+.x{display:inline-grid;place-items:center;width:1.75rem;height:1.75rem;flex:none;color:var(--text-2);font-weight:700}
+
+/* ── Ремонт R2: две строки в сетке ── */
+.r2-row{margin-top:2.5rem;align-items:center}
+.r2-row+.r2-row{margin-top:.5rem}
+.r2-side .h5{margin-bottom:.75rem}
+.r2-side ol{margin-top:1.25rem;display:grid;gap:.5rem}
+.r2-side li{display:flex;gap:.625rem;align-items:center;font-size:max(.875rem,13px);line-height:1.3}
+.r2-side .num{border-color:var(--acc);color:var(--acc)}
+.r2-stage{padding:2rem 0}
+.r2-row.before .r2-stage{background:#F0F1F3}
+.r2-row.before svg{filter:saturate(.35);opacity:.9}
+
+/* ── Встроенная в текст ── */
+.inl{grid-template-columns:37rem minmax(0,1fr)}
+.toc{background:var(--card);border-radius:.5rem;padding:1.5rem;align-self:start}
+.toc i{display:block;height:.6rem;border-radius:.3rem;background:#E0E2E5;margin:.7rem 0}
+.fig{margin:2rem 0}
+.fig .stage{padding:2.5rem 0 2rem}
+.fig figcaption{display:grid;grid-template-columns:auto 1fr;gap:1rem;margin-top:1rem;font-size:max(.875rem,13px);color:var(--text-2);line-height:1.45}
+.fig figcaption b{color:var(--text);font-weight:600;white-space:nowrap}
+
+.sec-head{display:grid;grid-template-columns:37rem minmax(0,1fr);column-gap:1.5rem;align-items:start}
+.sec-head .lbl b{display:block;font:800 2.5rem/1 var(--H);color:var(--acc);margin-bottom:.5rem}
+.where{display:block;margin-top:.5rem;text-transform:none;letter-spacing:0;font-weight:500}
+.stage{position:relative;background:var(--card);border-radius:.5rem;overflow:hidden;margin-top:2.5rem}
+.stage svg{display:block;width:100%;height:auto}
+.hit{fill:transparent;stroke:transparent;cursor:pointer;transition:fill .15s,stroke .15s}
+.hit:hover,.hit.on{fill:rgba(194,65,12,.08);stroke:#C2410C;stroke-width:1.5}
+.dot-c{fill:#C2410C;stroke:#fff;stroke-width:1.5}
+.dot-r{fill:none;stroke:#C2410C;stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:pulse 2s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+.dot{transition:opacity .2s}.dot.off{opacity:0}
+.hintpill{position:absolute;left:1rem;top:1rem;z-index:2;display:flex;align-items:center;gap:.625rem;background:#fff;border-radius:2rem;padding:.5rem 1rem .5rem .625rem;font:600 max(.875rem,13px)/1.2 var(--B);box-shadow:0 2px 12px rgba(0,0,0,.08);pointer-events:none}
+.hintpill i{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--acc);display:grid;place-items:center;flex:none}
+@media (prefers-reduced-motion:reduce){.dot-r{animation:none}}
+.tip{position:absolute;z-index:3;width:24rem;max-width:calc(100% - 24px);background:#fff;border-radius:.5rem;padding:1rem 1.25rem;box-shadow:0 8px 32px rgba(0,0,0,.14);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s}
+.tip.on{opacity:1;transform:none}
+.tip b{display:block;font:800 1.5rem/1 var(--H);text-transform:uppercase;letter-spacing:-.02em;margin-bottom:.5rem}
+.tip p{font-size:max(.875rem,13px);line-height:1.45;color:var(--text-2)}
+.seg{display:inline-flex;border:1px solid var(--stroke);border-radius:.5rem;overflow:hidden;margin-top:1.5rem}
+.seg button{font:600 max(.875rem,13px) var(--B);padding:.5rem 1.25rem;border:0;background:#fff;color:var(--text-2);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--acc);color:#fff}
+.off{display:none}
+.draft{margin-top:1rem;font-size:max(.8125rem,12px);color:var(--text-2)}
+</style></head><body><main class="wrap"><section class="intro card"><p class="lbl">учёттепла.рф · 16.11 · на согласование</p><h1 class="h1" style="margin-top:1rem">Карта обследования <b>ИТП</b></h1><p class="p" style="margin-top:1rem;color:var(--text-2)">Идея клиента: line-art чертёж ИТП, 6 пульсирующих точек, плашки при наведении (на телефоне — по тапу). Заголовок, подсказка и тексты плашек — слово в слово из правок клиента. Рисунок — мой, на согласование.</p></section><section class="card"><div class="sec-head"><p class="lbl"><b>01</b>Карта обследования<span class="where">Услуги / Обследование</span></p><div><h2 class="h4">Что проверяет инженер <b>на объекте</b></h2><p class="p" style="margin-top:1rem;color:var(--text-2)">Индивидуальный тепловой пункт: шесть точек, на которые инженер смотрит при выезде.</p></div></div><div class="stage" data-items='[{"t": "Схема теплоснабжения", "d": "Оцениваем схему теплоснабжения: зависимая/независимая, открытая/закрытая, количество трубопроводов и наличие ГВС."}, {"t": "Параметры труб", "d": "Проверяем параметры труб: диаметр, материал, состояние изоляции, наличие коррозии и отложений."}, {"t": "Прямые участки", "d": "Замеряем прямые участки до и после расходомера, проверяем отсутствие отводов и тройников."}, {"t": "Запорная арматура", "d": "Оцениваем состояние запорной арматуры и возможность перекрытия труб для монтажа."}, {"t": "Электрощиток", "d": "Проверяем наличие электропитания 220 В, заземления и возможность установки шкафа учета."}, {"t": "Место для монтажа", "d": "Оцениваем доступность места для монтажа, обслуживания узла и трасс прокладки кабеля."}]'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520"><rect x="230" y="392" width="560" height="104" rx="10" fill="rgba(194,65,12,.04)" stroke="#C2410C" stroke-width="1.5" stroke-dasharray="7 5"/><text x="510" y="478" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#C2410C" letter-spacing="0.5">СВОБОДНОЕ МЕСТО ДЛЯ МОНТАЖА И ОБСЛУЖИВАНИЯ</text><path d="M262 430h60M262 430l8 -6M262 430l8 6M322 430l-8 -6M322 430l-8 6" fill="none" stroke="#9AA0A8" stroke-width="1.5"/><rect x="60" y="110" width="40" height="270" rx="4" fill="#FFFFFF" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M72 130h16M72 360h16" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none"/><path d="M100 156H1170M100 184H1170" fill="none" stroke="#C2410C" stroke-width="2.5" stroke-linecap="round"/><rect x="101" y="146" width="10" height="48" rx="2" fill="#FFFFFF" stroke="#C2410C" stroke-width="2.5"/><rect x="1159" y="146" width="10" height="48" rx="2" fill="#FFFFFF" stroke="#C2410C" stroke-width="2.5"/><path d="M100 316H1170M100 344H1170" fill="none" stroke="#424242" stroke-width="2.5" stroke-linecap="round"/><rect x="101" y="306" width="10" height="48" rx="2" fill="#FFFFFF" stroke="#424242" stroke-width="2.5"/><rect x="1159" y="306" width="10" height="48" rx="2" fill="#FFFFFF" stroke="#424242" stroke-width="2.5"/><rect x="520" y="128" width="200" height="84" rx="8" fill="rgba(194,65,12,.06)" stroke="#C2410C" stroke-width="1.5" stroke-dasharray="6 4"/><text x="620" y="118" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#C2410C" letter-spacing="0.5">ПРЯМОЙ УЧАСТОК ПОД РАСХОДОМЕР</text><path d="M330 150v-16M330 134l-5 6M330 134l5 6" fill="none" stroke="#9AA0A8" stroke-width="1.5"/><path d="M330 190v16M330 206l-5 -6M330 206l5 -6" fill="none" stroke="#9AA0A8" stroke-width="1.5"/><text x="346" y="176" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" text-anchor="start" fill="#9AA0A8" letter-spacing="0">Ду</text><path d="M874 152L900 170L874 188Z M926 152L900 170L926 188Z" fill="#FFFFFF" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M900 170V124" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none"/><path d="M882 124H918" stroke="#C2410C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none"/><rect x="1000" y="198" width="120" height="80" rx="6" fill="#FFFFFF" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><rect x="1010" y="208" width="100" height="60" rx="3" fill="none" stroke="#9AA0A8" stroke-width="1.5"/><path d="M1024 224h20M1024 242h20M1024 260h20" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none"/><path d="M1060 220l8 8l12 -12" fill="none" stroke="#C2410C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="1072" cy="252" r="7" fill="none" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M1102 270v10M1018 270v10" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none"/><text x="1060.0" y="304" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#C2410C" letter-spacing="0">220 В</text><path d="M1000 240H620V190" fill="none" stroke="#9AA0A8" stroke-width="2" stroke-dasharray="3 5"/><path d="M1000 247H628V190M1000 263H612V190" fill="none" stroke="#9AA0A8" stroke-width="1" opacity=".0"/><text x="810" y="231" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" text-anchor="middle" fill="#9AA0A8" letter-spacing="0">кабельная трасса</text><text x="130" y="140" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" text-anchor="start" fill="#C2410C" letter-spacing="0.5">Т1 · ПОДАЧА</text><text x="130" y="372" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" text-anchor="start" fill="#424242" letter-spacing="0.5">Т2 · ОБРАТКА</text><path d="M1130 170h-22M1130 170l-8 -6M1130 170l-8 6" fill="none" stroke="#C2410C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M1108 330h22M1108 330l8 -6M1108 330l8 6" fill="none" stroke="#424242" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><g class="hits"><rect class="hit" data-k="0" x="50" y="104" width="60" height="282" rx="8"/><rect class="hit" data-k="1" x="270" y="140" width="130" height="60" rx="8"/><rect class="hit" data-k="2" x="520" y="128" width="200" height="84" rx="8"/><rect class="hit" data-k="3" x="860" y="110" width="84" height="120" rx="8"/><rect class="hit" data-k="4" x="996" y="194" width="130" height="108" rx="8"/><rect class="hit" data-k="5" x="230" y="392" width="560" height="104" rx="8"/></g><g class="dots" pointer-events="none"><g class="dot" transform="translate(80 245)"><circle class="dot-r" r="9"/><circle class="dot-c" r="5"/></g><g class="dot" transform="translate(330 170)"><circle class="dot-r" r="9"/><circle class="dot-c" r="5"/></g><g class="dot" transform="translate(620 170)"><circle class="dot-r" r="9"/><circle class="dot-c" r="5"/></g><g class="dot" transform="translate(900 170)"><circle class="dot-r" r="9"/><circle class="dot-c" r="5"/></g><g class="dot" transform="translate(1060 238)"><circle class="dot-r" r="9"/><circle class="dot-c" r="5"/></g><g class="dot" transform="translate(510 444)"><circle class="dot-r" r="9"/><circle class="dot-c" r="5"/></g></g></svg><div class="hintpill"><i><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 1l8 4.5-3.4.9L5.2 10z" fill="#fff"/></svg></i>Наведите на точку, чтобы узнать подробности обследования</div><div class="tip"></div></div></section></main><script>
+const PILL='<i><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 1l8 4.5-3.4.9L5.2 10z" fill="#fff"/></svg></i>';
+document.querySelectorAll('.stage').forEach(st=>{
+ const items=JSON.parse(st.dataset.items),tip=st.querySelector('.tip');
+ const hits=[...st.querySelectorAll('.hit')],dots=[...st.querySelectorAll('.dot')];
+ function show(el){const it=items[+el.dataset.k];tip.innerHTML='<b>'+it.t+'</b><p>'+it.d+'</p>';
+  const r=el.getBoundingClientRect(),s=st.getBoundingClientRect();
+  let left=r.left+r.width/2-s.left-tip.offsetWidth/2;left=Math.max(12,Math.min(left,s.width-tip.offsetWidth-12));
+  const below=r.top-s.top<tip.offsetHeight+24;
+  tip.style.left=left+'px';tip.style.top=(below?r.bottom-s.top+10:r.top-s.top-tip.offsetHeight-10)+'px';tip.classList.add('on');
+  const n=hits.indexOf(el);dots.forEach((d,k)=>d.classList.toggle('off',k===n));}
+ function hide(){tip.classList.remove('on');dots.forEach(d=>d.classList.remove('off'));}
+ hits.forEach(h=>{h.addEventListener('mouseenter',()=>show(h));h.addEventListener('mouseleave',hide);h.addEventListener('focus',()=>show(h));h.addEventListener('blur',hide);h.addEventListener('click',()=>show(h));h.setAttribute('tabindex','0');});
+});
+document.querySelectorAll('.seg').forEach(sg=>{const sc=sg.parentElement;sg.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+ sg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+ sc.querySelectorAll('.stage[data-s]').forEach(e=>e.classList.toggle('off',e.dataset.s!==b.dataset.s));}));});
+if(location.hash.startsWith('#t')){const m=location.hash.match(/#t(\d+)-(\d+)/);if(m){const st=document.querySelectorAll('.stage')[+m[1]],h=st.querySelectorAll('.hit')[+m[2]];h.classList.add('on');st.scrollIntoView();h.dispatchEvent(new Event('focus'));}}
+</script></body></html>
