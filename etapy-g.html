@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Главная — «Этапы работ»: вариант Г (идея клиента)</title>
+<style>
+:root{--white:#fff;--card:#F5F5F7;--text:#424242;--text-2:#6A6A6A;--stroke:#C4C4C4;--acc:#C2410C;--dk:#424242;--pad:40px;--gap:24px;--cardH:300px;--lane:100px}
+*{box-sizing:border-box;margin:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--text);background:#e9e9ec;padding:24px 0 80px}
+.note{max-width:1904px;margin:0 auto 16px;padding:0 var(--pad);font-size:14px;line-height:1.5;color:var(--text-2)}
+.note b{color:var(--text)}
+.plate{max-width:1904px;margin:0 auto;background:#fff;border-radius:8px;padding:var(--pad)}
+.top{display:grid;grid-template-columns:592px 1fr;gap:var(--gap);margin-bottom:24px;align-items:end}
+.top h2{font:400 16px/1.2 Inter,sans-serif}
+.top .ctl{display:flex;gap:8px;justify-content:flex-end}
+.ctl button{width:48px;height:48px;border:0;border-radius:6px;background:#6A6A6A;color:#fff;font-size:20px;cursor:pointer}
+.ctl button:disabled{opacity:.35;cursor:default}
+.body{display:grid;grid-template-columns:592px 1fr;gap:0}
+.src{position:sticky;top:24px;height:calc(var(--cardH) + var(--lane) + 20px)}
+.src svg{display:block;width:100%;height:100%}
+.scroll{overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+.track{position:relative;display:flex;gap:var(--gap);height:calc(var(--cardH) + var(--lane) + 20px);width:max-content;padding-left:24px}
+.track>.c:first-of-type{margin-left:0}
+.c{position:relative;flex:none;width:400px;height:var(--cardH);background:var(--card);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.num{display:inline-grid;place-items:center;min-width:36px;height:36px;border:1px solid var(--stroke);border-radius:6px;background:#fff;font-size:13px;color:var(--text-2);align-self:flex-start;margin-bottom:auto}
+.c h3{font:400 22px/1.2 Inter,sans-serif;letter-spacing:-.02em}
+.c p{font-size:14px;line-height:1.5;color:var(--text-2);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+/* трубы под карточками */
+.pipe{position:absolute;left:0;right:560px;height:10px;border-top:2px solid;border-bottom:2px solid;background:#fff}
+.t1{top:calc(var(--cardH) + 25px);border-color:var(--acc)}
+.t2{top:calc(var(--cardH) + 57px);border-color:var(--dk)}
+.drop{position:absolute;top:var(--cardH);width:2px;height:34px;background:var(--acc);left:41px}
+.joint{position:absolute;width:16px;height:16px;border:2px solid;background:#fff;left:34px}
+.j1{top:calc(var(--cardH) + 24px);border-color:var(--acc)}
+.j2{top:calc(var(--cardH) + 56px);border-color:var(--dk)}
+.pl{position:absolute;left:0;top:calc(var(--cardH) + 98px);font-size:12px;color:var(--text-2)}
+.end{flex:none;width:560px;height:100%;margin-left:-24px}
+.end svg{display:block;height:100%;width:auto}
+.src text,.end text{font-family:Inter,sans-serif}
+.hint{margin-top:12px;font-size:13px;color:var(--text-2)}
+</style>
+</head>
+<body>
+<div class="note"><b>Главная · «Этапы работ» — вариант Г (идея клиента, 16.11).</b> Путь тепла слева направо: источник тепла (фиксирован, не прокручивается) → этапы на трубах Т1 (подача) и Т2 (обратка), трубы проходят <b>под карточками</b> → здание с узлом учёта «УУТЭ» на вводе и печатью «ДОПУЩЕН». Подписи на концах труб: «от теплосети», «в теплосеть», «к потребителю», «от потребителя». Листайте стрелками или колесом/тачпадом: источник остаётся на месте. Рисунки котельной и дома — мои, на согласование.</div>
+
+<section class="plate">
+  <div class="top"><h2>Этапы работ</h2><div class="ctl"><button id="prev" aria-label="Назад">‹</button><button id="next" aria-label="Вперёд">›</button></div></div>
+  <div class="body">
+    <div class="src" id="src"></div>
+    <div class="scroll" id="sc"><div class="track" id="tr"></div></div>
+  </div>
+  <p class="hint">Тексты этапов — без изменений, как в макете. Здание: многоквартирный дом, узел учёта — внизу, на вводе (подвал).</p>
+</section>
+
+<script>
+const S=[
+["Звонок и консультация","Бесплатная консультация: разбираемся в вашей задаче — тип объекта, система теплоснабжения, требования РСО. Подсказываем, какой узел учёта тепловой энергии подойдёт и что нужно для согласования."],
+["Выезд на объект","Бесплатное обследование вашего объекта: определяем оптимальное место установки узла учёта тепловой энергии, оцениваем диаметры трубопроводов, систему отопления и ГВС, подбираем подходящий тип приборов учёта."],
+["Коммерческое предложение","Предоставим оптимальное предложение с подробной сметой, сроками и стоимостью оборудования для узла учёта тепловой энергии. Расчёт — бесплатно и без обязательств."],
+["Заключение договора","Фиксированная цена без скрытых платежей, чётко обозначенные сроки и гарантия на выполненные работы. Стоимость установки узла учёта тепловой энергии закрепляем в договоре."],
+["Разработка проекта","Мы не просто «рисуем бумаги» — наша задача разработать такой проект узла учёта тепловой энергии, который без труда пройдёт согласование в теплоснабжающей организации."],
+["Поставка оборудования","Берём на себя всю логистику и доставим оборудование для узла учёта тепловой энергии (расходомеры, тепловычислители, датчики, шкафы учёта) на ваш объект в полной сохранности и в чётко оговорённые сроки."],
+["Монтаж, наладка и сдача узла учёта тепловой энергии","Наш результат — это не просто смонтированный узел учёта тепловой энергии, а его надёжная работа, полный пакет исполнительной документации и гарантированный акт допуска в коммерческую эксплуатацию от РСО."]];
+const A='#C2410C',D='#424242',G='#9AA0A8';
+// Источник тепла (котельная): трубы выходят справа на y=332 (Т1) и y=364 (Т2) — как в ленте
+const src=`<svg viewBox="0 0 592 420" preserveAspectRatio="xMinYMid meet">
+<path d="M0 400H592" stroke="${G}" stroke-width="2" fill="none"/>
+<rect x="40" y="150" width="270" height="250" rx="6" fill="#fff" stroke="${D}" stroke-width="2.5"/>
+<path d="M40 190H310" stroke="${D}" stroke-width="2.5"/>
+<rect x="84" y="40" width="40" height="110" fill="#fff" stroke="${D}" stroke-width="2.5"/>
+<path d="M84 64h40M84 88h40" stroke="${A}" stroke-width="2.5"/>
+<path d="M104 30c-6-12 8-14 2-28M122 26c-6-12 8-14 2-28" stroke="${G}" stroke-width="2" fill="none" stroke-linecap="round"/>
+<rect x="70" y="236" width="86" height="104" rx="6" fill="#fff" stroke="${D}" stroke-width="2.5"/>
+<path d="M113 322c-18-4-20-26-8-38c1 8 6 10 8 4c6 6 14 14 12 24c-2 8-8 10-12 10z" fill="none" stroke="${A}" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="190" y="214" width="92" height="126" rx="22" fill="#fff" stroke="${D}" stroke-width="2.5"/>
+<path d="M190 250h92M190 306h92" stroke="${D}" stroke-width="2"/><circle cx="236" cy="278" r="10" fill="none" stroke="${A}" stroke-width="2.5"/>
+<path d="M310 326H592M310 338H592" stroke="${A}" stroke-width="2"/><path d="M310 358H592M310 370H592" stroke="${D}" stroke-width="2"/>
+<text x="326" y="314" font-size="13" font-weight="600" fill="${A}">от теплосети →</text>
+<text x="326" y="392" font-size="13" font-weight="600" fill="${D}">← в теплосеть</text>
+<text x="150" y="100" font-size="13" font-weight="700" fill="${D}" letter-spacing=".5">ИСТОЧНИК ТЕПЛА</text>
+</svg>`;
+document.getElementById('src').innerHTML=src;
+// здание с УУТЭ на вводе
+const end=`<svg viewBox="0 0 560 420" preserveAspectRatio="xMinYMid meet">
+<path d="M0 400H560" stroke="${G}" stroke-width="2" fill="none"/>
+<rect x="250" y="40" width="250" height="360" rx="4" fill="#fff" stroke="${D}" stroke-width="2.5"/>
+<path d="M250 296H500" stroke="${G}" stroke-width="1.5" stroke-dasharray="6 4"/>
+${[0,1,2,3,4].map(r=>[0,1,2,3].map(c=>`<rect x="${278+c*54}" y="${64+r*46}" width="26" height="24" fill="none" stroke="${D}" stroke-width="2"/>`).join('')).join('')}
+<text x="440" y="322" font-size="12" font-weight="600" fill="${G}" text-anchor="middle">подвал, ввод</text>
+<path d="M0 326H320M0 338H320" stroke="${A}" stroke-width="2"/><path d="M0 358H320M0 370H320" stroke="${D}" stroke-width="2"/>
+<path d="M320 332h50M320 364h50" stroke="${G}" stroke-width="2" stroke-dasharray="4 4"/>
+<rect x="150" y="312" width="110" height="74" rx="6" fill="#fff" stroke="${A}" stroke-width="2.5"/>
+<text x="205" y="355" font-size="22" font-weight="800" fill="${A}" text-anchor="middle" letter-spacing="1">УУТЭ</text>
+<text x="8" y="314" font-size="13" font-weight="600" fill="${A}">к потребителю →</text>
+<text x="8" y="392" font-size="13" font-weight="600" fill="${D}">← от потребителя</text>
+<g transform="rotate(-8 80 190)"><rect x="20" y="160" width="190" height="62" rx="6" fill="none" stroke="${A}" stroke-width="3"/><text x="115" y="198" font-size="26" font-weight="800" fill="${A}" text-anchor="middle" letter-spacing="2">ДОПУЩЕН</text></g>
+<text x="20" y="250" font-size="12" font-weight="500" fill="${D}">Узел учёта и пломба РСО</text>
+</svg>`;
+const tr=document.getElementById('tr');
+const n=i=>String(i+1).padStart(2,'0');
+tr.innerHTML=
+ `<div class="pipe t1"></div><div class="pipe t2"></div>`+
+ S.map((s,i)=>`<div class="c"><span class="num">${n(i)}</span><h3>${s[0]}</h3><p>${s[1]}</p><i class="drop"></i><i class="joint j1"></i><i class="joint j2"></i></div>`).join('')+
+ `<div class="end">${end}</div>`;
+// дорожка труб растягиваем на всю ширину трека после раскладки
+const sc=document.getElementById('sc'),prev=document.getElementById('prev'),next=document.getElementById('next');
+const step=()=>424*2;
+const upd=()=>{prev.disabled=sc.scrollLeft<=2;next.disabled=sc.scrollLeft+sc.clientWidth>=sc.scrollWidth-2};
+prev.onclick=()=>sc.scrollBy({left:-step()});next.onclick=()=>sc.scrollBy({left:step()});
+sc.addEventListener('scroll',upd);upd();
+</script>
+</body>
+</html>
