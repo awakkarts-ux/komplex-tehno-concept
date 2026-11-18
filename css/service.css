@@ -354,12 +354,11 @@
   .sv2-hero__foot .btns { flex-wrap: wrap; }
   .sv2 .sx-ugo { width: 7rem; height: 7rem; }
 
-  .sv2 .sp-split { grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); }
-  .sv2 .sp-split.sv2-split--blocks { grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); }
   .sv2 .sp-side { top: calc(4rem + var(--gap) * 2); height: calc(100vh - 4rem - var(--gap) * 3); }
   .sv2 .sp-side__toc { padding: 1.5rem; }
   .sv2 .sp-cta .btn-tall { width: 100%; min-height: 4rem; }
-  .sv2 .sp-sec { scroll-margin-top: calc(4rem + var(--gap) * 2 + 1rem); }
+  html:has(.sv2) { scroll-padding-top: 0; }   /* отступ под шапку задаёт scroll-margin-top секций, не складываем */
+  .sv2 .sp-sec, .sv2 section[id] { scroll-margin-top: calc(4rem + var(--gap) * 2 + 1rem); }
   .sv2-block { padding: 1.5rem; }
   .sv2 .sp-content { padding: 1.5rem; }
 
@@ -376,9 +375,11 @@
   .sv2 ~ .footer { margin: 0 var(--gap) var(--gap); }
 }
 
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .sv2 .sp-split, .sv2 .sp-split.sv2-split--blocks { grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); }
+}
 @media (max-width: 1023px) {
-  .sv2-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .sv2-sheets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv2 .sp-sec, .sv2 section[id] { scroll-margin-top: 9rem; }   /* шапка 72 + полоса 56 + 16 */
 }
 
 @media (max-width: 767px) {
