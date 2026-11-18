@@ -960,3 +960,307 @@ html.is-preload body::after { content: ""; position: fixed; inset: 0; z-index: 9
 .footer__contacts .footer__addr { align-items: flex-start; }
 .footer__contacts .ic { width: 1.25rem; height: 1.25rem; color: #fff; stroke-width: 1.75; }
 .footer__contacts .footer__addr .ic { margin-top: .125rem; }
+
+/* ==========================================================================================================
+   18.11 — Hero Главной, вариант А (hero-varianty.html, Figma). Лейблов над H1 нет — их место (.hero-a__slot) оставлено пустым
+   до выбора варианта 1/2/3 (hero-labels.html). Значения Figma 1920 в rem; ниже 1200 — блок «Адаптив»
+   ========================================================================================================== */
+.hero-a__slot { height: 2.375rem; }
+.hero-a__h1 { margin-top: 2.25rem; max-width: 112.5rem; font-size: 7rem; line-height: .92; letter-spacing: -.03em; }
+.hero-a__row { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; }
+.hero-a .hero-a__lead { margin: 1.75rem 0 2.5rem; max-width: 56.25rem; }
+.hero-a__svg { width: 4rem; height: 4rem; }
+.hero-a__facts { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 2.5rem; border-top: 1px solid #DEDFE2; }
+.hero-a__facts li { padding: 1.5rem 1.5rem 0; border-left: 1px solid #DEDFE2; }
+.hero-a__facts li:first-child { padding-left: 0; border-left: 0; }
+.hero-a__facts b { display: block; font: 800 2.75rem/1 var(--font-heading), var(--font-fallback); letter-spacing: -.01em; text-transform: uppercase; color: var(--accent); }
+.hero-a__facts span { display: block; margin-top: .5rem; font-size: max(.875rem, 13px); line-height: 1.43; color: var(--text-2); }
+
+/* 18.11 — индикатор «Наш подход»: труба + 9 узлов + «Слайд N из 9» (nash-podhod-indikator.html, вариант 5 клиента) */
+.ap-ind { width: 27.375rem; max-width: 100%; margin-top: 1.5rem; }
+.ap-ind__pipe { position: relative; display: flex; justify-content: space-between; align-items: center; height: 1.5rem; }
+.ap-ind__pipe::before, .ap-ind__pipe::after { content: ""; position: absolute; left: .75rem; top: 50%; height: 4px; margin-top: -2px; border-radius: 2px; }
+.ap-ind__pipe::before { right: .75rem; background: #D9D9DE; }
+.ap-ind__pipe::after { width: calc((100% - 1.5rem) * var(--p, 0)); background: var(--accent); transition: width .35s cubic-bezier(.2, .7, .2, 1); }
+.ap-ind__node { position: relative; z-index: 1; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #fff; border: 2px solid #C4C4C4; padding: 0; cursor: pointer; transition: background-color .25s, border-color .25s, transform .25s; }
+.ap-ind__node::before { content: ""; position: absolute; inset: -.75rem -.25rem; }   /* зона нажатия выше 24 px */
+.ap-ind__node:hover { border-color: var(--accent); transform: scale(1.12); }
+.ap-ind__node:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ap-ind__node.is-done { border-color: var(--accent); background: #fff; }
+.ap-ind__node.is-cur { border-color: var(--accent); background: var(--accent); }
+.ap-ind__label { margin-top: .75rem; font: 500 max(1rem, 15px)/1.4 var(--font-body), var(--font-fallback); color: var(--text-2); }
+.ap-ind__label b { font-weight: 600; color: var(--text); }
+@media (prefers-reduced-motion: reduce) { .ap-ind__pipe::after, .ap-ind__node { transition: none; } }
+
+/* Бургер и шторка — на десктопе скрыты (строятся js/concept.js) */
+.burger, .drawer { display: none; }
+
+/* ==========================================================================================================
+   18.11 — АДАПТИВ (adaptiv/RULES.md). Десктоп ≥ 1200 — как выше (масштаб 100vw/120). Ниже 1200 — перестройка:
+   планшет 768–1199 (rem = 16px, отступ плашки 24), мобильный ≤ 767 (отступ 16). Блок только добавляет — десктоп не трогает.
+   Общие приёмы для страниц: .plate/.g3/.btns/.btn-tall/.label, типографика по шкале RULES §2, шторка меню, .is-drawer
+   ========================================================================================================== */
+@media (max-width: 1199px) {
+  html { font-size: 16px; scroll-padding-top: 5rem; }
+  :root { --pad: 1.5rem; --col-gap: 1rem; }
+  .page { padding-top: calc(4rem + var(--gap) * 2); }
+  html.is-drawer { overflow: hidden; }
+
+  /* --- типографика (RULES §2): H1 56 · H2 44 · H3 28 · подзаголовок 22 · лид 18 · текст 16 --- */
+  .h1, .intro__title, .intro--photo .intro__title, .hs-title, .sv-hero__title { font-size: 3.5rem; line-height: 1; }
+  .hero-a__h1 { font-size: 4rem; line-height: .92; }
+  .h2, .about-banner__title, .approach__title, .numbers__title, .faq__title, .sp-h1, .intro__title--long, .sv-statement__t, .sv-partners__t { font-size: 2.75rem; line-height: 1.05; }
+  .sp-h2, .sp-content .sp-h2, .hub-card__t, .contacts__item b, .sv-next__t, .sv-quote__t { font-size: 1.75rem; line-height: 1.15; }
+  .t-28, .t-24, .about-banner__subtitle, .approach__slide-title, .svc__name { font-size: 1.375rem; line-height: 1.2; }
+  .t-20, .head__lead, .wk__lead, .about-banner__text, .approach__text, .numbers__lead, .sp-lead { font-size: 1.125rem; line-height: 1.45; }
+  .numbers__count { font-size: 6rem; line-height: 1; }
+
+  /* --- шапка: логотип + кнопка-телефон (иконка) + бургер --- */
+  .header { display: flex; align-items: center; height: 4rem; gap: .5rem; padding: 0 .75rem 0 1rem; }
+  .header .logo { margin-right: auto; min-width: 0; }
+  .logo__mark { width: 2.5rem; height: 2.5rem; }
+  .logo b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .logo > span:last-child { min-width: 0; }
+  .nav, .mnav__viewport { display: none; }
+  .phone-btn { font-size: 0; gap: 0; width: 2.75rem; height: 2.75rem; padding: 0; justify-content: center; flex: none; }
+  .phone-btn .ic { width: 1.375rem; height: 1.375rem; }
+  .burger { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; flex: none; border-radius: var(--r-sm); background: var(--card); color: var(--text); transition: background-color .2s; }
+  .burger:hover { background: var(--bg); }
+  .burger .ic { grid-area: 1 / 1; }
+  .burger__close, .burger[aria-expanded="true"] .burger__open { display: none; }
+  .burger[aria-expanded="true"] .burger__close { display: block; }
+  .header-wrap { z-index: 70; }
+  .drawer { position: fixed; inset: 0; z-index: 60; display: block; padding: calc(4rem + var(--gap) * 2) var(--gap) var(--gap); background: var(--bg); overflow-y: auto; overscroll-behavior: contain; }
+  .drawer[hidden] { display: none; }
+  .drawer__plate { min-height: 100%; display: flex; flex-direction: column; background: var(--white); border-radius: var(--r); padding: var(--pad) var(--pad) 1.25rem; }
+  .drawer__nav { display: flex; flex-direction: column; }
+  .dr-top, .dr-acc__btn { width: 100%; min-height: 3.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--stroke); font-size: 1.25rem; font-weight: 500; text-align: left; }
+  .dr-acc__btn .ic { transition: transform .25s; }
+  .dr-acc__btn[aria-expanded="true"] { color: var(--accent); }
+  .dr-acc__btn[aria-expanded="true"] .ic { transform: rotate(180deg); }
+  .dr-acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+  .dr-acc.is-open .dr-acc__panel { grid-template-rows: 1fr; }
+  .dr-acc__in { overflow: hidden; }
+  .dr-acc__list { display: grid; gap: .25rem; padding: .5rem 0 1rem; }
+  .dr-link { display: flex; align-items: center; gap: .875rem; min-height: 2.75rem; padding: .75rem; border-radius: var(--r-sm); background: var(--card); }
+  .dr-link > span:not(.badge-soon) { flex: 1; min-width: 0; }
+  .dr-link b { display: block; font-size: 1rem; font-weight: 600; line-height: 1.3; }
+  .dr-link small { display: block; margin-top: .125rem; font-size: .8125rem; line-height: 1.4; color: var(--text-2); }
+  .dr-link .ic { width: 1.125rem; height: 1.125rem; color: var(--text-2); }
+  .dr-link.is-current { background: #FBE6DB; }
+  .dr-link.is-soon > span, .dr-link.is-soon .dir-dot { opacity: .7; }
+  .dr-link--also { background: none; padding: .5rem .75rem; }
+  .drawer__foot { margin-top: auto; padding-top: 2rem; display: flex; flex-direction: column; gap: .75rem; }
+  .drawer__foot p { font-size: .9375rem; color: var(--text-2); }
+  .drawer__foot .btn-tall { width: 100%; white-space: nowrap; }
+  @media (prefers-reduced-motion: reduce) { .dr-acc__panel, .dr-acc__btn .ic { transition: none; } }
+
+  /* --- плашки, сетки --- */
+  .g3 { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+  .g3 > .span2 { grid-column: 2; }
+  .head { margin-bottom: 2.5rem; }
+  .head > .label { align-self: start; }
+  .sp-body, .sv-hero, .sv-statement, .sv-quote { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+  .numbers, .faq { padding: var(--pad); }
+
+  /* --- hero Главной --- */
+  .hero-a__slot { display: none; }
+  .hero-a__h1 { margin-top: 0; }
+  .hero-a .hero-a__lead { margin: 1.5rem 0 2rem; max-width: 40rem; }
+  .hero-a__ibox { width: 7.5rem; height: 7.5rem; }
+  .hero-a__facts { grid-template-columns: repeat(3, 1fr); margin-top: 2rem; row-gap: 1.5rem; border-top: 0; }
+  .hero-a__facts li { padding: 1rem 1rem 0 1.25rem; border-top: 1px solid #DEDFE2; }
+  .hero-a__facts li:nth-child(3n+1) { padding-left: 0; border-left: 0; }
+  .hero-a__facts b { font-size: 2.5rem; }
+  .hero-a__photo { height: auto; min-height: 0; max-height: none; }
+
+  /* --- о компании, наш подход --- */
+  .group-frame { padding: var(--pad); gap: 4rem; }
+  .about-banner, .approach { padding: 0; grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .about-banner__content { order: -1; }
+  .about-banner__img { width: 100%; max-width: 27.375rem; height: auto; aspect-ratio: 438 / 317; }
+  .about-banner__subtext { max-width: 40rem; }
+  .approach { grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem 1rem; align-items: center; }
+  .approach__heading { display: contents; }
+  .approach__title { grid-column: 1 / -1; grid-row: 1; }
+  .approach__text { grid-column: 1 / -1; grid-row: 2; }
+  .approach__slider { grid-column: 1 / -1; grid-row: 3; }
+  .ap-ind { grid-column: 1; grid-row: 4; width: 100%; max-width: 27.375rem; margin-top: 0; }
+  .approach__controls { grid-column: 2; grid-row: 4; }
+  .approach__slide { flex: 0 0 calc((100% - .5rem) * .46); min-height: 27rem; gap: 2rem; }
+
+  /* --- о нас в цифрах: 3 колонки, цифры 96 --- */
+  .numbers__top { grid-template-columns: minmax(0, 1fr); row-gap: 1.5rem; }
+  .numbers__intro { grid-column: 1; }
+  .numbers__list { margin-top: 3rem; gap: 1rem; }
+  .numbers__item:nth-child(2) { padding-top: 2rem; }
+  .numbers__item:nth-child(3) { padding-top: 4rem; }
+  .numbers__text { margin-bottom: 1.5rem; }
+  .numbers__item:nth-child(1)::after { min-height: 10rem; }
+  .numbers__item:nth-child(2)::after { min-height: 8rem; }
+  .numbers__item:nth-child(3)::after { min-height: 6rem; }
+
+  /* --- услуги: схема-лист слева скрыта, список на всю ширину --- */
+  .svc-grid { grid-template-columns: minmax(0, 1fr); }
+  .svc-grid__sheet { display: none; }
+  .svc-grid > .span2 { grid-column: 1; }
+  .svc__content { padding: 0 1.5rem 1.5rem; }
+  .svc__foot { margin-right: 0; }
+  .svc__foot .ic-box { width: 7.5rem; height: 7.5rem; }
+  .svc__foot .sic:has(use[href^="#i-svc"]) { width: 3.5rem; height: 3.5rem; }
+
+  /* --- этапы: лента с прокруткой, карточка 20rem --- */
+  .stg { padding-top: var(--pad); }
+  .stg__head { padding: 0 var(--pad); }
+  .stg__viewport { margin-top: 2rem; padding-left: 3.5rem; scroll-padding-left: 3.5rem; }
+  .stg__track { padding-right: var(--pad); }
+  .stg__step { width: 20rem; }
+  .stg__card { min-height: 15rem; padding: 1.25rem 1.5rem 1.5rem 1.25rem; }
+  .stg__title { font-size: 1.375rem; }
+  .stg__text { font-size: .9375rem; }
+
+  /* --- наши работы --- */
+  .wk { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .wk__sticky { position: static; gap: 1.5rem; }
+  .wk__lead { max-width: 40rem; }
+  .wk__list { gap: 1rem; }
+  .wcard { gap: 1.25rem; padding: 1rem; }
+  .wcard__title { font-size: 1.5rem; }
+  .wcard__meta { font-size: 1rem; }
+  .spec div { font-size: 1rem; }
+
+  /* --- FAQ, CTA --- */
+  .faq__title { max-width: none; }
+  .faq__list { grid-template-columns: minmax(0, 1fr); margin-top: 2rem; gap: .5rem; }
+  .faq__button { font-size: 1.125rem; }
+  .cta { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .cta__photo { min-height: 20rem; }
+  .cta__text .btn-tall { width: 18.75rem; }
+
+  /* --- подвал: 2 колонки, направления 2×2 --- */
+  .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem var(--col-gap); }
+  .footer__grid > :first-child { grid-column: 1 / -1; }
+  .footer__dirs-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+  .footer li a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .25rem 0; }
+  .footer__bottom { flex-wrap: wrap; align-items: center; gap: .5rem 1.5rem; }
+  .footer__bottom a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+  .footer__contacts li a, .footer__contacts .footer__addr { min-height: 2.75rem; }
+  .modal__panel { max-height: calc(100dvh - 2rem); overflow-y: auto; }
+  .modal .btn-tall { width: 100%; }
+
+  /* --- схема первого экрана (hero-sx): шире экрана — горизонтальная прокрутка, подписи не меньше 12 px --- */
+  main .hero-sx__var { position: static; margin-bottom: 1rem; align-self: flex-start; }
+  main .hero-sx__node .sx-node { display: block; overflow-x: auto; }
+  main .hero-sx__node .sx-node svg { width: 1320px; max-width: none; max-height: none; }
+  main .sx-legend { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  main .hero-sx__node::after { content: "Схема шире экрана — листайте влево-вправо"; margin-top: .5rem; font-size: .8125rem; color: var(--text-2); order: 1; }
+}
+
+/* ---------- мобильный ≤ 767 (макет 390): одна колонка, отступ плашки 16 ---------- */
+@media (max-width: 767px) {
+  :root { --pad: 1rem; --r: .625rem; }
+  .concept-bar { display: none; }
+
+  .h1, .intro__title, .intro--photo .intro__title, .hs-title, .sv-hero__title { font-size: 2.25rem; }
+  .hero-a__h1 { font-size: 2.5rem; }
+  .h2, .about-banner__title, .approach__title, .numbers__title, .faq__title, .sp-h1, .intro__title--long, .sv-statement__t, .sv-partners__t { font-size: 1.875rem; }
+  .sp-h2, .sp-content .sp-h2, .hub-card__t, .contacts__item b, .sv-next__t, .sv-quote__t { font-size: 1.5rem; }
+  .t-28, .t-24, .about-banner__subtitle, .approach__slide-title, .svc__name { font-size: 1.25rem; }
+  .t-20, .head__lead, .wk__lead, .about-banner__text, .approach__text, .numbers__lead, .sp-lead { font-size: 1rem; line-height: 1.5; }
+  .numbers__count { font-size: 4.5rem; }
+
+  .header { padding: 0 .5rem 0 .75rem; }
+  .logo > span:last-child > span { display: none; }   /* подпись под названием — на мобильном убрана */
+  .logo b { font-size: 1rem; }
+  .drawer__plate { padding-bottom: 1rem; }
+
+  .g3 { grid-template-columns: minmax(0, 1fr); row-gap: 1rem; }
+  .g3 > .span2 { grid-column: 1; }
+  .head { margin-bottom: 1.5rem; }
+  .sp-body, .sv-hero, .sv-statement, .sv-quote { grid-template-columns: minmax(0, 1fr); }
+  .sp-content, .sv-hero__main, .sv-statement__main, .sv-quote__main { grid-column: 1; }
+
+  /* кнопки Tall — на всю ширину, высота 72 */
+  .btns { flex-direction: column; }
+  .btn-tall, .btn-tall--wide, .cta__text .btn-tall, .btn-tall[href^="tel:"] { width: 100%; min-height: 4.5rem; }
+
+  .hero-a__row { flex-direction: column; align-items: stretch; }
+  .hero-a__ibox { display: none; }
+  .hero-a .hero-a__lead { margin: 1.25rem 0 1.5rem; }
+  .hero-a__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1.5rem; row-gap: 1rem; }
+  .hero-a__facts li:nth-child(3n+1) { padding-left: 1rem; border-left: 1px solid #DEDFE2; }
+  .hero-a__facts li:nth-child(2n+1) { padding-left: 0; border-left: 0; }
+  .hero-a__facts b { font-size: 2rem; }
+  main .sx-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .numbers__intro { grid-template-columns: minmax(0, 1fr); }
+  .numbers__lead { grid-column: 1; }
+
+  .group-frame { gap: 3rem; }
+  .approach { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .approach__slider { margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad); }
+  .approach__track { scroll-padding-left: var(--pad); }
+  .approach__slide { flex-basis: 82%; min-height: 24rem; gap: 1.5rem; }
+  .approach__controls { display: none; }
+  .ap-ind { grid-column: 1; margin-top: .5rem; }
+  .ap-ind__node { width: 1.25rem; height: 1.25rem; }
+  .ap-ind__pipe::before, .ap-ind__pipe::after { left: .625rem; }
+  .ap-ind__pipe::before { right: .625rem; }
+  .ap-ind__pipe::after { width: calc((100% - 1.25rem) * var(--p, 0)); }
+
+  .numbers__list { grid-template-columns: minmax(0, 1fr); margin-top: 2rem; gap: 2rem; }
+  .numbers__item:nth-child(n) { padding-top: 0; }
+  .numbers__item::after { display: none; }
+  .numbers__text { margin-bottom: 0; }
+
+  .svc__head { gap: .75rem; padding: .75rem .75rem .75rem 1rem; }
+  .svc__no { width: 2.25rem; }
+  .svc__content { padding: 0 1rem 1rem; gap: 1rem; }
+  .svc__foot { align-items: stretch; gap: .5rem; }
+  .svc__foot .btn-tall { flex: 1; width: auto; }
+  .svc__foot .ic-box { width: 4.5rem; height: 4.5rem; border-radius: .75rem; }
+  .svc__foot .sic:has(use[href^="#i-svc"]) { width: 2.5rem; height: 2.5rem; }
+
+  /* этапы: вертикальный список — две «трубы» Т1/Т2 слева, от них отводы к карточкам (набросок — etapy-g-v2.html) */
+  .stg { padding-top: var(--pad); }
+  .stg__nav { display: none; }
+  .stg__viewport { margin-top: 1.5rem; overflow: visible; padding: 1.25rem var(--pad) var(--pad); scroll-snap-type: none; }
+  .stg__track { position: relative; flex-direction: column; width: auto; gap: .75rem; padding: 0 0 0 3.5rem; }
+  .stg__track::before, .stg__track::after { content: ""; position: absolute; top: 0; bottom: 0; width: 2px; }
+  .stg__track::before { left: .5rem; background: var(--accent); }
+  .stg__track::after { left: 1.5rem; background: var(--text); }
+  main .stg__end, main .stg--mg .mg-t1, main .stg--mg .mg-t2, main .stg--mg .stg__step::before { display: none; }
+  main .stg__step, main .stg--mg .stg__step { width: auto; padding-top: 0; }
+  main .stg--mg .stg__num { position: static; transform: none; align-self: flex-start; margin: 1rem 1rem 0; }
+  .stg__card { min-height: 0; justify-content: flex-start; padding: .75rem 1rem 1.25rem; border-radius: .5rem; background: var(--card); }
+  .stg__title { font-size: 1.25rem; }
+  .stg__text { font-size: .9375rem; }
+  main .stg--mg .mg-tap { left: -3rem; top: 1.75rem; width: 3rem; height: 0; border-left: 0; border-top: 2px dashed var(--stroke); }
+  main .stg--mg .mg-j1, main .stg--mg .mg-j2 { top: 1.75rem; }
+  main .stg--mg .mg-j1 { left: -3rem; }
+  main .stg--mg .mg-j2 { left: -2rem; }
+  main .stg--mg .stg__step:hover .mg-tap { border-top-style: solid; border-color: var(--accent); }
+  main .stg--mg .mg-lab { left: -3rem; transform: translate(-50%, -100%); }
+  main .stg--mg .mg-lab--1 { top: -.25rem; }
+  main .stg--mg .mg-lab--2 { top: -.25rem; left: -2rem; }
+
+  .wk { gap: 1.5rem; }
+  .wcard { grid-template-columns: minmax(0, 1fr); gap: 1rem; padding: .75rem; }
+  .wcard__body { padding: 0 .25rem .25rem; }
+  .wcard__title { font-size: 1.375rem; }
+  .spec div { display: block; padding: .625rem 0; }
+  .spec i { display: none; }
+  .spec dt { white-space: normal; font-size: .8125rem; }
+  .spec dd { text-align: left; }
+  .wcard__actions { width: 100%; padding-top: 1.5rem; }
+  .wcard__actions .btn-tall { flex: 1; }
+  .wk__sticky .btn-tall { margin-top: .5rem; }
+
+  .faq__button { gap: 1rem; padding: 1rem; font-size: 1.0625rem; }
+  .faq__wrapper { padding: 0 1rem 1rem; }
+  .cta__photo { min-height: 14rem; }
+
+  .footer__grid { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+  .footer__dirs { margin-top: 2rem; }
+  .footer__dirs-row { grid-template-columns: minmax(0, 1fr); }
+  .footer__bottom { flex-direction: column; }
+}

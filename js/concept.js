@@ -21,19 +21,39 @@
     });
   });
 
-  // «Наш подход» — карусель как на учетстоках: стрелки листают на одну карточку, крайняя стрелка серая
+  // «Наш подход» — карусель как на учетстоках: стрелки листают на одну карточку, крайняя стрелка серая.
+  // 18.11 — индикатор «труба + 9 узлов + Слайд N из 9» (nash-podhod-indikator.html): клик по узлу листает к слайду
   var apTrack = document.querySelector('[data-ap-track]');
   if (apTrack) {
     var apBtns = document.querySelectorAll('[data-ap]');
+    var apInd = document.querySelector('[data-ap-ind]');
+    var apNodes = apInd ? [].slice.call(apInd.querySelectorAll('.ap-ind__node')) : [];
+    var apStep = function () { return apTrack.firstElementChild.offsetWidth + parseFloat(getComputedStyle(apTrack).columnGap || 0); };
+    var apIndex = function () {   // текущий — слайд у левого края; у правого края ленты — последний
+      var max = apTrack.scrollWidth - apTrack.clientWidth;
+      if (max > 2 && apTrack.scrollLeft >= max - 2) return apNodes.length - 1;
+      return Math.min(apNodes.length - 1, Math.round(apTrack.scrollLeft / apStep()));
+    };
     var apSync = function () {
       apBtns[0].disabled = apTrack.scrollLeft <= 2;
       apBtns[1].disabled = apTrack.scrollLeft >= apTrack.scrollWidth - apTrack.clientWidth - 2;
+      if (!apInd) return;
+      var i = apIndex();
+      apNodes.forEach(function (n, k) {
+        n.classList.toggle('is-cur', k === i);
+        n.classList.toggle('is-done', k < i);
+        n.setAttribute('aria-current', k === i ? 'true' : 'false');
+      });
+      apInd.querySelector('.ap-ind__pipe').style.setProperty('--p', i / (apNodes.length - 1));
+      apInd.querySelector('[data-ap-cur]').textContent = i + 1;
     };
     apBtns.forEach(function (b) {
       b.addEventListener('click', function () {
-        var step = apTrack.firstElementChild.offsetWidth + parseFloat(getComputedStyle(apTrack).columnGap);
-        apTrack.scrollBy({ left: step * +b.dataset.ap, behavior: reduce ? 'auto' : 'smooth' });
+        apTrack.scrollBy({ left: apStep() * +b.dataset.ap, behavior: reduce ? 'auto' : 'smooth' });
       });
+    });
+    apNodes.forEach(function (n, k) {
+      n.addEventListener('click', function () { apTrack.scrollTo({ left: apStep() * k, behavior: reduce ? 'auto' : 'smooth' }); });
     });
     apTrack.addEventListener('scroll', apSync, { passive: true });
     addEventListener('resize', apSync);
@@ -380,4 +400,85 @@
   }
   sw.forEach(function (b) { b.addEventListener('click', function () { setAccent(b.dataset.accent); }); });
   if (sw.length) setAccent(saved && [].some.call(sw, function (b) { return b.dataset.accent === saved; }) ? saved : sw[0].dataset.accent);   // панели нет — акцент из CSS
+
+  // 18.11 — адаптив (adaptiv/RULES.md): ниже 1200 меню из шапки собирается в бургер + полноэкранную шторку.
+  // Шторка строится из .nav и панелей .mnav__panel — разметку страниц менять не нужно. «Услуги» и «Направления» — аккордеоны,
+  // телефон внизу. aria-expanded, Esc закрывает и возвращает фокус на бургер, Tab не выходит за шторку, фон не прокручивается
+  var hdr = document.querySelector('.header');
+  var navEl = hdr && hdr.querySelector('.nav');
+  if (hdr && navEl) {
+    var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+    var chev = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+    var arr = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+    var ph = hdr.querySelector('.phone-btn');
+    var dHtml = '';
+    [].slice.call(navEl.children).forEach(function (n, i) {
+      if (n.matches('[data-mnav]')) {
+        var pn = document.getElementById(n.getAttribute('aria-controls')), inner = '';
+        var title = n.textContent.trim();
+        if (pn) {
+          pn.querySelectorAll('a.mnav__feature, a.mnav__link, a.mnav__also, .dir-link').forEach(function (l) {
+            if (l.matches('a.mnav__feature')) inner += '<a class="dr-link" href="' + l.getAttribute('href') + '"><span><b>Все услуги</b></span></a>';
+            else if (l.matches('a.mnav__link')) inner += '<a class="dr-link" href="' + l.getAttribute('href') + '"><span><b>' + esc(l.querySelector('b').textContent.trim()) + '</b><small>' + esc(l.querySelector('span').textContent) + '</small></span>' + arr + '</a>';
+            else if (l.matches('a.mnav__also')) inner += '<a class="dr-link dr-link--also" href="' + l.getAttribute('href') + '"><span><small>' + esc(l.textContent.trim()) + '</small></span></a>';
+            else {   // направление: точка, название, подпись, бейдж «Скоро» / ↗
+              var dot = l.querySelector('.dir-dot'), soon = l.querySelector('.badge-soon'), ext = l.querySelector('.dir-ext'), href = l.getAttribute('href');
+              var cur = l.classList.contains('is-current');
+              inner += (href ? '<a class="dr-link" href="' + href + '" target="_blank" rel="noopener">' : '<span class="dr-link' + (l.classList.contains('is-soon') ? ' is-soon' : '') + (cur ? ' is-current' : '') + '"' + (cur ? ' aria-current="page"' : '') + '>') +
+                '<i class="dir-dot ' + (dot ? dot.className.replace('dir-dot ', '') : '') + '"></i><span><b>' + esc(l.querySelector('b').textContent) + '</b><small>' + esc(l.querySelector('small').textContent) + '</small></span>' +
+                (soon ? '<em class="badge-soon">Скоро</em>' : '') + (ext ? arr : '') + (href ? '</a>' : '</span>');
+            }
+          });
+          dHtml += '<div class="dr-acc"><button class="dr-acc__btn" type="button" aria-expanded="false" aria-controls="dr-p' + i + '"><span>' + esc(title) + '</span>' + chev + '</button><div class="dr-acc__panel" id="dr-p' + i + '" inert><div class="dr-acc__in"><div class="dr-acc__list">' + inner + '</div></div></div></div>';
+        }
+      } else if (n.getAttribute('href')) {
+        dHtml += '<a class="dr-top" href="' + n.getAttribute('href') + '">' + esc(n.textContent.trim()) + '</a>';
+      }
+    });
+    var drawer = document.createElement('div');
+    drawer.className = 'drawer'; drawer.id = 'drawer'; drawer.hidden = true;
+    drawer.setAttribute('role', 'dialog'); drawer.setAttribute('aria-modal', 'true'); drawer.setAttribute('aria-label', 'Меню');
+    drawer.innerHTML = '<div class="drawer__plate"><nav class="drawer__nav" aria-label="Меню">' + dHtml + '</nav>' +
+      (ph ? '<div class="drawer__foot"><p>Позвоните — бесплатно проконсультируем</p><a class="btn-tall btn-tall--wide" href="' + ph.getAttribute('href') + '">' + esc(ph.textContent.trim()) + ' <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 17 5-5-5-5M13 17l5-5-5-5"/></svg></a></div>' : '') + '</div>';
+    var wrap = hdr.closest('.header-wrap') || hdr.parentNode;
+    wrap.parentNode.insertBefore(drawer, wrap.nextSibling);
+    var burger = document.createElement('button');
+    burger.className = 'burger'; burger.type = 'button'; burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-controls', 'drawer'); burger.setAttribute('aria-label', 'Открыть меню');
+    burger.innerHTML = '<svg class="ic burger__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><svg class="ic burger__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+    hdr.appendChild(burger);
+    if (ph) ph.setAttribute('aria-label', 'Позвонить: ' + ph.textContent.trim());
+    var dRoot = document.documentElement, dOpen = false;
+    var dMain = document.querySelector('main');
+    var dFocusable = function () { return [].slice.call(hdr.querySelectorAll('a[href], button')).concat([].slice.call(drawer.querySelectorAll('a[href], button:not([disabled])'))).filter(function (e) { return !e.closest('[inert]') && e.offsetParent !== null; }); };
+    var dToggle = function (open, back) {
+      if (open === dOpen) return;
+      dOpen = open;
+      drawer.hidden = !open;
+      dRoot.classList.toggle('is-drawer', open);
+      burger.setAttribute('aria-expanded', open);
+      burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+      if (dMain) dMain.inert = open;
+      if (open) { var f = drawer.querySelector('.dr-acc__btn'); if (f) f.focus(); }
+      else if (back !== false) burger.focus();
+    };
+    burger.addEventListener('click', function () { dToggle(!dOpen); });
+    drawer.querySelectorAll('.dr-acc__btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var open = b.getAttribute('aria-expanded') !== 'true';
+        drawer.querySelectorAll('.dr-acc__btn').forEach(function (o) { if (o !== b) { o.setAttribute('aria-expanded', 'false'); document.getElementById(o.getAttribute('aria-controls')).inert = true; o.parentNode.classList.remove('is-open'); } });
+        b.setAttribute('aria-expanded', open); document.getElementById(b.getAttribute('aria-controls')).inert = !open; b.parentNode.classList.toggle('is-open', open);
+      });
+    });
+    drawer.addEventListener('click', function (e) { if (e.target.closest('a[href^="#"], a[href^="tel:"], a[href^="mailto:"]')) dToggle(false, false); });
+    document.addEventListener('keydown', function (e) {
+      if (!dOpen) return;
+      if (e.key === 'Escape') { dToggle(false); return; }
+      if (e.key !== 'Tab') return;
+      var f = dFocusable(); if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    matchMedia('(min-width: 1200px)').addEventListener('change', function (m) { if (m.matches) dToggle(false, false); });
+  }
 })();

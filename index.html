@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/concept.css?v=44">
+<link rel="stylesheet" href="css/concept.css?v=45">
 <link rel="stylesheet" href="css/schemes.css?v=2">
 <script>
   // 15.10 — переход между страницами, как на olympic.no: пришли по ссылке с другой страницы сайта —
@@ -115,19 +115,21 @@
   <!-- 1. Первый экран — вариант А доски 08.10: как на учетстоков.рф (Figma «Главная» 2410:370 + 2503:2237).
        Плашка с текстом (метки слева, H1 в правых 2/3, две кнопки), под ней отдельная плашка с фото во всю ширину.
        Фото от дизайнера 06.10, исходник 1280×714 — нужен апскейл до 2560+ -->
-  <section class="plate g3 hero-a" aria-labelledby="hero-title">
-    <div class="hero-a__labels">
-      <p class="label">ООО «Комплекс-Техно»</p>
-      <p class="label">с 2007 года</p>
-    </div>
-    <div class="span2">
-      <h1 class="h1" id="hero-title">Установка узлов учета тепловой энергии (УУТЭ) <em>«под ключ»</em> в Москве и Московской области.</h1>
-      <p class="hero-a__lead t-20 muted">Профессиональная установка узлов учета тепловой энергии. Работаем с 2007 года. Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.</p>
-      <div class="btns">
-        <button class="btn-tall btn-tall--wide" type="button" data-modal>Получить консультацию <svg class="ic"><use href="#chev2"/></svg></button>
-        <a class="btn-tall btn-tall--line" href="#services">Услуги <svg class="ic"><use href="#chev2"/></svg></a>
+  <section class="plate hero-a" aria-labelledby="hero-title">
+    <!-- 18.11 — вариант А утверждён (hero-varianty.html). Место под два лейбла над H1 оставлено пустым: выбор варианта 1/2/3 — hero-labels.html -->
+    <div class="hero-a__slot" aria-hidden="true"></div>
+    <h1 class="h1 hero-a__h1" id="hero-title">Установка узлов учета тепловой энергии <em>под&nbsp;ключ</em> в&nbsp;Москве и&nbsp;Московской области</h1>
+    <div class="hero-a__row">
+      <div class="hero-a__main">
+        <p class="hero-a__lead t-20 muted">Профессиональная установка узлов учета тепловой энергии. Работаем с 2007 года. Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.</p>
+        <div class="btns">
+          <button class="btn-tall btn-tall--wide" type="button" data-modal>Получить консультацию <svg class="ic"><use href="#chev2"/></svg></button>
+          <a class="btn-tall btn-tall--wide btn-tall--line" href="#services">Услуги <svg class="ic"><use href="#chev2"/></svg></a>
+        </div>
       </div>
+      <div class="ic-box hero-a__ibox" aria-hidden="true"><svg viewBox="0 0 64 64" class="sic hero-a__svg" aria-hidden="true"><g fill="none" stroke="#3A3D42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 41H17M4 53H17M17 34V60M47 41H60M47 53H60M47 34V60"/><rect x="21" y="5" width="22" height="17" rx="2.5" stroke="#C2410C"/><path d="M32 27V49M25 42.5L32 49.5L39 42.5" stroke="#C2410C"/></g></svg></div>
     </div>
+    <ul class="hero-a__facts"><li><b>19+ лет</b><span>на рынке с 2007 года</span></li><li><b>300+</b><span>установленных узлов учета</span></li><li><b>92%</b><span>проектов согласуется с РСО с первого раза</span></li><li><b>1–3 дня</b><span>стандартный срок монтажа</span></li><li><b>12 месяцев</b><span>гарантия на монтаж</span></li><li><b>0 ₽</b><span>выезд инженера на объект</span></li></ul>
   </section>
   <!-- 27.10 — первый экран без фото: схема (графика-метафора). Переключатель вариантов — только для показа клиенту, на сайте останется один. Подпись — черновик -->
   <figure class="hero-a__photo hero-sx sx">
@@ -175,6 +177,10 @@
         <div class="approach__controls">
           <button class="approach__control" type="button" data-ap="-1" aria-label="Предыдущие"><svg class="ic"><use href="#chev2"/></svg></button>
           <button class="approach__control" type="button" data-ap="1" aria-label="Следующие"><svg class="ic"><use href="#chev2"/></svg></button>
+        </div>
+        <div class="ap-ind" data-ap-ind>
+          <div class="ap-ind__pipe"><button class="ap-ind__node" type="button" data-i="0" aria-label="Слайд 1"></button><button class="ap-ind__node" type="button" data-i="1" aria-label="Слайд 2"></button><button class="ap-ind__node" type="button" data-i="2" aria-label="Слайд 3"></button><button class="ap-ind__node" type="button" data-i="3" aria-label="Слайд 4"></button><button class="ap-ind__node" type="button" data-i="4" aria-label="Слайд 5"></button><button class="ap-ind__node" type="button" data-i="5" aria-label="Слайд 6"></button><button class="ap-ind__node" type="button" data-i="6" aria-label="Слайд 7"></button><button class="ap-ind__node" type="button" data-i="7" aria-label="Слайд 8"></button><button class="ap-ind__node" type="button" data-i="8" aria-label="Слайд 9"></button></div>
+          <p class="ap-ind__label" aria-live="polite">Слайд <b data-ap-cur>1</b> из 9</p>
         </div>
       </div>
       <div class="approach__slider">
@@ -259,8 +265,8 @@
         <p class="head__lead t-20 muted">Полный спектр услуг — от обследования, проектирования и установки до поверки и сервисного обслуживания узлов учёта тепловой энергии.</p>
       </div>
     </div>
-    <div class="g3">
-      <div><!-- 27.10 — вместо фото: лист условных обозначений, следит за открытой услугой (js/schemes.js) --><div class="svc__photo svc-sx" data-sx="svc" aria-hidden="true"></div></div>
+    <div class="g3 svc-grid">
+      <div class="svc-grid__sheet"><!-- 27.10 — вместо фото: лист условных обозначений, следит за открытой услугой (js/schemes.js) --><div class="svc__photo svc-sx" data-sx="svc" aria-hidden="true"></div></div>
       <ol class="span2 svc__list" data-acc>
         <li class="svc is-open">
           <button class="svc__head" type="button" aria-expanded="true" aria-controls="svc-1"><span class="svc__no">[01]</span><span class="svc__name t-24">Обследование объектов</span><span class="sq"><svg class="ic"><use href="#chev-r"/></svg></span></button>
@@ -524,7 +530,7 @@
 </div>
 
 
-<script src="js/concept.js?v=42"></script>
+<script src="js/concept.js?v=43"></script>
 <script src="js/schemes.js?v=2"></script>
 </body>
 </html>
