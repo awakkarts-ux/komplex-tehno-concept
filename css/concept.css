@@ -1271,3 +1271,23 @@ html.is-preload body::after { content: ""; position: fixed; inset: 0; z-index: 9
   .footer__dirs-row { grid-template-columns: minmax(0, 1fr); }
   .footer__bottom { flex-direction: column; }
 }
+
+/* ---------- Хаб «Услуги»: адаптив (Figma 52:5272: 2 колонки 948, иконка Icon/Service 64 в рамке 140) ---------- */
+.hub__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hub-card { min-height: 38.5rem; }   /* Figma: 948 × 616; оранжевый CTA в макете скрыт (правка клиента 16.11) — убран */
+.hub-card__ic .sic, .hub-card__ic .sic:has(use[href^="#i-svc"]) { width: 4rem; height: 4rem; }
+@media (max-width: 1199px) {
+  .hub-card { min-height: 0; padding: 1.5rem; gap: 1.25rem; }
+  .hub-card__top { gap: 1rem; padding-bottom: 1rem; }
+  .hub-card p { flex: 1; max-width: none; }
+  .hub-card__foot { gap: 1rem; flex-wrap: wrap; }
+  .hub-card__foot .btn-tall { width: auto; min-width: 0; flex: 1 1 10rem; max-width: 18rem; }
+  .hub-card__ic { width: 5.5rem; height: 5.5rem; border-radius: 1rem; }
+  .hub-card__ic .sic, .hub-card__ic .sic:has(use[href^="#i-svc"]) { width: 4rem; height: 4rem; }
+}
+@media (max-width: 767px) {
+  .hub__grid { grid-template-columns: minmax(0, 1fr); }
+  .hub-card { padding: 1rem; }
+  .hub-card__foot { flex-wrap: nowrap; align-items: flex-end; }
+  .hub-card__foot .btn-tall { max-width: none; }
+}
