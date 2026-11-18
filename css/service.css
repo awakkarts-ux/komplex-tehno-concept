@@ -437,3 +437,46 @@
   .sv2-cta__ph { min-height: 14rem; }
   .sv2 .faq__list { margin-top: 1.5rem; }
 }
+
+/* Обследование: одноколоночные грид-обёртки не растягиваются по max-content дочерних; легенда термограммы переносится */
+.sv2-qs, .sv2-subs, .sv2-intro { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 767px) {
+  .sv2 .sx-bar { flex-wrap: wrap; gap: .75rem; }
+  .sv2 .sx-heatleg { flex-wrap: wrap; }
+  .sv2 .sx-heatleg span { margin: 0 .25rem; }
+}
+@media (max-width: 767px) {
+  .sv2 .sx-seg { display: flex; width: 100%; }
+  .sv2 .sx-seg button { flex: 1 1 0; min-width: 0; min-height: 3rem; padding: .5rem .375rem; line-height: 1.2; }
+}
+
+/* Обследование: цепочка этапов (Figma steps-chain 1011:15097) — номер в рамке, стрелка-линия между шагами, подпись под номером */
+.sv2-chain { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--sv-gray); border-radius: var(--r); padding: 1.5rem 1rem; margin: 0; }
+.sv2-chain li { position: relative; display: flex; flex-direction: column; align-items: center; gap: .75rem; }
+.sv2-chain i { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; background: #fff; border: 1px solid var(--stroke); border-radius: .25rem; font-style: normal; font-size: max(.8125rem, 13px); font-weight: 500; color: var(--text-2); position: relative; z-index: 1; }
+.sv2-chain b { font-size: max(.875rem, 13px); font-weight: 600; letter-spacing: -.01em; text-align: center; }
+.sv2-chain li:not(:last-child)::after { content: ""; position: absolute; top: 1.125rem; left: calc(50% + 1.75rem); right: calc(-50% + 1.75rem); height: 1px; background: var(--text); }
+.sv2-chain li:not(:last-child)::before { content: ""; position: absolute; top: calc(1.125rem - 4px); right: calc(-50% + 1.75rem); width: 8px; height: 8px; border-top: 1px solid var(--text); border-right: 1px solid var(--text); transform: rotate(45deg) translate(-2px, 2px); }
+@media (max-width: 767px) { .sv2-chain { padding: 1rem .5rem; } .sv2-chain b { font-size: 12px; } .sv2-chain li:not(:last-child)::after { left: calc(50% + 1.5rem); right: calc(-50% + 1.5rem); } .sv2-chain li:not(:last-child)::before { right: calc(-50% + 1.5rem); } }
+
+/* Обследование: шкала ТУ — 15 рабочих дней (Figma mini-tu 964:6385): три недели по 5 суток, 1/5/10 — вехи, 15 — акцент */
+.sv2-tu { margin: 0; background: var(--sv-gray); border-radius: var(--r); padding: 1.5rem 1.875rem 1.5rem; display: grid; gap: 1rem; }
+.sv2-tu__weeks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 1.25rem; }
+.sv2-tu__w { display: grid; gap: .75rem; padding-left: 1.25rem; border-left: 1px dashed var(--text-2); }
+.sv2-tu__w:first-child { padding-left: 0; border-left: 0; }
+.sv2-tu__w > span { font-size: max(1.125rem, 15px); color: var(--text-2); }
+.sv2-tu__d { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem; }
+.sv2-tu__d i { display: grid; place-items: center; aspect-ratio: 1; max-height: 3.25rem; width: 100%; border-radius: .375rem; background: #CFD1D5; font-style: normal; font-size: max(1.25rem, 15px); font-weight: 600; color: var(--text-2); }
+.sv2-tu__d i.w2 { background: #B9BCC1; } .sv2-tu__d i.w3 { background: #9EA2A8; } .sv2-tu__d i.m { color: var(--text); }
+.sv2-tu__d i.a { background: var(--accent); color: #fff; }
+.sv2-tu__cap { display: flex; justify-content: space-between; gap: 1rem; margin-top: .5rem; font-size: max(1.125rem, 15px); }
+.sv2-tu__cap .a { color: var(--accent); text-align: right; }
+.sv2-tu__note { margin: 0; font-size: max(1rem, 15px); color: var(--text-2); font-weight: 500; }
+@media (max-width: 767px) {
+  .sv2-tu { padding: 1rem; }
+  .sv2-tu__weeks { grid-template-columns: minmax(0, 1fr); row-gap: 1rem; }
+  .sv2-tu__w, .sv2-tu__w:first-child { padding-left: 0; border-left: 0; }
+  .sv2-tu__d i { max-height: none; font-size: 1rem; }
+  .sv2-tu__cap { flex-direction: column; gap: .25rem; }
+  .sv2-tu__cap .a { text-align: left; }
+}
