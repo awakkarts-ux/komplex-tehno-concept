@@ -1180,9 +1180,10 @@ html.is-preload body::after { content: ""; position: fixed; inset: 0; z-index: 9
   .sp-body, .sv-hero, .sv-statement, .sv-quote { grid-template-columns: minmax(0, 1fr); }
   .sp-content, .sv-hero__main, .sv-statement__main, .sv-quote__main { grid-column: 1; }
 
-  /* кнопки Tall — на всю ширину, высота 72 */
+  /* кнопки Tall на телефоне — горизонтальные (18.11, правка дизайнера: 72 — слишком крупно): подпись слева, » справа, высота 52 */
   .btns { flex-direction: column; }
-  .btn-tall, .btn-tall--wide, .cta__text .btn-tall, .btn-tall[href^="tel:"] { width: 100%; min-height: 4.5rem; }
+  .btn-tall, .btn-tall--wide, .cta__text .btn-tall, .btn-tall[href^="tel:"] { width: 100%; min-height: 3.25rem; flex-direction: row; align-items: center; justify-content: space-between; gap: .75rem; padding: .75rem 1rem; font-size: .9375rem; }
+  .btn-tall .ic { align-self: center; width: 1.25rem; height: 1.25rem; flex: none; }
 
   .hero-a__row { flex-direction: column; align-items: stretch; }
   .hero-a__ibox { display: none; }
@@ -1259,7 +1260,13 @@ html.is-preload body::after { content: ""; position: fixed; inset: 0; z-index: 9
   .faq__wrapper { padding: 0 1rem 1rem; }
   .cta__photo { min-height: 14rem; }
 
-  .footer__grid { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+  /* подвал: пункты плотнее, секции «Меню» / «Услуги» / «Контакты» — дальше друг от друга (18.11, правка дизайнера) */
+  .footer__grid { grid-template-columns: minmax(0, 1fr); gap: 2.75rem; }
+  .footer__h { margin-bottom: .5rem; }
+  .footer li + li { margin-top: 0; }
+  .footer li a, .footer__contacts li a, .footer__contacts .footer__addr { min-height: 2.25rem; padding: .375rem 0; }
+  .footer li a { display: inline-flex; align-items: center; }
+  .footer__contacts .footer__addr { padding-top: .5rem; }
   .footer__dirs { margin-top: 2rem; }
   .footer__dirs-row { grid-template-columns: minmax(0, 1fr); }
   .footer__bottom { flex-direction: column; }
