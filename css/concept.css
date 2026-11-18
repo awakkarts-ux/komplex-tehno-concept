@@ -377,11 +377,12 @@ img { transition: opacity .4s ease; }
 .modal .btn-tall { width: 19rem; }
 
 /* ---------- Перелинковка семейства (решение 08.10): цвета направлений, меню, перекрёстный блок, футер ---------- */
-:root { --dir-stoki: #213A6A; --dir-voda: #1E88C8; }   /* синий учетстоков; голубой воды — заглушка, цвет не выбран */
+:root { --dir-stoki: #213A6A; --dir-voda: #1E88C8; --dir-par: #7A8793; }   /* синий учетстоков; голубой воды — заглушка, цвет не выбран */
 .dir-dot { width: .625rem; height: .625rem; border-radius: 50%; flex: none; display: inline-block; }
 .dir-dot--stoki { background: var(--dir-stoki); }
 .dir-dot--teplo { background: var(--accent); }
 .dir-dot--voda { background: var(--dir-voda); }
+.dir-dot--par { background: var(--dir-par); }
 
 .nav__menu--dirs { left: auto; right: -1.25rem; }
 .dir-link { display: flex !important; align-items: center; gap: .875rem; justify-content: flex-start !important; }
@@ -389,7 +390,7 @@ img { transition: opacity .4s ease; }
 .dir-link b { display: block; font-weight: 600; }
 .dir-link small { display: block; font-size: max(.8125rem, 13px); color: var(--text-2); margin-top: .125rem; }
 .dir-link.is-current { background: var(--card); }
-.dir-link.is-soon { opacity: .55; }
+.dir-link.is-soon > span:not(.x), .dir-link.is-soon .dir-dot { opacity: .7; }
 
 /* «Другие направления» — два баннера (решение 08.10, референс Double Distill / Dr. Drink):
    у каждого направления своя «упаковка» — фон и фактура в его цвете, крупно адрес сайта, строкой что делаем, фото справа */
@@ -420,7 +421,7 @@ a.dir-banner:hover .dir-banner__go { transform: translateX(.25rem); }
 .dir-banner__soon { position: absolute; left: 2.5rem; bottom: 2.5rem; font-size: max(.875rem, 13px); font-weight: 600; border: 1px dashed currentColor; border-radius: .5rem; padding: .5rem .75rem; opacity: .7; }
 
 .footer__dirs { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .25); }
-.footer__dirs-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .25rem; }
+.footer__dirs-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem; }
 .fdir { display: flex; align-items: center; gap: .875rem; padding: 1rem 1.25rem; border-radius: var(--r-sm); background: rgba(255, 255, 255, .1); }
 .fdir > span { flex: 1; }
 .fdir b { display: block; font-weight: 600; }
@@ -428,7 +429,7 @@ a.dir-banner:hover .dir-banner__go { transform: translateX(.25rem); }
 .fdir .dir-dot { box-shadow: 0 0 0 2px rgba(255, 255, 255, .8); }
 a.fdir:hover { background: rgba(255, 255, 255, .18); text-decoration: none; }
 .fdir.is-current { background: rgba(255, 255, 255, .2); }
-.fdir.is-soon { opacity: .6; }
+.fdir.is-soon > span, .fdir.is-soon .dir-dot { opacity: .75; }
 .footer .footer__bottom { margin-top: 1.5rem; }
 
 /* ---------- Страница услуги (sp-*) — решения 09.10 (PROJECT.md). Сетка и компоненты — те же, что на главной ---------- */
@@ -947,3 +948,15 @@ html.is-preload body::after { content: ""; position: fixed; inset: 0; z-index: 9
 /* 27.10 — иконки услуг из условных обозначений (i-svc-*, tools/add_schemes.mjs): линия 2 px, рисунок тоньше прежних — крупнее в рамке */
 .sic:has(use[href^="#i-svc"]) { width: 4.5rem; height: 4.5rem; }
 .mnav__fic .sic:has(use[href^="#i-svc"]) { width: 2.25rem; height: 2.25rem; }
+
+
+/* ---------- 18.11, правки клиента 09/10: направления — двухуровневый текст, бейдж «Скоро», ↗, контакты футера с иконками ---------- */
+.dir-link b, .fdir b { font-size: max(1.125rem, 18px); line-height: 1.2; }
+.dir-link small, .fdir small { font-size: max(.8125rem, 13px); }
+.badge-soon { flex: none; font-style: normal; font-size: max(.75rem, 12px); line-height: 1; font-weight: 600; padding: .3125rem .625rem; border-radius: .375rem; background: #FBE6DB; color: var(--accent); }
+.fdir .badge-soon { background: #fff; color: var(--accent); }
+.dir-ext { width: 1.25rem; height: 1.25rem; }
+.footer__contacts li a, .footer__contacts .footer__addr { display: inline-flex; align-items: center; gap: .75rem; color: #fff; padding: .25rem 0; }
+.footer__contacts .footer__addr { align-items: flex-start; }
+.footer__contacts .ic { width: 1.25rem; height: 1.25rem; color: #fff; stroke-width: 1.75; }
+.footer__contacts .footer__addr .ic { margin-top: .125rem; }
