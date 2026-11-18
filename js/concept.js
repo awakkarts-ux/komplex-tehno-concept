@@ -481,4 +481,87 @@
     });
     matchMedia('(min-width: 1200px)').addEventListener('change', function (m) { if (m.matches) dToggle(false, false); });
   }
+  // ---------- Страницы услуг на ≤1023 (RULES §8): оглавление → липкая полоса под шапкой, баннер → нижняя липкая кнопка ----------
+  // Разметку не требует: строится из .sp-side__toc и .sp-cta, которые уже есть на каждой странице услуг (main.sv2)
+  (function () {
+    var toc = document.querySelector('.sv2 .sp-side__toc .sp-toc__list');
+    var cta = document.querySelector('.sv2 .sp-cta .btn-tall[data-modal]');
+    var hero = document.querySelector('.sv2 .sv2-hero');
+    if (!toc || !hero) return;
+    var mq = matchMedia('(max-width: 1023px)');
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    var esc = function (t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+    var DEFAULT = 'На этой странице';
+    var items = [].map.call(toc.querySelectorAll('a[href^="#"]'), function (a) {
+      return { id: a.getAttribute('href').slice(1), text: a.textContent.trim(), el: document.getElementById(a.getAttribute('href').slice(1)) };
+    }).filter(function (i) { return i.el; });
+    if (!items.length) return;
+
+    var bar = document.createElement('div');
+    bar.className = 'sp-bar'; bar.setAttribute('data-sp-bar', '');
+    bar.innerHTML = '<button class="sp-bar__btn" type="button" aria-expanded="false" aria-controls="sp-bar-panel"><svg class="ic" aria-hidden="true"><use href="#menu"/></svg><span class="sp-bar__cur">' + DEFAULT + '</span><svg class="ic sp-bar__chev" aria-hidden="true"><use href="#chev-d"/></svg></button>' +
+      '<nav class="sp-bar__panel" id="sp-bar-panel" aria-label="На этой странице" hidden><ol>' +
+      items.map(function (i) { return '<li><a href="#' + i.id + '" data-bar="' + i.id + '">' + esc(i.text) + '</a></li>'; }).join('') + '</ol></nav>';
+    document.body.appendChild(bar);
+    var btn = bar.querySelector('.sp-bar__btn'), cur = bar.querySelector('.sp-bar__cur'), panel = bar.querySelector('.sp-bar__panel');
+    var links = [].slice.call(panel.querySelectorAll('a'));
+
+    var sticky = null;
+    if (cta) {
+      sticky = document.createElement('div');
+      sticky.className = 'sp-sticky'; sticky.setAttribute('data-sp-sticky', '');
+      sticky.innerHTML = '<button class="sp-sticky__btn" type="button" data-modal data-modal-lead="' + esc((cta.dataset.modalLead || '')).replace(/"/g, '&quot;') + '"><span>' + esc(cta.textContent.trim()) + '</span><svg class="ic" aria-hidden="true"><use href="#chev2"/></svg></button>';
+      document.body.appendChild(sticky);
+      // то же окно, тот же текст: нажатие уходит в кнопку баннера, у которой обработчик модалки уже навешен
+      sticky.querySelector('button').addEventListener('click', function () { cta.click(); });
+    }
+
+    var isOpen = false;
+    var setOpen = function (v, back) {
+      if (v === isOpen) return;
+      isOpen = v; panel.hidden = !v; btn.setAttribute('aria-expanded', v);
+      bar.classList.toggle('is-open', v);
+      if (!v && back) btn.focus();
+      update();
+    };
+    btn.addEventListener('click', function () { setOpen(!isOpen); });
+    panel.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+    document.addEventListener('click', function (e) { if (isOpen && !bar.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (isOpen && e.key === 'Escape') setOpen(false, true); });
+
+    var modalEl = document.getElementById('consult');
+    var finals = [document.getElementById('contacts'), document.querySelector('footer.footer')].filter(Boolean);
+    var shown = false, curId = '';
+    var update = function () {
+      var on = mq.matches;
+      var vh = innerHeight;
+      var past = hero.getBoundingClientRect().bottom <= (parseFloat(getComputedStyle(bar).top) || 0) + 1;
+      var blocked = document.documentElement.classList.contains('is-drawer') || (modalEl && !modalEl.hidden);
+      // текущий раздел: последний, верх которого уже выше линии «шапка + полоса + 24»
+      var line = 144 + 24, id = '';
+      items.forEach(function (i) { if (i.el.getBoundingClientRect().top <= line) id = i.id; });
+      if (id !== curId) {
+        curId = id;
+        var it = items.filter(function (i) { return i.id === id; })[0];
+        cur.textContent = it ? it.text : DEFAULT;
+        links.forEach(function (a) { var on2 = a.dataset.bar === id; a.classList.toggle('is-active', on2); if (on2) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+      }
+      var showBar = on && past && !blocked;
+      bar.classList.toggle('is-on', showBar);
+      if (!showBar && isOpen) setOpen(false);
+      if (sticky) {
+        var atEnd = finals.some(function (f) { return f.getBoundingClientRect().top < vh - 8; });
+        sticky.classList.toggle('is-on', on && past && !blocked && !atEnd && !isOpen);
+      }
+    };
+    var raf = 0;
+    var queue = function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; update(); }); };
+    addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', queue);
+    mq.addEventListener('change', function () { if (!mq.matches) setOpen(false); queue(); });
+    var mo = new MutationObserver(queue);
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    if (modalEl) mo.observe(modalEl, { attributes: true, attributeFilter: ['hidden'] });
+    update();
+  })();
 })();
