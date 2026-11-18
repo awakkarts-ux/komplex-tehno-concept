@@ -4,10 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Страница не найдена — ООО «Комплекс-Техно»</title>
+<meta name="description" content="Страница не найдена.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/concept.css?v=46">
+<link rel="stylesheet" href="css/service.css?v=18">
+<link rel="stylesheet" href="css/pages.css?v=3">
 <script>
   // 15.10 — переход между страницами, как на olympic.no: пришли по ссылке с другой страницы сайта —
   // до отрисовки ставим is-page-in, чёрная панель закрывает экран и уходит вверх шторкой. Прелоадера первого захода нет
@@ -109,14 +112,15 @@
   </header>
 </div>
 
-<main class="page" id="top">
-
-  <!-- 404 — добавлена по решению 09.10. Текст — черновик, согласовать с клиентом -->
-  <section class="plate p404" aria-labelledby="sp-title">
-    <p class="p404__code">404</p>
-    <h1 class="sp-h1" id="sp-title">Страница не найдена</h1>
-    <p class="t-20 muted">Возможно, она переехала или в адресе опечатка.</p>
-    <div class="btns"><a class="btn-tall" href="index.html">На главную <svg class="ic"><use href="#chev2"/></svg></a><a class="btn-tall btn-tall--line" href="uslugi.html">Услуги <svg class="ic"><use href="#chev2"/></svg></a></div>
+<main class="page sv2" id="top">
+  <section class="plate pg-404" aria-labelledby="sp-title">
+    <p class="pg-404__code" aria-hidden="true">404</p>
+    <h1 class="pg-404__h" id="sp-title">Страница не найдена</h1>
+    <p class="sv2-p pg-404__p">Возможно, она переехала или в адресе опечатка.</p>
+    <div class="btns pg-404__btns">
+      <a class="btn-tall" href="index.html">На главную <svg class="ic"><use href="#chev2"/></svg></a>
+      <a class="btn-tall btn-tall--line" href="uslugi.html">Услуги <svg class="ic"><use href="#chev2"/></svg></a>
+    </div>
   </section>
 </main>
 
@@ -179,6 +183,6 @@
 </div>
 
 
-<script src="js/concept.js?v=43"></script>
+<script src="js/concept.js?v=44"></script>
 </body>
 </html>

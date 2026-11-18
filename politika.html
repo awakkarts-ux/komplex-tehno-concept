@@ -4,11 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Политика конфиденциальности — ООО «Комплекс-Техно»</title>
-<meta name="description" content="Политика конфиденциальности ООО «Комплекс-Техно».">
+<meta name="description" content="Политика конфиденциальности сайта ООО «Комплекс-Техно».">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/concept.css?v=46">
+<link rel="stylesheet" href="css/service.css?v=18">
+<link rel="stylesheet" href="css/pages.css?v=3">
 <script>
   // 15.10 — переход между страницами, как на olympic.no: пришли по ссылке с другой страницы сайта —
   // до отрисовки ставим is-page-in, чёрная панель закрывает экран и уходит вверх шторкой. Прелоадера первого захода нет
@@ -110,17 +112,18 @@
   </header>
 </div>
 
-<main class="page" id="top">
-
-  <!-- Политика — один документ на три сайта (решение 09.10). Текст — от клиента или юриста -->
-  <section class="plate intro" aria-labelledby="sp-title">
+<main class="page sv2" id="top">
+  <section class="plate pg-intro" aria-labelledby="sp-title">
     <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span>/</span><span aria-current="page">Политика конфиденциальности</span></nav>
-    <h1 class="intro__title" id="sp-title">Политика конфиденциальности</h1>
+    <h1 class="sv2-h1" id="sp-title">Политика конфиденциальности</h1>
   </section>
 
-  <section class="plate g3" aria-label="Текст политики">
-    <div></div>
-    <div class="span2 policy"><div class="wait"><b>Ждём от клиента</b><span>текст политики конфиденциальности — один для учетстоков.рф, учёттепла.рф, учётводы.рф</span></div><div class="ln-block"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <section class="plate pg-policy" aria-label="Текст политики">
+    <div class="pg-policy__side" aria-hidden="true"></div>
+    <div class="pg-policy__text policy">
+      <div class="pg-note"><p class="pg-note__k">Ждём от клиента</p><p class="pg-note__t">текст политики конфиденциальности — один для учетстоков.рф, учёттепла.рф, учётводы.рф</p></div>
+      <div class="pg-skel" aria-hidden="true"><i></i><i></i><i class="s"></i><i></i><i></i><i class="s"></i><i></i></div>
+    </div>
   </section>
 </main>
 
@@ -183,6 +186,6 @@
 </div>
 
 
-<script src="js/concept.js?v=43"></script>
+<script src="js/concept.js?v=44"></script>
 </body>
 </html>

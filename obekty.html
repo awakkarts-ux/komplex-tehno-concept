@@ -4,11 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Наши работы — ООО «Комплекс-Техно»</title>
-<meta name="description" content="Объекты ООО «Комплекс-Техно»: установленные и реконструированные узлы учёта тепловой энергии в Москве и Московской области.">
+<meta name="description" content="Объекты ООО «Комплекс-Техно»: установленные узлы учёта тепловой энергии в Москве и Московской области.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/concept.css?v=46">
+<link rel="stylesheet" href="css/service.css?v=18">
+<link rel="stylesheet" href="css/pages.css?v=3">
 <script>
   // 15.10 — переход между страницами, как на olympic.no: пришли по ссылке с другой страницы сайта —
   // до отрисовки ставим is-page-in, чёрная панель закрывает экран и уходит вверх шторкой. Прелоадера первого захода нет
@@ -110,74 +112,90 @@
   </header>
 </div>
 
-<main class="page" id="top">
-
-  <!-- Объекты — хаб. Объекты — ПРИМЕРЫ с главной: клиент пришлёт 10–11. Фильтра нет (решение 09.10) -->
-  <section class="plate intro" aria-labelledby="sp-title">
+<main class="page sv2" id="top">
+  <section class="plate pg-intro" aria-labelledby="sp-title">
     <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span>/</span><span aria-current="page">Объекты</span></nav>
-    <h1 class="intro__title" id="sp-title">Наши работы</h1>
-    <div class="g3 intro__row">
-      <div class="sp-hero__side"><div class="wait"><b>Ждём от клиента</b><span>10–11 объектов: название, объект, система теплоснабжения, состав учёта, местоположение, фото</span></div></div>
-      <div class="span2"><p class="sp-intro t-20">Профессионализм и ответственность — в каждом сданном узле учёта тепловой энергии.</p><div class="btns"><button class="btn-tall btn-tall--wide" type="button" data-modal>Получить консультацию <svg class="ic"><use href="#chev2"/></svg></button></div></div>
-    </div>
+    <h1 class="sv2-h1" id="sp-title">Наши работы</h1>
+    <p class="sv2-p pg-lead">В этом разделе — реализованные проекты по установке узлов учёта тепловой энергии. Каждая карточка содержит фотографии с объекта и описывает задачу, наше решение и полученный результат. Это практическая база нашего опыта для вашей оценки.</p>
   </section>
 
-  <section class="plate" aria-labelledby="obj-list">
-    <h2 class="vh" id="obj-list">Список объектов</h2>   <!-- 13.10: без пропуска уровня H1 → H3 -->
-    <div class="obj-grid">
-<article class="wcard">
-        <div class="ph wcard__img"><p class="ph__cap"><b>Фото объекта</b>ИТП жилого комплекса: смонтированный узел учёта, тепловычислитель и расходомеры на трубах</p></div>
-        <div class="wcard__body">
-          <span class="wcard__tag">Пример — ждём объекты от клиента</span>
-          <p class="wcard__meta"><span>Жилой комплекс</span><span>г. Москва</span></p>
-          <h3 class="wcard__title">Установка узла учёта тепловой энергии в ИТП жилого комплекса</h3>
-          <dl class="spec">
-            <div><dt>Система теплоснабжения</dt><i></i><dd>Независимая, закрытая</dd></div>
-            <div><dt>Состав учёта</dt><i></i><dd>Отопление, ГВС, подпитка</dd></div>
-          </dl>
-          <div class="wcard__actions"><a class="btn-tall btn-tall--line" href="obekt.html">Подробнее <svg class="ic"><use href="#chev2"/></svg></a></div>
-        </div>
+  <section class="plate pg-objects" aria-labelledby="obj-list">
+    <h2 class="vh" id="obj-list">Список объектов</h2>
+    <div class="ftabs" role="group" aria-label="Фильтр по услугам" data-ftabs>
+      <button class="ftab is-active" type="button" data-filter="all" aria-pressed="true">Все услуги</button>
+      <button class="ftab" type="button" data-filter="obsledovanie" aria-pressed="false">Обследование</button>
+      <button class="ftab" type="button" data-filter="proektirovanie" aria-pressed="false">Проектирование</button>
+      <button class="ftab" type="button" data-filter="ustanovka" aria-pressed="false">Установка</button>
+      <button class="ftab" type="button" data-filter="servis" aria-pressed="false">Сервисное обслуживание</button>
+      <button class="ftab" type="button" data-filter="remont" aria-pressed="false">Ремонт и замена</button>
+    </div>
+    <div class="pg-grid" data-grid>
+      <article class="pg-card" data-service="ustanovka">
+        <img class="pg-card__img" src="img/home/obj-sergiev-posad.jpg" alt="Узел учёта в подвале жилого дома: вычислитель на стене, расходомеры и арматура на трубах" width="1200" height="900" loading="lazy">
+        <h3 class="pg-card__t">Узел учёта тепловой энергии и ГВС для жилого дома в Сергиевом Посаде</h3>
+        <dl class="pg-spec"><div><dt>Объект</dt><dd>Жилой дом</dd></div><div><dt>Система теплоснабжения</dt><dd>Трёхтрубная, зависимая, открытая</dd></div><div><dt>Состав учёта</dt><dd>Отопление, ГВС</dd></div><div><dt>Местоположение</dt><dd>г. Сергиев Посад</dd></div></dl>
+        <a class="btn-tall" href="obekt-sergiev-posad.html">Подробнее <svg class="ic"><use href="#chev2"/></svg></a>
       </article>
-<article class="wcard">
-        <div class="ph wcard__img"><p class="ph__cap"><b>Фото объекта</b>Центральный тепловой пункт бизнес-центра: шкаф учёта, приборы, трубопроводы</p></div>
-        <div class="wcard__body">
-          <span class="wcard__tag">Пример — ждём объекты от клиента</span>
-          <p class="wcard__meta"><span>Бизнес-центр</span><span>г. Химки</span></p>
-          <h3 class="wcard__title">Реконструкция узла учёта тепловой энергии в центральном тепловом пункте бизнес-центра</h3>
-          <dl class="spec">
-            <div><dt>Система теплоснабжения</dt><i></i><dd>Зависимая, закрытая</dd></div>
-            <div><dt>Состав учёта</dt><i></i><dd>Отопление, ГВС</dd></div>
-          </dl>
-          <div class="wcard__actions"><a class="btn-tall btn-tall--line" href="obekt.html">Подробнее <svg class="ic"><use href="#chev2"/></svg></a></div>
-        </div>
+      <article class="pg-card" data-service="ustanovka">
+        <img class="pg-card__img" src="img/home/obj-pravdinskiy.jpg" alt="Узел учёта на вводе производственного корпуса: расходомеры и манометры на трубах" width="1200" height="900" loading="lazy">
+        <h3 class="pg-card__t">Коммерческий учёт тепла на производственном корпусе в Правдинском</h3>
+        <dl class="pg-spec"><div><dt>Объект</dt><dd>Производственный корпус</dd></div><div><dt>Система теплоснабжения</dt><dd>Двухтрубная, зависимая, закрытая</dd></div><div><dt>Состав учёта</dt><dd>Отопление</dd></div><div><dt>Местоположение</dt><dd>п. Правдинский</dd></div></dl>
+        <a class="btn-tall" href="obekt.html">Подробнее <svg class="ic"><use href="#chev2"/></svg></a>
       </article>
-<article class="wcard">
-        <div class="ph wcard__img"><p class="ph__cap"><b>Фото объекта</b>Тепловой ввод промышленного предприятия: узел учёта в цеху, крупные трубы</p></div>
-        <div class="wcard__body">
-          <span class="wcard__tag">Пример — ждём объекты от клиента</span>
-          <p class="wcard__meta"><span>Промышленное предприятие</span><span>г. Подольск</span></p>
-          <h3 class="wcard__title">Узел учёта тепловой энергии на вводе промышленного предприятия</h3>
-          <dl class="spec">
-            <div><dt>Система теплоснабжения</dt><i></i><dd>Независимая, открытая</dd></div>
-            <div><dt>Состав учёта</dt><i></i><dd>Отопление, вентиляция</dd></div>
-          </dl>
-          <div class="wcard__actions"><a class="btn-tall btn-tall--line" href="obekt.html">Подробнее <svg class="ic"><use href="#chev2"/></svg></a></div>
-        </div>
+      <article class="pg-card" data-service="ustanovka">
+        <img class="pg-card__img" src="img/home/obj-razvilka.jpg" alt="Тепловой пункт кафе-магазина: красные трубы с приборами учёта и арматурой" width="1200" height="900" loading="lazy">
+        <h3 class="pg-card__t">Коммерческий учёт тепла для нового кафе-магазина в Развилке</h3>
+        <dl class="pg-spec"><div><dt>Объект</dt><dd>Кафе-магазин</dd></div><div><dt>Система теплоснабжения</dt><dd>Двухтрубная, зависимая, закрытая</dd></div><div><dt>Состав учёта</dt><dd>Отопление</dd></div><div><dt>Местоположение</dt><dd>пос. Развилка</dd></div></dl>
+        <a class="btn-tall" href="obekt.html">Подробнее <svg class="ic"><use href="#chev2"/></svg></a>
+      </article>
+      <article class="pg-card" data-service="ustanovka">
+        <img class="pg-card__img" src="img/home/obj-razvilka.jpg" alt="Тепловой пункт кафе-магазина: красные трубы с приборами учёта и арматурой" width="1200" height="900" loading="lazy">
+        <h3 class="pg-card__t">Коммерческий учёт тепла для нового кафе-магазина в Развилке</h3>
+        <dl class="pg-spec"><div><dt>Объект</dt><dd>Кафе-магазин</dd></div><div><dt>Система теплоснабжения</dt><dd>Двухтрубная, зависимая, закрытая</dd></div><div><dt>Состав учёта</dt><dd>Отопление</dd></div><div><dt>Местоположение</dt><dd>пос. Развилка</dd></div></dl>
+        <a class="btn-tall" href="obekt.html">Подробнее <svg class="ic"><use href="#chev2"/></svg></a>
+      </article>
+      <article class="pg-card pg-card--stub" data-service="" aria-hidden="true">
+        <div class="pg-card__img pg-card__img--stub"></div>
+        <h3 class="pg-card__t">Объект — заглушка</h3>
+        <dl class="pg-spec"><div><dt>Объект</dt><dd>—</dd></div><div><dt>Система теплоснабжения</dt><dd>—</dd></div><div><dt>Состав учёта</dt><dd>—</dd></div><div><dt>Местоположение</dt><dd>—</dd></div></dl>
+        <span class="btn-tall" aria-hidden="true">Подробнее <svg class="ic"><use href="#chev2"/></svg></span>
+      </article>
+      <article class="pg-card pg-card--stub" data-service="" aria-hidden="true">
+        <div class="pg-card__img pg-card__img--stub"></div>
+        <h3 class="pg-card__t">Объект — заглушка</h3>
+        <dl class="pg-spec"><div><dt>Объект</dt><dd>—</dd></div><div><dt>Система теплоснабжения</dt><dd>—</dd></div><div><dt>Состав учёта</dt><dd>—</dd></div><div><dt>Местоположение</dt><dd>—</dd></div></dl>
+        <span class="btn-tall" aria-hidden="true">Подробнее <svg class="ic"><use href="#chev2"/></svg></span>
+      </article>
+      <article class="pg-card pg-card--stub" data-service="" aria-hidden="true">
+        <div class="pg-card__img pg-card__img--stub"></div>
+        <h3 class="pg-card__t">Объект — заглушка</h3>
+        <dl class="pg-spec"><div><dt>Объект</dt><dd>—</dd></div><div><dt>Система теплоснабжения</dt><dd>—</dd></div><div><dt>Состав учёта</dt><dd>—</dd></div><div><dt>Местоположение</dt><dd>—</dd></div></dl>
+        <span class="btn-tall" aria-hidden="true">Подробнее <svg class="ic"><use href="#chev2"/></svg></span>
+      </article>
+      <article class="pg-card pg-card--stub" data-service="" aria-hidden="true">
+        <div class="pg-card__img pg-card__img--stub"></div>
+        <h3 class="pg-card__t">Объект — заглушка</h3>
+        <dl class="pg-spec"><div><dt>Объект</dt><dd>—</dd></div><div><dt>Система теплоснабжения</dt><dd>—</dd></div><div><dt>Состав учёта</dt><dd>—</dd></div><div><dt>Местоположение</dt><dd>—</dd></div></dl>
+        <span class="btn-tall" aria-hidden="true">Подробнее <svg class="ic"><use href="#chev2"/></svg></span>
       </article>
     </div>
+    <p class="pg-empty" data-empty hidden role="status">В этой категории пока нет объектов</p>
   </section>
 
-  <section class="plate cta" id="contacts" aria-labelledby="cta-title">
-    <div class="cta__text">
-      <h2 class="h2" id="cta-title">Остались вопросы? Будем рады помочь!</h2>
-      <p class="t-20 muted" style="margin-top:1rem">Установка узла учёта тепловой энергии может казаться сложной задачей. Свяжитесь с нами, и мы с радостью поможем разобраться в требованиях к узлу учёта, подскажем, как пройти согласование и на что обратить внимание при подборе и установке оборудования.</p>
-      <div class="btns" style="margin-top:2.5rem">
+  <section class="plate sv2-cta pg-cta" id="contacts" aria-labelledby="cta-title">
+    <div class="sv2-cta__text">
+      <div class="sv2-cta__copy">
+        <h2 class="sv2-h2" id="cta-title">Остались вопросы? Будем рады помочь!</h2>
+        <p class="sv2-p">Установка узла учёта тепловой энергии может казаться сложной задачей. Свяжитесь с нами, и мы с радостью поможем разобраться в требованиях к узлу учёта, подскажем, как пройти согласование и на что обратить внимание при подборе и установке оборудования.</p>
+      </div>
+      <div class="btns">
         <a class="btn-tall" href="tel:+74991107701">+7 (499) 110-77-01 <svg class="ic"><use href="#chev2"/></svg></a>
-        <a class="btn-tall" href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru <svg class="ic"><use href="#chev2"/></svg></a>
+        <a class="btn-tall btn-tall--mail" href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru <svg class="ic"><use href="#chev2"/></svg></a>
       </div>
     </div>
-    <div class="ph cta__photo"><p class="ph__cap"><b>Фото</b>Специалист в тепловом пункте, смотрит на показания тепловычислителя</p></div>
+    <div class="ph sv2-cta__ph" aria-hidden="true"><p class="ph__cap"><b>Фото</b>Специалист в тепловом пункте, смотрит на показания тепловычислителя</p></div>
   </section>
+
 </main>
 
   <!-- Футер — плашка цвета акцента, как синий футер учетстоков. Тексты клиента -->
@@ -239,6 +257,7 @@
 </div>
 
 
-<script src="js/concept.js?v=43"></script>
+<script src="js/concept.js?v=44"></script>
+<script src="js/obekty.js?v=1"></script>
 </body>
 </html>

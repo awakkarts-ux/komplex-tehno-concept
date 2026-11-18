@@ -4,11 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Контакты — ООО «Комплекс-Техно»</title>
-<meta name="description" content="Контакты ООО «Комплекс-Техно»: телефон +7 (499) 110-77-01, почта Complex-T@yandex.ru.">
+<meta name="description" content="Контакты ООО «Комплекс-Техно»: телефон +7 (499) 110-77-01, адрес — Москва, Ярославское шоссе, дом 42, пом. 1/4.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/concept.css?v=46">
+<link rel="stylesheet" href="css/service.css?v=18">
+<link rel="stylesheet" href="css/pages.css?v=3">
 <script>
   // 15.10 — переход между страницами, как на olympic.no: пришли по ссылке с другой страницы сайта —
   // до отрисовки ставим is-page-in, чёрная панель закрывает экран и уходит вверх шторкой. Прелоадера первого захода нет
@@ -110,28 +112,45 @@
   </header>
 </div>
 
-<main class="page" id="top">
-
-  <!-- Контакты. Телефон и почта — от клиента; какой телефон общий для направлений — уточняем (110-77-01 / 110-47-01 на стоках).
-       Режим работы, адрес, реквизиты для тепла не подтверждены -->
-  <section class="plate intro" aria-labelledby="sp-title">
+<main class="page sv2" id="top">
+  <section class="plate pg-intro pg-contacts" aria-labelledby="sp-title">
     <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span>/</span><span aria-current="page">Контакты</span></nav>
-    <h1 class="intro__title" id="sp-title">Контакты</h1>
+    <h1 class="sv2-h1" id="sp-title">Контакты <span>«Комплекс-Техно»</span></h1>
+    <div class="pg-group">
+      <h2 class="pg-group__t">Адрес</h2>
+      <dl class="pg-rows">
+        <div class="pg-row"><dt>Юридический адрес</dt><dd>129337, г. Москва, Ярославское шоссе, дом 42, пом. 1/4</dd></div>
+        <div class="pg-row"><dt>Фактический адрес</dt><dd>129337, г. Москва, Ярославское шоссе, дом 42, пом. 1/4</dd></div>
+      </dl>
+    </div>
+    <div class="pg-group pg-group--line">
+      <h2 class="pg-group__t">Контакты</h2>
+      <dl class="pg-rows">
+        <div class="pg-row"><dt>Телефон</dt><dd><a href="tel:+74991107701">+7 (499) 110-77-01</a></dd><dd class="pg-row__note">Ежедневно с 8.00 до 20.00, включая выходные и праздничные дни</dd></div>
+        <div class="pg-row"><dt>Электронная почта</dt><dd><a href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru</a></dd></div>
+        <div class="pg-row"><dt>Адрес офиса и склада</dt><dd>129337, г. Москва, Ярославское шоссе, дом 42, пом. 1/4</dd><dd class="pg-row__link"><a href="#map">На карте</a></dd></div>
+      </dl>
+    </div>
   </section>
 
-  <section class="plate g3 contacts" aria-label="Контакты">
-    <div class="contacts__list">
-      <a class="contacts__item" href="tel:+74991107701"><span>Телефон</span><b>+7 (499) 110-77-01</b></a>
-      <a class="contacts__item" href="mailto:Complex-T@yandex.ru"><span>Почта</span><b>Complex-T@yandex.ru</b></a>
-      <div class="contacts__item"><span>Режим работы</span><div class="wait"><b>Ждём от клиента</b><span>режим работы для теплового направления</span></div></div>
-      <div class="contacts__item"><span>Адрес</span><div class="wait"><b>Ждём от клиента</b><span>адрес подтвердить — на стоках: г. Москва, Ярославское шоссе, д. 42, пом. 1/4</span></div></div>
+  <section class="plate pg-map" id="map" aria-label="Карта">
+    <div class="ph pg-map__ph" role="img" aria-label="Карта: Яндекс.Карты, Ярославское шоссе, дом 42"><p class="ph__cap"><b>Карта</b>Яндекс.Карты — Ярославское шоссе, дом 42</p></div>
+  </section>
+
+  <section class="plate sv2-cta pg-cta" id="contacts" aria-labelledby="cta-title">
+    <div class="sv2-cta__text">
+      <div class="sv2-cta__copy">
+        <h2 class="sv2-h2" id="cta-title">Остались вопросы? Будем рады помочь!</h2>
+        <p class="sv2-p">Установка узла учёта тепловой энергии может казаться сложной задачей. Свяжитесь с нами, и мы с радостью поможем разобраться в требованиях к узлу учёта, подскажем, как пройти согласование и на что обратить внимание при подборе и установке оборудования.</p>
+      </div>
+      <div class="btns">
+        <a class="btn-tall" href="tel:+74991107701">+7 (499) 110-77-01 <svg class="ic"><use href="#chev2"/></svg></a>
+        <a class="btn-tall btn-tall--mail" href="mailto:Complex-T@yandex.ru">Complex-T@yandex.ru <svg class="ic"><use href="#chev2"/></svg></a>
+      </div>
     </div>
-    <div class="span2 ph contacts__map"><p class="ph__cap"><b>Карта</b>Яндекс.Карты — после подтверждения адреса</p></div>
+    <div class="ph sv2-cta__ph" aria-hidden="true"><p class="ph__cap"><b>Фото</b>Специалист в тепловом пункте, смотрит на показания тепловычислителя</p></div>
   </section>
-  <section class="plate" aria-label="Реквизиты">
-    <h2 class="sp-h2">Реквизиты</h2>
-    <div class="wait"><b>Ждём от клиента</b><span>реквизиты ООО «Комплекс-Техно» для теплового направления</span></div>
-  </section>
+
 </main>
 
   <!-- Футер — плашка цвета акцента, как синий футер учетстоков. Тексты клиента -->
@@ -193,6 +212,6 @@
 </div>
 
 
-<script src="js/concept.js?v=43"></script>
+<script src="js/concept.js?v=44"></script>
 </body>
 </html>
