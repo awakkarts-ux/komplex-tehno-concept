@@ -1,0 +1,131 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Hero Главной — лейблы</title>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#E8EAEC;--w:#fff;--card:#F5F5F7;--text:#424242;--t2:#6A6A6A;--stroke:#C4C4C4;--hair:#DEDFE2;--acc:#C2410C;
+--head:"Sofia Sans Extra Condensed",Arial Narrow,sans-serif;--ui:"Inter",Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#D5D8DB;font:400 16px/1.45 var(--ui);color:var(--text);-webkit-font-smoothing:antialiased}
+h1,p,ul{margin:0;padding:0;list-style:none}a{color:inherit;text-decoration:none}
+.intro{max-width:1240px;margin:0 auto;padding:48px 24px 8px}
+.intro h2{font:800 44px/1 var(--head);text-transform:uppercase;margin:0 0 12px}
+.intro p{color:var(--t2);max-width:900px}
+.var{max-width:1920px;margin:40px auto 0;padding:0 24px}
+.var__cap{display:flex;gap:16px;align-items:baseline;margin:0 0 6px}
+.var__cap b{font:800 40px/1 var(--head);color:var(--acc)}
+.var__cap h3{font:800 32px/1 var(--head);text-transform:uppercase;margin:0}
+.var__note{color:var(--text);max-width:1100px;margin:0 0 14px;font-size:15px}
+.stage{width:100%;overflow:hidden;border-radius:6px;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.frame{width:1920px;background:var(--bg);padding:8px;transform-origin:0 0}
+/* шапка */
+.hdr{height:74px;background:var(--w);border-radius:12px;display:flex;align-items:center;padding:0 32px 0 24px;gap:40px;margin-bottom:8px}
+.logo{display:flex;align-items:center;gap:12px;width:560px}.logo__c{width:48px;height:48px;border:1.5px dashed var(--stroke);border-radius:50%;display:grid;place-items:center;font-size:12px;color:var(--t2)}
+.logo b{display:block;color:var(--acc);font-weight:600;font-size:17px}.logo small{display:block;font-size:13px;color:var(--t2)}
+.hdr nav{display:flex;gap:40px;font-weight:500;font-size:16px;margin-right:auto;margin-left:30px}.hdr nav s{text-decoration:none;font-size:13px}
+.phone{background:var(--acc);color:#fff;border-radius:8px;height:48px;padding:0 16px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px}
+.phone svg{width:18px;fill:none;stroke:#fff;stroke-width:1.6}
+/* hero общее */
+.hero{background:var(--w);border-radius:12px;padding:40px}
+.labels{display:flex;flex-direction:column;gap:8px;align-items:flex-start}.labels--row{flex-direction:row}
+.lbl{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--stroke);border-radius:4px;height:38px;padding:0 13px;font-size:17px;font-weight:500}
+.lbl i{width:7px;height:7px;background:var(--acc);border-radius:1px}
+.h1{font:800 86px/86px var(--head);text-transform:uppercase;letter-spacing:-.005em;color:var(--text)}
+.h1 em{font-style:normal;color:var(--acc)}
+.h1--l{font-size:98px;line-height:94px}.h1--xl{font-size:112px;line-height:104px;max-width:1800px}
+.lead{font-size:16px;line-height:24px;color:var(--t2);max-width:900px}
+.row{display:flex;justify-content:space-between;align-items:flex-end}
+.btns{display:flex;gap:8px}
+.btn{width:300px;height:100px;border-radius:6px;padding:20px 12px 14px;font-weight:600;font-size:16px;position:relative;display:block}
+.btn--p{background:var(--acc);color:#fff}.btn--w{border:1px solid var(--stroke);color:var(--text)}
+.arr{position:absolute;right:14px;bottom:14px;width:20px;height:20px;fill:none;stroke-width:1.7;stroke:currentColor}.btn--w .arr{stroke:var(--acc)}
+.ibox{width:140px;height:140px;border:1.5px dashed var(--stroke);border-radius:14px;display:grid;place-items:center;flex:none}
+.ibox svg{width:64px;height:64px}
+.facts b{display:block;font:800 40px/1 var(--head);color:var(--acc);text-transform:uppercase;letter-spacing:-.01em}
+.facts span{display:block;font-size:14px;line-height:20px;color:var(--t2);margin-top:8px}
+/* 0 */
+.v0{display:flex;gap:24px}.v0__side{width:592px;flex:none}.v0__main{flex:1;display:flex;flex-direction:column}
+.v0 .lead{margin-top:24px}.v0 .row{margin-top:auto}
+.f0{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin-top:40px}
+.f0 li{background:var(--card);border-radius:6px;height:118px;padding:20px}
+/* А */
+.vA .h1{margin-top:36px}.vA .lead{margin:28px 0 40px}
+.fA{display:grid;grid-template-columns:repeat(6,1fr);margin-top:40px;border-top:1px solid var(--hair)}
+.fA li{padding:24px 24px 0;border-left:1px solid var(--hair)}.fA li:first-child{border-left:0;padding-left:0}
+.fA b{font-size:44px}
+/* Б */
+.vB{display:grid;grid-template-columns:1fr 520px;gap:80px}
+.vB .h1{margin-top:36px}.vB .lead{margin-top:28px}.vB .row{margin-top:40px}
+.vB__side{display:flex;align-items:stretch;padding-left:48px;border-left:1px solid var(--hair)}
+.fB{display:grid;grid-template-columns:1fr 1fr;gap:28px 32px;width:100%;align-content:space-between}
+.fB li{border-top:1px solid var(--hair);padding-top:16px;min-height:104px}
+/* В */
+.vC .h1{margin-top:36px}.vC .lead{margin:28px 0 40px}
+.main-line{position:relative;margin-top:44px;padding-top:30px}
+.pipe{position:absolute;left:40px;right:0;height:2px}.pipe em{position:absolute;left:-40px;top:-6px;font:700 13px/1 var(--ui);font-style:normal}
+.pipe--t1{top:0;background:var(--acc)}.pipe--t1 em{color:var(--acc)}
+.pipe--t2{top:18px;background:#9AA0A6}.pipe--t2 em{color:#7A7F85}
+.fC{display:grid;grid-template-columns:40px repeat(6,1fr);position:relative}
+.fC::before{content:"";}
+.fC li{position:relative;padding:18px 24px 0 0}
+.fC .nd{position:absolute;left:0;top:-36px;width:12px;height:12px;border:2px solid var(--acc);background:#fff;border-radius:50%}
+.fC .nd::after{content:"";position:absolute;left:3px;top:10px;width:2px;height:30px;background:var(--hair)}
+/* Г */
+.vD .h1{margin-top:44px}.vD .lead{margin:32px 0 40px}.vD{padding-bottom:40px}
+.plate-facts{background:var(--w);border-radius:12px;margin-top:8px;padding:28px 40px}
+.fD{display:grid;grid-template-columns:repeat(6,1fr)}
+.fD li{display:flex;gap:16px;align-items:center;padding:0 24px;border-left:1px solid var(--hair)}
+.fD li:first-child{border-left:0;padding-left:0}
+.fD b{font-size:40px;white-space:nowrap}.fD span{margin:0;font-size:14px;line-height:18px}
+.reco{max-width:1240px;margin:48px auto 80px;padding:24px;background:#fff;border-radius:12px}
+.reco h2{font:800 32px/1 var(--head);text-transform:uppercase;margin:0 0 10px}
+.pipe{display:block;width:1824px;max-width:1824px;height:24px}</style></head><body>
+<div class="intro"><h2>Hero Главной (А): что делать с лейблами над заголовком</h2>
+<p>Клиент: лейблы дублируют информацию ниже. Дизайнер: убирать жалко, они разбавляют визуал. Четыре варианта, остальное в hero не менялось.</p></div>
+<section class="var" id="v0"><div class="var__cap"><b>0</b><h3>Сейчас: два лейбла</h3></div>
+<p class="var__note">«ООО «Комплекс-Техно»» дублирует логотип в шапке, «с 2007 года» — лид и первую цифру («19+ лет на рынке с 2007 года»). Это и есть дубль, о котором пишет клиент.</p><div class="stage"><div class="frame"><header class="hdr">
+  <div class="logo"><span class="logo__c">лого</span><span><b>ООО «Комплекс-Техно»</b><small>Учет тепловой энергии — современные возможности</small></span></div>
+  <nav><a>Услуги <s>⌄</s></a><a>Объекты</a><a>Контакты</a><a>Направления <s>⌄</s></a></nav>
+  <a class="phone"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+7 (499) 110-77-01</a>
+</header><section class="hero vA">
+  <div class="labels labels--row"><span class="lbl"><i></i>ООО «Комплекс-Техно»</span><span class="lbl"><i></i>с 2007 года</span></div>
+  <h1 class="h1 h1--xl">Установка узлов учета тепловой энергии <em>под ключ</em> в Москве и Московской области</h1>
+  <div class="row"><div><p class="lead">Профессиональная установка узлов учета тепловой энергии. Работаем с 2007 года. Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.</p><div class="btns"><a class="btn btn--p">Получить консультацию<svg class="arr" viewBox="0 0 20 20"><path d="M5 5l5 5-5 5M11 5l5 5-5 5"/></svg></a><a class="btn btn--w">Услуги<svg class="arr" viewBox="0 0 20 20"><path d="M5 5l5 5-5 5M11 5l5 5-5 5"/></svg></a></div></div><div class="ibox"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><g fill="none" stroke="#3A3D42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 41H17M4 53H17M17 34V60M47 41H60M47 53H60M47 34V60"/><rect x="21" y="5" width="22" height="17" rx="2.5" stroke="#C2410C"/><path d="M32 27V49M25 42.5L32 49.5L39 42.5" stroke="#C2410C"/></g></svg></div></div>
+  <ul class="facts fA"><li><b>19+ лет</b><span>на рынке с 2007 года</span></li><li><b>300+</b><span>установленных узлов учета</span></li><li><b>92%</b><span>проектов согласуется с РСО с первого раза</span></li><li><b>1–3 дня</b><span>стандартный срок монтажа</span></li><li><b>12 месяцев</b><span>гарантия на монтаж</span></li><li><b>0 ₽</b><span>выезд инженера на объект</span></li></ul>
+</section></div></div></section><section class="var" id="v1"><div class="var__cap"><b>1</b><h3>Без лейблов</h3></div>
+<p class="var__note">Просто убрать. H1 поднимается к верху карточки, экран чище и короче на 70 px. Минус: верх карточки становится «голым» — меньше визуальных деталей.</p><div class="stage"><div class="frame"><header class="hdr">
+  <div class="logo"><span class="logo__c">лого</span><span><b>ООО «Комплекс-Техно»</b><small>Учет тепловой энергии — современные возможности</small></span></div>
+  <nav><a>Услуги <s>⌄</s></a><a>Объекты</a><a>Контакты</a><a>Направления <s>⌄</s></a></nav>
+  <a class="phone"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+7 (499) 110-77-01</a>
+</header><section class="hero vA">
+  
+  <h1 class="h1 h1--xl" style="margin-top:0">Установка узлов учета тепловой энергии <em>под ключ</em> в Москве и Московской области</h1>
+  <div class="row"><div><p class="lead">Профессиональная установка узлов учета тепловой энергии. Работаем с 2007 года. Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.</p><div class="btns"><a class="btn btn--p">Получить консультацию<svg class="arr" viewBox="0 0 20 20"><path d="M5 5l5 5-5 5M11 5l5 5-5 5"/></svg></a><a class="btn btn--w">Услуги<svg class="arr" viewBox="0 0 20 20"><path d="M5 5l5 5-5 5M11 5l5 5-5 5"/></svg></a></div></div><div class="ibox"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><g fill="none" stroke="#3A3D42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 41H17M4 53H17M17 34V60M47 41H60M47 53H60M47 34V60"/><rect x="21" y="5" width="22" height="17" rx="2.5" stroke="#C2410C"/><path d="M32 27V49M25 42.5L32 49.5L39 42.5" stroke="#C2410C"/></g></svg></div></div>
+  <ul class="facts fA"><li><b>19+ лет</b><span>на рынке с 2007 года</span></li><li><b>300+</b><span>установленных узлов учета</span></li><li><b>92%</b><span>проектов согласуется с РСО с первого раза</span></li><li><b>1–3 дня</b><span>стандартный срок монтажа</span></li><li><b>12 месяцев</b><span>гарантия на монтаж</span></li><li><b>0 ₽</b><span>выезд инженера на объект</span></li></ul>
+</section></div></div></section><section class="var" id="v2"><div class="var__cap"><b>2</b><h3>Вместо лейблов — труба с фланцами</h3></div>
+<p class="var__note">Тонкая линия-труба на всю ширину с фланцами по краям и датчиком (оранжевый узел). Текст не дублируется, визуальная «разбавка» остаётся и отсылает к схеме узла и разделителям на страницах услуг. Рекомендую.</p><div class="stage"><div class="frame"><header class="hdr">
+  <div class="logo"><span class="logo__c">лого</span><span><b>ООО «Комплекс-Техно»</b><small>Учет тепловой энергии — современные возможности</small></span></div>
+  <nav><a>Услуги <s>⌄</s></a><a>Объекты</a><a>Контакты</a><a>Направления <s>⌄</s></a></nav>
+  <a class="phone"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+7 (499) 110-77-01</a>
+</header><section class="hero vA">
+  <svg class="pipe" width="1824" height="24" viewBox="0 0 1824 24" aria-hidden="true">
+<rect x="0.75" y="2.75" width="10.5" height="18.5" rx="2" fill="#fff" stroke="#8a8a8a" stroke-width="1.5"/>
+<path d="M12 6H1812M12 18H1812" stroke="#C4C4C4" stroke-width="1.5" fill="none"/>
+<g stroke="#C4C4C4" stroke-width="1" opacity=".8"><path d="M200 6 l-6 12"/><path d="M214 6 l-6 12"/><path d="M228 6 l-6 12"/><path d="M242 6 l-6 12"/><path d="M256 6 l-6 12"/><path d="M270 6 l-6 12"/><path d="M284 6 l-6 12"/><path d="M298 6 l-6 12"/><path d="M312 6 l-6 12"/><path d="M326 6 l-6 12"/><path d="M340 6 l-6 12"/><path d="M354 6 l-6 12"/><path d="M368 6 l-6 12"/><path d="M382 6 l-6 12"/><path d="M396 6 l-6 12"/><path d="M410 6 l-6 12"/><path d="M424 6 l-6 12"/><path d="M438 6 l-6 12"/><path d="M452 6 l-6 12"/><path d="M466 6 l-6 12"/><path d="M480 6 l-6 12"/><path d="M494 6 l-6 12"/><path d="M508 6 l-6 12"/><path d="M522 6 l-6 12"/><path d="M536 6 l-6 12"/><path d="M550 6 l-6 12"/><path d="M564 6 l-6 12"/><path d="M578 6 l-6 12"/><path d="M592 6 l-6 12"/><path d="M606 6 l-6 12"/><path d="M620 6 l-6 12"/><path d="M634 6 l-6 12"/><path d="M648 6 l-6 12"/><path d="M662 6 l-6 12"/><path d="M676 6 l-6 12"/><path d="M690 6 l-6 12"/><path d="M704 6 l-6 12"/><path d="M718 6 l-6 12"/><path d="M732 6 l-6 12"/><path d="M746 6 l-6 12"/><path d="M760 6 l-6 12"/><path d="M774 6 l-6 12"/><path d="M788 6 l-6 12"/><path d="M802 6 l-6 12"/><path d="M816 6 l-6 12"/><path d="M830 6 l-6 12"/><path d="M844 6 l-6 12"/><path d="M858 6 l-6 12"/><path d="M872 6 l-6 12"/><path d="M886 6 l-6 12"/><path d="M900 6 l-6 12"/><path d="M914 6 l-6 12"/><path d="M928 6 l-6 12"/><path d="M942 6 l-6 12"/><path d="M956 6 l-6 12"/><path d="M970 6 l-6 12"/><path d="M984 6 l-6 12"/><path d="M998 6 l-6 12"/><path d="M1012 6 l-6 12"/><path d="M1026 6 l-6 12"/><path d="M1040 6 l-6 12"/><path d="M1054 6 l-6 12"/><path d="M1068 6 l-6 12"/><path d="M1082 6 l-6 12"/><path d="M1096 6 l-6 12"/><path d="M1110 6 l-6 12"/><path d="M1124 6 l-6 12"/><path d="M1138 6 l-6 12"/><path d="M1152 6 l-6 12"/><path d="M1166 6 l-6 12"/><path d="M1180 6 l-6 12"/><path d="M1194 6 l-6 12"/><path d="M1208 6 l-6 12"/><path d="M1222 6 l-6 12"/><path d="M1236 6 l-6 12"/><path d="M1250 6 l-6 12"/><path d="M1264 6 l-6 12"/><path d="M1278 6 l-6 12"/><path d="M1292 6 l-6 12"/><path d="M1306 6 l-6 12"/><path d="M1320 6 l-6 12"/><path d="M1334 6 l-6 12"/><path d="M1348 6 l-6 12"/><path d="M1362 6 l-6 12"/><path d="M1376 6 l-6 12"/><path d="M1390 6 l-6 12"/><path d="M1404 6 l-6 12"/><path d="M1418 6 l-6 12"/><path d="M1432 6 l-6 12"/><path d="M1446 6 l-6 12"/><path d="M1460 6 l-6 12"/><path d="M1474 6 l-6 12"/><path d="M1488 6 l-6 12"/><path d="M1502 6 l-6 12"/><path d="M1516 6 l-6 12"/><path d="M1530 6 l-6 12"/><path d="M1544 6 l-6 12"/><path d="M1558 6 l-6 12"/><path d="M1572 6 l-6 12"/><path d="M1586 6 l-6 12"/><path d="M1600 6 l-6 12"/><path d="M1614 6 l-6 12"/><path d="M1628 6 l-6 12"/><path d="M1642 6 l-6 12"/><path d="M1656 6 l-6 12"/><path d="M1670 6 l-6 12"/><path d="M1684 6 l-6 12"/><path d="M1698 6 l-6 12"/><path d="M1712 6 l-6 12"/><path d="M1726 6 l-6 12"/><path d="M1740 6 l-6 12"/><path d="M1754 6 l-6 12"/><path d="M1768 6 l-6 12"/><path d="M1782 6 l-6 12"/><path d="M1796 6 l-6 12"/></g>
+<rect x="1812.75" y="2.75" width="10.5" height="18.5" rx="2" fill="#fff" stroke="#8a8a8a" stroke-width="1.5"/>
+<rect x="120" y="1" width="8" height="22" fill="#fff" stroke="#C2410C" stroke-width="1.5"/>
+<circle cx="124" cy="12" r="3" fill="#C2410C"/></svg>
+  <h1 class="h1 h1--xl" style="margin-top:28px">Установка узлов учета тепловой энергии <em>под ключ</em> в Москве и Московской области</h1>
+  <div class="row"><div><p class="lead">Профессиональная установка узлов учета тепловой энергии. Работаем с 2007 года. Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.</p><div class="btns"><a class="btn btn--p">Получить консультацию<svg class="arr" viewBox="0 0 20 20"><path d="M5 5l5 5-5 5M11 5l5 5-5 5"/></svg></a><a class="btn btn--w">Услуги<svg class="arr" viewBox="0 0 20 20"><path d="M5 5l5 5-5 5M11 5l5 5-5 5"/></svg></a></div></div><div class="ibox"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><g fill="none" stroke="#3A3D42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 41H17M4 53H17M17 34V60M47 41H60M47 53H60M47 34V60"/><rect x="21" y="5" width="22" height="17" rx="2.5" stroke="#C2410C"/><path d="M32 27V49M25 42.5L32 49.5L39 42.5" stroke="#C2410C"/></g></svg></div></div>
+  <ul class="facts fA"><li><b>19+ лет</b><span>на рынке с 2007 года</span></li><li><b>300+</b><span>установленных узлов учета</span></li><li><b>92%</b><span>проектов согласуется с РСО с первого раза</span></li><li><b>1–3 дня</b><span>стандартный срок монтажа</span></li><li><b>12 месяцев</b><span>гарантия на монтаж</span></li><li><b>0 ₽</b><span>выезд инженера на объект</span></li></ul>
+</section></div></div></section><section class="var" id="v3"><div class="var__cap"><b>3</b><h3>Один лейбл с новым смыслом</h3></div>
+<p class="var__note">Оставляем один лейбл, но не повторяющий соседей: «Коммерческий учёт тепловой энергии» — <b>мой текст</b>, клиент не писал. Сохраняет привычный «чип», но добавляет ещё одну фразу над H1.</p><div class="stage"><div class="frame"><header class="hdr">
+  <div class="logo"><span class="logo__c">лого</span><span><b>ООО «Комплекс-Техно»</b><small>Учет тепловой энергии — современные возможности</small></span></div>
+  <nav><a>Услуги <s>⌄</s></a><a>Объекты</a><a>Контакты</a><a>Направления <s>⌄</s></a></nav>
+  <a class="phone"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+7 (499) 110-77-01</a>
+</header><section class="hero vA">
+  <div class="labels labels--row"><span class="lbl"><i></i>Коммерческий учёт тепловой энергии</span></div>
+  <h1 class="h1 h1--xl">Установка узлов учета тепловой энергии <em>под ключ</em> в Москве и Московской области</h1>
+  <div class="row"><div><p class="lead">Профессиональная установка узлов учета тепловой энергии. Работаем с 2007 года. Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.</p><div class="btns"><a class="btn btn--p">Получить консультацию<svg class="arr" viewBox="0 0 20 20"><path d="M5 5l5 5-5 5M11 5l5 5-5 5"/></svg></a><a class="btn btn--w">Услуги<svg class="arr" viewBox="0 0 20 20"><path d="M5 5l5 5-5 5M11 5l5 5-5 5"/></svg></a></div></div><div class="ibox"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><g fill="none" stroke="#3A3D42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 41H17M4 53H17M17 34V60M47 41H60M47 53H60M47 34V60"/><rect x="21" y="5" width="22" height="17" rx="2.5" stroke="#C2410C"/><path d="M32 27V49M25 42.5L32 49.5L39 42.5" stroke="#C2410C"/></g></svg></div></div>
+  <ul class="facts fA"><li><b>19+ лет</b><span>на рынке с 2007 года</span></li><li><b>300+</b><span>установленных узлов учета</span></li><li><b>92%</b><span>проектов согласуется с РСО с первого раза</span></li><li><b>1–3 дня</b><span>стандартный срок монтажа</span></li><li><b>12 месяцев</b><span>гарантия на монтаж</span></li><li><b>0 ₽</b><span>выезд инженера на объект</span></li></ul>
+</section></div></div></section><script>
+function fit(){document.querySelectorAll('.stage').forEach(s=>{const f=s.firstElementChild;const k=Math.min(1,s.clientWidth/1920);f.style.transform=`scale(${k})`;s.style.height=(f.offsetHeight*k)+'px'})}
+addEventListener('resize',fit);document.fonts.ready.then(fit);fit();
+</script></body></html>
