@@ -1,0 +1,980 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Документация для верстальщика — учёттепла.рф</title><meta name="robots" content="noindex"><style>
+:root{--ink:#2B2D31;--mute:#6A6E75;--line:#DADCDF;--bg:#F3F4F6;--acc:#C2410C;--ok:#2E7D4F;--bad:#B3261E}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:16px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.side{position:fixed;inset:0 auto 0 0;width:272px;overflow:auto;background:#fff;border-right:1px solid var(--line);padding:18px 14px 28px}
+.side h1{font-size:15px;line-height:1.3;margin:0 0 4px}.side .sub{font-size:12px;color:var(--mute);margin:0 0 14px}
+.side ol{list-style:none;margin:0;padding:0}.side>ol>li{margin:0 0 6px}
+.side a{display:block;color:inherit;text-decoration:none;padding:3px 6px;border-radius:5px;font-size:13px}
+.side a:hover{background:#F3F4F6}.side a.on{background:#FBE6DB;color:var(--acc)}
+.side>ol>li>a{font-weight:600}.side ol ol{margin:1px 0 4px 10px;border-left:1px solid var(--line)}.side ol ol a{font-size:12px;color:var(--mute);padding:2px 6px}
+main{margin-left:272px;padding:28px 36px 80px;max-width:1280px}
+h2{font-size:26px;margin:56px 0 12px;padding-top:20px;border-top:2px solid var(--ink)}
+h3{font-size:19px;margin:34px 0 10px}h4{font-size:15px;margin:22px 0 8px}
+p{margin:0 0 12px;max-width:980px}ul,ol{max-width:980px;padding-left:22px}li{margin:0 0 6px}
+code{font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#ECEEF1;padding:1px 5px;border-radius:4px;word-break:break-word}
+a{color:#0A58CA}
+.tw{overflow-x:auto;margin:10px 0 16px;background:#fff;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--line)}
+th{background:#F7F8F9;font-weight:600}tr:last-child td{border-bottom:0}td code{font-size:12px}
+table.num td:not(:first-child){white-space:nowrap}
+.mute{color:var(--mute)}.ok{color:var(--ok)}.bad{color:var(--bad)}
+.note{background:#FFF7E6;border-left:3px solid #E0A100;padding:8px 12px;border-radius:0 6px 6px 0}
+.warn{background:#FDECEA;border-left:3px solid var(--bad);padding:8px 12px;border-radius:0 6px 6px 0}
+.src{color:var(--mute);font-size:13px;margin-top:-4px}
+pre.tree{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow:auto;font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace}
+.code{background:#1F2124;color:#E6E7E9;border-radius:8px;margin:10px 0 16px;min-width:0}
+.code__bar{display:flex;align-items:center;gap:10px;padding:6px 8px 6px 12px;border-bottom:1px solid #34373B;font-size:12px}
+.code__path{font:12px ui-monospace,Menlo,Consolas,monospace;color:#A6AAB0;word-break:break-all}
+.code__flag{background:#34373B;color:#E5C07B;border-radius:4px;padding:1px 6px;font-size:11px;cursor:help}
+.code__note{color:#7D8187}
+.code__copy{margin-left:auto;border:0;background:var(--acc);color:#fff;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;min-height:30px;flex:none}
+.code__copy.ok{background:var(--ok)}
+.code pre{margin:0;padding:12px;max-height:380px;overflow:auto;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;tab-size:2}
+.code code{background:none;padding:0;color:inherit;font:inherit;word-break:normal}
+@media(max-width:1000px){.side{position:static;width:auto;border:0;border-bottom:1px solid var(--line)}main{margin:0;padding:20px 16px 60px}}
+</style></head><body><nav class="side" aria-label="Оглавление"><h1>Документация для верстальщика</h1><p class="sub">учёттепла.рф · концепт · собрано из кода принятых страниц</p><ol><li><a href="#overview">1. Обзор</a><ol><li><a href="#ov-tree">Структура</a></li><li><a href="#ov-order">Подключение и версии</a></li><li><a href="#ov-adapt">Что адаптировано</a></li><li><a href="#ov-ext">Внешнее, спрайт, не переносить</a></li></ol></li><li><a href="#adaptive">2. Адаптив</a><ol><li><a href="#ad-bp">Брейкпоинты и масштаб</a></li><li><a href="#ad-type">Типографика</a></li><li><a href="#ad-table">Элемент → 3 размера</a></li></ol></li><li><a href="#tokens">3. Токены</a><ol><li><a href="#tk-root">Корень и цвета</a></li><li><a href="#tk-space">Радиусы и отступы</a></li><li><a href="#tk-plate">Плашка, сетка</a></li><li><a href="#tk-btn">Кнопки</a></li><li><a href="#tk-tag">Метки, номера, трубы</a></li></ol></li><li><a href="#components">4. Компоненты</a><ol><li><a href="#c-header">Шапка, бургер, меню</a></li><li><a href="#c-footer">Подвал</a></li><li><a href="#c-crumbs">Крошки</a></li><li><a href="#c-hero">Hero</a></li><li><a href="#c-ribbons">Ленты</a></li><li><a href="#c-acc">Аккордеон</a></li><li><a href="#c-table">Таблицы → карточки</a></li><li><a href="#c-side">Левая колонка услуг</a></li><li><a href="#c-filter">Фильтр «Объектов»</a></li><li><a href="#c-modal">Модалка</a></li></ol></li><li><a href="#graphics">5. Графика и анимация</a><ol><li><a href="#gr-map">Блок → карточка → файл</a></li><li><a href="#gr-rules">Общие правила</a></li></ol></li><li><a href="#pages">6. Страницы</a><ol><li><a href="#pg-index">Главная</a></li><li><a href="#pg-uslugi">Услуги (хаб)</a></li><li><a href="#pg-obsl">Обследование</a></li><li><a href="#pg-proekt">Проектирование</a></li><li><a href="#pg-ust">Установка</a></li><li><a href="#pg-serv">Сервис</a></li><li><a href="#pg-rem">Ремонт</a></li><li><a href="#pg-obj">Объекты</a></li><li><a href="#pg-kont">Контакты</a></li><li><a href="#pg-pol">Политика</a></li><li><a href="#pg-404">404</a></li><li><a href="#pg-cases">Кейсы</a></li></ol></li><li><a href="#a11y">7. Доступность и скорость</a><ol><li><a href="#a-tap">Цели нажатия</a></li><li><a href="#a-focus">Фокус и aria</a></li><li><a href="#a-motion">reduced-motion</a></li><li><a href="#a-perf">Изображения и вес</a></li></ol></li><li><a href="#diffs">8. Отличия и вопросы</a><ol><li><a href="#d-fig">Код ↔ Figma</a></li><li><a href="#d-code">Код ↔ правила</a></li><li><a href="#d-open">Открытые вопросы</a></li></ol></li><li><a href="#method">Как проверено</a></li></ol></nav><main><h1 style="font-size:32px;margin:0 0 8px">Документация для верстальщика — учёттепла.рф</h1><p class="mute">Концепт «Комплекс-Техно». Источник — код принятых страниц в <code>concept/</code> (HTML, <code>css/*.css</code>, <code>js/*.js</code>) и замеры в Chromium; не планы и не макеты. Где код расходится с правилами или Figma — это записано в разделе 8. Блоки кода — реальные фрагменты с путём и строками; кнопка «Копировать» кладёт в буфер ровно то, что показано.</p>
+<h2 id="overview">1. Обзор</h2>
+<p>Концепт — набор статических HTML-страниц без сборщика. Один общий CSS-каскад (<code>concept.css</code>) + по одному-два дополнительных файла на тип страницы; JS — без библиотек. Эталон — принятые страницы из <code>concept/</code>; всё, что ниже, взято из их кода и замеров.</p>
+
+<h3 id="ov-tree">1.1. Структура <code>concept/</code></h3>
+<pre class="tree">concept/
+├─ index.html · uslugi.html · obsledovanie.html · proektirovanie.html · ustanovka.html
+├─ servis.html · remont.html · obekty.html · kontakty.html · politika.html · 404.html   ← принятые, адаптированы
+├─ obekt.html · obekt-sergiev-posad.html                                                ← кейсы, НЕ адаптированы
+├─ biblioteka-grafiki.html   ← вся графика: 26 карточек, 3 размера, код (см. раздел 5)
+├─ css/   concept · service · pages · home · schemes · uslugi-b
+├─ js/    concept · home · hvs · schemes · obekty
+├─ img/   home/ (иконки услуг и «Подхода», SVG «Этапов» и чертежа, фото объектов)
+│         svc/  (иконки карточек, разделители-трубы divider-*.svg, мини-схемы)
+│         sergiev-posad/ (кейс) · hero.png, hero-2560.jpg (старый hero, на принятых страницах не используется)
+└─ прочее: pravki-*.html, hero-*.html, etapy-*.html, uzel-*.html, grafika-*.html, hover-vse.html … — черновики и документы согласования,
+   в вёрстку не переносить (какие файлы — «источник поведения», а какие «отвергнутые», — в GRAPHICS-MAP.md)</pre>
+
+<h3 id="ov-order">1.2. Порядок подключения и версии (<code>?v=</code>) — по факту из каждой страницы</h3>
+<p>Порядок всегда один: <b>Google Fonts → concept.css → (schemes.css) → (service.css / home.css / pages.css) → (uslugi-b.css)</b>; скрипты в конце <code>&lt;body&gt;</code>: <b>concept.js → (schemes.js) → (home.js | hvs.js | obekty.js)</b>. <code>concept.css</code> всегда первый: остальные файлы переопределяют его.</p>
+<div class="tw"><table class=""><thead><tr><th>Файл</th><th>Строк</th><th>Что внутри</th></tr></thead><tbody><tr><td><code>css/concept.css</code></td><td>1294</td><td>База: токены, плашки, кнопки, шапка/шторка, подвал, модалка, главная (hero, «Наш подход», «Цифры», «Услуги», «Наши работы», FAQ, CTA), хаб «Услуги», адаптив ≤1199 / ≤767 (с l.1000).</td></tr><tr><td><code>css/service.css</code></td><td>483</td><td>Страницы услуг (<code>main.sv2</code>): hero, левая колонка, блоки, шаги, таблицы, цепочка этапов, шкала ТУ; §8 — полоса оглавления и нижняя кнопка (l.297–337).</td></tr><tr><td><code>css/pages.css</code></td><td>153</td><td>«Объекты» (фильтр <code>.ftabs</code>, карточки <code>.pg-card</code>), «Контакты», «Политика», 404.</td></tr><tr><td><code>css/home.css</code></td><td>264</td><td>Только Главная: схема узла, «Этапы работ» (<code>.stgg</code>), «Наши работы» (лента ≤1199), «Услуги» с кадрами чертежа, метки-плашки.</td></tr><tr><td><code>css/schemes.css</code></td><td>278</td><td>Схемы-метафоры страниц услуг (<code>data-sx</code>): магистраль Т1/Т2 у шагов, листы проекта, пиктограммы объектов.</td></tr><tr><td><code>css/uslugi-b.css</code></td><td>210</td><td>Схемы с подсказками <code>.hvs</code> (Установка, Сервис, Ремонт, карта ИТП), шкала сезона, переключатель «Было / Стало», разделители-трубы <code>.sv2-pdiv</code>.</td></tr></tbody></table></div>
+<div class="tw"><table class=""><thead><tr><th>Файл</th><th>Строк</th><th>Что внутри</th></tr></thead><tbody><tr><td><code>js/concept.js</code></td><td>568</td><td>Аккордеоны (<code>.svc</code>, <code>.faq__item</code>), «Наш подход» + индикатор, оглавление услуг (<code>data-toc</code>), модалка, выпадашки шапки, бургер-шторка, полоса оглавления и нижняя кнопка. Плюс концептуальное (прелоадер, переходы страниц, переключатель акцента).</td></tr><tr><td><code>js/home.js</code></td><td>178</td><td>Схема узла (наведение / тап), кадры чертежа «Услуг», ленты «Этапы» и «Наши работы» (стрелки, drag, ←/→), подгон подписей SVG ≥ 12 px.</td></tr><tr><td><code>js/hvs.js</code></td><td>163</td><td>Схемы с подсказками на страницах услуг и карте ИТП (<code>[data-hvs]</code>), шкала сезона, сегмент «Было / Стало».</td></tr><tr><td><code>js/schemes.js</code></td><td>565</td><td>Схемы-метафоры по <code>data-sx</code> (термограмма, прямые участки, ведомость, погрешность, листы проекта, пиктограммы объектов, магистраль шагов).</td></tr><tr><td><code>js/obekty.js</code></td><td>46</td><td>Фильтр «Объектов» по категории услуги (hash в адресе, <code>aria-pressed</code>).</td></tr></tbody></table></div>
+<p>Версия <code>?v=</code> — ручной счётчик кэша; на разных страницах он расходится (<code>concept.css</code> v46 и v48, <code>concept.js</code> v43 и v44, <code>service.css</code> v18 и v22). Это разные «срезы» одного файла: сам файл один, расходится только число в ссылке. При переносе версию задаёт сборка.</p>
+<h4>Таблица подключений</h4>
+<div class="tw"><table class=""><thead><tr><th>Страница</th><th>CSS (по порядку)</th><th>JS (по порядку)</th></tr></thead><tbody><tr><td><a href="index.html"><code>index.html</code></a><br>Главная</td><td><code>concept v46</code><br><code>schemes v2</code><br><code>home v2</code></td><td><code>concept v43</code><br><code>schemes v2</code><br><code>home v2</code></td></tr><tr><td><a href="uslugi.html"><code>uslugi.html</code></a><br>Услуги (хаб)</td><td><code>concept v48</code></td><td><code>concept v43</code></td></tr><tr><td><a href="obsledovanie.html"><code>obsledovanie.html</code></a><br>Обследование</td><td><code>concept v48</code><br><code>schemes v2</code><br><code>service v22</code><br><code>uslugi-b v2</code></td><td><code>concept v44</code><br><code>schemes v3</code><br><code>hvs v1</code></td></tr><tr><td><a href="proektirovanie.html"><code>proektirovanie.html</code></a><br>Проектирование</td><td><code>concept v46</code><br><code>schemes v2</code><br><code>service v18</code></td><td><code>concept v44</code><br><code>schemes v3</code></td></tr><tr><td><a href="ustanovka.html"><code>ustanovka.html</code></a><br>Установка</td><td><code>concept v46</code><br><code>schemes v2</code><br><code>service v18</code><br><code>uslugi-b v2</code></td><td><code>concept v44</code><br><code>schemes v3</code><br><code>hvs v1</code></td></tr><tr><td><a href="servis.html"><code>servis.html</code></a><br>Сервис</td><td><code>concept v46</code><br><code>schemes v2</code><br><code>service v18</code><br><code>uslugi-b v2</code></td><td><code>concept v44</code><br><code>schemes v3</code><br><code>hvs v1</code></td></tr><tr><td><a href="remont.html"><code>remont.html</code></a><br>Ремонт и замена</td><td><code>concept v46</code><br><code>schemes v2</code><br><code>service v18</code><br><code>uslugi-b v2</code></td><td><code>concept v44</code><br><code>schemes v3</code><br><code>hvs v1</code></td></tr><tr><td><a href="obekty.html"><code>obekty.html</code></a><br>Объекты (список)</td><td><code>concept v46</code><br><code>service v18</code><br><code>pages v3</code></td><td><code>concept v44</code><br><code>obekty v1</code></td></tr><tr><td><a href="kontakty.html"><code>kontakty.html</code></a><br>Контакты</td><td><code>concept v46</code><br><code>service v18</code><br><code>pages v3</code></td><td><code>concept v44</code></td></tr><tr><td><a href="politika.html"><code>politika.html</code></a><br>Политика</td><td><code>concept v46</code><br><code>service v18</code><br><code>pages v3</code></td><td><code>concept v44</code></td></tr><tr><td><a href="404.html"><code>404.html</code></a><br>404</td><td><code>concept v46</code><br><code>service v18</code><br><code>pages v3</code></td><td><code>concept v44</code></td></tr><tr><td><a href="obekt.html"><code>obekt.html</code></a><br>Объект (кейс) — шаблон</td><td><code>concept v46</code></td><td><code>concept v43</code></td></tr><tr><td><a href="obekt-sergiev-posad.html"><code>obekt-sergiev-posad.html</code></a><br>Кейс «Сергиев Посад» — отдельный файл</td><td><span class="mute">—</span></td><td><span class="mute">—</span></td></tr></tbody></table></div>
+
+<h3 id="ov-adapt">1.3. Что адаптировано</h3>
+<div class="tw"><table class=""><thead><tr><th>Страница</th><th>Адаптив</th><th>Переполнение по ширине (замер: 1920 / 1440 / 1200 / 1024 / 768 / 390)</th></tr></thead><tbody><tr><td>Главная, Услуги (хаб), Обследование, Проектирование, Установка, Сервис, Ремонт, Объекты (список), Контакты, Политика, 404</td><td><b class="ok">адаптированы</b></td><td><code>scrollWidth − innerWidth = 0</code> на всех шести ширинах</td></tr><tr><td>Кейсы: <code>obekt.html</code> (шаблон «Объект»), <code>obekt-sergiev-posad.html</code></td><td><b class="bad">не адаптированы</b> — ждут утверждения десктопа</td><td><code>obekt.html</code>: +34 px на 768, +158 px на 390; <code>obekt-sergiev-posad.html</code>: +34 px на 390. Подключают только <code>concept.css</code> (без service/pages), поэтому берут общие правила ≤1199 / ≤767 «как есть». Не переносить в вёрстку до утверждения.</td></tr></tbody></table></div>
+<h3 id="ov-ext">1.4. Внешние запросы, спрайт иконок, что не переносить</h3>
+<ul>
+<li><b>Шрифты.</b> В <code>&lt;head&gt;</code> каждой страницы — <code>fonts.googleapis.com</code> (Sofia Sans Extra Condensed 100–900 и Inter 100–900). Для боевого сайта — подключить локально; реально используются: Sofia Sans Extra Condensed 400, 700, 800; Inter 400, 500, 600 (остальные начертания из ссылки не нужны — проверено по computed-значениям на всех страницах).</li>
+<li><b>Иконки интерфейса</b> — inline-спрайт <code>&lt;svg width="0" height="0"&gt;&lt;symbol id="…"&gt;</code> в начале <code>&lt;body&gt;</code> каждой страницы (на Главной 28 символов), вызов <code>&lt;svg class="ic"&gt;&lt;use href="#chev2"/&gt;&lt;/svg&gt;</code>. Спрайт надо перенести целиком в общий шаблон.</li>
+<li><b>Только для концепта — не переносить:</b> прелоадер (<code>.preloader</code>, <code>html.is-preload</code>), шторка перехода между страницами (<code>.page-veil</code>, <code>html.is-page-in/-out</code>), переключатель акцента (<code>setAccent</code>, <code>.concept-bar</code> — в разметке принятых страниц его уже нет, остались стили и функция), режим <code>?shot</code> / <code>html.is-shot</code>, закреплённые «Этапы» <code>.hs-*</code> и <code>.sv-tape</code> из ранних версий. Блоки в <code>concept.js</code> помечены комментариями с датой.</li>
+</ul>
+
+<h2 id="adaptive">2. Адаптив</h2>
+<h3 id="ad-bp">2.1. Брейкпоинты и масштаб</h3>
+<p>Три яруса, медиа-запросы <b>max-width</b>: <code>1199px</code> и <code>767px</code>. На десктопе масштаб идёт от ширины окна, ниже 1200 страница не масштабируется, а перестраивается.</p>
+<div class="tw"><table class=""><thead><tr><th>Имя</th><th>Диапазон</th><th>Что происходит (по коду)</th><th>Где</th></tr></thead><tbody><tr><td>Десктоп</td><td>≥ 1200</td><td><code>html{font-size:calc(100vw/120)}</code>: 1 rem = 16 px при 1920, 12 px при 1440, 10 px при 1200. Всё в rem, масштаб пропорциональный. Для текста стоит нижняя граница <code>max(rem; 15px)</code> (подписи — 13 px)</td><td>concept.css:34</td></tr><tr><td>Планшет</td><td>768–1199</td><td><code>html{font-size:16px}</code> — фиксированно, масштаба внутри яруса <b>нет</b>. Меню → бургер (≤1199), сетки перестраиваются, отступ плашки 24</td><td>concept.css:1003 и далее</td></tr><tr><td>Мобильный</td><td>≤ 767</td><td>Тот же 16 px, отступ плашки 16, скругление 10, одна колонка, кнопки на всю ширину (высота 52)</td><td>concept.css:1160 и далее</td></tr><tr><td>Доп. граница 1023</td><td>≤ 1023</td><td>Схемы переходят на «карточку под схемой» (<code>(max-width:1023px), (hover:none)</code>), страницы услуг — в одну колонку, полоса оглавления + нижняя кнопка, схема узла: легенда Т1/Т2 над схемой</td><td>service.css:302, home.css:168, uslugi-b.css:58</td></tr><tr><td>Доп. граница 1024–1199</td><td>1024–1199</td><td>Страницы услуг: две колонки <code>1fr / 2.2fr</code> с липкой колонкой, но rem уже 16 px (не масштаб)</td><td>service.css:378</td></tr><tr><td>Доп. граница 1919</td><td>≤ 1919</td><td>«Этапы» Главной: высота карточки <code>max(18.75rem; 312px)</code>, чтобы текст 13 px помещался</td><td>home.css:70</td></tr></tbody></table></div>
+<div class="code" id="c1"><div class="code__bar"><span class="code__path">css/concept.css:34–36</span><button type="button" class="code__copy">Копировать</button></div><pre><code>html { font-size: calc(100vw / 120); scroll-behavior: smooth; scroll-padding-top: 6rem; }
+@media (max-width: 1200px) { html { font-size: 10px; } }   /* концепт — только десктоп; ниже 1200 не ужимаем */
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }</code></pre></div>
+<p>Строка <code>@media (max-width:1200px){html{font-size:10px}}</code> (l.35) при ширине ровно 1200 даёт те же 10 px, что и формула; на 1199 вступает правило планшета (16 px) — на этой границе <b>скачок масштаба</b>: на 1200 заголовок H2 равен 40 px, на 1199 — 44 px, шапка 46 → 64 px. Так принято дизайнером (границы 1200 / 768 утверждены 18.11), промежуточного масштаба rem для планшета и мобильного нет.</p>
+<div class="code" id="c2"><div class="code__bar"><span class="code__path">css/concept.css:1003–1006</span><button type="button" class="code__copy">Копировать</button></div><pre><code>@media (max-width: 1199px) {
+  html { font-size: 16px; scroll-padding-top: 5rem; }
+  :root { --pad: 1.5rem; --col-gap: 1rem; }
+  .page { padding-top: calc(4rem + var(--gap) * 2); }</code></pre></div>
+<p>Макеты Figma: 1920 (десктоп, он же масштаб 1440 и 1200), 768, 390. Проверочные ширины: <b>1920, 1440, 1200, 1024, 768, 390</b>; <code>document.documentElement.scrollWidth ≤ innerWidth</code> выполняется на всех принятых страницах.</p>
+
+<h3 id="ad-type">2.2. Типографика по ярусам (замер computed-значений)</h3>
+<p>Значения — <code>getComputedStyle</code> в Chromium на указанных ширинах; первое число — размер, второе — line-height (множитель). Шрифтовая шкала приходит из блока «UI Kit → концепт: типографика» (<code>concept.css:740–872</code>, переменные <code>--ts-*</code>), он перекрывает старые значения выше по файлу (<code>.h1{font-size:4.5rem}</code> в l.56 <b>не действует</b>).</p>
+<div class="tw"><table class="num"><thead><tr><th>Роль (класс)</th><th>1920 (rem 16)</th><th>1440 (rem 12)</th><th>1200 (rem 10)</th><th>Планшет 768–1199</th><th>Мобильный ≤767</th><th>Гарнитура · вес · трекинг</th></tr></thead><tbody><tr><td>H1 hero Главной <code>.hero-a__h1</code></td><td>112 / 0,92</td><td>84</td><td>70</td><td>64 / 0,92</td><td>40 / 0,92</td><td>Sofia 800 · −0,03em · капс</td></tr><tr><td>H1 страниц <code>.sv2-h1</code>, <code>.pg-intro h1</code></td><td>80 / 1</td><td>60</td><td>50</td><td>56 / 1</td><td>40 / 0,98</td><td>Sofia 800 · −0,03em · капс</td></tr><tr><td>H2 секций <code>.h2</code>, <code>.approach__title</code>, <code>.faq__title</code>, хаб <code>.intro__title</code></td><td>64 / 1</td><td>48</td><td>40</td><td>44 / 1,05</td><td>30 / 1,05</td><td>Sofia 800 · −0,03em · капс</td></tr><tr><td>H2 блока услуги <code>.sp-h2</code></td><td>52 / 1</td><td>39</td><td>32,5</td><td>44 / 1,05</td><td>30 / 1,05</td><td>Sofia 800 · −0,03em · капс</td></tr><tr><td>H3 заголовок блока <code>.sv2-h5</code>, <code>.sp-cta .sv2-h5</code></td><td>32</td><td>24</td><td>20</td><td>28</td><td>24</td><td>Sofia 800 · −0,03em · капс</td></tr><tr><td>Заголовок карточки хаба <code>.hub-card__t</code></td><td>44 / 1,09</td><td>33</td><td>27,5</td><td>28</td><td>24</td><td>Sofia 400 · −0,0227em</td></tr><tr><td>Название услуги в аккордеоне <code>.svc__name</code></td><td>32 / 1</td><td>24</td><td>20</td><td>26 (в home.css; в concept.css 22)</td><td>22</td><td>Sofia 700 · капс</td></tr><tr><td>Цифры «О нас» <code>.numbers__count</code></td><td>80</td><td>60</td><td>50</td><td>96 (карточки: 96)</td><td>72</td><td>Sofia 800 · капс</td></tr><tr><td>Цифры hero <code>.hero-a__facts b</code></td><td>44</td><td>33</td><td>27,5</td><td>40</td><td>28 (лента-свайп)</td><td>Sofia 800 · капс</td></tr><tr><td>Лид / текст <code>.t-20</code>, <code>.sv2-p</code>, <code>.sp-p</code></td><td>16 / 24</td><td>15 / 22,5</td><td>15</td><td>18 лид (Главная) · 16 текст</td><td>16 / 24</td><td>Inter 400 · −0,015em</td></tr><tr><td>Подзаголовок <code>.about-banner__subtitle</code>, <code>.sv2-lg</code></td><td>18 / 24</td><td>16 · 15</td><td>16 · 15</td><td>22 (Главная) · 18</td><td>20 · 18</td><td>Inter 600</td></tr><tr><td>Кнопка <code>.btn-tall</code></td><td>16 (600)</td><td>15</td><td>15</td><td>16</td><td>15</td><td>Inter 600</td></tr><tr><td>Пункт меню / крошки <code>.nav</code>, <code>.crumbs</code></td><td>16</td><td>15</td><td>15</td><td>16</td><td>16</td><td>Inter 400/600</td></tr><tr><td>Подпись / спецификация <code>.spec dt</code>, <code>.pg-spec dt</code>, <code>.sv2-facts span</code></td><td>14</td><td>13</td><td>13</td><td>13–14</td><td>13–14</td><td>Inter 400</td></tr><tr><td>Метка секции <code>.uzel__label</code>, <code>.hvs__label</code></td><td>14 · капс · +0,06em</td><td>13</td><td>13</td><td>14</td><td>14</td><td>Inter 600</td></tr></tbody></table></div>
+<div class="code" id="c3"><div class="code__bar"><span class="code__path">css/concept.css:1009–1016</span><button type="button" class="code__copy">Копировать</button></div><pre><code>/* --- типографика (RULES §2): H1 56 · H2 44 · H3 28 · подзаголовок 22 · лид 18 · текст 16 --- */
+.h1, .intro__title, .intro--photo .intro__title, .hs-title, .sv-hero__title { font-size: 3.5rem; line-height: 1; }
+.hero-a__h1 { font-size: 4rem; line-height: .92; }
+.h2, .about-banner__title, .approach__title, .numbers__title, .faq__title, .sp-h1, .intro__title--long, .sv-statement__t, .sv-partners__t { font-size: 2.75rem; line-height: 1.05; }
+.sp-h2, .sp-content .sp-h2, .hub-card__t, .contacts__item b, .sv-next__t, .sv-quote__t { font-size: 1.75rem; line-height: 1.15; }
+.t-28, .t-24, .about-banner__subtitle, .approach__slide-title, .svc__name { font-size: 1.375rem; line-height: 1.2; }
+.t-20, .head__lead, .wk__lead, .about-banner__text, .approach__text, .numbers__lead, .sp-lead { font-size: 1.125rem; line-height: 1.45; }
+.numbers__count { font-size: 6rem; line-height: 1; }</code></pre></div>
+<p class="note">Отличия от <code>adaptiv/RULES.md</code> §2: лид и текст на десктопе — <b>16</b> (в правилах 20 / 16); H1 hero Главной на планшете 64 (в правилах 56), на мобильном 40 (в правилах 36); H1 страниц — 80 / 56 / 40. Пишем как в коде.</p>
+
+<h3 id="ad-table">2.3. Элемент → десктоп / планшет / мобильный (сверено с кодом)</h3>
+<p>Исходник — <code>adaptiv/RULES.md</code> §3; последняя колонка помечает расхождение правил и кода. <b>Верно то, что в коде.</b></p>
+<div class="tw"><table class=""><thead><tr><th>Элемент</th><th>Десктоп ≥ 1200</th><th>Планшет 768–1199</th><th>Мобильный ≤ 767</th><th>Сверка с RULES</th></tr></thead><tbody><tr><td>Шапка</td><td>grid 3 колонки, высота 74 (на 1920), логотип · меню · телефон-кнопка 208×48</td><td>flex, высота 64: логотип слева, телефон-кнопка 44×44 (только иконка), бургер 44×44; меню скрыто</td><td>то же, подпись под названием логотипа скрыта</td><td>✓</td></tr><tr><td>Бургер-шторка</td><td>—</td><td>создаётся JS на ≤1199: fixed, весь экран; «Услуги» и «Направления» — аккордеоны, телефон внизу</td><td>то же, отступ плашки 16</td><td>✓ (граница 1199, а не 1023 — как в правилах)</td></tr><tr><td>Хлебные крошки</td><td>в строку, <code>flex-wrap</code></td><td>то же</td><td>то же, перенос по ширине</td><td>✓</td></tr><tr><td>Метка слева + контент <code>.g3</code> (592 | 1208)</td><td>3 колонки, контент в 2–3</td><td>2 колонки: <code>1fr 2fr</code></td><td>1 колонка, зазор строк 16</td><td>✓</td></tr><tr><td>Hero Главной</td><td>H1 112, кнопки 300, иконка 140 справа, 6 фактов в ряд</td><td>H1 64, иконка 120 справа, факты 3×2</td><td>H1 40, кнопки друг под другом, иконка скрыта, <b>факты — горизонтальная лента со свайпом</b> (карточка 42 %)</td><td>≠ RULES (там 2×3)</td></tr><tr><td>Hero страниц услуг <code>.sv2-hero</code></td><td>2 колонки <code>37rem / 1fr</code>, плашки фактов слева (284 шир.)</td><td>1 колонка, факты 3 в ряд</td><td>факты в 1 колонку, кнопки 100 %, иконка скрыта</td><td>—</td></tr><tr><td>Левая колонка услуг <code>.sp-side</code></td><td>липкая, 2 плашки (оглавление + оранжевый баннер), колонки <code>37fr / 81.5fr</code></td><td>1024–1199: колонки <code>1fr / 2.2fr</code>, липкая (rem 16); ≤1023: скрыта → полоса + нижняя кнопка</td><td>то же, что ≤1023</td><td>≠ RULES §8.3 («как десктоп, масштаб»)</td></tr><tr><td>Карточки 4 в ряд (<code>.pg-grid</code>, Объекты)</td><td>4</td><td>2 (до 1199 включительно)</td><td>1</td><td>✓</td></tr><tr><td>Хаб «Услуги» <code>.hub__grid</code></td><td>2 колонки по 948</td><td>2 колонки</td><td>1 колонка</td><td>≠ RULES (там 4/2/1) — хаб 2 колонки по макету</td></tr><tr><td>Листы «Что входит» <code>.sv2-sheets</code>, «Три варианта» <code>.sv2-vars</code></td><td>3</td><td>2</td><td>1</td><td>✓</td></tr><tr><td>«Когда критично» <code>.sv2-lcards</code></td><td>2</td><td>2</td><td>1</td><td>—</td></tr><tr><td>Лента «Наш подход»</td><td>карточка 430, 3-я выглядывает</td><td>карточка 46 % ширины (320 на 768, 518 на 1199), scroll-snap, стрелки + индикатор</td><td>карточка 82 %, scroll-snap, стрелки скрыты, индикатор под лентой</td><td>✓</td></tr><tr><td>«Этапы работ» Главной <code>.stgg</code></td><td>котельная слева (592), лента справа, карточка 430, шаг 454</td><td>котельная сверху, лента под ней, scroll-snap, карточка min(430; 46 %)</td><td><b>горизонтальная лента</b>, карточка 82 %, графика под телефон не делалась</td><td>≠ RULES §4 (там вертикальный вариант)</td></tr><tr><td>«Наши работы» Главной</td><td>3 карточки 1208×438 в колонку, слева липкий заголовок</td><td>горизонтальная лента, карточка min(22rem; 46 %), «Подробнее» ссылкой, фото снизу</td><td>карточка 82 %</td><td>—</td></tr><tr><td>«О нас в цифрах»</td><td>3 колонки</td><td>3 колонки, цифры 96</td><td>1 колонка, цифры 72</td><td>✓</td></tr><tr><td>FAQ</td><td>2 колонки</td><td>1</td><td>1</td><td>✓</td></tr><tr><td>Подвал</td><td>4 колонки; направления 4 в ряд</td><td>2 колонки; направления 2×2</td><td>1 колонка; направления в 1 колонку</td><td>✓</td></tr><tr><td>Кнопка <code>.btn-tall</code></td><td>200×100 (<code>--wide</code> 300×100)</td><td>300×100 / 200×100, подпись слева сверху, » снизу справа</td><td>100 % ширины, высота 52, <b>горизонтальная</b>: подпись слева, » справа</td><td>≠ RULES (там высота 72)</td></tr><tr><td>Фильтр «Объектов» <code>.ftabs</code></td><td>6 вкладок в ряд, высота 44</td><td>горизонтальная прокрутка, активная вкладка по центру</td><td>то же</td><td>✓</td></tr><tr><td>Таблицы <code>.sp-table</code></td><td>таблица 2 колонки</td><td>как есть</td><td>карточки: подпись «Ошибка» / «Последствия» над значением (псевдоэлементы)</td><td>✓</td></tr><tr><td>Схемы с точками (<code>.uzel</code>, <code>.hvs</code>)</td><td>наведение → плашка над элементом</td><td>≤1023 или <code>hover:none</code>: тап по точке → <b>карточка под схемой</b> с ‹ ›</td><td>то же; подписи текстов на схеме скрыты, остаётся легенда Т1/Т2</td><td>≠ RULES §4 (там нижняя шторка)</td></tr><tr><td>CTA-плашка <code>.cta</code>, <code>.sv2-cta</code></td><td>2 колонки: текст + фото</td><td>1 колонка</td><td>1 колонка, кнопки в столбик</td><td>✓</td></tr></tbody></table></div>
+
+<h2 id="tokens">3. Токены</h2>
+<h3 id="tk-root">3.1. Корень и цвета</h3>
+<p>Комментарий в начале <code>concept.css</code> и переменная <code>--font</code> (<code>"Montserrat"</code>) — наследие ранней версии: Montserrat на принятых страницах <b>не используется</b>, шрифты задаёт блок «UI Kit → концепт: типографика» (l.740–872). Рабочие гарнитуры: <b>Sofia Sans Extra Condensed</b> (заголовки, цифры, капс, веса 400/700/800) и <b>Inter</b> (текст, 400/500/600), запасной <code>Arial, sans-serif</code>.</p>
+<div class="code" id="c4"><div class="code__bar"><span class="code__path">css/concept.css:14–31</span><button type="button" class="code__copy">Копировать</button></div><pre><code>:root {
+  --bg: #E8EAEC;
+  --white: #FFFFFF;
+  --card: #F5F5F7;
+  --text: #424242;
+  --text-2: #6A6A6A;
+  --stroke: #C4C4C4;
+  --accent: #C2410C;          /* акцент тепла — переключатель в панели концепта */
+  --accent-ink: #FFFFFF;
+
+  --gap: .5rem;               /* зазор между плашками: 8 при 1920, 6 при 1440 */
+  --pad: 2.5rem;              /* внутренний отступ плашки: 40 */
+  --col-gap: 1.5rem;          /* зазор колонок: 24 */
+  --r: .75rem;                /* скругление плашки: 12 / 9 */
+  --r-sm: .5rem;              /* кнопки, карточки внутри плашек */
+
+  --font: &quot;Montserrat&quot;, Arial, sans-serif;
+}</code></pre></div>
+<div class="code" id="c5"><div class="code__bar"><span class="code__path">css/concept.css:380–380</span><button type="button" class="code__copy">Копировать</button></div><pre><code>:root { --dir-stoki: #213A6A; --dir-voda: #1E88C8; --dir-par: #7A8793; }   /* синий учетстоков; голубой воды — заглушка, цвет не выбран */</code></pre></div>
+<div class="tw"><table class=""><thead><tr><th>Токен / значение</th><th>Роль</th><th>Где</th></tr></thead><tbody><tr><td><code>--bg #E8EAEC</code></td><td>фон страницы между плашками</td><td><code>body</code></td></tr><tr><td><code>--white #FFFFFF</code></td><td>плашка</td><td><code>.plate</code></td></tr><tr><td><code>--card #F5F5F7</code> · <code>--sv-gray #F5F5F7</code> · <code>--sv-gray-2 #F6F5F8</code></td><td>карточка внутри плашки (факты, шаги, FAQ-пункт <code>#F6F5F8</code>)</td><td><code>.sv2</code>, <code>.faq__item</code></td></tr><tr><td><code>--text #424242</code></td><td>основной текст</td><td></td></tr><tr><td><code>--text-2 #6A6A6A</code></td><td>вторичный текст, подписи</td><td></td></tr><tr><td><code>--stroke #C4C4C4</code></td><td>рамки номеров, кнопок-«line», пунктир</td><td><code>.num</code>, <code>.btn-tall--line</code></td></tr><tr><td><code>#DADCDF</code> (<code>--hair</code> в <code>.sx</code>, <code>.sp-content</code>)</td><td>hairline-линии строк (12 вхождений)</td><td>строки, таблицы, факты hero</td></tr><tr><td><code>--accent #C2410C</code> · <code>--accent-ink #FFFFFF</code></td><td>акцент тепла: кнопки, метки, активные состояния, красные точки схем</td><td>везде</td></tr><tr><td><code>#FBE6DB</code></td><td>светлый акцент: бейдж «Скоро», «Вы здесь» в меню</td><td><code>.badge-soon</code>, <code>.dr-link.is-current</code></td></tr><tr><td><code>--dir-stoki #213A6A</code> · <code>--dir-voda #1E88C8</code> · <code>--dir-par #7A8793</code></td><td>точки «Направлений» (тепло — <code>--accent</code>). Цвет «Учёт воды» и «Учёт пара» — заглушки</td><td><code>.dir-dot--*</code></td></tr><tr><td><code>#D9784F → #F3BFA5 → #B9532A</code> / <code>#A3A9B1 → #E4E6E9 → #858C95</code></td><td>градиенты труб Т1 (подача, оранжевая) / Т2 (обратка, серая) в легендах схем</td><td>home.css:190</td></tr><tr><td><code>rgba(194,65,12,.08)</code> / <code>.14</code></td><td>заливка активной зоны на схеме (наведение / выбрано)</td><td><code>.hit:hover</code>, <code>.hit.on</code></td></tr></tbody></table></div>
+<h3 id="tk-space">3.2. Радиусы и отступы (rem; пиксели при 1920 → ярусы)</h3>
+<div class="tw"><table class="num"><thead><tr><th>Токен</th><th>1920</th><th>1440</th><th>1200</th><th>≤1199</th><th>≤767</th><th>Использование</th></tr></thead><tbody><tr><td><code>--r</code> (плашка)</td><td>12</td><td>9</td><td>7,5</td><td>12</td><td>10</td><td><code>.plate</code>, блоки, шапка</td></tr><tr><td><code>--r-sm</code></td><td>8</td><td>6</td><td>5</td><td>8</td><td>8</td><td>кнопки, карточки внутри плашек, поля</td></tr><tr><td>мелкие</td><td>6 (чипы, бейдж), 4 (номер шага)</td><td></td><td></td><td></td><td></td><td><code>.badge-soon</code>, <code>.sv2-no</code></td></tr><tr><td>рамка иконки <code>.ic-box</code></td><td>24 (140×140)</td><td>18</td><td>15</td><td>24 (120×120)</td><td>24 (скрыта на страницах услуг)</td><td>hero Главной, хаб</td></tr></tbody></table></div>
+<div class="tw"><table class="num"><thead><tr><th>Токен</th><th>1920</th><th>1440</th><th>1200</th><th>≤1199</th><th>≤767</th><th>Что задаёт</th></tr></thead><tbody><tr><td><code>--gap</code></td><td>8</td><td>6</td><td>5</td><td>8</td><td>8</td><td>зазор между плашками, поля страницы (<code>.page</code> padding)</td></tr><tr><td><code>--pad</code></td><td>40</td><td>30</td><td>25</td><td>24</td><td>16</td><td>внутренний отступ плашки</td></tr><tr><td><code>--col-gap</code></td><td>24</td><td>18</td><td>15</td><td>16</td><td>16 (строки <code>.g3</code>)</td><td>зазор колонок</td></tr><tr><td><code>.page</code> padding-top</td><td>90 (= шапка 74 + 2×8)</td><td>67,5</td><td>56,25</td><td>80 (= 64 + 2×8)</td><td>80</td><td>отступ под фиксированную шапку</td></tr><tr><td>шапка</td><td>74</td><td>56</td><td>46</td><td>64</td><td>64</td><td>высота <code>.header</code></td></tr><tr><td><code>--sv-sec</code> (страницы услуг)</td><td>56</td><td>42</td><td>35</td><td>56</td><td>56</td><td>вертикальный отступ секции блока</td></tr></tbody></table></div>
+<h3 id="tk-plate">3.3. Плашка <code>.plate</code>, страница, сетка <code>.g3</code></h3>
+<p>Страница — колонка плашек: <code>.page{display:flex;flex-direction:column;gap:var(--gap)}</code>, каждая секция — <code>.plate</code> (белый фон, радиус <code>--r</code>, padding <code>--pad</code>). Оранжевая плашка — <code>.plate--accent</code> (подвал, баннер в левой колонке). <code>.g3</code> — «метка слева (1/3) + контент (2/3)».</p>
+<div class="code" id="c6"><div class="code__bar"><span class="code__path">css/concept.css:71–79</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.page { display: flex; flex-direction: column; gap: var(--gap); padding: calc(4.625rem + var(--gap) * 2) var(--gap) var(--gap); }
+.plate { background: var(--white); border-radius: var(--r); padding: var(--pad); position: relative; }
+.plate--accent { background: var(--accent); color: var(--accent-ink); }
+
+/* Три колонки по 592 с зазором 24 → левая треть + правые две трети */
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: var(--col-gap); }
+.g3 &gt; .span2 { grid-column: 2 / 4; }
+.head { margin-bottom: 4rem; }
+.head__lead { margin-top: 1.5rem; max-width: 62ch; }</code></pre></div>
+<h3 id="tk-btn">3.4. Кнопки</h3>
+<p><code>.btn-tall</code> — «высокая» кнопка из UI Kit: подпись слева сверху, шеврон <code>»</code> справа снизу, 200×100 (<code>--wide</code> 300×100). Варианты: основная (акцент), <code>--line</code> (белая с рамкой), <code>--white</code>, <code>--glass</code> (полупрозрачная в оранжевом баннере). Квадратная <code>.sq</code> 48×48 — стрелки лент. <b>Мобильная</b> — горизонтальная: подпись слева, <code>»</code> справа, высота 52, ширина 100 % (с 18.11, правка дизайнера: высота 72 была крупнее нужного).</p>
+<div class="code" id="c7"><div class="code__bar"><span class="code__path">css/concept.css:82–98</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.btn-tall {
+  display: inline-flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+  width: 12.5rem; min-height: 6.25rem; gap: .5rem; padding: .75rem; border-radius: var(--r-sm);   /* min-height: подпись с нижней границей размера может занять 2 строки */
+  font-size: max(1.125rem, 15px); line-height: 1.2; font-weight: 500; text-align: left;
+  background: var(--accent); color: var(--accent-ink); border: 1px solid var(--accent);
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.btn-tall .ic { align-self: flex-end; }
+.btn-tall--wide { width: 18.75rem; }
+.btn-tall--line { background: var(--white); color: var(--text); border-color: var(--stroke); }
+.btn-tall--line .ic { color: var(--accent); }
+.btn-tall--white { background: var(--white); color: var(--text); border-color: var(--white); }
+.btn-tall--white .ic { color: var(--accent); }
+.btn-tall:hover { background: color-mix(in srgb, var(--accent) 86%, #000); border-color: color-mix(in srgb, var(--accent) 86%, #000); }
+.btn-tall--line:hover { background: var(--card); border-color: var(--accent); }
+.btn-tall--white:hover { background: var(--card); border-color: var(--card); }
+.btns { display: flex; gap: .5rem; flex-wrap: wrap; }</code></pre></div>
+<div class="code" id="c8"><div class="code__bar"><span class="code__path">css/concept.css:1183–1187</span><button type="button" class="code__copy">Копировать</button></div><pre><code>/* кнопки Tall на телефоне — горизонтальные (18.11, правка дизайнера: 72 — слишком крупно): подпись слева, » справа, высота 52 */
+.btns { flex-direction: column; }
+.btn-tall, .btn-tall--wide, .cta__text .btn-tall, .btn-tall[href^=&quot;tel:&quot;] { width: 100%; min-height: 3.25rem; flex-direction: row; align-items: center; justify-content: space-between; gap: .75rem; padding: .75rem 1rem; font-size: .9375rem; }
+.btn-tall .ic { align-self: center; width: 1.25rem; height: 1.25rem; flex: none; }</code></pre></div>
+<h3 id="tk-tag">3.5. Метки, теги, номера в рамке, разделители-трубы</h3>
+<ul>
+<li><b>Метка секции</b> <code>.label</code>: квадрат 8 акцентного цвета + текст 16/500. На Главной в секциях «Услуги», «Этапы», «Наши работы» — вариант «плашка с рамкой» 126×38 (<code>home.css</code>, блок «доводка до Figma»). На страницах услуг — капс-метка <code>.sv2-label</code> / <code>.hvs__label</code> (13–14 px, +0,06em, серый / акцент).</li>
+<li><b>Бейдж</b> <code>.badge-soon</code> («Скоро») — 12/600, фон <code>#FBE6DB</code>, текст акцент, радиус 6.</li>
+<li><b>Номер в рамке</b>: <code>.num</code> — квадрат 48, рамка <code>--stroke #C4C4C4</code>, радиус 8, цифра Sofia 18/500 (<code>#424242</code>). Шаги страниц услуг <code>.sp-step__no</code> — 48×48 (40 на ≤767), цифра Inter 18/600 оранжевая. Строки списков «Сервиса»/«Ремонта» <code>.sv2-no</code> — 36×36, радиус 4, цифра Inter 13/500 оранжевая, рамка серая <code>#C4C4C4</code>.</li>
+<li><b>Разделитель-труба</b> <code>.sv2-pdiv</code> — <code>&lt;div&gt;&lt;img src="img/svc/divider-*.svg"&gt;&lt;/div&gt;</code>: линия на всю ширину с элементом по центру (кран, фланец, датчик, манометр, расходомер, «двойной»), высота 64 (планшет/мобильный 48), <code>object-fit:cover</code> по центру — на узком экране боковые части обрезаются. Файлы: <code>divider-flange / -flowmeter / -gauge / -sensor / -twin / -valve</code>.</li>
+</ul>
+<div class="code" id="c9"><div class="code__bar"><span class="code__path">css/concept.css:65–68</span><button type="button" class="code__copy">Копировать</button></div><pre><code>/* Метка секции — квадрат 8 + подпись 20/600, как «Гарантии качества» на учетстоках */
+.label { display: flex; align-items: center; gap: 1rem; font-size: max(1.25rem, 17px); line-height: 1.4; font-weight: 600; letter-spacing: -.02em; }
+.label::before { content: &quot;&quot;; width: .5rem; height: .5rem; border-radius: .125rem; background: var(--accent); flex: none; }
+.label--light::before { background: var(--accent-ink); }</code></pre></div><div class="code" id="c10"><div class="code__bar"><span class="code__path">css/concept.css:111–114</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.num {
+  width: 3rem; height: 3rem; border-radius: var(--r-sm); border: 1px solid var(--stroke); background: var(--white);
+  display: inline-grid; place-items: center; font-size: max(1rem, 15px); font-weight: 600; flex: none;
+}</code></pre></div><div class="code" id="c12"><div class="code__bar"><span class="code__path">css/concept.css:956–956</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.badge-soon { flex: none; font-style: normal; font-size: max(.75rem, 12px); line-height: 1; font-weight: 600; padding: .3125rem .625rem; border-radius: .375rem; background: #FBE6DB; color: var(--accent); }</code></pre></div>
+<div class="code" id="c11"><div class="code__bar"><span class="code__path">css/uslugi-b.css:45–48</span><button type="button" class="code__copy">Копировать</button></div><pre><code>/* ---------- Разделители-трубы (Figma Divider/Pipe/*): линия на всю ширину, элемент по центру, на узком экране боковые части обрезаются ---------- */
+.sv2-pdiv { display: block; width: 100%; height: 4rem; margin: 0; flex: none; }
+.sv2-pdiv img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }</code></pre></div>
+<h2 id="components">4. Общие компоненты</h2>
+<p>У каждого: назначение, разметка (реальный фрагмент), ключевые классы, поведение на трёх размерах, JS. Номера строк — на момент сборки документа.</p>
+
+<h3 id="c-header">4.1. Шапка, бургер-шторка, выпадашки «Услуги» / «Направления»</h3>
+<p><b>Назначение.</b> Фиксированная плашка <code>.header-wrap &gt; .header</code> на всех страницах. Одна и та же разметка обслуживает три режима: на десктопе — меню с общей выпадающей панелью, на ≤1199 — логотип + телефон-иконка + бургер.</p>
+<p><b>Ключевые классы:</b> <code>.header-wrap</code> (fixed, padding = <code>--gap</code>), <code>.header</code>, <code>.logo</code>, <code>.nav</code> с <code>button.mnav__trigger[data-mnav]</code>, <code>.mnav__viewport</code> + <code>.mnav__panel#mnav-uslugi / #mnav-dirs</code>, <code>.mnav__feature</code> / <code>.mnav__link</code>, <code>.dir-link</code> + <code>.dir-dot--*</code> + <code>.badge-soon</code> (направления), <code>.phone-btn</code>. <b>Бургер и шторка в разметке страниц отсутствуют</b> — их строит <code>concept.js</code> на ≤1199 из <code>.nav</code> и <code>.mnav__panel</code> (классы <code>.burger</code>, <code>.drawer</code>, <code>.dr-acc</code>, <code>.dr-link</code>). В боевой вёрстке можно отдать их готовой разметкой, сохранив классы и атрибуты.</p>
+<div class="code" id="c13"><div class="code__bar"><span class="code__path">index.html:75–111</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;header class=&quot;header&quot;&gt;
+  &lt;a class=&quot;logo&quot; href=&quot;#top&quot;&gt;
+    &lt;span class=&quot;logo__mark&quot; aria-hidden=&quot;true&quot;&gt;лого&lt;/span&gt;
+    &lt;span&gt;&lt;b&gt;ООО «Комплекс-Техно»&lt;/b&gt;&lt;span&gt;Учет тепловой энергии — современные возможности&lt;/span&gt;&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;nav class=&quot;nav&quot; aria-label=&quot;Основное меню&quot;&gt;
+    &lt;button class=&quot;nav__btn mnav__trigger&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;mnav-uslugi&quot; data-mnav=&quot;uslugi&quot;&gt;Услуги &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev-d&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;a href=&quot;obekty.html&quot;&gt;Объекты&lt;/a&gt;
+    &lt;a href=&quot;kontakty.html&quot;&gt;Контакты&lt;/a&gt;
+    &lt;button class=&quot;nav__btn mnav__trigger&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;mnav-dirs&quot; data-mnav=&quot;dirs&quot;&gt;Направления &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev-d&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+  &lt;/nav&gt;
+  &lt;div class=&quot;mnav__viewport&quot;&gt;
+    &lt;div class=&quot;mnav__panel&quot; id=&quot;mnav-uslugi&quot; data-panel=&quot;uslugi&quot;&gt;
+      &lt;a class=&quot;mnav__feature&quot; href=&quot;uslugi.html&quot;&gt;&lt;span class=&quot;ic-box mnav__fic&quot;&gt;&lt;svg class=&quot;sic&quot;&gt;&lt;use href=&quot;#ap-check&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;b&gt;Все услуги&lt;/b&gt;&lt;span&gt;Полный комплекс услуг: от обследования до ввода в эксплуатацию и обслуживания.&lt;/span&gt;&lt;/a&gt;
+      &lt;div class=&quot;mnav__grid&quot;&gt;
+        &lt;a class=&quot;mnav__link&quot; href=&quot;obsledovanie.html&quot;&gt;&lt;b&gt;Обследование объектов &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#arr-ne&quot;/&gt;&lt;/svg&gt;&lt;/b&gt;&lt;span&gt;Бесплатно — выезд инженера, замеры и коммерческое предложение&lt;/span&gt;&lt;/a&gt;
+        &lt;a class=&quot;mnav__link&quot; href=&quot;proektirovanie.html&quot;&gt;&lt;b&gt;Проектирование &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#arr-ne&quot;/&gt;&lt;/svg&gt;&lt;/b&gt;&lt;span&gt;92% проектов согласуются с первого раза&lt;/span&gt;&lt;/a&gt;
+        &lt;a class=&quot;mnav__link&quot; href=&quot;ustanovka.html&quot;&gt;&lt;b&gt;Установка &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#arr-ne&quot;/&gt;&lt;/svg&gt;&lt;/b&gt;&lt;span&gt;1–3 дня — стандартный монтаж в тепловом пункте МКД&lt;/span&gt;&lt;/a&gt;
+        &lt;a class=&quot;mnav__link&quot; href=&quot;servis.html&quot;&gt;&lt;b&gt;Сервисное обслуживание &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#arr-ne&quot;/&gt;&lt;/svg&gt;&lt;/b&gt;&lt;span&gt;24 часа — выезд при некорректных показаниях&lt;/span&gt;&lt;/a&gt;
+        &lt;a class=&quot;mnav__link&quot; href=&quot;remont.html&quot;&gt;&lt;b&gt;Ремонт, замена и реконструкция &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#arr-ne&quot;/&gt;&lt;/svg&gt;&lt;/b&gt;&lt;span&gt;Бесплатно — выезд и диагностика&lt;/span&gt;&lt;/a&gt;
+        &lt;a class=&quot;mnav__also&quot; href=&quot;uslugi.html&quot;&gt;Также: поставка оборудования и поверка приборов учёта &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#arr-ne&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;mnav__panel mnav__panel--dirs&quot; id=&quot;mnav-dirs&quot; data-panel=&quot;dirs&quot;&gt;
+      &lt;span class=&quot;dir-link is-soon&quot;&gt;&lt;i class=&quot;dir-dot dir-dot--voda&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;Учёт воды&lt;/b&gt;&lt;small&gt;учётводы.рф&lt;/small&gt;&lt;/span&gt;&lt;em class=&quot;badge-soon&quot;&gt;Скоро&lt;/em&gt;&lt;/span&gt;
+      &lt;a class=&quot;dir-link&quot; href=&quot;https://xn--b1afppbpgbf4b.xn--p1ai/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;i class=&quot;dir-dot dir-dot--stoki&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;Учёт сточных вод&lt;/b&gt;&lt;small&gt;учётстоков.рф&lt;/small&gt;&lt;/span&gt;&lt;svg class=&quot;ic dir-ext&quot; aria-label=&quot;Откроется в новой вкладке&quot;&gt;&lt;use href=&quot;#arr-ne&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;span class=&quot;dir-link is-current&quot; aria-current=&quot;page&quot;&gt;&lt;i class=&quot;dir-dot dir-dot--teplo&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;Учёт тепловой энергии&lt;/b&gt;&lt;small&gt;Вы здесь&lt;/small&gt;&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;dir-link is-soon&quot;&gt;&lt;i class=&quot;dir-dot dir-dot--par&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;Учёт пара&lt;/b&gt;&lt;small&gt;учётпара.рф&lt;/small&gt;&lt;/span&gt;&lt;em class=&quot;badge-soon&quot;&gt;Скоро&lt;/em&gt;&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;a class=&quot;phone-btn&quot; href=&quot;tel:+74991107701&quot;&gt;&lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#phone&quot;/&gt;&lt;/svg&gt;+7 (499) 110-77-01&lt;/a&gt;
+&lt;/header&gt;</code></pre></div>
+<h4>Поведение на трёх размерах</h4>
+<div class="tw"><table class=""><thead><tr><th></th><th>Десктоп ≥ 1200</th><th>Планшет 768–1199</th><th>Мобильный ≤ 767</th></tr></thead><tbody><tr><td>Шапка</td><td>grid, 74 (на 1920), поля 24; логотип · меню · телефон 208×48</td><td>flex, 64; логотип · телефон-иконка 44×44 · бургер 44×44</td><td>то же, поля 8/12, подпись логотипа скрыта</td></tr><tr><td>Меню</td><td>2 выпадающих пункта + «Объекты», «Контакты»</td><td>в шторке: 2 аккордеона + ссылки, телефон внизу (<code>.drawer__foot</code>)</td><td>то же</td></tr><tr><td>Цели нажатия</td><td>пункты 37 высотой</td><td>бургер, телефон 44×44; пункты шторки ≥ 56 / 44</td><td>то же; логотип 40 на страницах без <code>home.css</code> (см. разд. 7)</td></tr></tbody></table></div>
+<h4>CSS: шапка (десктоп) и её перестройка на ≤1199</h4>
+<div class="code" id="c15"><div class="code__bar"><span class="code__path">css/concept.css:134–137</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.header-wrap { position: fixed; inset: 0 0 auto; z-index: 50; padding: var(--gap) var(--gap) 0; }
+.header {
+  height: 4.625rem; background: var(--white); border-radius: var(--r); padding: 0 1.5rem 0 1.5rem;
+  display: flex; align-items: center; gap: 2rem; box-shadow: 0 0 0 var(--gap) var(--bg);</code></pre></div>
+<div class="code" id="c16"><div class="code__bar"><span class="code__path">css/concept.css:1018–1029</span><button type="button" class="code__copy">Копировать</button></div><pre><code>/* --- шапка: логотип + кнопка-телефон (иконка) + бургер --- */
+.header { display: flex; align-items: center; height: 4rem; gap: .5rem; padding: 0 .75rem 0 1rem; }
+.header .logo { margin-right: auto; min-width: 0; }
+.logo__mark { width: 2.5rem; height: 2.5rem; }
+.logo b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.logo &gt; span:last-child { min-width: 0; }
+.nav, .mnav__viewport { display: none; }
+.phone-btn { font-size: 0; gap: 0; width: 2.75rem; height: 2.75rem; padding: 0; justify-content: center; flex: none; }
+.phone-btn .ic { width: 1.375rem; height: 1.375rem; }
+.burger { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; flex: none; border-radius: var(--r-sm); background: var(--card); color: var(--text); transition: background-color .2s; }
+.burger:hover { background: var(--bg); }
+.burger .ic { grid-area: 1 / 1; }</code></pre></div><div class="code" id="c17"><div class="code__bar"><span class="code__path">css/concept.css:1033–1056</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.drawer { position: fixed; inset: 0; z-index: 60; display: block; padding: calc(4rem + var(--gap) * 2) var(--gap) var(--gap); background: var(--bg); overflow-y: auto; overscroll-behavior: contain; }
+.drawer[hidden] { display: none; }
+.drawer__plate { min-height: 100%; display: flex; flex-direction: column; background: var(--white); border-radius: var(--r); padding: var(--pad) var(--pad) 1.25rem; }
+.drawer__nav { display: flex; flex-direction: column; }
+.dr-top, .dr-acc__btn { width: 100%; min-height: 3.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--stroke); font-size: 1.25rem; font-weight: 500; text-align: left; }
+.dr-acc__btn .ic { transition: transform .25s; }
+.dr-acc__btn[aria-expanded=&quot;true&quot;] { color: var(--accent); }
+.dr-acc__btn[aria-expanded=&quot;true&quot;] .ic { transform: rotate(180deg); }
+.dr-acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+.dr-acc.is-open .dr-acc__panel { grid-template-rows: 1fr; }
+.dr-acc__in { overflow: hidden; }
+.dr-acc__list { display: grid; gap: .25rem; padding: .5rem 0 1rem; }
+.dr-link { display: flex; align-items: center; gap: .875rem; min-height: 2.75rem; padding: .75rem; border-radius: var(--r-sm); background: var(--card); }
+.dr-link &gt; span:not(.badge-soon) { flex: 1; min-width: 0; }
+.dr-link b { display: block; font-size: 1rem; font-weight: 600; line-height: 1.3; }
+.dr-link small { display: block; margin-top: .125rem; font-size: .8125rem; line-height: 1.4; color: var(--text-2); }
+.dr-link .ic { width: 1.125rem; height: 1.125rem; color: var(--text-2); }
+.dr-link.is-current { background: #FBE6DB; }
+.dr-link.is-soon &gt; span, .dr-link.is-soon .dir-dot { opacity: .7; }
+.dr-link--also { background: none; padding: .5rem .75rem; }
+.drawer__foot { margin-top: auto; padding-top: 2rem; display: flex; flex-direction: column; gap: .75rem; }
+.drawer__foot p { font-size: .9375rem; color: var(--text-2); }
+.drawer__foot .btn-tall { width: 100%; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .dr-acc__panel, .dr-acc__btn .ic { transition: none; } }</code></pre></div>
+<h4>JS: выпадашки (≥1200) — <code>concept.js:107–168</code></h4>
+<p>Одна общая панель <code>.mnav__viewport</code>: ширина, высота и позиция едут к выбранному пункту на пружине (stiffness 350, damping 32); содержимое при переходе между пунктами уезжает в сторону движения. Открытие — наведением (<code>(hover:hover)</code>) или нажатием; закрытие — уход курсора с задержкой, клик вне шапки, <code>Esc</code> (фокус возвращается на кнопку), <code>focusout</code>. <code>aria-expanded</code> на кнопке-триггере, <code>aria-controls</code> → id панели. При <code>prefers-reduced-motion</code> переходы выключены (<code>concept.css:196</code>).</p>
+<h4>JS: бургер и шторка (≤1199) — <code>concept.js:404–483</code></h4>
+<div class="code" id="c14"><div class="code__bar"><span class="code__path">js/concept.js:404–483</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>var hdr = document.querySelector(&#x27;.header&#x27;);
+var navEl = hdr &amp;&amp; hdr.querySelector(&#x27;.nav&#x27;);
+if (hdr &amp;&amp; navEl) {
+  var esc = function (t) { return String(t).replace(/&amp;/g, &#x27;&amp;amp;&#x27;).replace(/&lt;/g, &#x27;&amp;lt;&#x27;); };
+  var chev = &#x27;&lt;svg class=&quot;ic&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m6 9 6 6 6-6&quot;/&gt;&lt;/svg&gt;&#x27;;
+  var arr = &#x27;&lt;svg class=&quot;ic&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M7 17 17 7M8 7h9v9&quot;/&gt;&lt;/svg&gt;&#x27;;
+  var ph = hdr.querySelector(&#x27;.phone-btn&#x27;);
+  var dHtml = &#x27;&#x27;;
+  [].slice.call(navEl.children).forEach(function (n, i) {
+    if (n.matches(&#x27;[data-mnav]&#x27;)) {
+      var pn = document.getElementById(n.getAttribute(&#x27;aria-controls&#x27;)), inner = &#x27;&#x27;;
+      var title = n.textContent.trim();
+      if (pn) {
+        pn.querySelectorAll(&#x27;a.mnav__feature, a.mnav__link, a.mnav__also, .dir-link&#x27;).forEach(function (l) {
+          if (l.matches(&#x27;a.mnav__feature&#x27;)) inner += &#x27;&lt;a class=&quot;dr-link&quot; href=&quot;&#x27; + l.getAttribute(&#x27;href&#x27;) + &#x27;&quot;&gt;&lt;span&gt;&lt;b&gt;Все услуги&lt;/b&gt;&lt;/span&gt;&lt;/a&gt;&#x27;;
+          else if (l.matches(&#x27;a.mnav__link&#x27;)) inner += &#x27;&lt;a class=&quot;dr-link&quot; href=&quot;&#x27; + l.getAttribute(&#x27;href&#x27;) + &#x27;&quot;&gt;&lt;span&gt;&lt;b&gt;&#x27; + esc(l.querySelector(&#x27;b&#x27;).textContent.trim()) + &#x27;&lt;/b&gt;&lt;small&gt;&#x27; + esc(l.querySelector(&#x27;span&#x27;).textContent) + &#x27;&lt;/small&gt;&lt;/span&gt;&#x27; + arr + &#x27;&lt;/a&gt;&#x27;;
+          else if (l.matches(&#x27;a.mnav__also&#x27;)) inner += &#x27;&lt;a class=&quot;dr-link dr-link--also&quot; href=&quot;&#x27; + l.getAttribute(&#x27;href&#x27;) + &#x27;&quot;&gt;&lt;span&gt;&lt;small&gt;&#x27; + esc(l.textContent.trim()) + &#x27;&lt;/small&gt;&lt;/span&gt;&lt;/a&gt;&#x27;;
+          else {   // направление: точка, название, подпись, бейдж «Скоро» / ↗
+            var dot = l.querySelector(&#x27;.dir-dot&#x27;), soon = l.querySelector(&#x27;.badge-soon&#x27;), ext = l.querySelector(&#x27;.dir-ext&#x27;), href = l.getAttribute(&#x27;href&#x27;);
+            var cur = l.classList.contains(&#x27;is-current&#x27;);
+            inner += (href ? &#x27;&lt;a class=&quot;dr-link&quot; href=&quot;&#x27; + href + &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&#x27; : &#x27;&lt;span class=&quot;dr-link&#x27; + (l.classList.contains(&#x27;is-soon&#x27;) ? &#x27; is-soon&#x27; : &#x27;&#x27;) + (cur ? &#x27; is-current&#x27; : &#x27;&#x27;) + &#x27;&quot;&#x27; + (cur ? &#x27; aria-current=&quot;page&quot;&#x27; : &#x27;&#x27;) + &#x27;&gt;&#x27;) +
+              &#x27;&lt;i class=&quot;dir-dot &#x27; + (dot ? dot.className.replace(&#x27;dir-dot &#x27;, &#x27;&#x27;) : &#x27;&#x27;) + &#x27;&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;&#x27; + esc(l.querySelector(&#x27;b&#x27;).textContent) + &#x27;&lt;/b&gt;&lt;small&gt;&#x27; + esc(l.querySelector(&#x27;small&#x27;).textContent) + &#x27;&lt;/small&gt;&lt;/span&gt;&#x27; +
+              (soon ? &#x27;&lt;em class=&quot;badge-soon&quot;&gt;Скоро&lt;/em&gt;&#x27; : &#x27;&#x27;) + (ext ? arr : &#x27;&#x27;) + (href ? &#x27;&lt;/a&gt;&#x27; : &#x27;&lt;/span&gt;&#x27;);
+          }
+        });
+        dHtml += &#x27;&lt;div class=&quot;dr-acc&quot;&gt;&lt;button class=&quot;dr-acc__btn&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;dr-p&#x27; + i + &#x27;&quot;&gt;&lt;span&gt;&#x27; + esc(title) + &#x27;&lt;/span&gt;&#x27; + chev + &#x27;&lt;/button&gt;&lt;div class=&quot;dr-acc__panel&quot; id=&quot;dr-p&#x27; + i + &#x27;&quot; inert&gt;&lt;div class=&quot;dr-acc__in&quot;&gt;&lt;div class=&quot;dr-acc__list&quot;&gt;&#x27; + inner + &#x27;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&#x27;;
+      }
+    } else if (n.getAttribute(&#x27;href&#x27;)) {
+      dHtml += &#x27;&lt;a class=&quot;dr-top&quot; href=&quot;&#x27; + n.getAttribute(&#x27;href&#x27;) + &#x27;&quot;&gt;&#x27; + esc(n.textContent.trim()) + &#x27;&lt;/a&gt;&#x27;;
+    }
+  });
+  var drawer = document.createElement(&#x27;div&#x27;);
+  drawer.className = &#x27;drawer&#x27;; drawer.id = &#x27;drawer&#x27;; drawer.hidden = true;
+  drawer.setAttribute(&#x27;role&#x27;, &#x27;dialog&#x27;); drawer.setAttribute(&#x27;aria-modal&#x27;, &#x27;true&#x27;); drawer.setAttribute(&#x27;aria-label&#x27;, &#x27;Меню&#x27;);
+  drawer.innerHTML = &#x27;&lt;div class=&quot;drawer__plate&quot;&gt;&lt;nav class=&quot;drawer__nav&quot; aria-label=&quot;Меню&quot;&gt;&#x27; + dHtml + &#x27;&lt;/nav&gt;&#x27; +
+    (ph ? &#x27;&lt;div class=&quot;drawer__foot&quot;&gt;&lt;p&gt;Позвоните — бесплатно проконсультируем&lt;/p&gt;&lt;a class=&quot;btn-tall btn-tall--wide&quot; href=&quot;&#x27; + ph.getAttribute(&#x27;href&#x27;) + &#x27;&quot;&gt;&#x27; + esc(ph.textContent.trim()) + &#x27; &lt;svg class=&quot;ic&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m7 17 5-5-5-5M13 17l5-5-5-5&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;&lt;/div&gt;&#x27; : &#x27;&#x27;) + &#x27;&lt;/div&gt;&#x27;;
+  var wrap = hdr.closest(&#x27;.header-wrap&#x27;) || hdr.parentNode;
+  wrap.parentNode.insertBefore(drawer, wrap.nextSibling);
+  var burger = document.createElement(&#x27;button&#x27;);
+  burger.className = &#x27;burger&#x27;; burger.type = &#x27;button&#x27;; burger.setAttribute(&#x27;aria-expanded&#x27;, &#x27;false&#x27;); burger.setAttribute(&#x27;aria-controls&#x27;, &#x27;drawer&#x27;); burger.setAttribute(&#x27;aria-label&#x27;, &#x27;Открыть меню&#x27;);
+  burger.innerHTML = &#x27;&lt;svg class=&quot;ic burger__open&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M4 6h16M4 12h16M4 18h10&quot;/&gt;&lt;/svg&gt;&lt;svg class=&quot;ic burger__close&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M18 6 6 18M6 6l12 12&quot;/&gt;&lt;/svg&gt;&#x27;;
+  hdr.appendChild(burger);
+  if (ph) ph.setAttribute(&#x27;aria-label&#x27;, &#x27;Позвонить: &#x27; + ph.textContent.trim());
+  var dRoot = document.documentElement, dOpen = false;
+  var dMain = document.querySelector(&#x27;main&#x27;);
+  var dFocusable = function () { return [].slice.call(hdr.querySelectorAll(&#x27;a[href], button&#x27;)).concat([].slice.call(drawer.querySelectorAll(&#x27;a[href], button:not([disabled])&#x27;))).filter(function (e) { return !e.closest(&#x27;[inert]&#x27;) &amp;&amp; e.offsetParent !== null; }); };
+  var dToggle = function (open, back) {
+    if (open === dOpen) return;
+    dOpen = open;
+    drawer.hidden = !open;
+    dRoot.classList.toggle(&#x27;is-drawer&#x27;, open);
+    burger.setAttribute(&#x27;aria-expanded&#x27;, open);
+    burger.setAttribute(&#x27;aria-label&#x27;, open ? &#x27;Закрыть меню&#x27; : &#x27;Открыть меню&#x27;);
+    if (dMain) dMain.inert = open;
+    if (open) { var f = drawer.querySelector(&#x27;.dr-acc__btn&#x27;); if (f) f.focus(); }
+    else if (back !== false) burger.focus();
+  };
+  burger.addEventListener(&#x27;click&#x27;, function () { dToggle(!dOpen); });
+  drawer.querySelectorAll(&#x27;.dr-acc__btn&#x27;).forEach(function (b) {
+    b.addEventListener(&#x27;click&#x27;, function () {
+      var open = b.getAttribute(&#x27;aria-expanded&#x27;) !== &#x27;true&#x27;;
+      drawer.querySelectorAll(&#x27;.dr-acc__btn&#x27;).forEach(function (o) { if (o !== b) { o.setAttribute(&#x27;aria-expanded&#x27;, &#x27;false&#x27;); document.getElementById(o.getAttribute(&#x27;aria-controls&#x27;)).inert = true; o.parentNode.classList.remove(&#x27;is-open&#x27;); } });
+      b.setAttribute(&#x27;aria-expanded&#x27;, open); document.getElementById(b.getAttribute(&#x27;aria-controls&#x27;)).inert = !open; b.parentNode.classList.toggle(&#x27;is-open&#x27;, open);
+    });
+  });
+  drawer.addEventListener(&#x27;click&#x27;, function (e) { if (e.target.closest(&#x27;a[href^=&quot;#&quot;], a[href^=&quot;tel:&quot;], a[href^=&quot;mailto:&quot;]&#x27;)) dToggle(false, false); });
+  document.addEventListener(&#x27;keydown&#x27;, function (e) {
+    if (!dOpen) return;
+    if (e.key === &#x27;Escape&#x27;) { dToggle(false); return; }
+    if (e.key !== &#x27;Tab&#x27;) return;
+    var f = dFocusable(); if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey &amp;&amp; document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey &amp;&amp; document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  matchMedia(&#x27;(min-width: 1200px)&#x27;).addEventListener(&#x27;change&#x27;, function (m) { if (m.matches) dToggle(false, false); });
+}</code></pre></div>
+<p class="note">Шторка: <code>role="dialog" aria-modal="true" aria-label="Меню"</code>; пока открыта, <code>main</code> получает <code>inert</code>, <code>html.is-drawer</code> блокирует прокрутку; <code>Esc</code> закрывает и возвращает фокус на бургер; <code>Tab</code> циркулирует внутри; при переходе на ≥1200 шторка закрывается (<code>matchMedia('(min-width:1200px)')</code>). Аккордеоны «Услуги» / «Направления» — <code>aria-expanded</code> + <code>aria-controls</code>, закрытая панель — <code>inert</code>, открыт один.</p>
+
+<h3 id="c-footer">4.2. Подвал</h3>
+<p><b>Назначение.</b> Оранжевая плашка <code>.plate--accent.footer</code> в конце каждой страницы: логотип + описание, «Меню», «Услуги», «Контакты», внизу ряд «Наши направления» (4 карточки <code>.fdir</code>) и юридическая строка. Верхний ряд — <code>.footer__grid</code> (4 колонки), направления — <code>.footer__dirs-row</code> (4).</p>
+<p><b>Поведение:</b> ≥1200 — 4 колонки / 4 направления в ряд; 768–1199 — 2 колонки (логотип на всю ширину), направления 2×2; ≤767 — 1 колонка, направления в одну. Ссылки: на десктопе <code>min-height:24px</code>, на планшете 44, на мобильном <b>36</b> (сознательное уплотнение по правке дизайнера 18.11: секции «Меню / Услуги / Контакты» разведены на 44 px, пункты плотнее). JS не нужен.</p>
+<div class="code" id="c18"><div class="code__bar"><span class="code__path">index.html:462–502</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;footer class=&quot;plate plate--accent footer&quot;&gt;
+  &lt;div class=&quot;footer__grid&quot;&gt;
+    &lt;div&gt;
+      &lt;a class=&quot;logo&quot; href=&quot;#top&quot;&gt;&lt;span class=&quot;logo__mark&quot; aria-hidden=&quot;true&quot;&gt;лого&lt;/span&gt;&lt;span&gt;&lt;b&gt;ООО «Комплекс-Техно»&lt;/b&gt;&lt;span&gt;Учет тепловой энергии — современные возможности&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;
+      &lt;p class=&quot;footer__about&quot;&gt;Помогаем промышленным предприятиям, бюджетным организациям,…&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h2 class=&quot;footer__h&quot;&gt;Меню&lt;/h2&gt;
+      &lt;ul&gt;&lt;li&gt;&lt;a href=&quot;uslugi.html&quot;&gt;Услуги&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;obekty.html&quot;&gt;Объекты&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;kontakty.html&quot;&gt;Контакты&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h2 class=&quot;footer__h&quot;&gt;Услуги&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;obsledovanie.html&quot;&gt;Обследование объектов&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;proektirovanie.html&quot;&gt;Проектирование&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;ustanovka.html&quot;&gt;Установка&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;servis.html&quot;&gt;Сервисное обслуживание&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;remont.html&quot;&gt;Ремонт и реконструкция&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h2 class=&quot;footer__h&quot;&gt;Контакты&lt;/h2&gt;
+      &lt;ul class=&quot;footer__contacts&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;tel:+74991107701&quot;&gt;&lt;svg class=&quot;ic&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#phone&quot;/&gt;&lt;/svg&gt;+7 (499) 110-77-01&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;mailto:Complex-T@yandex.ru&quot;&gt;&lt;svg class=&quot;ic&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#mail&quot;/&gt;&lt;/svg&gt;Complex-T@yandex.ru&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;span class=&quot;footer__addr&quot;&gt;&lt;svg class=&quot;ic&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#pin&quot;/&gt;&lt;/svg&gt;129337, г. Москва, Ярославское шоссе, дом 42, пом. 1/4&lt;/span&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;footer__dirs&quot;&gt;
+    &lt;h2 class=&quot;footer__h&quot;&gt;Наши направления&lt;/h2&gt;
+    &lt;div class=&quot;footer__dirs-row&quot;&gt;
+      &lt;span class=&quot;fdir is-soon&quot;&gt;&lt;i class=&quot;dir-dot dir-dot--voda&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;Учёт воды&lt;/b&gt;&lt;small&gt;учётводы.рф&lt;/small&gt;&lt;/span&gt;&lt;em class=&quot;badge-soon&quot;&gt;Скоро&lt;/em&gt;&lt;/span&gt;
+      &lt;a class=&quot;fdir&quot; href=&quot;https://xn--b1afppbpgbf4b.xn--p1ai/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;i class=&quot;dir-dot dir-dot--stoki&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;Учёт сточных вод&lt;/b&gt;&lt;small&gt;учётстоков.рф&lt;/small&gt;&lt;/span&gt;&lt;svg class=&quot;ic dir-ext&quot; aria-label=&quot;Откроется в новой вкладке&quot;&gt;&lt;use href=&quot;#arr-ne&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;span class=&quot;fdir is-current&quot; aria-current=&quot;page&quot;&gt;&lt;i class=&quot;dir-dot dir-dot--teplo&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;Учёт тепловой энергии&lt;/b&gt;&lt;small&gt;Вы здесь&lt;/small&gt;&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;fdir is-soon&quot;&gt;&lt;i class=&quot;dir-dot dir-dot--par&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;b&gt;Учёт пара&lt;/b&gt;&lt;small&gt;учётпара.рф&lt;/small&gt;&lt;/span&gt;&lt;em class=&quot;badge-soon&quot;&gt;Скоро&lt;/em&gt;&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;footer__bottom&quot;&gt;&lt;span&gt;© 2007–2026 ООО «Комплекс-Техно»&lt;/span&gt;&lt;a href=&quot;politika.html&quot;&gt;Политика конфиденциальности&lt;/a&gt;&lt;/div&gt;
+&lt;/footer&gt;</code></pre></div>
+<div class="code" id="c19"><div class="code__bar"><span class="code__path">css/concept.css:363–365</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.footer li + li { margin-top: .25rem; }
+.footer li a { display: inline-block; padding: .25rem 0; min-height: 24px; }   /* цель клика от 24px */
+.footer a:hover { text-decoration: underline; text-underline-offset: .2em; }</code></pre></div>
+<div class="code" id="c20"><div class="code__bar"><span class="code__path">css/concept.css:1140–1144</span><button type="button" class="code__copy">Копировать</button></div><pre><code>/* --- подвал: 2 колонки, направления 2×2 --- */
+.footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem var(--col-gap); }
+.footer__grid &gt; :first-child { grid-column: 1 / -1; }
+.footer__dirs-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+.footer li a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .25rem 0; }</code></pre></div>
+
+<h3 id="c-crumbs">4.3. Хлебные крошки</h3>
+<p><b>Назначение.</b> <code>&lt;nav class="crumbs" aria-label="Хлебные крошки"&gt;</code> над H1 на всех страницах, кроме Главной. Последний элемент — <code>&lt;span aria-current="page"&gt;</code>, остальные — ссылки с подчёркиванием. На страницах услуг (<code>.sv2</code>) — вес 600, разделители серые. Всегда <code>flex-wrap</code>: на узком экране переносятся по ширине. На ≤1023 у крошек «Объектов/Контактов/Политики» область нажатия растянута до 44 (<code>pages.css:112</code>, отрицательный margin); у крошек страниц услуг — высота 29–32 (см. разд. 7).</p>
+<div class="code" id="c21"><div class="code__bar"><span class="code__path">proektirovanie.html:119–119</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;nav class=&quot;crumbs&quot; aria-label=&quot;Хлебные крошки&quot;&gt;&lt;a href=&quot;index.html&quot;&gt;Главная&lt;/a&gt;&lt;span&gt;/&lt;/span&gt;&lt;a href=&quot;uslugi.html&quot;&gt;Услуги&lt;/a&gt;&lt;span&gt;/&lt;/span&gt;&lt;span aria-current=&quot;page&quot;&gt;Проектирование&lt;/span&gt;&lt;/nav&gt;</code></pre></div>
+<div class="code" id="c22"><div class="code__bar"><span class="code__path">css/concept.css:436–439</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: max(1rem, 15px); color: var(--text); }
+.crumbs a { text-decoration: underline; text-underline-offset: .2em; display: inline-block; padding: .25rem 0; min-height: 24px; }   /* цель клика от 24px */
+.crumbs a:hover { color: var(--accent); }
+.crumbs [aria-current] { color: var(--text); }</code></pre></div>
+<div class="code" id="c23"><div class="code__bar"><span class="code__path">css/pages.css:10–10</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.pg-intro .crumbs a { padding: 0; min-height: 0; }</code></pre></div>
+
+<h3 id="c-hero">4.4. Hero (Главная)</h3>
+<p><b>Назначение.</b> Первый экран: H1, лид, две кнопки, иконка «Установка» 140×140 справа внизу (<code>.hero-a__ibox</code>, inline-SVG 64×64) и полоса из 6 фактов <code>.hero-a__facts</code> (без иконок, hairline сверху и слева). Над H1 — пустой слот под лейблы <code>.hero-a__slot</code> (высота 38, <code>aria-hidden</code>): выбор лейблов не сделан (<code>hero-labels.html</code>), слот скрыт на ≤1199.</p>
+<p><b>Поведение:</b> ≥1200 — H1 112, кнопки 300×100 в ряд, факты 6 в ряд; планшет — H1 64, иконка 120 справа, факты 3×2 (цифры 40); мобильный — H1 40, кнопки в столбик 100 % × 52, иконка скрыта, факты — <b>горизонтальная лента со свайпом</b> (<code>scroll-snap-type:x mandatory</code>, карточка 42 % ширины, скроллбар скрыт). H1 — единственный <code>&lt;h1&gt;</code> на странице; <code>&lt;em&gt;</code> внутри — оранжевый акцент; неразрывные пробелы в «под&amp;nbsp;ключ».</p>
+<div class="code" id="c24"><div class="code__bar"><span class="code__path">index.html:119–134</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;section class=&quot;plate hero-a&quot; aria-labelledby=&quot;hero-title&quot;&gt;
+  &lt;div class=&quot;hero-a__slot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+  &lt;h1 class=&quot;h1 hero-a__h1&quot; id=&quot;hero-title&quot;&gt;Установка узлов учета тепловой энергии &lt;em&gt;под&amp;nbsp;ключ&lt;/em&gt; в&amp;nbsp;Москве и&amp;nbsp;Московской области&lt;/h1&gt;
+  &lt;div class=&quot;hero-a__row&quot;&gt;
+    &lt;div class=&quot;hero-a__main&quot;&gt;
+      &lt;p class=&quot;hero-a__lead t-20 muted&quot;&gt;Профессиональная установка узлов учета тепловой энергии. Раб…&lt;/p&gt;
+      &lt;div class=&quot;btns&quot;&gt;
+        &lt;button class=&quot;btn-tall btn-tall--wide&quot; type=&quot;button&quot; data-modal&gt;Получить консультацию &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev2&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+        &lt;a class=&quot;btn-tall btn-tall--wide btn-tall--line&quot; href=&quot;#services&quot;&gt;Услуги &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev2&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;ic-box hero-a__ibox&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 64 64&quot; class=&quot;sic hero-a__svg&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#3A3D42&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 41H17M4 53H17M17 34V60M47 41H60M47 53H60M47 34V60&quot;/&gt;&lt;rect x=&quot;21&quot; y=&quot;5&quot; width=&quot;22&quot; height=&quot;17&quot; rx=&quot;2.5&quot; stroke=&quot;#C2410C&quot;/&gt;&lt;path d=&quot;M32 27V49M25 42.5L32 49.5L39 42.5&quot; stroke=&quot;#C2410C&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;ul class=&quot;hero-a__facts&quot;&gt;&lt;li&gt;&lt;b&gt;19+ лет&lt;/b&gt;&lt;span&gt;на рынке с 2007 года&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;300+&lt;/b&gt;&lt;span&gt;установленных узлов учета&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;92%&lt;/b&gt;&lt;span&gt;проектов согласуется с РСО с первого раза&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;1–3 дня&lt;/b&gt;&lt;span&gt;стандартный срок монтажа&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;12 месяцев&lt;/b&gt;&lt;span&gt;гарантия на монтаж&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;0 ₽&lt;/b&gt;&lt;span&gt;выезд инженера на объект&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;/section&gt;</code></pre></div>
+<div class="code" id="c25"><div class="code__bar"><span class="code__path">css/concept.css:968–970</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.hero-a__slot { height: 2.375rem; }
+.hero-a__h1 { margin-top: 2.25rem; max-width: 112.5rem; font-size: 7rem; line-height: .92; letter-spacing: -.03em; }
+.hero-a__row { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; }</code></pre></div>
+<div class="code" id="c26"><div class="code__bar"><span class="code__path">css/home.css:199–204</span><button type="button" class="code__copy">Копировать</button></div><pre><code>/* преимущества hero — лента свайпом вправо-влево (правка 18.11) */
+.hero-a .hero-a__facts { display: flex; gap: .5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+  margin: 1.5rem calc(var(--pad) * -1) 0; padding: 0 var(--pad); scroll-padding: 0 var(--pad); border-top: 0; }
+.hero-a .hero-a__facts::-webkit-scrollbar { display: none; }
+.hero-a .hero-a__facts li:nth-child(n) { flex: 0 0 42%; scroll-snap-align: start; padding: 1rem; border: 0; border-radius: var(--r-sm); background: var(--card); }
+.hero-a .hero-a__facts b { font-size: 1.75rem; }</code></pre></div>
+
+<h3 id="c-ribbons">4.5. Ленты с прокруткой: «Наш подход», «Этапы работ», «Наши работы», «Факты hero»</h3>
+<p><b>Назначение.</b> Горизонтальные ленты, где следующая карточка «выглядывает» за край. Общий приём: контейнер <code>display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain</code> (+ <code>::-webkit-scrollbar{display:none}</code>), у карточек <code>scroll-snap-align:start</code>. Нативная прокрутка работает на касании; стрелки/клавиши/перетаскивание мышью — JS.</p>
+
+<h4>«Наш подход» (9 карточек + индикатор «труба + 9 узлов»)</h4>
+<p>Десктоп: карточка 430×568, шаг 8, 3-я выглядывает; стрелки <code>.approach__control</code> 48×48 (крайняя <code>disabled</code>), индикатор <code>.ap-ind</code> 438×58 (узлы-кнопки <code>.ap-ind__node</code> 24 px; пройденные — оранжевая обводка, текущий — заливка, <code>aria-current</code>). Планшет: карточка <code>46%</code> (320 на 768, 438 на 1024, 518 на 1199), иконка 48 в углу, высота по тексту. Мобильный: карточка <code>82%</code> (280 на 390), стрелки скрыты, индикатор под лентой (узлы 20 px, зона нажатия расширена псевдоэлементом <code>::before{inset:-.75rem -.6875rem}</code>, <code>home.css:260</code>).</p>
+<div class="code" id="c27"><div class="code__bar"><span class="code__path">index.html:200–206</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;div class=&quot;approach__slider&quot;&gt;
+  &lt;ol class=&quot;approach__track&quot; data-ap-track&gt;
+    &lt;li class=&quot;approach__slide&quot;&gt;
+      &lt;div class=&quot;approach__slide-heading&quot;&gt;&lt;span class=&quot;num&quot;&gt;1&lt;/span&gt;&lt;h3 class=&quot;approach__slide-title&quot;&gt;Большой опыт&lt;/h3&gt;&lt;/div&gt;
+      &lt;div class=&quot;approach__slide-img-block&quot;&gt;&lt;img class=&quot;approach__slide-img approach__slide-img--64&quot; src=&quot;img/home/icon-approach-opyt.svg&quot; alt=&quot;&quot; width=&quot;64&quot; height=&quot;64&quot;&gt;&lt;/div&gt;
+      &lt;p class=&quot;approach__slide-text&quot;&gt;Работаем с 2007 года и знаем многие тонкости и нюансы учёта тепловой энергии.&lt;/p&gt;
+    &lt;/li&gt;</code></pre></div>
+<div class="code" id="c28"><div class="code__bar"><span class="code__path">css/concept.css:234–236</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.approach__track { display: flex; gap: .5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.approach__track::-webkit-scrollbar { display: none; }
+.approach__slide { flex: 0 0 26.875rem; min-height: 32.375rem; scroll-snap-align: start; background: #F6F5F8; border-radius: .5rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 4.375rem; }</code></pre></div>
+<div class="code" id="c29"><div class="code__bar"><span class="code__path">css/concept.css:1090–1090</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.approach__slide { flex: 0 0 calc((100% - .5rem) * .46); min-height: 27rem; gap: 2rem; }</code></pre></div><div class="code" id="c30"><div class="code__bar"><span class="code__path">css/concept.css:1201–1204</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.approach__slider { margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad); }
+.approach__track { scroll-padding-left: var(--pad); }
+.approach__slide { flex-basis: 82%; min-height: 24rem; gap: 1.5rem; }
+.approach__controls { display: none; }</code></pre></div>
+
+<div class="code" id="c31"><div class="code__bar"><span class="code__path">js/concept.js:24–61</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>var apTrack = document.querySelector(&#x27;[data-ap-track]&#x27;);
+if (apTrack) {
+  var apBtns = document.querySelectorAll(&#x27;[data-ap]&#x27;);
+  var apInd = document.querySelector(&#x27;[data-ap-ind]&#x27;);
+  var apNodes = apInd ? [].slice.call(apInd.querySelectorAll(&#x27;.ap-ind__node&#x27;)) : [];
+  var apStep = function () { return apTrack.firstElementChild.offsetWidth + parseFloat(getComputedStyle(apTrack).columnGap || 0); };
+  var apIndex = function () {   // текущий — слайд у левого края; у правого края ленты — последний
+    var max = apTrack.scrollWidth - apTrack.clientWidth;
+    if (max &gt; 2 &amp;&amp; apTrack.scrollLeft &gt;= max - 2) return apNodes.length - 1;
+    return Math.min(apNodes.length - 1, Math.round(apTrack.scrollLeft / apStep()));
+  };
+  var apSync = function () {
+    apBtns[0].disabled = apTrack.scrollLeft &lt;= 2;
+    apBtns[1].disabled = apTrack.scrollLeft &gt;= apTrack.scrollWidth - apTrack.clientWidth - 2;
+    if (!apInd) return;
+    var i = apIndex();
+    apNodes.forEach(function (n, k) {
+      n.classList.toggle(&#x27;is-cur&#x27;, k === i);
+      n.classList.toggle(&#x27;is-done&#x27;, k &lt; i);
+      n.setAttribute(&#x27;aria-current&#x27;, k === i ? &#x27;true&#x27; : &#x27;false&#x27;);
+    });
+    apInd.querySelector(&#x27;.ap-ind__pipe&#x27;).style.setProperty(&#x27;--p&#x27;, i / (apNodes.length - 1));
+    apInd.querySelector(&#x27;[data-ap-cur]&#x27;).textContent = i + 1;
+  };
+  apBtns.forEach(function (b) {
+    b.addEventListener(&#x27;click&#x27;, function () {
+      apTrack.scrollBy({ left: apStep() * +b.dataset.ap, behavior: reduce ? &#x27;auto&#x27; : &#x27;smooth&#x27; });
+    });
+  });
+  apNodes.forEach(function (n, k) {
+    n.addEventListener(&#x27;click&#x27;, function () { apTrack.scrollTo({ left: apStep() * k, behavior: reduce ? &#x27;auto&#x27; : &#x27;smooth&#x27; }); });
+  });
+  apTrack.addEventListener(&#x27;scroll&#x27;, apSync, { passive: true });
+  addEventListener(&#x27;resize&#x27;, apSync);
+  apSync();
+}</code></pre></div>
+<h4>«Этапы работ» (<code>.stgg</code>: котельная → 7 шагов → дом с УУТЭ)</h4>
+<p>Десктоп: слева SVG котельной (592×420, не прокручивается), справа лента <code>.stgg__scroll</code> (tabindex=0, <code>aria-label</code>), карточка 430, шаг 454, трубы Т1/Т2 — псевдо-элементы <code>.stgg__pipe</code>, в конце <code>.stgg__end</code> — дом с печатью «ДОПУЩЕН». Стрелки <code>.stg__btn</code> 44×36 + счётчик <code>01 / 07</code> (<code>aria-live="polite"</code>). Планшет: котельная сверху (макс. 592), лента под ней со snap, карточка <code>min(430; 46%)</code>. Мобильный: та же лента, карточка 82 %, высота <code>--ch</code> 400.</p>
+<div class="code" id="c32"><div class="code__bar"><span class="code__path">index.html:343–353</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;section class=&quot;plate stgg&quot; aria-labelledby=&quot;steps-title&quot;&gt;
+  &lt;div class=&quot;stgg__head&quot;&gt;
+    &lt;h2 class=&quot;label stg__label&quot; id=&quot;steps-title&quot;&gt;Этапы работы&lt;/h2&gt;
+    &lt;div class=&quot;stgg__ctl&quot;&gt;&lt;span class=&quot;stgg__pos&quot; data-stgg-pos aria-live=&quot;polite&quot;&gt;01 / 07&lt;/span&gt;
+      &lt;div class=&quot;stg__nav&quot;&gt;
+        &lt;button class=&quot;stg__btn&quot; type=&quot;button&quot; data-stgg=&quot;-1&quot; aria-label=&quot;Предыдущий этап&quot;&gt;&lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev-l&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+        &lt;button class=&quot;stg__btn&quot; type=&quot;button&quot; data-stgg=&quot;1&quot; aria-label=&quot;Следующий этап&quot;&gt;&lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev-r&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;stgg__body&quot;&gt;</code></pre></div>
+<div class="code" id="c33"><div class="code__bar"><span class="code__path">index.html:355–359</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;div class=&quot;stgg__scroll&quot; data-stgg-track tabindex=&quot;0&quot; aria-label=&quot;Этапы работы, прокрутка по горизонтали&quot;&gt;
+  &lt;div class=&quot;stgg__track&quot;&gt;
+    &lt;i class=&quot;stgg__ground&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;i class=&quot;stgg__pipe stgg__pipe--1&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;i class=&quot;stgg__pipe stgg__pipe--2&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+    &lt;ol class=&quot;stgg__list&quot;&gt;
+    &lt;li class=&quot;stgg__step&quot;&gt;&lt;div class=&quot;stgg__card&quot;&gt;&lt;span class=&quot;num stgg__num&quot;&gt;01&lt;/span&gt;&lt;h3 class=&quot;stgg__title&quot;&gt;Звонок и консультация&lt;/h3&gt;&lt;p class=&quot;stgg__text&quot;&gt;Бесплатная консультация: разбираемся в вашей задаче — тип об…&lt;/p&gt;&lt;/div&gt;&lt;img class=&quot;stgg__j&quot; src=&quot;img/home/styk-etapa.svg&quot; alt=&quot;&quot; width=&quot;80&quot; height=&quot;120&quot;&gt;&lt;/li&gt;</code></pre></div>
+<div class="code" id="c34"><div class="code__bar"><span class="code__path">css/home.css:73–73</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.stgg__scroll { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; outline-offset: -2px; }</code></pre></div>
+<div class="code" id="c35"><div class="code__bar"><span class="code__path">css/home.css:124–132</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.stgg { --ch: 22rem; }
+.stgg__body { grid-template-columns: minmax(0, 1fr); margin-top: 1.5rem; padding-left: 0; }
+.stgg__src { padding: 0 var(--pad); }
+.stgg__src svg { width: 100%; max-width: 37rem; height: auto; }
+.stgg__scroll { margin-top: 1rem; scroll-snap-type: x mandatory; scroll-padding-left: var(--pad); }
+.stgg__track { padding-left: var(--pad); }
+.stgg__step { width: min(26.875rem, calc((100vw - 2 * var(--gap) - 2 * var(--pad)) * .46)); scroll-snap-align: start; }
+.stgg__end { scroll-snap-align: end; }
+.stg__btn { width: 2.75rem; height: 2.75rem; }</code></pre></div>
+<h4>«Наши работы» ≤1199 и общий скрипт лент</h4>
+<p>На десктопе «Наши работы» — три карточки в колонку (<code>.wk__list</code> grid 1 колонка), слева липкий заголовок. На ≤1199 тот же список превращается в ленту (правка дизайнера 18.11, образец — «Наши работы» на учётстоков.рф): карточка <code>min(22rem; 46%)</code> (82 % на мобильном), «Подробнее» — ссылкой, фото снизу 4:3, спецификация «подпись над значением».</p>
+<div class="code" id="c36"><div class="code__bar"><span class="code__path">css/home.css:143–150</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.wk:has(.wcard--obj) { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+.wk__nav { display: flex; order: 1; }
+.wk__sticky &gt; .btn-tall { order: 2; }
+.wk__list:has(.wcard--obj) { display: flex; gap: .5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+  margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad); scroll-padding: 0 var(--pad); }
+.wk__list:has(.wcard--obj)::-webkit-scrollbar { display: none; }
+.wk__list.is-drag { cursor: grabbing; }
+.wcard--obj { flex: 0 0 min(22rem, 46%); display: flex; flex-direction: column; gap: 1rem; padding: 1rem; scroll-snap-align: start; }</code></pre></div>
+<p>Скрипт <code>slider()</code> общий для «Этапов» и «Работ»: стрелки листают на один шаг (<code>pitch</code> = расстояние между 1-й и 2-й карточкой), крайняя стрелка <code>disabled</code>, ←/→ на сфокусированной ленте, перетаскивание мышью (<code>pointerType==='mouse'</code>, порог 4 px, после отпускания доводка до шага; щелчок после перетаскивания гасится), счётчик «NN / 07» для «Этапов». <code>prefers-reduced-motion</code> → <code>behavior:'auto'</code> вместо <code>smooth</code>.</p>
+<div class="code" id="c37"><div class="code__bar"><span class="code__path">js/home.js:124–153</span><button type="button" class="code__copy">Копировать</button></div><pre><code>function slider(sc, items, btns, pos) {
+  var pitch = function () { return items.length &gt; 1 ? items[1].offsetLeft - items[0].offsetLeft : sc.clientWidth; };
+  var upd = function () {
+    var atEnd = sc.scrollLeft + sc.clientWidth &gt;= sc.scrollWidth - 2;
+    btns[0].disabled = sc.scrollLeft &lt;= 2; btns[1].disabled = atEnd;
+    if (pos) { var i = atEnd ? items.length : Math.min(items.length, Math.round(sc.scrollLeft / pitch()) + 1); pos.textContent = pad2(i) + &#x27; / &#x27; + pad2(items.length); }
+  };
+  var go = function (d) { sc.scrollTo({ left: (Math.round(sc.scrollLeft / pitch()) + d) * pitch(), behavior: reduce ? &#x27;auto&#x27; : &#x27;smooth&#x27; }); };
+  btns.forEach(function (b, i) { b.addEventListener(&#x27;click&#x27;, function () { go(i ? 1 : -1); }); });
+  sc.addEventListener(&#x27;scroll&#x27;, upd, { passive: true }); addEventListener(&#x27;resize&#x27;, upd); upd();
+  sc.addEventListener(&#x27;keydown&#x27;, function (e) { if (e.key === &#x27;ArrowRight&#x27;) { e.preventDefault(); go(1); } if (e.key === &#x27;ArrowLeft&#x27;) { e.preventDefault(); go(-1); } });
+  var x0 = null, s0 = 0, moved = false;
+  sc.addEventListener(&#x27;pointerdown&#x27;, function (e) { if (e.pointerType !== &#x27;mouse&#x27; || e.button || sc.scrollWidth &lt;= sc.clientWidth) return; x0 = e.clientX; s0 = sc.scrollLeft; moved = false; });
+  sc.addEventListener(&#x27;pointermove&#x27;, function (e) {
+    if (x0 === null) return;
+    if (!moved &amp;&amp; Math.abs(e.clientX - x0) &gt; 4) { moved = true; sc.classList.add(&#x27;is-drag&#x27;); sc.setPointerCapture(e.pointerId); }
+    if (moved) sc.scrollLeft = s0 - (e.clientX - x0);
+  });
+  var end = function () {
+    if (x0 === null) return; x0 = null;
+    if (moved) { sc.classList.remove(&#x27;is-drag&#x27;); sc.scrollTo({ left: Math.round(sc.scrollLeft / pitch()) * pitch(), behavior: reduce ? &#x27;auto&#x27; : &#x27;smooth&#x27; }); }
+  };
+  sc.addEventListener(&#x27;pointerup&#x27;, end); sc.addEventListener(&#x27;pointercancel&#x27;, end);
+  sc.addEventListener(&#x27;click&#x27;, function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  sc.addEventListener(&#x27;dragstart&#x27;, function (e) { e.preventDefault(); });
+}
+var stg = document.querySelector(&#x27;[data-stgg-track]&#x27;);
+if (stg) slider(stg, $$(&#x27;.stgg__step&#x27;, stg), $$(&#x27;[data-stgg]&#x27;), document.querySelector(&#x27;[data-stgg-pos]&#x27;));
+var wk = document.querySelector(&#x27;[data-wk-track]&#x27;);
+if (wk) slider(wk, $$(&#x27;.wcard&#x27;, wk), $$(&#x27;[data-wk]&#x27;), null);</code></pre></div>
+
+<h3 id="c-acc">4.6. Аккордеон: «Услуги» Главной и FAQ</h3>
+<p><b>Назначение.</b> Два вида. «Услуги» (<code>.svc</code>, 7 строк) — открыт <b>один</b>; на десктопе рядом кадр интерактивного чертежа, который следит за открытой/наведённой строкой (см. разд. 5). FAQ (<code>.faq__item</code>, 2 колонки на десктопе) — можно открыть несколько. Плавное раскрытие — <code>grid-template-rows: 0fr → 1fr</code> за 0,3 с, без измерения высот в JS.</p>
+<p><b>Ключевые атрибуты.</b> кнопка-заголовок: <code>aria-expanded</code> + <code>aria-controls="id панели"</code>; закрытая панель — атрибут <code>inert</code> (недоступна с клавиатуры и ридерам); состояние открытого — класс <code>.is-open</code> на элементе. Иконка + / − (<code>.faq__icon</code>, поворот 45° при открытии); у «Услуг» шеврон поворачивается на 90°.</p>
+<p><b>Три размера.</b> Десктоп: «Услуги» — слева лист чертежа 592×663 (<code>.svc-grid__sheet</code>), справа список; планшет — лист скрыт (<code>display:none</code>), список на всю ширину; мобильный — «просто раскрывающиеся карточки без графики» (решение дизайнера), иконка услуги в раскрытом блоке скрыта, кнопка «Подробнее» 100 %. FAQ: 2 колонки → 1 → 1, заголовок 18 px.</p>
+<div class="code" id="c38"><div class="code__bar"><span class="code__path">index.html:285–291</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;li class=&quot;svc&quot;&gt;
+  &lt;button class=&quot;svc__head&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;svc-1&quot;&gt;&lt;span class=&quot;svc__no&quot;&gt;[01]&lt;/span&gt;&lt;span class=&quot;svc__name t-24&quot;&gt;Обследование объектов&lt;/span&gt;&lt;span class=&quot;sq&quot;&gt;&lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev-r&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/button&gt;
+  &lt;div class=&quot;svc__body&quot; id=&quot;svc-1&quot; inert&gt;&lt;div class=&quot;svc__in&quot;&gt;&lt;div class=&quot;svc__content&quot;&gt;
+    &lt;p&gt;После получения заявки мы в кратчайшие сроки проведем компле…&lt;/p&gt;
+    &lt;div class=&quot;svc__foot&quot;&gt;&lt;a class=&quot;btn-tall btn-tall--line&quot; href=&quot;obsledovanie.html&quot;&gt;Подробнее &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev2&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;&lt;span class=&quot;ic-box&quot; aria-hidden=&quot;true&quot;&gt;&lt;img class=&quot;sic sic--svc&quot; src=&quot;img/home/icon-service-obsled.svg&quot; alt=&quot;&quot; width=&quot;64&quot; height=&quot;64&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/li&gt;</code></pre></div><div class="code" id="c39"><div class="code__bar"><span class="code__path">index.html:421–424</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;div class=&quot;faq__item&quot;&gt;
+  &lt;button class=&quot;faq__button&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;qa-1&quot;&gt;&lt;span class=&quot;faq__icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#plus&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;span&gt;Что такое коммерческий узел учёта тепловой энергии и зачем он нужен?&lt;/span&gt;&lt;/button&gt;
+  &lt;div class=&quot;faq__content&quot; id=&quot;qa-1&quot; inert&gt;&lt;div class=&quot;faq__in&quot;&gt;&lt;div class=&quot;faq__wrapper&quot;&gt;&lt;p class=&quot;faq__text&quot;&gt;Коммерческий узел учёта тепловой энергии (КУУТЭ) — это компл…&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></div><div class="code" id="c40"><div class="code__bar"><span class="code__path">css/concept.css:276–278</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.svc__body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+.svc.is-open .svc__body { grid-template-rows: 1fr; }
+.svc__in { overflow: hidden; }</code></pre></div><div class="code" id="c41"><div class="code__bar"><span class="code__path">css/concept.css:342–344</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.faq__content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+.faq__item.is-open .faq__content { grid-template-rows: 1fr; }
+.faq__in { overflow: hidden; }</code></pre></div><div class="code" id="c42"><div class="code__bar"><span class="code__path">js/concept.js:3–17</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>function toggle(item, open) {
+  var head = item.querySelector(&#x27;[aria-expanded]&#x27;);
+  var body = document.getElementById(head.getAttribute(&#x27;aria-controls&#x27;));
+  item.classList.toggle(&#x27;is-open&#x27;, open);
+  head.setAttribute(&#x27;aria-expanded&#x27;, open);
+  body.inert = !open;
+}
+document.querySelectorAll(&#x27;.svc&#x27;).forEach(function (item) {
+  item.querySelector(&#x27;.svc__head&#x27;).addEventListener(&#x27;click&#x27;, function () {
+    var open = !item.classList.contains(&#x27;is-open&#x27;);
+    item.parentNode.querySelectorAll(&#x27;.svc.is-open&#x27;).forEach(function (o) { if (o !== item) toggle(o, false); });
+    toggle(item, open);
+  });
+});</code></pre></div><div class="code" id="c43"><div class="code__bar"><span class="code__path">js/concept.js:18–22</span><button type="button" class="code__copy">Копировать</button></div><pre><code>document.querySelectorAll(&#x27;.faq__item&#x27;).forEach(function (item) {
+  item.querySelector(&#x27;.faq__button&#x27;).addEventListener(&#x27;click&#x27;, function () {
+    toggle(item, !item.classList.contains(&#x27;is-open&#x27;));
+  });
+});</code></pre></div>
+
+<h3 id="c-table">4.7. Таблицы → карточки («Цена ошибки», «Характеристики»)</h3>
+<p><b>Назначение.</b> Двухколоночная таблица <code>.sp-table</code> (разметка на <code>div</code>, <code>role="table"</code>): «Ошибка» → «Последствия». На десктопе и планшете — таблица как есть; на ≤767 строки превращаются в карточки: шапка <code>.sp-table__head</code> скрыта, подписи «Ошибка» / «Последствия» подставляются псевдоэлементами <code>::before</code> над значением (капс 13 px, серая / акцентная). Цена — аналогично: <code>.sp-price__row</code> в одну колонку. «Спецификации» карточек объектов (<code>.spec</code>, <code>.pg-spec</code>): на ≤767 <code>dt</code> над <code>dd</code>, пунктир <code>&lt;i&gt;</code> скрыт. JS не нужен.</p>
+<div class="code" id="c44"><div class="code__bar"><span class="code__path">proektirovanie.html:228–229</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;div class=&quot;sp-table&quot; role=&quot;table&quot;&gt;&lt;div class=&quot;sp-table__row sp-table__head&quot;&gt;&lt;span&gt;Ошибка в проекте&lt;/span&gt;&lt;span&gt;Последствия&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;sp-table__row&quot;&gt;&lt;b&gt;Расходомер подобран без учёта фактического диапазона расходов&lt;/b&gt;&lt;span&gt;Выход за пределы измерений, систематическая погрешность, перерасчёт по нормативу&lt;/span&gt;&lt;/div&gt;</code></pre></div><div class="code" id="c45"><div class="code__bar"><span class="code__path">css/service.css:424–432</span><button type="button" class="code__copy">Копировать</button></div><pre><code>/* таблицы → карточки: подпись над значением (RULES §3) */
+.sv2 .sp-table { border: 0; border-radius: 0; display: grid; gap: .5rem; overflow: visible; }
+.sv2 .sp-table__head { display: none; }
+.sv2 .sp-table__row { display: block; background: var(--sv-gray-2); border: 1px solid var(--stroke); border-radius: var(--r-sm); padding: 0; }
+.sv2 .sp-table__row:not(:first-child) { border-top: 1px solid var(--stroke); }
+.sv2 .sp-table__row &gt; * { display: block; padding: .75rem 1rem; }
+.sv2 .sp-table__row + .sp-table__row &gt; :first-child { border-right: 0; border-bottom: 1px solid var(--stroke); }
+.sv2 .sp-table__row &gt; :first-child::before { content: &quot;Ошибка&quot;; display: block; margin-bottom: .25rem; font-size: .8125rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2); }
+.sv2 .sp-table__row &gt; :last-child::before { content: &quot;Последствия&quot;; display: block; margin-bottom: .25rem; font-size: .8125rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }</code></pre></div>
+
+<h3 id="c-side">4.8. Левая колонка страниц услуг: оглавление + баннер → полоса + нижняя кнопка</h3>
+<p><b>Назначение.</b> На 5 страницах услуг (<code>main.sv2</code>) слева липкая колонка <code>aside.sp-side</code> из двух плашек: оглавление «На этой странице» (<code>.sp-side__toc</code>, 5–7 пунктов, активный подсвечивается при прокрутке) и оранжевый баннер-призыв (<code>.sp-cta</code>, кнопка с <code>data-modal</code> и <code>data-modal-lead</code>). Правила — <code>adaptiv/RULES.md</code> §8; ниже — как реализовано.</p>
+<h4>Десктоп и 1024–1199</h4>
+<p>Сетка <code>.sp-split</code>: <code>37fr / 81.5fr</code> (608 / 1304 при 1920), на 1024–1199 — <code>1fr / 2.2fr</code>. Колонка <code>position:sticky; top = шапка + 2·gap</code>, высота <code>min(55.75rem; 100vh − шапка − 3·gap)</code>; оглавление скроллится внутри (<code>overflow:auto</code>). Активный пункт — <code>IntersectionObserver</code> с <code>rootMargin:-35% 0px -60% 0px</code> по <code>[data-toc]</code> → класс <code>.is-active</code> (сдвиг пункта + оранжевая риска).</p>
+<div class="code" id="c46"><div class="code__bar"><span class="code__path">proektirovanie.html:148–167</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;aside class=&quot;sp-side&quot; aria-label=&quot;Содержание страницы&quot;&gt;
+  &lt;div class=&quot;plate sp-side__toc&quot;&gt;
+    &lt;p class=&quot;sp-toc__h&quot;&gt;&lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#menu&quot;/&gt;&lt;/svg&gt;На этой странице&lt;/p&gt;
+    &lt;ol class=&quot;sp-toc__list&quot;&gt;
+      &lt;li&gt;&lt;a href=&quot;#must&quot; data-toc=&quot;must&quot;&gt;Когда проект обязателен&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#scope&quot; data-toc=&quot;scope&quot;&gt;Что входит в проект&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#steps&quot; data-toc=&quot;steps&quot;&gt;Этапы проектирования&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#objects&quot; data-toc=&quot;objects&quot;&gt;Особенности для объектов&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#risk&quot; data-toc=&quot;risk&quot;&gt;Цена ошибки&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#result&quot; data-toc=&quot;result&quot;&gt;Что вы получаете&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#faq&quot; data-toc=&quot;faq&quot;&gt;Вопросы&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;plate plate--accent sp-cta&quot;&gt;
+    &lt;p class=&quot;sv2-h5&quot;&gt;Закажите разработку проекта узла учёта тепловой энергии&lt;/p&gt;
+    &lt;p class=&quot;sp-cta__p&quot;&gt;Свяжитесь с нами — мы бесплатно проконсультируем вас без сло…&lt;/p&gt;
+    &lt;button class=&quot;btn-tall btn-tall--glass btn-tall--wide&quot; type=&quot;button&quot; data-modal data-modal-lead=&quot;Обсудим объект, сроки и что нужно для согласования проекта с РСО.&quot;&gt;Заказать проект &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev2&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;</code></pre></div><div class="code" id="c47"><div class="code__bar"><span class="code__path">css/service.css:47–58</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.sv2 .sp-split { display: grid; grid-template-columns: 37fr 81.5fr; gap: var(--gap); align-items: start; }
+.sv2 .sp-side {
+  position: sticky; top: calc(4.625rem + var(--gap) * 2); height: min(55.75rem, calc(100vh - 4.625rem - var(--gap) * 3));
+  display: flex; flex-direction: column; gap: var(--gap);
+}
+.sv2 .sp-side__toc { flex: 1 1 auto; min-height: 0; overflow: auto; padding: 2.5rem; }
+.sv2 .sp-toc__h { margin-bottom: 1.5rem; font-size: max(1rem, 15px); font-weight: 600; letter-spacing: -.015em; line-height: 1.5; }
+.sv2 .sp-toc__list li { padding-left: 2rem; }
+.sv2 .sp-toc__list a { font-size: max(1rem, 15px); line-height: 1.5; letter-spacing: -.015em; padding: .5rem .75rem; }
+.sv2 .sp-toc__list a.is-active { padding-left: calc(.75rem + 8px); }
+.sv2 .sp-cta { flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; padding: 1.5rem; }
+.sv2 .sp-cta .sv2-h5 { color: var(--accent-ink); }</code></pre></div><div class="code" id="c50"><div class="code__bar"><span class="code__path">js/concept.js:190–202</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>var tocLinks = document.querySelectorAll(&#x27;[data-toc]&#x27;);
+if (tocLinks.length &amp;&amp; &#x27;IntersectionObserver&#x27; in window) {
+  var tocMap = {};
+  tocLinks.forEach(function (a) { tocMap[a.dataset.toc] = a; });
+  var tocIo = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      tocLinks.forEach(function (a) { a.classList.toggle(&#x27;is-active&#x27;, a === tocMap[e.target.id]); });
+    });
+  }, { rootMargin: &#x27;-35% 0px -60% 0px&#x27; });
+  Object.keys(tocMap).forEach(function (id) { var s = document.getElementById(id); if (s) tocIo.observe(s); });
+}</code></pre></div>
+<h4>≤1023: полоса оглавления + нижняя липкая кнопка</h4>
+<ol>
+<li><b>Колонка скрыта</b> (<code>.sv2 .sp-side{display:none}</code>), <code>.sp-split</code> — одна колонка, у секций <code>scroll-margin-top:9rem</code> (шапка 64 + gap 16 + полоса 48 + запас).</li>
+<li><b>Полоса <code>.sp-bar</code></b> строится JS из <code>.sp-toc__list</code> и добавляется в <code>&lt;body&gt;</code>: <code>position:fixed; top = 4rem + 2·gap (80); высота 48; левый/правый отступ = gap</code>. Появляется, когда нижний край hero ушёл выше её верхней границы; не показывается, если открыта шторка меню или модалка. Слева иконка «меню», по центру название <b>текущего раздела</b> (последний раздел, верх которого выше линии 168 px; до первого — «На этой странице»), справа шеврон. Тап раскрывает панель (<code>max-height:60dvh</code>, прокрутка внутри, пункты ≥ 44, активный — оранжевая риска слева); закрывается по тапу на пункт, вне панели, <code>Esc</code> (фокус на кнопку) и повторным тапом. <code>aria-expanded</code> + <code>aria-controls="sp-bar-panel"</code>, панель — <code>nav aria-label="На этой странице"</code>, активная ссылка <code>aria-current="true"</code>.</li>
+<li><b>Баннер скрыт</b>, вместо него <b>нижняя кнопка <code>.sp-sticky</code></b>: <code>fixed; bottom = 1rem + env(safe-area-inset-bottom); left/right 16; высота 52</code>, оранжевая, тот же текст, <code>data-modal</code> и <code>data-modal-lead</code>; нажатие вызывает <code>click()</code> кнопки баннера (модалка и текст — те же). Показывается после hero, прячется, когда в экране финальный CTA <code>#contacts</code> или подвал, когда открыта панель оглавления, шторка меню или модалка.</li>
+<li><code>prefers-reduced-motion</code> → без плавного скролла и анимации появления.</li>
+</ol>
+<p class="note">Реализация использует <code>scroll</code> + <code>requestAnimationFrame</code> (не <code>IntersectionObserver</code>, как написано в RULES §8.1) и класс-флаг <code>html.is-drawer</code> от шторки. Нижний отступ страницы под кнопку отдельно не задан — кнопка скрывается у CTA/подвала, поэтому контент не перекрывает.</p>
+<div class="code" id="c48"><div class="code__bar"><span class="code__path">css/service.css:301–333</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.sp-bar, .sp-sticky { display: none; }
+@media (max-width: 1023px) {
+  .sv2 .sp-split, .sv2 .sp-split.sv2-split--blocks { grid-template-columns: minmax(0, 1fr); }
+  .sv2 .sp-side { display: none; }   /* липкая колонка не помещается: оглавление → полоса, баннер → нижняя кнопка */
+  .sv2 .sp-sec, .sv2 section[id], .sv2 ~ section[id] { scroll-margin-top: 9rem; }
+
+  .sp-bar { display: block; position: fixed; z-index: 45; left: var(--gap); right: var(--gap); top: calc(4rem + var(--gap) * 2);
+    opacity: 0; visibility: hidden; transform: translateY(-.5rem); transition: opacity .2s, transform .2s, visibility 0s .2s; }
+  .sp-bar.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity .2s, transform .2s; }
+  .sp-bar__btn { display: flex; align-items: center; gap: .75rem; width: 100%; height: 3rem; padding: 0 1rem; text-align: left;
+    background: #fff; color: var(--text); border: 0; border-bottom: 1px solid var(--stroke); border-radius: var(--r-sm); box-shadow: 0 1px 0 rgb(0 0 0 / .02); }
+  .sp-bar__btn .ic { width: 1.25rem; height: 1.25rem; flex: none; color: var(--text-2); }
+  .sp-bar__cur { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 1rem; font-weight: 600; letter-spacing: -.015em; }
+  .sp-bar__chev { transition: transform .2s; }
+  .sp-bar.is-open .sp-bar__chev { transform: rotate(180deg); }
+  .sp-bar__panel { margin-top: 0; max-height: 60vh; max-height: 60dvh; overflow-y: auto; overscroll-behavior: contain; background: #fff;
+    border-radius: 0 0 var(--r) var(--r); border: 1px solid var(--stroke); border-top: 0; box-shadow: 0 12px 32px rgb(0 0 0 / .12); }
+  .sp-bar__panel[hidden] { display: none; }
+  .sp-bar__panel ol { padding: .5rem 0; }
+  .sp-bar__panel a { position: relative; display: flex; align-items: center; min-height: 2.75rem; padding: .5rem 1rem .5rem 2.5rem; font-size: 1rem; line-height: 1.35; color: var(--text-2); }
+  .sp-bar__panel a::after { content: &quot;&quot;; position: absolute; left: 1rem; top: 50%; width: 1rem; height: 2px; background: var(--stroke); transition: background-color .2s, width .2s; }
+  .sp-bar__panel a.is-active { color: var(--text); font-weight: 600; }
+  .sp-bar__panel a.is-active::after { width: 1.25rem; background: var(--accent); }
+
+  .sp-sticky { display: block; position: fixed; z-index: 44; left: 1rem; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    opacity: 0; visibility: hidden; transform: translateY(1rem); transition: opacity .2s, transform .2s, visibility 0s .2s; }
+  .sp-sticky.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity .2s, transform .2s; }
+  .sp-sticky__btn { display: flex; align-items: center; justify-content: center; gap: .75rem; width: 100%; height: 3.25rem; padding: 0 1.25rem;
+    background: var(--accent); color: var(--accent-ink); border: 0; border-radius: var(--r-sm); font-size: 1rem; font-weight: 600; letter-spacing: -.015em;
+    box-shadow: 0 8px 24px rgb(0 0 0 / .18); }
+  .sp-sticky__btn .ic { width: 1.25rem; height: 1.25rem; }
+  .sp-sticky:not(.is-on) .sp-sticky__btn { pointer-events: none; }
+}</code></pre></div><div class="code" id="c49"><div class="code__bar"><span class="code__path">js/concept.js:484–566</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>(function () {
+  var toc = document.querySelector(&#x27;.sv2 .sp-side__toc .sp-toc__list&#x27;);
+  var cta = document.querySelector(&#x27;.sv2 .sp-cta .btn-tall[data-modal]&#x27;);
+  var hero = document.querySelector(&#x27;.sv2 .sv2-hero&#x27;);
+  if (!toc || !hero) return;
+  var mq = matchMedia(&#x27;(max-width: 1023px)&#x27;);
+  var reduce = matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;);
+  var esc = function (t) { return String(t).replace(/&amp;/g, &#x27;&amp;amp;&#x27;).replace(/&lt;/g, &#x27;&amp;lt;&#x27;); };
+  var DEFAULT = &#x27;На этой странице&#x27;;
+  var items = [].map.call(toc.querySelectorAll(&#x27;a[href^=&quot;#&quot;]&#x27;), function (a) {
+    return { id: a.getAttribute(&#x27;href&#x27;).slice(1), text: a.textContent.trim(), el: document.getElementById(a.getAttribute(&#x27;href&#x27;).slice(1)) };
+  }).filter(function (i) { return i.el; });
+  if (!items.length) return;
+
+  var bar = document.createElement(&#x27;div&#x27;);
+  bar.className = &#x27;sp-bar&#x27;; bar.setAttribute(&#x27;data-sp-bar&#x27;, &#x27;&#x27;);
+  bar.innerHTML = &#x27;&lt;button class=&quot;sp-bar__btn&quot; type=&quot;button&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;sp-bar-panel&quot;&gt;&lt;svg class=&quot;ic&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#menu&quot;/&gt;&lt;/svg&gt;&lt;span class=&quot;sp-bar__cur&quot;&gt;&#x27; + DEFAULT + &#x27;&lt;/span&gt;&lt;svg class=&quot;ic sp-bar__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#chev-d&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&#x27; +
+    &#x27;&lt;nav class=&quot;sp-bar__panel&quot; id=&quot;sp-bar-panel&quot; aria-label=&quot;На этой странице&quot; hidden&gt;&lt;ol&gt;&#x27; +
+    items.map(function (i) { return &#x27;&lt;li&gt;&lt;a href=&quot;#&#x27; + i.id + &#x27;&quot; data-bar=&quot;&#x27; + i.id + &#x27;&quot;&gt;&#x27; + esc(i.text) + &#x27;&lt;/a&gt;&lt;/li&gt;&#x27;; }).join(&#x27;&#x27;) + &#x27;&lt;/ol&gt;&lt;/nav&gt;&#x27;;
+  document.body.appendChild(bar);
+  var btn = bar.querySelector(&#x27;.sp-bar__btn&#x27;), cur = bar.querySelector(&#x27;.sp-bar__cur&#x27;), panel = bar.querySelector(&#x27;.sp-bar__panel&#x27;);
+  var links = [].slice.call(panel.querySelectorAll(&#x27;a&#x27;));
+
+  var sticky = null;
+  if (cta) {
+    sticky = document.createElement(&#x27;div&#x27;);
+    sticky.className = &#x27;sp-sticky&#x27;; sticky.setAttribute(&#x27;data-sp-sticky&#x27;, &#x27;&#x27;);
+    sticky.innerHTML = &#x27;&lt;button class=&quot;sp-sticky__btn&quot; type=&quot;button&quot; data-modal data-modal-lead=&quot;&#x27; + esc((cta.dataset.modalLead || &#x27;&#x27;)).replace(/&quot;/g, &#x27;&amp;quot;&#x27;) + &#x27;&quot;&gt;&lt;span&gt;&#x27; + esc(cta.textContent.trim()) + &#x27;&lt;/span&gt;&lt;svg class=&quot;ic&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#chev2&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&#x27;;
+    document.body.appendChild(sticky);
+    sticky.querySelector(&#x27;button&#x27;).addEventListener(&#x27;click&#x27;, function () { cta.click(); });
+  }
+
+  var isOpen = false;
+  var setOpen = function (v, back) {
+    if (v === isOpen) return;
+    isOpen = v; panel.hidden = !v; btn.setAttribute(&#x27;aria-expanded&#x27;, v);
+    bar.classList.toggle(&#x27;is-open&#x27;, v);
+    if (!v &amp;&amp; back) btn.focus();
+    update();
+  };
+  btn.addEventListener(&#x27;click&#x27;, function () { setOpen(!isOpen); });
+  panel.addEventListener(&#x27;click&#x27;, function (e) { if (e.target.closest(&#x27;a&#x27;)) setOpen(false); });
+  document.addEventListener(&#x27;click&#x27;, function (e) { if (isOpen &amp;&amp; !bar.contains(e.target)) setOpen(false); });
+  document.addEventListener(&#x27;keydown&#x27;, function (e) { if (isOpen &amp;&amp; e.key === &#x27;Escape&#x27;) setOpen(false, true); });
+
+  var modalEl = document.getElementById(&#x27;consult&#x27;);
+  var finals = [document.getElementById(&#x27;contacts&#x27;), document.querySelector(&#x27;footer.footer&#x27;)].filter(Boolean);
+  var shown = false, curId = &#x27;&#x27;;
+  var update = function () {
+    var on = mq.matches;
+    var vh = innerHeight;
+    var past = hero.getBoundingClientRect().bottom &lt;= (parseFloat(getComputedStyle(bar).top) || 0) + 1;
+    var blocked = document.documentElement.classList.contains(&#x27;is-drawer&#x27;) || (modalEl &amp;&amp; !modalEl.hidden);
+    var line = 144 + 24, id = &#x27;&#x27;;
+    items.forEach(function (i) { if (i.el.getBoundingClientRect().top &lt;= line) id = i.id; });
+    if (id !== curId) {
+      curId = id;
+      var it = items.filter(function (i) { return i.id === id; })[0];
+      cur.textContent = it ? it.text : DEFAULT;
+      links.forEach(function (a) { var on2 = a.dataset.bar === id; a.classList.toggle(&#x27;is-active&#x27;, on2); if (on2) a.setAttribute(&#x27;aria-current&#x27;, &#x27;true&#x27;); else a.removeAttribute(&#x27;aria-current&#x27;); });
+    }
+    var showBar = on &amp;&amp; past &amp;&amp; !blocked;
+    bar.classList.toggle(&#x27;is-on&#x27;, showBar);
+    if (!showBar &amp;&amp; isOpen) setOpen(false);
+    if (sticky) {
+      var atEnd = finals.some(function (f) { return f.getBoundingClientRect().top &lt; vh - 8; });
+      sticky.classList.toggle(&#x27;is-on&#x27;, on &amp;&amp; past &amp;&amp; !blocked &amp;&amp; !atEnd &amp;&amp; !isOpen);
+    }
+  };
+  var raf = 0;
+  var queue = function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; update(); }); };
+  addEventListener(&#x27;scroll&#x27;, queue, { passive: true });
+  addEventListener(&#x27;resize&#x27;, queue);
+  mq.addEventListener(&#x27;change&#x27;, function () { if (!mq.matches) setOpen(false); queue(); });
+  var mo = new MutationObserver(queue);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: [&#x27;class&#x27;] });
+  if (modalEl) mo.observe(modalEl, { attributes: true, attributeFilter: [&#x27;hidden&#x27;] });
+  update();
+})();</code></pre></div>
+
+<h3 id="c-filter">4.9. Фильтр «Объектов»</h3>
+<p><b>Назначение.</b> 6 кнопок-вкладок над сеткой карточек: «Все услуги» + 5 услуг. Карточка с <code>data-service="ustanovka"</code> видна во вкладке «Установка» и во «Все услуги»; карточки-заглушки (<code>data-service=""</code>, их 4) — только во «Все услуги»; в пустой категории показывается плашка <code>[data-empty]</code>. Выбор пишется в <code>location.hash</code> (<code>#ustanovka</code>), открытие по ссылке с hash работает.</p>
+<p><b>Три размера.</b> Всегда горизонтальная лента <code>.ftabs</code> (<code>overflow-x:auto; scroll-snap-type:x proximity</code>, скроллбар скрыт), вкладка высотой 44 (<code>min-height:2.75rem</code>), активная при выборе прокручивается в центр ленты (<code>scrollTo</code> только ленты, не страницы). На мобильном лента выходит за поля плашки (<code>margin-inline:-var(--pad)</code>). Семантика: <code>role="group" aria-label="Фильтр по услугам"</code>, на кнопках <code>aria-pressed</code> (не <code>role="tab"</code>: панелей-вкладок нет, это переключатели фильтра). Сетка карточек <code>.pg-grid</code>: 4 → 2 (≤1199) → 1 (≤767).</p>
+<div class="code" id="c51"><div class="code__bar"><span class="code__path">obekty.html:124–131</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;div class=&quot;ftabs&quot; role=&quot;group&quot; aria-label=&quot;Фильтр по услугам&quot; data-ftabs&gt;
+  &lt;button class=&quot;ftab is-active&quot; type=&quot;button&quot; data-filter=&quot;all&quot; aria-pressed=&quot;true&quot;&gt;Все услуги&lt;/button&gt;
+  &lt;button class=&quot;ftab&quot; type=&quot;button&quot; data-filter=&quot;obsledovanie&quot; aria-pressed=&quot;false&quot;&gt;Обследование&lt;/button&gt;
+  &lt;button class=&quot;ftab&quot; type=&quot;button&quot; data-filter=&quot;proektirovanie&quot; aria-pressed=&quot;false&quot;&gt;Проектирование&lt;/button&gt;
+  &lt;button class=&quot;ftab&quot; type=&quot;button&quot; data-filter=&quot;ustanovka&quot; aria-pressed=&quot;false&quot;&gt;Установка&lt;/button&gt;
+  &lt;button class=&quot;ftab&quot; type=&quot;button&quot; data-filter=&quot;servis&quot; aria-pressed=&quot;false&quot;&gt;Сервисное обслуживание&lt;/button&gt;
+  &lt;button class=&quot;ftab&quot; type=&quot;button&quot; data-filter=&quot;remont&quot; aria-pressed=&quot;false&quot;&gt;Ремонт и замена&lt;/button&gt;
+&lt;/div&gt;</code></pre></div><div class="code" id="c52"><div class="code__bar"><span class="code__path">css/pages.css:15–25</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.ftabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; overscroll-behavior-x: contain; }
+.ftabs::-webkit-scrollbar { display: none; }
+.ftab {
+  flex: none; scroll-snap-align: center; min-height: 2.75rem; padding: 0 1.25rem; border-radius: .5rem;
+  border: 1px solid transparent; background: var(--sv-gray); color: var(--text);
+  font-family: var(--font-body), var(--font-fallback); font-size: max(1rem, 15px); line-height: 1.15; font-weight: 600; white-space: nowrap;
+  cursor: pointer; transition: background-color .2s, color .2s, border-color .2s;
+}
+.ftab:hover { border-color: var(--accent); }
+.ftab.is-active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.ftab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }</code></pre></div><div class="code" id="c53"><div class="code__bar"><span class="code__path">js/obekty.js:3–45</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>(function () {
+  &#x27;use strict&#x27;;
+  var bar = document.querySelector(&#x27;[data-ftabs]&#x27;);
+  if (!bar) return;
+  var tabs = Array.prototype.slice.call(bar.querySelectorAll(&#x27;[data-filter]&#x27;));
+  var cards = Array.prototype.slice.call(document.querySelectorAll(&#x27;[data-grid] [data-service]&#x27;));
+  var empty = document.querySelector(&#x27;[data-empty]&#x27;);
+  var reduce = matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;).matches;
+
+  function reveal(btn, smooth) {
+    var left = btn.offsetLeft - (bar.clientWidth - btn.offsetWidth) / 2;
+    bar.scrollTo({ left: Math.max(0, left), behavior: smooth &amp;&amp; !reduce ? &#x27;smooth&#x27; : &#x27;auto&#x27; });
+  }
+
+  function apply(key, smooth) {
+    var shown = 0;
+    tabs.forEach(function (t) {
+      var on = t.getAttribute(&#x27;data-filter&#x27;) === key;
+      t.classList.toggle(&#x27;is-active&#x27;, on);
+      t.setAttribute(&#x27;aria-pressed&#x27;, on ? &#x27;true&#x27; : &#x27;false&#x27;);
+      if (on) reveal(t, smooth);
+    });
+    cards.forEach(function (c) {
+      var ok = key === &#x27;all&#x27; || (c.getAttribute(&#x27;data-service&#x27;) || &#x27;&#x27;).split(&#x27; &#x27;).indexOf(key) &gt; -1;
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+    if (empty) empty.hidden = shown &gt; 0;
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener(&#x27;click&#x27;, function () {
+      var key = t.getAttribute(&#x27;data-filter&#x27;);
+      apply(key, true);
+      try { history.replaceState(null, &#x27;&#x27;, key === &#x27;all&#x27; ? location.pathname + location.search : &#x27;#&#x27; + key); } catch (e) {}
+    });
+  });
+
+  var h = (location.hash || &#x27;&#x27;).replace(&#x27;#&#x27;, &#x27;&#x27;);
+  var known = tabs.some(function (t) { return t.getAttribute(&#x27;data-filter&#x27;) === h; });
+  apply(known ? h : &#x27;all&#x27;, false);
+})();</code></pre></div>
+
+<h3 id="c-modal">4.10. Модалка консультации</h3>
+<p><b>Назначение.</b> «Получить консультацию» — окно без формы: телефон и почта кнопками. Открывается любой кнопкой с атрибутом <code>data-modal</code>; если у кнопки есть <code>data-modal-lead</code>, заголовок окна = надпись кнопки, а подводка берётся из атрибута (тексты — черновик, согласовать с клиентом). Одно окно <code>#consult</code> лежит в конце <code>&lt;body&gt;</code> каждой страницы.</p>
+<p><b>Доступность.</b> <code>role="dialog" aria-modal="true" aria-labelledby="consult-title"</code>, атрибут <code>hidden</code> вместо классов; при открытии весь остальной <code>body</code> получает <code>inert</code>, <code>body{overflow:hidden}</code>, фокус — на «Закрыть»; <code>Tab</code> замкнут внутри, <code>Esc</code> и клик по <code>.modal__overlay[data-close]</code> закрывают, фокус возвращается на кнопку-источник. Размеры: панель 736 (<code>46rem</code>, не шире <code>100vw − 32</code>), на ≤1199 <code>max-height:100dvh − 32</code> с прокруткой, кнопки на ≤1199 — 100 % ширины.</p>
+<div class="code" id="c54"><div class="code__bar"><span class="code__path">index.html:507–518</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>&lt;div class=&quot;modal&quot; id=&quot;consult&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;consult-title&quot; hidden&gt;
+  &lt;div class=&quot;modal__overlay&quot; data-close&gt;&lt;/div&gt;
+  &lt;div class=&quot;modal__panel&quot;&gt;
+    &lt;button class=&quot;sq sq--line modal__close&quot; type=&quot;button&quot; aria-label=&quot;Закрыть&quot; data-close&gt;&lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#x&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;h2 class=&quot;t-28&quot; id=&quot;consult-title&quot;&gt;Получить консультацию&lt;/h2&gt;
+    &lt;p class=&quot;t-16&quot;&gt;Свяжитесь с нами — мы бесплатно проконсультируем вас без сло…&lt;b&gt;Просто позвоните или напишите:&lt;/b&gt;&lt;/p&gt;
+    &lt;div class=&quot;btns&quot;&gt;
+      &lt;a class=&quot;btn-tall&quot; href=&quot;tel:+74991107701&quot;&gt;+7 (499) 110-77-01 &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev2&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+      &lt;a class=&quot;btn-tall btn-tall--line&quot; href=&quot;mailto:Complex-T@yandex.ru&quot;&gt;Complex-T@yandex.ru &lt;svg class=&quot;ic&quot;&gt;&lt;use href=&quot;#chev2&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div><div class="code" id="c55"><div class="code__bar"><span class="code__path">css/concept.css:369–377</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; }
+.modal[hidden] { display: none; }
+.modal__overlay { position: absolute; inset: 0; background: rgba(24, 28, 33, .55); }
+.modal__panel { position: relative; background: var(--white); border-radius: var(--r); padding: var(--pad); width: 46rem; max-width: calc(100vw - 2rem); }
+.modal__panel h2 { margin-bottom: 1.25rem; padding-right: 4rem; }
+.modal__panel p { color: var(--text-2); margin-bottom: 2rem; }
+.modal__panel p b { color: var(--text); font-weight: 600; }
+.modal__close { position: absolute; top: 1.5rem; right: 1.5rem; }
+.modal .btn-tall { width: 19rem; }</code></pre></div><div class="code" id="c57"><div class="code__bar"><span class="code__path">css/concept.css:1148–1149</span><button type="button" class="code__copy">Копировать</button></div><pre><code>.modal__panel { max-height: calc(100dvh - 2rem); overflow-y: auto; }
+.modal .btn-tall { width: 100%; }</code></pre></div><div class="code" id="c56"><div class="code__bar"><span class="code__path">js/concept.js:204–241</span> <span class="code__flag" title="Длинные тексты и SVG-пути в строках заменены на «…», сам фрагмент — подряд из файла">сокращено</span><button type="button" class="code__copy">Копировать</button></div><pre><code>var modal = document.getElementById(&#x27;consult&#x27;);
+var mTitle = modal.querySelector(&#x27;#consult-title&#x27;);
+var mLead = modal.querySelector(&#x27;.modal__panel &gt; p&#x27;);
+var mDefault = { title: mTitle.textContent, lead: mLead.innerHTML };
+var last = null;
+function onKey(e) {
+  if (e.key === &#x27;Escape&#x27;) return close();
+  if (e.key !== &#x27;Tab&#x27;) return;
+  var f = modal.querySelectorAll(&#x27;a[href], button:not([disabled])&#x27;);
+  var first = f[0], end = f[f.length - 1];
+  if (e.shiftKey &amp;&amp; document.activeElement === first) { e.preventDefault(); end.focus(); }
+  else if (!e.shiftKey &amp;&amp; document.activeElement === end) { e.preventDefault(); first.focus(); }
+}
+function setInert(on) {
+  [].forEach.call(document.body.children, function (el) { if (el !== modal &amp;&amp; el.tagName !== &#x27;SCRIPT&#x27;) el.inert = on; });
+}
+function open(e) {
+  var b = e.currentTarget;
+  last = b;
+  var lead = b.dataset.modalLead;
+  mTitle.textContent = lead ? b.textContent.trim() : mDefault.title;
+  mLead.innerHTML = lead ? lead + &#x27; &lt;b&gt;Просто позвоните или напишите:&lt;/b&gt;&#x27; : mDefault.lead;
+  modal.hidden = false;
+  setInert(true);
+  document.body.style.overflow = &#x27;hidden&#x27;;
+  modal.querySelector(&#x27;.modal__close&#x27;).focus();
+  document.addEventListener(&#x27;keydown&#x27;, onKey);
+}
+function close() {
+  modal.hidden = true;
+  setInert(false);
+  document.body.style.overflow = &#x27;&#x27;;
+  document.removeEventListener(&#x27;keydown&#x27;, onKey);
+  if (last) last.focus();
+}
+document.querySelectorAll(&#x27;[data-modal]&#x27;).forEach(function (b) { b.addEventListener(&#x27;click&#x27;, open); });</code></pre></div>
+
+<h2 id="graphics">5. Графика и анимация</h2>
+<p><b>Вся графика сайта — в <a href="biblioteka-grafiki.html"><code>biblioteka-grafiki.html</code></a>: 26 карточек (id: uzel, svc, stgg, ap, itp, sxrun, chain, tu, sx2, gost, thr, sheets, montazh, datchik, trial, oplomb, season, err, remont, ic-svc, ic-ap, ic-card, ic-obj, divs, parts, sym).</b> Каждая карточка — живая демонстрация в трёх размерах (1920 / 768 / 390), описание поведения и состояний, вкладки HTML / CSS / JS / SVG и кнопка «Копировать». Этот документ графику не дублирует; он указывает, где что лежит в коде страниц.</p>
+<h3 id="gr-map">5.1. Блок страницы → карточка библиотеки → файл</h3>
+<div class="tw"><table class=""><thead><tr><th>Блок страницы (Figma)</th><th>Карточка библиотеки</th><th>Файлы</th></tr></thead><tbody><tr><td>Главная · «Схема узла» (948:8604)</td><td><b>uzel</b> — Схема узла учёта</td><td>index.html (<code>#uzel</code>, <code>[data-uzel]</code>, <code>#uzel-items</code> JSON), <code>js/home.js:8–92</code>, <code>css/home.css:8–104</code>; SVG инлайном</td></tr><tr><td>Главная · «Услуги» — кадр чертежа слева</td><td><b>svc</b> — кадры чертежа + аккордеон</td><td><code>img/home/state-0…7.svg</code>, <code>js/home.js:93–121</code>, <code>[data-svc-ill]</code></td></tr><tr><td>Главная · «Этапы работ»</td><td><b>stgg</b> — котельная → 7 шагов → дом</td><td><code>img/home/istochnik.svg</code>, <code>dom-uute.svg</code>, <code>lenta-shag.svg</code>, <code>styk-etapa.svg</code>; <code>js/home.js:122–154</code>; <code>css/home.css</code> (<code>.stgg*</code>)</td></tr><tr><td>Главная · «Наш подход»: индикатор</td><td><b>ap</b> — труба + 9 узлов</td><td><code>.ap-ind</code> в <code>concept.css</code>; <code>js/concept.js:24–61</code></td></tr><tr><td>Главная · «Наш подход»: 9 иконок</td><td><b>ic-ap</b> — иконки 64 (9)</td><td><code>img/home/icon-approach-*.svg</code></td></tr><tr><td>Главная и «Услуги»: иконки услуг</td><td><b>ic-svc</b> — иконки услуг 64 (7)</td><td><code>img/home/icon-service-*.svg</code> (аккордеон, хаб), <code>img/svc/icon-service-*.svg</code> (страницы услуг)</td></tr><tr><td>Обследование · карта ИТП (1308:10517)</td><td><b>itp</b> — карта ИТП, 6 точек</td><td><code>obsledovanie.html#scheme</code>, <code>[data-hvs]</code>, <code>js/hvs.js</code>, <code>css/uslugi-b.css</code> (<code>.hvs*</code>)</td></tr><tr><td>Обследование · «Прямые участки» (963:6124)</td><td><b>sxrun</b> — 3 ситуации</td><td><code>[data-sx]</code>, <code>js/schemes.js:266–322</code>. <b>Старая версия</b> (нужен экспорт mini-straight из Figma)</td></tr><tr><td>Обследование · цепочка этапов</td><td><b>chain</b></td><td><code>.sv2-chain</code> (<code>service.css:454</code>), чистый HTML/CSS</td></tr><tr><td>Обследование · шкала ТУ 15 дней</td><td><b>tu</b></td><td><code>.sv2-tu</code> (<code>service.css:463</code>), чистый HTML/CSS</td></tr><tr><td>Обследование · схема обследования (964:6042)</td><td><b>sx2</b> — две строки, размеры</td><td><b>на принятой странице отсутствует</b> (см. разд. 8); SVG: <code>teplo-graphics/svg/gibrid/scheme-obsledovanie-*.svg</code></td></tr><tr><td>Проектирование · ГОСТ-схема (965:6248)</td><td><b>gost</b> — функциональная схема</td><td><code>proektirovanie.html</code> (<code>figure.sx-hero</code>, <code>[data-sx][data-mode]</code>), <code>js/schemes.js:115–211</code></td></tr><tr><td>Проектирование · порог 0,2 Гкал/ч</td><td><b>thr</b></td><td><code>img/svc/*</code> / инлайн в странице</td></tr><tr><td>Проектирование · «Что входит» (13 листов)</td><td><b>sheets</b> — 13 мини-листов</td><td><code>js/schemes.js:399–426</code> (наведение связывает лист и строку)</td></tr><tr><td>Установка · «Монтаж по шагам» (948:9142)</td><td><b>montazh</b> — 8 шагов, точки</td><td><code>ustanovka.html#scheme</code>, <code>[data-hvs]</code>, <code>js/hvs.js</code></td></tr><tr><td>Установка · датчик в трубе (948:9680)</td><td><b>datchik</b> — разрез, 7 точек</td><td><code>ustanovka.html #datchik</code>, <code>.hvs--in</code></td></tr><tr><td>Установка · опытная эксплуатация</td><td><b>trial</b> — mini-trial</td><td><code>img/svc/mini-trial.svg</code>, <code>js/schemes.js:323–347</code></td></tr><tr><td>Сервис · опломбирование (950:6464)</td><td><b>oplomb</b> — 3 точки</td><td><code>servis.html #oplomb</code>, <code>[data-hvs]</code></td></tr><tr><td>Сервис · шкала сезона, вариант Б (950:6590)</td><td><b>season</b> — 12 месяцев</td><td><code>servis.html#season</code>, <code>[data-season]</code>, <code>js/hvs.js:104–151</code></td></tr><tr><td>Сервис · график погрешности (3/6/9/12/15 мес.)</td><td><b>err</b></td><td><code>img/svc/mini-err-months.svg</code>, <code>js/schemes.js:348–398</code></td></tr><tr><td>Ремонт · «Было / Стало / Реконструкция»</td><td><b>remont</b></td><td><code>remont.html#scheme</code>, <code>.hvs--rem</code>, <code>js/hvs.js:152–162</code> (сегмент <code>.hvs__seg</code>, <code>aria-pressed</code>)</td></tr><tr><td>Страницы услуг · иконки карточек, объекты, hero-иконка</td><td><b>ic-card</b>, <b>ic-obj</b></td><td><code>img/svc/card-*.svg</code>; пиктограммы объектов — <code>js/schemes.js:427–468</code></td></tr><tr><td>Между блоками страниц услуг</td><td><b>divs</b> — 6 разделителей-труб</td><td><code>img/svc/divider-*.svg</code>, <code>.sv2-pdiv</code></td></tr><tr><td>Легенды схем и справочник деталей</td><td><b>sym</b>, <b>parts</b></td><td>в боевой вёрстке — по необходимости; на принятых страницах не используются отдельно</td></tr></tbody></table></div>
+<p class="note">Файлы — реальные из <code>concept/</code>; номера строк — <code>js/home.js</code>, <code>js/hvs.js</code>, <code>js/schemes.js</code> на момент сборки. Источники SVG в <code>teplo-graphics/svg/*</code> — не часть концепта и в вёрстку не переносятся, пока нет экспорта в <code>img/</code>.</p>
+<h3 id="gr-rules">5.2. Общие правила графики</h3>
+<ul>
+<li><b>Тап вместо hover.</b> Режим касания включается условием <code>(max-width:1023px), (hover:none)</code> (JS: <code>matchMedia</code>, CSS: тот же запрос). В нём <code>.hit{pointer-events:none}</code>, плашка-подсказка скрыта, зоны выбираются тапом по схеме.</li>
+<li><b>Карточка под схемой</b> вместо нижней шторки (принято 18.11, коммит 5516a75): легенда «Т1 · подача / Т2 · обратка» над схемой, под схемой блок <code>.uzel__info</code> / <code>[data-hvs-info]</code>: счётчик «01 / 09», ‹ ›, название и описание. Подсказка-призыв («Наведите на элемент» → «Нажмите на точку») переключается классами <code>__hint-d</code> / <code>__hint-m</code>.</li>
+<li><b>Точки</b> — красные <code>#C2410C</code> с белой обводкой и кольцом-пульсом (<code>@keyframes uzel-pulse / hvs-pulse</code>, 2 с); у выбранного элемента точка гаснет (<code>.dot.off</code>), остальные остаются; на узком экране ядро точки не меньше ~10 px (обёртка <code>.dot-s</code>).</li>
+<li><b>Подписи на схеме ≥ 12 px после масштаба.</b> Для встроенных SVG котельной и дома — <code>svg[data-fit-text]</code> + <code>fitText()</code> (<code>home.js:155–177</code>) подбирает <code>font-size</code> по ширине; схемы шире экрана получают горизонтальную прокрутку (<code>.hvs__sc</code>, <code>overflow-x:auto</code>) и подсказку «листайте».</li>
+<li><b><code>prefers-reduced-motion</code></b> выключает: пульс точек, подсказки-переходы (<code>transition:none</code>), шиммер скелетона, бегущую ленту, плавный скролл, магистраль Т1/Т2 (анимация капель), пружину выпадашки.</li>
+<li><b>Состояния без JS</b> — у точек на схеме и ссылок-зон работает <code>:focus-visible</code> (контур 2 px акцентным цветом).</li>
+<li><b>Интерактивные SVG</b> — инлайном в HTML (для hover по <code>.hit</code> и подгона текста); декоративные (иконки, разделители, фото-схемы) — <code>&lt;img&gt;</code> с пустым <code>alt=""</code>.</li>
+</ul>
+<h2 id="pages">6. Страницы</h2><p>Блоки сверху вниз. Узлы Figma — из <code>concept/FIGMA-MAP.md</code> и <code>adaptiv/GRAPHICS-MAP.md</code>; колонка «HTML» — по фактической разметке принятой страницы (порядок секций в <code>&lt;main&gt;</code> замерен). Тела страниц услуг — <code>div.sp-split</code> с левой колонкой и плашками-блоками <code>.sv2-block &gt; section.sp-sec#id</code>.</p><p class="note">Фото-блоки макета («Hero Photo» Главной 98:5001, «Photo» страниц услуг) в HTML отсутствуют; фото-заглушки <code>.ph</code> (серый градиент с подписью-описанием кадра) стоят в «О компании», CTA и баннерах. Реальные фото — только объекты (<code>img/home/obj-*.jpg</code>, 1200×900) и кейс «Сергиев Посад».</p><h3 id="pg-index">Главная — <code>index.html</code></h3><p class="src">Figma 98:4951 · css: concept, schemes, home · js: concept, schemes, home</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header 98:4952</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Hero 98:4979</td><td><code>section.hero-a</code></td><td>кнопки <code>data-modal</code> и якорь <code>#services</code>; лента фактов на ≤767</td></tr><tr><td>Схема узла 948:8604</td><td><code>section#uzel.uzel</code></td><td>точки: наведение / тап, ‹ › (карточка под схемой), клавиатура</td></tr><tr><td>About 98:5002 + Approach 98:5032</td><td><code>section.group-frame</code> → <code>.about-banner</code> + <code>.approach</code></td><td>лента 9 карточек, стрелки, индикатор <code>.ap-ind</code> (4.5)</td></tr><tr><td>Numbers 99:5018</td><td><code>section.numbers.numbers--cards</code></td><td>—</td></tr><tr><td>Services 99:5042</td><td><code>section#services.services</code> → <code>.svc-grid</code></td><td>аккордеон (один открыт), кадр чертежа следует за строкой</td></tr><tr><td>Stages 99:5119</td><td><code>section.stgg</code></td><td>лента: стрелки, drag, ←/→, счётчик 01 / 07</td></tr><tr><td>Works 100:5046</td><td><code>section#works.wk</code></td><td>на ≤1199 лента со стрелками <code>[data-wk]</code></td></tr><tr><td>FAQ 100:5134</td><td><code>section.plate.faq</code></td><td>аккордеон (4.6)</td></tr><tr><td>Section/CTA 100:5176</td><td><code>section#contacts.cta</code></td><td><code>data-modal</code></td></tr><tr><td>Footer 100:5196</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-uslugi">Услуги (хаб) — <code>uslugi.html</code></h3><p class="src">Figma 52:5226 · css: concept · js: concept</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Intro 52:5254</td><td><code>section.plate.intro</code> (крошки, H1, лид)</td><td>—</td></tr><tr><td>Hub Grid 52:5272</td><td><code>section.hub &gt; .hub__grid &gt; article.hub-card</code> ×7</td><td>ссылки-кнопки на страницы услуг; сетка 2 → 2 → 1; карточка 948×616, иконка 64 в рамке 140 (88 на ≤1199)</td></tr><tr><td>CTA 52:5434</td><td><code>section#contacts.cta</code></td><td><code>data-modal</code></td></tr><tr><td>Footer 52:5454</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-obsl">Обследование — <code>obsledovanie.html</code></h3><p class="src">Figma 9:66 · css: concept, schemes, service, uslugi-b · js: concept, schemes, hvs</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header 9:67</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Hero 29:3257</td><td><code>section.plate.sv2-hero</code></td><td>кнопки, плашки-факты</td></tr><tr><td>Scheme — Карта обследования ИТП 1308:10517</td><td><code>section#scheme.plate.hvs</code> (<code>[data-hvs][data-items]</code>)</td><td>6 точек, карточка под схемой на тач</td></tr><tr><td>Left Column (TOC , Banner )</td><td><code>aside.sp-side</code>: <code>.sp-side__toc</code> + <code>.sp-cta</code></td><td>подсветка по прокрутке <code>[data-toc]</code>; ≤1023 → полоса + нижняя кнопка (4.8)</td></tr><tr><td>Зачем 10:167 · Нормативы 10:179 · Что входит 10:184 · Цена ошибки 11:196 · Что получаете 11:231</td><td><code>section#base</code> · <code>#norms</code> · <code>#scope</code> · <code>#risk</code> · <code>#result</code> внутри <code>div.sp-content</code></td><td>цепочка этапов <code>.sv2-chain</code>, шкала ТУ <code>.sv2-tu</code>, «прямые участки» <code>[data-sx]</code>, таблица «Цена ошибки» → карточки</td></tr><tr><td>FAQ 11:259</td><td><code>section#faq.plate.faq</code></td><td>аккордеон, можно открыть несколько (4.6)</td></tr><tr><td>CTA 11:298</td><td><code>section#contacts.plate.sv2-cta</code></td><td>кнопки <code>data-modal</code>, <code>tel:</code>, <code>mailto:</code></td></tr><tr><td>Footer 11:320</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><p class="note">Страница дизайнера (Figma 9:66 — «не трогать»). Схема обследования 964:6042, иконки «Что входит» и экспорт «Прямые участки» не подтянуты — см. разд. 8.</p><h3 id="pg-proekt">Проектирование — <code>proektirovanie.html</code></h3><p class="src">Figma 87:7123 · css: concept, schemes, service · js: concept, schemes</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Hero 88:9875</td><td><code>section.plate.sv2-hero</code></td><td>кнопки</td></tr><tr><td>Scheme — ГОСТ-схема 965:6248</td><td><code>figure.plate.sx.sx-hero</code> (<code>[data-sx][data-mode]</code>)</td><td>переключатель режимов <code>.sx-seg</code>, подсказки</td></tr><tr><td>Left Column (TOC 87:7126, Banner 87:8168)</td><td><code>aside.sp-side</code>: <code>.sp-side__toc</code> + <code>.sp-cta</code></td><td>подсветка по прокрутке <code>[data-toc]</code>; ≤1023 → полоса + нижняя кнопка (4.8)</td></tr><tr><td>Условия + Что входит 94:9306</td><td><code>section#must</code>, <code>section#scope</code></td><td>13 листов <code>[data-sx="sheets"]</code></td></tr><tr><td>Этапы 94:9626</td><td><code>section#steps</code></td><td>магистраль Т1/Т2 у шагов <code>.sv2-pipe</code></td></tr><tr><td>Особенности 94:9876</td><td><code>section#objects</code></td><td>пиктограммы объектов <code>[data-sx][data-objs]</code></td></tr><tr><td>Цена ошибки + Итоги 94:10093</td><td><code>section#risk</code>, <code>section#result</code></td><td>таблица → карточки на ≤767</td></tr><tr><td>FAQ 87:7246</td><td><code>section#faq.plate.faq</code></td><td>аккордеон, можно открыть несколько (4.6)</td></tr><tr><td>CTA 87:7255</td><td><code>section#contacts.plate.sv2-cta.sv2-cta--long</code></td><td><code>data-modal</code></td></tr><tr><td>Footer 87:7266</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-ust">Установка — <code>ustanovka.html</code></h3><p class="src">Figma 87:8177 · css: concept, schemes, service, uslugi-b · js: concept, schemes, hvs</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Hero 88:9847</td><td><code>section.plate.sv2-hero</code></td><td>кнопки</td></tr><tr><td>Scheme — «Монтаж по шагам» 948:9142</td><td><code>section#scheme.plate.hvs</code></td><td>8 шагов, точки, карточка под схемой</td></tr><tr><td>Left Column (TOC 87:8180, Banner 87:8390)</td><td><code>aside.sp-side</code>: <code>.sp-side__toc</code> + <code>.sp-cta</code></td><td>подсветка по прокрутке <code>[data-toc]</code>; ≤1023 → полоса + нижняя кнопка (4.8)</td></tr><tr><td>Как работаем 94:10300</td><td><code>section#steps</code> (+ <code>div#datchik.hvs--in</code>, датчик в трубе 948:9680, 7 точек; <code>mini-trial</code>)</td><td>схема с точками внутри блока</td></tr><tr><td>Особенности 94:10502</td><td><code>section#objects</code></td><td>пиктограммы объектов</td></tr><tr><td>Цена ошибки + Итоги 94:10675</td><td><code>section#risk</code>, <code>section#result</code></td><td>таблица → карточки</td></tr><tr><td>FAQ 87:8300</td><td><code>section#faq.plate.faq</code></td><td>аккордеон, можно открыть несколько (4.6)</td></tr><tr><td>CTA 87:8309</td><td><code>section#contacts.sv2-cta.sv2-cta--long</code></td><td><code>data-modal</code></td></tr><tr><td>Footer 87:8320</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-serv">Сервис — <code>servis.html</code></h3><p class="src">Figma 87:9037 · css: concept, schemes, service, uslugi-b · js: concept, schemes, hvs</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Hero 88:9889</td><td><code>section.plate.sv2-hero.sv2-hero--snug</code></td><td>кнопки</td></tr><tr><td>Scheme — шкала сезона Б 950:6590</td><td><code>section#season.plate.hvs.hvs--season</code> (<code>[data-season][data-tips]</code>)</td><td>наведение / тап на месяц, один тултип на месяц, подсветка июня</td></tr><tr><td>Left Column (TOC 87:9040, Banner 87:9250)</td><td><code>aside.sp-side</code>: <code>.sp-side__toc</code> + <code>.sp-cta</code></td><td>подсветка по прокрутке <code>[data-toc]</code>; ≤1023 → полоса + нижняя кнопка (4.8)</td></tr><tr><td>Почему 94:10838 · ТО 94:11334 · Сервисное 94:11819</td><td><code>section#why</code> · <code>#to</code> · <code>#service</code></td><td>опломбирование <code>div#oplomb.hvs--in</code> (950:6464, 3 точки), график погрешности <code>mini-err</code></td></tr><tr><td>Когда критично 94:12271</td><td><code>section#critical</code></td><td>карточки <code>.sv2-lcards</code> 2 → 2 → 1</td></tr><tr><td>Как работаем 94:12698 · Особенности 94:13092 · Цена ошибки + Итоги 94:13453</td><td><code>#steps</code> · <code>#objects</code> · <code>#risk</code>, <code>#result</code></td><td>магистраль Т1/Т2, пиктограммы объектов, таблица → карточки</td></tr><tr><td>FAQ 87:9160</td><td><code>section#faq.plate.faq</code></td><td>аккордеон, можно открыть несколько (4.6)</td></tr><tr><td>CTA 87:9169</td><td><code>section#contacts.sv2-cta.sv2-cta--long</code></td><td><code>data-modal</code></td></tr><tr><td>Footer 87:9180</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-rem">Ремонт и замена — <code>remont.html</code></h3><p class="src">Figma 87:10358 · css: concept, schemes, service, uslugi-b · js: concept, schemes, hvs</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Hero 88:9861</td><td><code>section.plate.sv2-hero</code></td><td>кнопки</td></tr><tr><td>Scheme — «Было / Стало / Реконструкция» 126:5433</td><td><code>section#scheme.plate.hvs.hvs--rem</code></td><td>сегмент <code>.hvs__seg</code> (<code>aria-pressed</code>), 3 состояния, точки</td></tr><tr><td>Left Column (TOC 87:10361, Banner 87:10571)</td><td><code>aside.sp-side</code>: <code>.sp-side__toc</code> + <code>.sp-cta</code></td><td>подсветка по прокрутке <code>[data-toc]</code>; ≤1023 → полоса + нижняя кнопка (4.8)</td></tr><tr><td>Контент 88:9983</td><td><code>#situations</code> (5 ситуаций: 2+2 и одна на всю ширину) · <code>#variants</code> (3 варианта-якоря <code>.sv2-var</code>) · <code>#remont-repair</code> · <code>#remont-replace</code> · <code>#remont-rebuild</code> · <code>#risk</code> · <code>#objects</code> · <code>#steps</code> · <code>#price</code> · <code>#result</code></td><td>якорные карточки, таблица цены <code>.sp-price</code> → строки в колонку, разделители-трубы <code>.sv2-pdiv</code> (расходомер)</td></tr><tr><td>FAQ 87:10481</td><td><code>section#faq.plate.faq</code></td><td>аккордеон, можно открыть несколько (4.6)</td></tr><tr><td>CTA 87:10490</td><td><code>section#contacts.sv2-cta.sv2-cta--long</code></td><td><code>data-modal</code></td></tr><tr><td>Footer 87:10501</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-obj">Объекты (список) — <code>obekty.html</code></h3><p class="src">Figma 53:6274 · css: concept, service, pages · js: concept, obekty</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Intro 53:6302</td><td><code>section.plate.pg-intro</code> (крошки, H1)</td><td>—</td></tr><tr><td>Tabs 978:14396 + Objects 53:6323</td><td><code>section.plate.pg-objects</code> → <code>.ftabs[data-ftabs]</code> + <code>.pg-grid[data-grid]</code> → <code>article.pg-card[data-service]</code></td><td>фильтр (4.9); сетка 4 → 2 → 1; 3 реальные карточки + 4 заглушки; кнопка «Подробнее» → <code>obekt-sergiev-posad.html</code></td></tr><tr><td>CTA 53:6399</td><td><code>section#contacts.sv2-cta.pg-cta</code></td><td><code>data-modal</code></td></tr><tr><td>Footer 53:6419</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><p class="note">Вкладки фильтра в макете лежат в Intro (53:6302), в HTML — внутри <code>.pg-objects</code> непосредственно над сеткой.</p><h3 id="pg-kont">Контакты — <code>kontakty.html</code></h3><p class="src">Figma 51:4922 · css: concept, service, pages · js: concept</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Intro 51:4950 + Contacts 51:4958</td><td><code>section.plate.pg-intro.pg-contacts</code> → <code>.pg-group</code> «Адрес», <code>.pg-group--line</code> «Контакты» → <code>.pg-row</code> (<code>dt</code> / <code>dd</code>)</td><td>ссылки <code>tel:</code>, <code>mailto:</code>, «На карте» → <code>#map</code>; ≤1023 строки 10rem + значение, ≤767 в столбец</td></tr><tr><td>Карта</td><td><code>section#map.plate.pg-map</code> (заглушка <code>.pg-map__ph</code>, высота 560 → 400 → 320)</td><td>карта Яндекса пока не подключена</td></tr><tr><td>Requisites 51:4990</td><td>— (в HTML нет, блок «Реквизиты» убран)</td><td>—</td></tr><tr><td>CTA</td><td><code>section#contacts.sv2-cta.pg-cta</code></td><td><code>data-modal</code></td></tr><tr><td>Footer 51:4995</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-pol">Политика — <code>politika.html</code></h3><p class="src">Figma 51:5057 · css: concept, service, pages · js: concept</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>Intro 51:5085</td><td><code>section.plate.pg-intro</code></td><td>—</td></tr><tr><td>Policy 51:5093</td><td><code>section.plate.pg-policy</code> (текст <code>.policy</code>, боковая колонка <code>.pg-policy__side</code>)</td><td>боковая колонка скрыта на ≤1199</td></tr><tr><td>Footer 51:5107</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-404">404 — <code>404.html</code></h3><p class="src">Figma 51:5169 · css: concept, service, pages · js: concept</p><div class="tw"><table class=""><thead><tr><th>Figma (узел)</th><th>HTML (селектор → секция)</th><th>Что интерактивного</th></tr></thead><tbody><tr><td>Header —</td><td><code>.header-wrap &gt; .header</code></td><td>выпадашки / бургер, телефон (разд. 4.1)</td></tr><tr><td>404 51:5197</td><td><code>section.plate.pg-404</code> (<code>.pg-404__code</code> 7,5rem ≤1199 / 4,5rem ≤767, кнопки в столбик ≤767)</td><td>ссылки «На главную», «Контакты»</td></tr><tr><td>Footer 51:5212</td><td><code>footer.plate--accent.footer</code></td><td>—</td></tr></tbody></table></div><h3 id="pg-cases">Кейсы — <code>obekt.html</code>, <code>obekt-sergiev-posad.html</code></h3><p>Figma 53:6481 (Intro 53:6509 · About 53:6521 · Gallery 53:6558 · CTA 53:6575 · Footer 53:6595). <b>Не адаптированы</b> и ждут утверждения десктопа; в разделе не расписаны. Правка «вместо второго CTA — секция „Другие наши работы“ (Figma 1443:10371)» в HTML ещё не внесена.</p>
+<h2 id="a11y">7. Доступность и производительность</h2>
+<h3 id="a-tap">7.1. Цели нажатия</h3>
+<p>Требование: ≥ 44×44 на планшете и мобильном. Замер Playwright: на 390 и 768 найдены все видимые <code>a, button, [role=button], input</code> меньше 44 по меньшей стороне; на 1920 (где цели масштабируются) — для справки.</p>
+<div class="tw"><table class=""><thead><tr><th>Элемент</th><th>Размер (замер)</th><th>Где</th><th>Комментарий</th></tr></thead><tbody><tr><td>Бургер, телефон-иконка (≤1199)</td><td>44×44</td><td>все страницы</td><td>✓</td></tr><tr><td>Пункты шторки (<code>.dr-top</code>, <code>.dr-acc__btn</code> / <code>.dr-link</code>)</td><td>≥ 56 / ≥ 44</td><td>все</td><td>✓</td></tr><tr><td>Кнопка <code>.btn-tall</code></td><td>≥ 52 по высоте (моб.), 100 (десктоп)</td><td>все</td><td>✓</td></tr><tr><td>Вкладка фильтра <code>.ftab</code></td><td>44</td><td>Объекты</td><td>✓ (на десктопе 1440 / 1200 масштабируется до 33 / 28 — правило ≥ 44 для планшета и мобильного)</td></tr><tr><td>Кнопка полосы оглавления / нижняя кнопка</td><td>48 / 52</td><td>страницы услуг ≤1023</td><td>✓</td></tr><tr><td>Узлы индикатора «Наш подход» <code>.ap-ind__node</code></td><td>видимая 24 (планшет) / 20 (моб.), зона нажатия расширена <code>::before{inset:-.75rem …}</code></td><td>Главная</td><td>✓ за счёт псевдоэлемента</td></tr><tr><td><b>Ссылки подвала</b> <code>.footer li a</code></td><td><b>36</b> (≤767) · 44 (768–1199)</td><td>все страницы</td><td>сознательное отклонение (правка дизайнера 18.11)</td></tr><tr><td>Крошки страниц услуг <code>.sv2 .crumbs a</code></td><td><b>29–32</b> по высоте</td><td>Обследование, Проектирование, Установка, Сервис, Ремонт, Услуги</td><td>отклонение: на «Объектах / Контактах / Политике» область растянута до 44, на страницах услуг — нет</td></tr><tr><td>Логотип <code>a.logo</code> (≤1023)</td><td><b>40</b> по высоте</td><td>все, кроме Главной</td><td>на Главной 44 (<code>home.css</code>, блок «цели нажатия ≥ 44 на ≤1023»), на остальных правила нет</td></tr><tr><td>Стрелки лент <code>.stg__btn</code></td><td>44×36 (десктоп)</td><td>Главная «Этапы»</td><td>на ≤1199 — 44×44 (<code>home.css</code>)</td></tr><tr><td>Триггеры выпадашек (десктоп)</td><td>37 по высоте</td><td>все</td><td>десктопный ярус, правило ≥ 44 не распространяется</td></tr></tbody></table></div>
+<h3 id="a-focus">7.2. Фокус и семантика</h3>
+<ul>
+<li><b>Фокус.</b> Глобально <code>:focus-visible{outline:.125rem solid var(--accent);outline-offset:.125rem}</code> (<code>concept.css:51</code>); у вкладок фильтра свой контур 2 px; ленты с прокруткой — <code>tabindex="0"</code> + <code>aria-label</code>.</li>
+<li><b>Меню.</b> Триггеры выпадашек: <code>button[aria-expanded][aria-controls]</code>; бургер: <code>aria-expanded</code>, <code>aria-controls</code>, <code>aria-label</code> «Открыть / Закрыть меню»; шторка — <code>role="dialog" aria-modal="true"</code>; закрытые панели — <code>inert</code>.</li>
+<li><b>Аккордеоны.</b> <code>button[aria-expanded][aria-controls]</code> + закрытая панель <code>inert</code>: на Главной 13 пар (7 «Услуг» + 6 вопросов FAQ), на страницах услуг по 6 (FAQ); плюс 2 триггера выпадашек шапки на каждой странице.</li>
+<li><b>Переключатели.</b> Фильтр «Объектов» — <code>aria-pressed</code>, группа с <code>aria-label</code>; сегмент «Было / Стало» — <code>aria-pressed</code>. <code>role="tab"</code> на принятых страницах не используется (панелей-вкладок нет).</li>
+<li><b>Живые области.</b> Счётчики «01 / 07», «01 / 09», «Слайд N из 9» — <code>aria-live="polite"</code>.</li>
+<li><b>Навигация.</b> <code>nav[aria-label]</code>: «Основное меню», «Хлебные крошки», «На этой странице», «Меню»; текущая страница — <code>aria-current="page"</code>; в индикаторе — <code>aria-current="true"</code>.</li>
+<li><b>Модалка</b> — см. 4.10; <b>полоса оглавления</b> — 4.8.</li>
+<li><b>Декоративное</b> — <code>aria-hidden="true"</code> у иконок и разделителей, <code>alt=""</code> у декоративных <code>&lt;img&gt;</code>; у схемы узла — <code>role="img" aria-label</code> с описанием.</li>
+</ul>
+<h3 id="a-motion">7.3. <code>prefers-reduced-motion</code></h3>
+<p>Покрыто в CSS (<code>concept.css:36, 127, 196, 308, 715, 924, 993, 1056</code>, <code>service.css:127, 334</code>, <code>home.css:105</code>, <code>uslugi-b.css:52, 158</code>, <code>schemes.css:208, 277</code>, <code>pages.css:152</code>): отключены плавный скролл, пружина и переходы меню, шиммер скелетона, пульс точек, анимация магистрали Т1/Т2, бегущая лента, раскрытие панелей. В JS — <code>matchMedia</code> в <code>concept.js</code>, <code>home.js</code>, <code>hvs.js</code>, <code>schemes.js</code>, <code>obekty.js</code>: <code>behavior:'auto'</code> вместо <code>'smooth'</code>.</p>
+<h3 id="a-perf">7.4. Изображения и вес</h3>
+<div class="tw"><table class=""><thead><tr><th>Файл</th><th>Вес</th><th>Где</th></tr></thead><tbody><tr><td><code>img/home/state-0…7.svg</code> (кадры чертежа «Услуг»)</td><td>≈ 49 КБ каждый, 8 шт. ≈ 390 КБ</td><td>Главная (7 из 8 — lazy)</td></tr><tr><td><code>img/home/istochnik.svg</code> · <code>dom-uute.svg</code> · <code>lenta-shag.svg</code> · <code>styk-etapa.svg</code></td><td>11,5 · 17 · 4,5 · 3,6 КБ</td><td>Главная «Этапы» (<code>styk-etapa</code> — 7 раз)</td></tr><tr><td>иконки <code>icon-service-*.svg</code>, <code>icon-approach-*.svg</code></td><td>0,3–1,3 КБ</td><td>Главная, хаб</td></tr><tr><td><code>img/svc/*.svg</code> (карточки, разделители, мини-схемы)</td><td>39 КБ все вместе</td><td>страницы услуг</td></tr><tr><td><code>img/home/obj-*.jpg</code></td><td>120 · 183 · 190 КБ</td><td>Главная, Объекты (lazy)</td></tr><tr><td><code>biblioteka-grafiki.html</code></td><td>2,7 МБ</td><td>внутренний документ, в сайт не входит</td></tr></tbody></table></div>
+<ul>
+<li><b>Ленивая загрузка.</b> <code>loading="lazy"</code> и явные <code>width</code>/<code>height</code> заданы: на Главной у кадров чертежа <code>state-1…7.svg</code> и фото «Наших работ» (10 из 34 <code>&lt;img&gt;</code>; <code>state-0.svg</code> и иконки — сразу), на «Объектах» у всех 4 фото. На страницах услуг <code>&lt;img&gt;</code> — декоративные SVG-иконки и разделители, <code>loading</code> не задан. <code>decoding="async"</code> нигде нет — можно добавить.</li>
+<li><b>Фото.</b> Реальные — только объекты (<code>obj-*.jpg</code>, 120–190 КБ при 1200×900). Старый hero (<code>img/hero.png</code> 1,4 МБ, <code>hero-2560.jpg</code> 0,3 МБ) на принятых страницах не используется — не переносить.</li>
+<li><b>Шрифты.</b> Подключены с Google Fonts (внешний запрос); для вёрстки — <code>font-display:swap</code> и подмножество кириллица + латиница, 3 веса Sofia + 3 веса Inter.</li>
+<li><b>Спрайт иконок</b> — inline в каждой странице (28 символов на Главной); HTML Главной 166 КБ, страниц услуг 70–190 КБ (схемы инлайном).</li>
+</ul>
+
+<h2 id="diffs">8. Известные отличия и открытые вопросы</h2>
+<h3 id="d-fig">8.1. Код ↔ Figma (из <code>HANDOFF.md</code> 18.11–19.11)</h3>
+<ul>
+<li><b>Обследование (Figma 9:66, дизайнер не трогает) — ещё не подтянуто:</b> схема обследования <b>964:6042</b> (две строки, размеры) — в HTML на странице нет, SVG лежат в <code>teplo-graphics/svg/gibrid/scheme-obsledovanie-*.svg</code>; иконки карточек «Что входит» (<code>Info Card / Icon</code>); «Прямые участки» (<code>mini-straight</code> 963:6124) — старый вариант в <code>schemes.js</code>, нужен экспорт из Figma.</li>
+<li><b>Допущения, принятые в HTML:</b> мобильная схема — <b>карточка под схемой</b> (а не шторка); на страницах услуг <b>полоса оглавления вместо липкой колонки</b> и нижняя кнопка вместо баннера (RULES §8 — «показать дизайнеру»; запасные варианты: лента-чипсы или аккордеон в потоке); <b>хаб «Услуги» — 2 колонки</b> на десктопе и планшете.</li>
+<li><b>Лейблы над H1 hero Главной.</b> Ждём выбор из <code>hero-labels.html</code> (рекомендован вариант 2 «труба»); место оставлено — <code>.hero-a__slot</code> (38 px, пустой, скрыт на ≤1199).</li>
+<li><b>Заглушки:</b> 4-я карточка и 2-й ряд «Объектов» (4 карточки <code>data-service=""</code>: серое фото, «Объект — заглушка»; в Figma <code>Grid — 2-й ряд (заглушки)</code> — «убрать: скрыть/удалить»); блок «Реквизиты» на «Контактах» убран; домены «Учёт воды» (учётводы.рф) и «Учёт пара» (учётпара.рф) и цвета их точек (<code>#1E88C8</code>, <code>#7A8793</code>) — заглушки; карта — заглушка <code>.pg-map__ph</code>; логотип «лого»; фото в «О компании» и CTA — <code>.ph</code>.</li>
+<li><b>Кейсы</b> («Объекты / …») не адаптированы; секция «Другие наши работы» (Figma 1443:10371: шапка, 4 карточки по услуге, 2 заглушки) в HTML-кейсе не внесена; кейсы Правдинский (919:6095) и Развилка (919:6122) в HTML не собраны.</li>
+<li><b>Графика:</b> «Hero Photo» Главной (98:5001) и «Photo» страниц услуг в HTML нет; столбцы «Numbers» (скрыты в Figma как старая версия) в HTML тоже не делались.</li>
+<li><b>Не согласовано с клиентом:</b> тексты подсказок Т1/Т2 в «Было / Стало» и подводки <code>data-modal-lead</code> — черновики.</li>
+<li><b>Решено, не переоткрывать:</b> 4-я карточка «Объектов» — заглушка; «5 ситуаций» (пятая на всю ширину) — оставляем; линия под подзаголовком в списках «Сервиса» / «Ремонта» = ширина строк (952); тизеры «Трёх вариантов» утверждены клиентом.</li>
+</ul>
+<h3 id="d-code">8.2. Расхождения «код ↔ правила / план»</h3>
+<div class="tw"><table class=""><thead><tr><th>№</th><th>Что в коде</th><th>Что в правилах / плане</th><th>Как писать в вёрстке</th></tr></thead><tbody><tr><td>1</td><td>Ниже 1200 <code>html{font-size:16px}</code> фиксировано; между 390 и 767 и между 768 и 1199 интерфейс не масштабируется</td><td><code>RULES.md</code> §7 рекомендует <code>clamp</code>-масштаб внутри ярусов</td><td>как в коде; масштаб внутри ярусов — открытое решение дизайнера</td></tr><tr><td>2</td><td>Брейкпоинты 1199 / 767 + доп. 1023 (схемы, страницы услуг) и 1024–1199 (две колонки без масштаба)</td><td>RULES §1: 1199 / 767; §8.3: «1024–1199 как десктоп, масштаб»</td><td>как в коде</td></tr><tr><td>3</td><td>Лид и текст на десктопе 16 px; H1 hero Главной 112 / 64 / 40, H1 страниц 80 / 56 / 40</td><td>RULES §2: лид 20, H1 hero планшет 56, моб. 36</td><td>как в коде (разд. 2.2)</td></tr><tr><td>4</td><td>Схема узла и схемы с подсказками на ≤1023 / тач: <b>карточка под схемой</b> с ‹ ›, легенда Т1/Т2 над схемой</td><td>RULES §4: нижняя шторка (45 %)</td><td>карточка под схемой — принято дизайнером 18.11</td></tr><tr><td>5</td><td>Факты hero Главной на ≤767 — лента со свайпом (карточка 42 %)</td><td>RULES §3: 2×3</td><td>как в коде</td></tr><tr><td>6</td><td>«Этапы работ» на ≤767 — горизонтальная лента (карточка 82 %); комментарий в <code>index.html</code> о вертикальном варианте устарел</td><td>RULES §4: вертикальный вариант <code>etapy-g-v2.html</code></td><td>как в коде; вертикальный — отдельная задача</td></tr><tr><td>7</td><td>Кнопка Tall на ≤767: горизонтальная, высота 52</td><td>RULES §3: высота 72</td><td>как в коде</td></tr><tr><td>8</td><td>Полоса оглавления и нижняя кнопка: <code>scroll</code> + <code>rAF</code>, линия «текущего раздела» 168 px</td><td>RULES §8.1: <code>IntersectionObserver</code></td><td>допустима любая реализация, поведение то же</td></tr><tr><td>9</td><td>Хаб «Услуги»: 2 колонки → 1; карточка 948×616</td><td>RULES §3 «карточки 4 в ряд» к хабу не относится</td><td>по Figma 52:5272</td></tr><tr><td>10</td><td>Упоминания Montserrat (комментарии, <code>--font</code>) в <code>concept.css</code></td><td>—</td><td>не использовать; гарнитуры — Sofia Sans Extra Condensed + Inter</td></tr><tr><td>11</td><td>Версии <code>?v=</code> расходятся между страницами (v43/v44, v46/v48, v18/v22)</td><td>—</td><td>задаёт сборка</td></tr></tbody></table></div>
+<h3 id="d-open">8.3. Открытые вопросы</h3>
+<ul>
+<li>Масштабировать ли rem внутри ярусов 768–1199 и ≤767 (RULES §7) — иначе на границе 1199 / 1200 H2 прыгает 44 → 40.</li>
+<li>Цели нажатия: ссылки подвала на мобильном (36), крошки страниц услуг (29–32), логотип на страницах кроме Главной (40) — оставить или привести к 44.</li>
+<li>Обводка тегов/капсул hero (скрин в документах согласования показывал старый hero) — оставить или снять.</li>
+<li>«Этапы» на телефоне: оставить ленту или рисовать вертикальный вариант.</li>
+<li>Выбор лейблов над H1 hero Главной.</li>
+</ul>
+
+<h2 id="method">Как проверено</h2>
+<ul>
+<li>Фрагменты кода выбраны по якорям в исходных файлах скриптом <code>teplo-graphics/library/dev_doc.py</code> (путь и строки — в шапке каждого блока); после правок страниц документ пересобирается перезапуском скрипта.</li>
+<li>Размеры, сетки, кегли, ширины — <code>getComputedStyle</code> / <code>getBoundingClientRect</code> в Chromium (Playwright) на ширинах 1920, 1440, 1200, 1199, 1024, 768, 767, 390; горизонтальное переполнение — <code>scrollWidth − innerWidth</code> на 1920 / 1440 / 1200 / 1024 / 768 / 390 для всех 13 страниц.</li>
+<li>Не проверено: поведение на реальном устройстве (тап по точкам, свайп лент), <code>safe-area-inset-bottom</code>, Safari / Firefox.</li>
+</ul>
+</main><script>
+(function(){
+  function fb(t){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;left:-9999px;top:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+  function copy(t){window.__lastCopy=t;if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).catch(function(){fb(t)});fb(t);return Promise.resolve()}
+  document.querySelectorAll('.code').forEach(function(c){
+    var b=c.querySelector('.code__copy');
+    b.addEventListener('click',function(){copy(c.querySelector('code').textContent).then(function(){b.textContent='Скопировано';b.classList.add('ok');setTimeout(function(){b.textContent='Копировать';b.classList.remove('ok')},1400)})});
+  });
+  var links=[].slice.call(document.querySelectorAll('.side a[href^="#"]')),map={};
+  links.forEach(function(a){var e=document.getElementById(a.getAttribute('href').slice(1));if(e)map[e.id]=a});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a===map[e.target.id])})}})},{rootMargin:'-10% 0px -80% 0px'});
+    Object.keys(map).forEach(function(id){io.observe(document.getElementById(id))});
+  }
+})();
+</script></body></html>
