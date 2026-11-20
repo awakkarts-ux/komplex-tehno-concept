@@ -54,9 +54,14 @@
   .hvs__tip, .hvs__seg button { transition: none !important; }
 }
 
-/* ---------- Планшет и мобильный (RULES §3–4): карточка элемента под схемой вместо плашки ---------- */
+/* ---------- Планшет и мобильный (RULES §3–4): раскладка — по ширине ---------- */
 @media (max-width: 1023px) {
   .hvs__head { grid-template-columns: minmax(0, 1fr); row-gap: .75rem; margin-bottom: 1.5rem; }
+  .hvs__seg { display: flex; width: 100%; }
+  .hvs__seg button { flex: 1 1 0; padding: 0 .5rem; min-height: 3rem; }
+}
+/* ---------- ≤1023 и любое касание (iPad 1024/1366 тоже): карточка элемента под схемой вместо плашки — то же условие, что в hvs.js и home.css ---------- */
+@media (max-width: 1023px), (hover: none) {
   .hvs__svg .hit { pointer-events: none; }
   .hvs__stage { cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
   .hvs__svg rect.hit.on { fill: rgba(194, 65, 12, .14); stroke: #C2410C; stroke-width: 2; vector-effect: non-scaling-stroke; }
@@ -79,8 +84,6 @@
   .hvs__lg--t1 { color: var(--accent); }
   .hvs__lg--t1::before { background: linear-gradient(#D9784F, #F3BFA5 50%, #B9532A); }
   .hvs__lg--t2::before { background: linear-gradient(#A3A9B1, #E4E6E9 50%, #858C95); }
-  .hvs__seg { display: flex; width: 100%; }
-  .hvs__seg button { flex: 1 1 0; padding: 0 .5rem; min-height: 3rem; }
 }
 @media (max-width: 1199px) {
   .hvs { padding: 1.5rem; }
@@ -157,7 +160,7 @@
 .sv2 .sv2-label--ic img { width: 3rem; height: 3rem; flex: none; }
 @media (prefers-reduced-motion: reduce) { .hvs__season .hl, .hvs__tip--c { transition: none !important; } }
 @media (max-width: 1199px) { .hvs--season { padding: 1.5rem; } .hvs__stol { padding: 1rem 1.5rem 1.25rem; } .hvs__sleg { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; } }
-@media (max-width: 1023px) {
+@media (max-width: 1023px), (hover: none) {
   .hvs__sc--wide { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
   .hvs__sc--wide .hvs__svg { width: max(100%, var(--hvs-min, 70rem)); }
   .hvs--season .hvs__stol .hvs__swipe { display: flex; background: none; padding: .5rem 0 0; }
@@ -207,3 +210,55 @@
   .sv2 .sv2-j1, .sv2 .sv2-j2 { top: 2.25rem; }
   .sv2 .sv2-pipe > .sp-step:last-child .sv2-t1, .sv2 .sv2-pipe > .sp-step:last-child .sv2-t2 { height: calc(3.25rem + 1px); }
 }
+
+/* ---------- 20.11, аудит графики П1.2: подсказка и «Листайте» не уезжают при прокрутке схемы ---------- */
+@media (max-width: 1023px), (hover: none) {
+  .hvs__sc > .hvs__hint, .hvs__sc > .hvs__swipe { position: sticky; left: 0; }
+  /* ГОСТ-схема (Проектирование): подписи FE/TE/UQR смысловые — схема не уже 960 px, подписи доводятся до 12 px (hvs.js, data-fit-up) */
+  #gost .hvs__sc { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+  #gost .hvs__sc .hvs__svg { width: max(100%, 960px); }
+  #gost .hvs__swipe { display: none; }
+  #gost .hvs__sc.is-scroll .hvs__swipe { display: flex; align-items: center; justify-content: center; gap: .25rem; margin: 0; padding: 0 1rem .75rem; background: var(--card); font: 600 .8125rem/1 var(--font-body), var(--font-fallback); letter-spacing: .04em; text-transform: uppercase; color: var(--text-2); }
+}
+
+/* ---------- 20.11, аудит графики П1.3: «Прямые участки» (Figma 963:6124, mini-straight) ---------- */
+.ms { margin: 1.5rem 0 0; padding: 1.5rem 0; overflow: hidden; border-radius: .5rem; background: #F5F5F7; }
+.ms__svg { display: block; width: 100%; height: auto; }
+.ms__m { display: none; }
+.ms__st { display: flex; align-items: center; gap: .5rem; margin: 0; font: 700 1rem/1.2 var(--font-body), var(--font-fallback); color: #3A3D42; }
+.ms__st svg { width: 1.375rem; height: 1.375rem; flex: none; }
+.ms__st--no { margin-top: 1.25rem; color: var(--accent); }
+@media (max-width: 1199px) { .ms { padding: 1rem 0; } }
+.ms__st { padding: 0 1rem; }
+@media (max-width: 767px) {
+  .ms__svg--full { display: none; }
+  .ms__m { display: block; }
+  .ms__m .ms__svg { margin-top: .25rem; }
+  .ms__dec { display: none; }
+}
+
+/* ---------- 20.11, аудит графики П1.4: «Датчик в трубе» — шкала зоны погружения HTML-слоем (касание и ≤1023) ---------- */
+.hvs__zone { display: none; }
+@media (max-width: 1023px), (hover: none) {
+  .hvs__zone { display: block; margin-top: .5rem; padding: 1rem; border-radius: var(--r-sm); background: var(--card); }
+  .hvs__zone-h { display: flex; align-items: center; gap: .625rem; margin: 0; font: 600 .9375rem/1.35 var(--font-body), var(--font-fallback); color: var(--text); }
+  .hvs__zone-h i { flex: none; width: 1.75rem; height: 1rem; border-radius: 2px; border: 1px solid #E8A88A;
+    background: repeating-linear-gradient(135deg, #F3C3AC 0 2px, #FBEDE6 2px 6px); }
+  .hvs__zone-s { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin: .75rem 0 0; padding: 0; list-style: none; }
+  .hvs__zone-s li { display: grid; gap: .25rem; padding: .5rem .625rem; border-left: 2px solid var(--accent); font-size: .8125rem; line-height: 1.25; color: var(--text-2); }
+  .hvs__zone-s li:nth-child(2) { border-left-style: dashed; }
+  .hvs__zone-s b { font: 700 1.125rem/1 var(--font-body), var(--font-fallback); color: var(--accent); }
+}
+
+/* ---------- 20.11, аудит П1.5: десктоп 1024–1440 — подписи зоны датчика скрыты (мельче 12 px) → та же шкала HTML-слоем ---------- */
+.hvs--lbl-off .hvs__zone { display: block; margin-top: .75rem; padding: 1rem 1.25rem; border-radius: .5rem; background: var(--card, #fff); }
+.hvs__zone-h { display: flex; align-items: center; gap: .625rem; margin: 0; font: 600 max(.9375rem, 14px)/1.35 var(--font-body), var(--font-fallback); color: var(--text); }
+.hvs__zone-h i { flex: none; width: 1.75rem; height: 1rem; border-radius: 2px; border: 1px solid #E8A88A; background: repeating-linear-gradient(135deg, #F3C3AC 0 2px, #FBEDE6 2px 6px); }
+.hvs__zone-s { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; max-width: 40rem; margin: .75rem 0 0; padding: 0; list-style: none; }
+.hvs__zone-s li { display: grid; gap: .25rem; padding: .5rem .625rem; border-left: 2px solid var(--accent); font-size: max(.8125rem, 12px); line-height: 1.25; color: var(--text-2); }
+.hvs__zone-s li:nth-child(2) { border-left-style: dashed; }
+.hvs__zone-s b { font: 700 max(1.125rem, 15px)/1 var(--font-body), var(--font-fallback); color: var(--accent); }
+/* штампы этапов: не мельче, чем на 1920 (8.5rem = 136 px) — микротекст по кругу не падает ниже исходного */
+.sx-stamp { width: max(8.5rem, 136px); height: max(8.5rem, 136px); }
+/* 20.11, аудит П2: пиктограммы объектов — подпись ИТП/ВВОД/В СЕТЬ (10 px в SVG, на экране 7–11,6 px) не показываем */
+.sv2-obj svg text.ta { display: none; }

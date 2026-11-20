@@ -27,8 +27,24 @@
     lbls.forEach(function (t) { t.setAttribute('data-fs', t.getAttribute('font-size') || '12'); });
     function fit() {
       var k = svg.getBoundingClientRect().width / VW || 1, mob = touchMQ.matches;
-      // ≤1023: подписи мельче 12 px после масштаба скрываем — смысл несёт карточка под схемой (RULES §4)
-      lbls.forEach(function (t) { t.style.display = (mob && +t.getAttribute('data-fs') * k < 12) ? 'none' : ''; });
+      // подписи мельче 12 px после масштаба скрываем; ≤1023/касание — смысл несёт карточка под схемой (RULES §4)
+      // data-fit-up (ГОСТ-схема, 20.11): подписи смысловые — не прячем, а доводим до 12 px (не больше ×1,25 от исходного)
+      var up = svg.hasAttribute('data-fit-up'), lost = false;
+      lbls.forEach(function (t) {
+        var fs = +t.getAttribute('data-fs'), f = up ? Math.min(fs * 1.25, Math.max(fs, 12 / k)) : fs;
+        if (up) t.setAttribute('font-size', f.toFixed(2));
+        // 20.11 (аудит П1.5): и на десктопе 1024–1440 подпись мельче 12 px не показываем — декор приборов прячется,
+        // смысл несут плашка при наведении и HTML-слой (.hvs__zone у датчика)
+        var hide = (f * k < 11.5 && (mob || innerWidth < 1920)) ? 'none' : '';   // 1920 — эталон, не меняется
+        if (hide) lost = true;
+        t.style.display = hide;
+        // подложка подписи (rect с заливкой фона прямо перед текстом) прячется вместе с ней
+        var bg = t.previousElementSibling;
+        if (bg && bg.tagName === 'rect' && /^#F5F5F7$|^#fff(fff)?$/i.test(bg.getAttribute('fill') || '') && +bg.getAttribute('height') < 40) bg.style.display = hide;
+      });
+      root.classList.toggle('hvs--lbl-off', lost);
+      var sc = stage.querySelector('.hvs__sc');
+      if (sc) sc.classList.toggle('is-scroll', sc.scrollWidth > sc.clientWidth + 2);
       var ds = Math.min(3.4, Math.max(1, 1 / k));
       dots.forEach(function (d) { d.firstChild.setAttribute('transform', 'scale(' + ds.toFixed(2) + ')'); });
     }
@@ -159,4 +175,5 @@
       });
     });
   });
+
 })();

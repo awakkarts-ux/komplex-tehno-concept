@@ -20,10 +20,14 @@
       while (d.firstChild) g.appendChild(d.firstChild); d.appendChild(g);
     });
     lbls.forEach(function (t) { t.dataset.fs = t.getAttribute('font-size'); });
+    var deco = $$('text:not(.lbl)', svg).filter(function (t) { return t.getAttribute('font-size'); });
+    deco.forEach(function (t) { t.dataset.fs = t.getAttribute('font-size'); });
     function fit() {
       var k = svg.getBoundingClientRect().width / VW || 1;
       // подписи схемы не мельче 12 px после масштаба (на ≤1023 они скрыты — вместо них легенда над схемой)
       lbls.forEach(function (t) { var fs = +t.dataset.fs; t.style.fontSize = (fs * k < 12 ? (12 / k).toFixed(2) : fs) + 'px'; });
+      // 20.11 (аудит П1.5): микротекст приборов (0125,4, РАСХОДОМЕР, Гкал…) — декор, мельче 12 px не показываем
+      deco.forEach(function (t) { t.style.display = (+t.dataset.fs * k < 11.5 && innerWidth < 1920) ? 'none' : ''; });   // 1920 — эталон, не меняется
       var ds = Math.min(3.4, Math.max(1, 1 / k)); // ядро точки r=5 → не меньше 10 px на экране
       dots.forEach(function (d) { d.firstChild.setAttribute('transform', 'scale(' + ds.toFixed(2) + ')'); });
     }
