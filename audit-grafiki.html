@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Аудит адаптации графики — учёттепла.рф</title>
+<style>
+:root{--t:#23262B;--t2:#5E636B;--bg:#F4F5F7;--card:#fff;--or:#C2410C;--ok:#2F7D4F;--mid:#B7791F;--line:#E2E4E8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--t);background:var(--bg)}
+.w{max-width:1240px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:34px;line-height:1.1;margin:0 0 6px}
+h2{font-size:24px;margin:48px 0 12px;padding-top:12px;border-top:2px solid var(--t)}
+h3{font-size:17px;margin:24px 0 8px}
+p,li{max-width:900px}
+.meta{color:var(--t2);margin:0 0 24px}
+.box{background:var(--card);border-radius:12px;padding:20px 24px;margin:12px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.grid3{grid-template-columns:1fr}}
+.k{border-left:4px solid var(--or)} .m{border-left:4px solid var(--mid)} .g{border-left:4px solid var(--ok)}
+.box h3{margin-top:0}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:13.5px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#ECEEF1;font-weight:600;position:sticky;top:0}
+.tw{overflow-x:auto;border-radius:12px}
+.p{display:inline-block;padding:1px 8px;border-radius:99px;font-weight:600;font-size:12px;white-space:nowrap}
+.p1{background:#FCE7DC;color:var(--or)} .p2{background:#FBF0D9;color:#8A5A0B} .p3{background:#E3F2E8;color:var(--ok)}
+.s{font-weight:700;white-space:nowrap}
+code{background:#ECEEF1;padding:1px 5px;border-radius:4px;font-size:12.5px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.pair.one{grid-template-columns:1fr}
+figure{margin:0;background:var(--card);border-radius:12px;padding:12px}
+figure img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:6px;margin:0 auto}
+figure.n img{max-width:390px}
+figcaption{font-size:13px;color:var(--t2);margin-top:8px}
+.shots{display:grid;gap:16px}
+.tag{font-size:12px;color:var(--t2)}
+ul.tight li{margin:3px 0}
+.toc a{color:var(--t);margin-right:14px}
+</style>
+</head>
+<body><div class="w">
+
+<h1>Аудит адаптации графики</h1>
+<p class="meta">учёттепла.рф · 20.11.2026 · ширины 1920 / 1440 / 1200 / 1024 (мышь и касание) / 768 / 390 · эталон — Figma <code>afhjmp3eRNMG3RdmToLG1f</code>. Боевые файлы не менялись. Замеры и все скрины — <code>adaptiv/audit/</code> (<code>measure.json</code>, <code>interact.json</code>, <code>lib.json</code>, <code>shots/</code>, <code>figma/</code>).</p>
+<p class="toc"><a href="#sum">Сводка</a><a href="#tab">Таблица</a><a href="#shots">Скрины</a><a href="#rules">Правила</a><a href="#figma">Figma</a><a href="#lib">Библиотека</a><a href="#asm">Допущения</a></p>
+
+<h2 id="sum">Сводка</h2>
+<div class="grid3">
+<div class="box k"><h3>Критично (чинить до показа клиенту)</h3><ul class="tight">
+<li><b>Касание на планшете ≥ 1024</b> (iPad в альбомной, iPad Pro): на страницах услуг тап по точке ничего не показывает — подписи уже скрыты, плашка не открывается, карточки под схемой нет. Причина: в <code>css/uslugi-b.css</code> карточка включается только по <code>max-width:1023px</code>, а JS (<code>hvs.js</code>) переходит в режим касания и по <code>(hover:none)</code>. На Главной так не происходит (там в CSS условие есть). Исправление — одна строка.</li>
+<li><b>ГОСТ-схема (Проектирование)</b>: на странице стоит старая статичная схема с номерами 01…, а не схема с точками из Figma 965:6248. На 390 подписи 3 px. Версия с точками уже есть в библиотеке — её и ставить.</li>
+<li><b>«Прямые участки» (Обследование)</b>: на странице старая схема, на 390 подписи 3,5–4 px, смысл («3 Ду / 1 Ду») не читается.</li>
+<li><b>«Датчик в трубе» (Установка)</b>: на 768/390 подписи «⅓ Ду / ½ Ду / ⅔ Ду» скрыты, а в карточке их нет — главный смысл схемы теряется.</li>
+<li><b>Узкий десктоп 1024–1440</b>: на схемах услуг информационные подписи падают до 6–9 px («⅓ Ду», «Монтажная длина прибора», «Отопительный период», «Т1 подача»); при мыши их никто не скрывает.</li>
+</ul></div>
+<div class="box g"><h3>Можно оставить</h3><ul class="tight">
+<li>Карта ИТП, «Монтаж по шагам», «Опломбирование», «Было/Стало/Реконструкция» на 768/390: прокрутка + «листайте» + карточка под схемой. <b>Тап попадает в нужную точку во всех 60+ проверках</b> (радиус захвата 28 px перекрывает мелкие точки).</li>
+<li>Переключатель «Было/Стало/Реконструкция»: высота не прыгает (863 px на 390 во всех трёх состояниях), карточка 248 px постоянна.</li>
+<li>Шкала ТУ, «Опытная эксплуатация», порог 0,2 Гкал/ч — HTML-графика, кегль ≥ 12 везде, переполнения нет.</li>
+<li>«Этапы работ» и индикатор «Наш подход»: лента со скроллом совпадает с Figma 390.</li>
+</ul></div>
+<div class="box m"><h3>Решение дизайнера</h3><ul class="tight">
+<li><b>Схема узла Главной на 390</b>: в HTML уменьшена целиком (374×175, точки в 21 px друг от друга), в Figma — фрагмент в крупном масштабе с прокруткой «Схема листается →». Рекомендую как в Figma (единый паттерн со страницами услуг).</li>
+<li><b>Микротекст на приборах</b> («0125,4», «РАСХОДОМЕР», «Гкал», штамп листа в «Услугах») — даже на 1920 7–9 px. Предлагаю считать декором и не требовать ≥ 12 (или заменить на штрихи).</li>
+<li><b>Шкала сезона на 390</b>: карточка месяца меняет высоту 193→345 px — блок прыгает на 150 px. Закрепить высоту по самому длинному месяцу или сократить тексты.</li>
+<li><b>Пиктограммы объектов</b> (ИТП / ВВОД / В СЕТЬ): подписи внутри иконки 7 px на всех ширинах. Предлагаю убрать текст из иконки (тема уже в заголовке карточки).</li>
+<li>Полоса цифр hero на 390: в HTML и Figma — лента с прокруткой (RULES §3 говорит 2×3); в Figma есть подпись «← листается →», в HTML нет.</li>
+</ul></div>
+</div>
+
+<h2 id="tab">Таблица: графика → проблемы → стратегия → приоритет</h2>
+<p class="tag">Стратегии: <b>а</b> — масштабировать как есть · <b>б</b> — отдельная мобильная компоновка (свой viewBox) · <b>в</b> — горизонтальная прокрутка с подсказкой · <b>г</b> — упрощённая версия · <b>д</b> — разворот в вертикаль. Кегль — минимальный размер подписи на экране, px (после масштаба). «скрыто» — подписи меньше 12 px скрыты, смысл несёт карточка под схемой.</p>
+<div class="tw"><table>
+<thead><tr><th>Графика (страница)</th><th>1920</th><th>1440</th><th>1200</th><th>768</th><th>390</th><th>Проблемы</th><th>Стратегия</th><th>Приор.</th></tr></thead>
+<tbody>
+<tr><td>Схема узла (Главная) · 9 элем., 19 точек</td><td>9,4*</td><td>7*</td><td>5,9*</td><td>скрыто</td><td>скрыто</td><td>390: схема 374×175 (масштаб 0,28), точки в 21 px друг от друга — визуально каша, хотя тап попадает верно. Figma 390 — фрагмент + прокрутка. *микротекст на приборах</td><td class="s">в (как Figma)</td><td><span class="p p2">П2</span></td></tr>
+<tr><td>«Услуги» Главной — кадры чертежа (img, 8 сост.)</td><td>7,9*</td><td>—</td><td>5*</td><td>скрыта</td><td>скрыта</td><td>Штамп листа и подписи 13 px в SVG ⇒ 5–8 px на экране даже на десктопе. На ≤1199 скрыта (решение дизайнера). Высота блока по строкам аккордеона меняется (785–875 на 1200) — это аккордеон, нормально</td><td class="s">а (десктоп), скрыть ≤1199</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>«Этапы работ» (котельная / лента / дом)</td><td>12</td><td>12</td><td>12</td><td>13</td><td>12</td><td>Норма. RULES §4 обещал вертикаль на мобильном, но и HTML, и Figma 390 — лента; RULES устарел. В Figma 390 «от теплосети» наезжает на трубу</td><td class="s">в</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>«Наш подход» + индикатор</td><td>16</td><td>—</td><td>15</td><td>16</td><td>16</td><td>Труба индикатора на 9 px шире контейнера на 768/390 (за экран не выходит)</td><td class="s">а</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>Карта ИТП, вар. B (Обследование)</td><td>19</td><td>14,5</td><td>12,1</td><td>скрыто</td><td>скрыто</td><td>1024 с мышью: 10,2. Тап 6/6 верно; карточка 182–204 (прыжок 22 px на 390)</td><td class="s">в</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>Прямые участки (Обследование)</td><td>14,5</td><td>10,9</td><td>9,1</td><td>8</td><td><b>3,5</b></td><td>На странице старая схема <code>sx-run</code>, не <code>mini-straight</code> из Figma. На 390 нечитаема. В Figma 390 кадр 592 в слоте 342 — обрезан («РАСХОДОМ…»)</td><td class="s">б + д (3 ситуации стопкой, каждая на всю ширину)</td><td><span class="p p1">П1</span></td></tr>
+<tr><td>Шкала ТУ (Обследование)</td><td>16</td><td>—</td><td>15</td><td>16</td><td>16</td><td>HTML — норма (на 390 вертикально). Figma 390: кадр 546 шире экрана</td><td class="s">д (уже)</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>ГОСТ-схема (Проектирование)</td><td>16,7</td><td>12,5</td><td>8,8</td><td>6,5</td><td><b>3,1</b></td><td>На странице старая схема с номерами (<code>sx-node</code>, 14 подписей видно на 390). Figma и библиотека — схема с точками и карточкой</td><td class="s">в (взять из библиотеки)</td><td><span class="p p1">П1</span></td></tr>
+<tr><td>Порог 0,2 Гкал/ч (Проектирование)</td><td>12</td><td>—</td><td>12</td><td>12</td><td>12</td><td>Норма. Figma 390: кадр 507 шире экрана</td><td class="s">а</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>mini-list, 13 листов (Проектирование)</td><td colspan="5">иконки без подписей, 64→48</td><td>Норма. В Figma есть Device-варианты <code>Info Card / Sheet</code></td><td class="s">а</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>«Монтаж по шагам» (Установка) · 8 шагов, 12 точек</td><td>12</td><td>9*</td><td>6,3*</td><td>скрыто</td><td>скрыто</td><td>Тап 12/12 верно. Есть Device-варианты в Figma (агент дизайнера). На 1024 касанием — не работает (см. критично)</td><td class="s">в</td><td><span class="p p2">П2</span></td></tr>
+<tr><td>Датчик в трубе (Установка)</td><td>13</td><td>9,8</td><td><b>6,9</b></td><td>скрыто</td><td>скрыто</td><td>«⅓ Ду / ½ Ду / ⅔ Ду / зона погружения» — смысловые подписи; на 1200 6,9 px, на тач скрыты и в карточке их нет ⇒ смысл теряется</td><td class="s">б (крупный фрагмент зоны погружения, подписи HTML-слоем)</td><td><span class="p p1">П1</span></td></tr>
+<tr><td>Опломбирование (Сервис)</td><td>6,4*</td><td>4,8*</td><td>4*</td><td>скрыто</td><td>скрыто</td><td>«Монтажная длина прибора» 12 → 7,4 на 1200 — смысловая</td><td class="s">в + правило подписей</td><td><span class="p p2">П2</span></td></tr>
+<tr><td>Шкала сезона Б (Сервис)</td><td>17</td><td>12,9</td><td><b>9</b></td><td>11,1</td><td>11,1</td><td>1200: подписи периодов 9 px. 390: прокрутка 1120/318, карточка месяца 193–345 px — прыжок 152 px</td><td class="s">в + фикс. высота карточки</td><td><span class="p p2">П2</span></td></tr>
+<tr><td>График погрешности (Сервис, img)</td><td>12</td><td>—</td><td>—</td><td>13</td><td><b>6,9</b></td><td>На 390 график ужат до 342 (контейнер с <code>overflow:auto</code> не прокручивается), а подпись «листайте график» показывается</td><td class="s">в (min-width 592) или б</td><td><span class="p p2">П2</span></td></tr>
+<tr><td>Было / Стало / Реконструкция (Ремонт)</td><td>10,6*</td><td>7,9*</td><td>5,6*</td><td>скрыто</td><td>скрыто</td><td>Высота стабильна, тап верно во всех 3 состояниях</td><td class="s">в</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>Пиктограммы объектов ИТП/ВВОД/В СЕТЬ</td><td>11,6</td><td>8,7</td><td>7,3</td><td>7,2</td><td>7,2</td><td>Подпись в иконке нечитаема на всех ширинах</td><td class="s">г (без текста)</td><td><span class="p p2">П2</span></td></tr>
+<tr><td>Иконки услуг / карточек / Icon Box hero</td><td colspan="5">без текста</td><td>Норма. Icon Box на 390 скрыт (по правилам)</td><td class="s">а</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>Разделители-трубы</td><td colspan="5">без текста</td><td>Норма; в Figma — фреймы 704 / 342, не компоненты</td><td class="s">а (труба тянется, элемент по центру)</td><td><span class="p p3">П3</span></td></tr>
+<tr><td>Hero-цифры</td><td>14</td><td>—</td><td>13</td><td>14</td><td>14</td><td>390: лента с прокруткой без подсказки (в Figma «← листается →»)</td><td class="s">в</td><td><span class="p p3">П3</span></td></tr>
+</tbody></table></div>
+<p class="tag">* — минимум даёт декоративный микротекст на приборах; смысловые подписи этих схем ≥ 12 на 1920, но падают ниже 12 на 1200–1440.</p>
+
+<h2 id="shots">Скрины (HTML слева, Figma справа)</h2>
+<div class="shots">
+<div class="pair"><figure class="n"><img src="img/audit/uzel-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — схема узла целиком, точки слиплись</figcaption></figure><figure class="n"><img src="img/audit/figma/uzel-390.png" alt="" loading="lazy"><figcaption>Figma 390 (1489:14301) — фрагмент + «Схема листается»</figcaption></figure></div>
+<div class="pair"><figure class="n"><img src="img/audit/gost-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — старая ГОСТ-схема, подписи 3 px</figcaption></figure><figure class="n"><img src="img/audit/figma/gost-390.png" alt="" loading="lazy"><figcaption>Figma 390 (1527:15211) — схема с точками и карточкой</figcaption></figure></div>
+<div class="pair"><figure class="n"><img src="img/audit/straight-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — «Прямые участки», подписи 3,5–4 px</figcaption></figure><figure class="n"><img src="img/audit/figma/straight-390.png" alt="" loading="lazy"><figcaption>Figma 390 (1531:16665) — другая графика, кадр обрезан справа</figcaption></figure></div>
+<div class="pair one"><figure><img src="img/audit/ustanovka-1024touch.jpg" alt="" loading="lazy"><figcaption>1024 касанием, после тапа по точке: подсказки нет, карточки нет, текст «Наведите…» — взаимодействие мёртвое</figcaption></figure></div>
+<div class="pair one"><figure><img src="img/audit/datchik-1200.jpg" alt="" loading="lazy"><figcaption>1200 — «Датчик в трубе»: «⅓ Ду / ось трубы / ⅔ Ду» 6,9 px; пиктограммы объектов с подписью 7 px</figcaption></figure></div>
+<div class="pair"><figure><img src="img/audit/season-1200.jpg" alt="" loading="lazy"><figcaption>1200 — шкала сезона, подписи периодов 9 px</figcaption></figure><figure><img src="img/audit/plomb-1200.jpg" alt="" loading="lazy"><figcaption>1200 — опломбирование, «монтажная длина прибора» 7,4 px</figcaption></figure></div>
+<div class="pair"><figure class="n"><img src="img/audit/season-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — сезон: 4 пункта легенды, карточка 193–345 px</figcaption></figure><figure class="n"><img src="img/audit/figma/season-390.png" alt="" loading="lazy"><figcaption>Figma 390 (1538:20156) — 1 пункт легенды, «ЛИСТАЙТЕ» дважды</figcaption></figure></div>
+<div class="pair"><figure class="n"><img src="img/audit/err-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — график погрешности ужат, «листайте» без прокрутки</figcaption></figure><figure class="n"><img src="img/audit/itp-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — карта ИТП: эталонный паттерн (прокрутка + карточка)</figcaption></figure></div>
+<div class="pair"><figure class="n"><img src="img/audit/montazh-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — «Монтаж по шагам»</figcaption></figure><figure class="n"><img src="img/audit/figma/montazh-390.png" alt="" loading="lazy"><figcaption>Figma 390 — Installation / Scheme, Device=Mobile</figcaption></figure></div>
+<div class="pair"><figure class="n"><img src="img/audit/remont-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — Было/Стало/Реконструкция</figcaption></figure><figure class="n"><img src="img/audit/figma/remont-390.png" alt="" loading="lazy"><figcaption>Figma 390 (1540:20601)</figcaption></figure></div>
+<div class="pair"><figure class="n"><img src="img/audit/stages-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — «Этапы работ»</figcaption></figure><figure class="n"><img src="img/audit/figma/stages-390.png" alt="" loading="lazy"><figcaption>Figma 390 (1489:16026) — «от теплосети» на трубе</figcaption></figure></div>
+<div class="pair"><figure class="n"><img src="img/audit/hero-390.jpg" alt="" loading="lazy"><figcaption>HTML 390 — hero, цифры лентой без подсказки</figcaption></figure><figure class="n"><img src="img/audit/figma/hero-390.png" alt="" loading="lazy"><figcaption>Figma 390 — лейблы над H1 и «← листается →»</figcaption></figure></div>
+<div class="pair"><figure><img src="img/audit/uzel-1200.jpg" alt="" loading="lazy"><figcaption>1200 — схема узла, микротекст приборов 6 px</figcaption></figure><figure><img src="img/audit/montazh-1200.jpg" alt="" loading="lazy"><figcaption>1200 — «Монтаж по шагам»</figcaption></figure></div>
+<div class="pair"><figure><img src="img/audit/gost-1200.jpg" alt="" loading="lazy"><figcaption>1200 — старая ГОСТ-схема, 8,8 px</figcaption></figure><figure><img src="img/audit/svcill-1200.jpg" alt="" loading="lazy"><figcaption>1200 — «Услуги» Главной, штамп 5 px</figcaption></figure></div>
+</div>
+
+<h2 id="rules">Единые правила графики (предложение)</h2>
+<div class="box"><h3>1. Текст</h3><ul>
+<li>Два класса подписей. <b>Смысловые</b> (Т1/Т2, Ду, размеры, зоны, периоды, названия элементов) — ≥ 12 px на экране на любой ширине. <b>Декор</b> (цифры на табло, шильдики, штамп листа) — без требования; в SVG помечать <code>class="decor"</code>, на ≤ 1199 скрывать.</li>
+<li>Где смысловая подпись не помещается: сначала вынести её в HTML-слой над схемой (легенда, как Т1/Т2), потом — в карточку элемента. Скрывать смысловую подпись без замены нельзя.</li>
+<li>Правило «скрыть < 12 px» в <code>hvs.js</code> распространить и на десктоп 1024–1440 (сейчас работает только в режиме касания), но только для декора; для смысловых — минимальный масштаб схемы (см. 3).</li>
+</ul></div>
+<div class="box"><h3>2. Касание</h3><ul>
+<li>Режим касания включается одинаково в CSS и JS: <code>(max-width:1023px), (hover:none)</code>.</li>
+<li>Точка → карточка под схемой («01 / N», ‹ ›), как на Главной. Шторку из RULES §4 не делаем — карточка уже принята.</li>
+<li>Зона тапа ≥ 44 px: держится радиусом захвата 28 px вокруг центра точки (сейчас так). Если центры точек ближе 44 px — схеме нужен больший масштаб (прокрутка), а не меньшие точки.</li>
+<li>Высота карточки фиксируется по самому длинному тексту элемента — блок не прыгает при переключении (сейчас нарушено в «Сезоне» и на 22 px в карте ИТП/монтаже).</li>
+<li>Подсказка: на тач «Нажмите на точку — появится описание», на мыши «Наведите…». Подпись «листайте» показывать только если контейнер реально прокручивается.</li>
+</ul></div>
+<div class="box"><h3>3. Масштаб и прокрутка</h3><ul>
+<li>Минимальный масштаб схемы со смысловыми подписями 12 px в SVG — 1,0; с подписями 14–16 — 0,75–0,85. Ниже — схема получает <code>min-width</code> и прокрутку с подсказкой (стратегия в).</li>
+<li>При выборе элемента карточкой выбранная точка прокручивается в видимую часть (сейчас так в <code>hvs.js</code>).</li>
+<li>Схемы-сравнения из нескольких строк (прямые участки) — не прокрутка, а стопка: каждая строка своим кадром на всю ширину.</li>
+</ul></div>
+<div class="box"><h3>4. Переключатели состояний</h3><ul>
+<li>Все состояния одного блока — в одном viewBox, высота сцены одинакова (как «Было/Стало» — проверено).</li>
+<li>Номер выбранного элемента сбрасывается на 01 при смене состояния; карточка не меняет высоту.</li>
+<li>На 390 сегмент-переключатель — на всю ширину, кнопки ≥ 44 px.</li>
+</ul></div>
+<div class="box"><h3>5. Что скрывается на мобильном</h3><ul>
+<li>Скрывать: «Услуги» Главной (кадры чертежа), Icon Box hero, декоративный микротекст, подсказку «Наведите…».</li>
+<li>Не скрывать: смысловые подписи (переносить в легенду/карточку), легенду Т1/Т2, точки.</li>
+</ul></div>
+<div class="box"><h3>6. Экспорт SVG</h3><ul>
+<li><b>Верстальщику:</b> один SVG на состояние, <code>viewBox</code> без <code>width/height</code>; точки — <code>&lt;g class="dot" data-k&gt;</code>, зоны — <code>.hit data-k</code>; подписи — <code>&lt;text&gt;</code> с <code>font-size</code> атрибутом (по нему считается скрытие), декор с <code>class="decor"</code>; шрифты Inter / Sofia Sans, не в кривых; без <code>&lt;foreignObject&gt;</code>.</li>
+<li><b>Для Figma:</b> штриховка — набором линий в <code>clipPath</code>, без <code>&lt;pattern&gt;</code>; стрелки — отдельными path, без <code>marker</code>; без <code>mask</code> с градиентами; текст оставить текстом; группы по элементам с именами (как в 989:14286).</li>
+<li>Мобильная компоновка (стратегия б) — отдельный файл <code>*-m.svg</code> со своим viewBox, те же <code>data-k</code>.</li>
+</ul></div>
+
+<h2 id="figma">Проверка Figma</h2>
+<div class="box"><h3>Варианты Device у графики</h3><ul>
+<li><b>Есть:</b> только набор «Установка» (агент дизайнера): <code>Installation / Scheme</code> 1523:19501, <code>/ Sensor</code> 1523:19502, <code>/ Mini trial</code>, <code>Scheme / Hotspot</code> 1523:17805 и др. — Desktop/Tablet/Mobile. Плюс общие <code>Scheme / Mobile Card</code> (Tablet/Mobile), <code>Slider Progress</code>, <code>Step</code>, <code>Info Card / Sheet</code>.</li>
+<li><b>Нет:</b> <code>Services / Illustration</code> 976:18468 (только «Сцена»), <code>Scheme / Hover Tooltip</code> 971:6864 (один компонент), <code>Illustration/Узел — Ремонт</code> 123:2174. Схемы узла, ИТП, ГОСТ, сезон, опломбирование, Было/Стало, mini-* и <code>Divider/Pipe/*</code> — <b>не компоненты</b>, а локальные фреймы в каждом кадре 768/390.</li>
+</ul></div>
+<div class="box"><h3>Расхождения Figma 768/390 ↔ HTML</h3><ul>
+<li>Схема узла 390: Figma — фрагмент + прокрутка; HTML — схема целиком.</li>
+<li>ГОСТ-схема: Figma — точки + карточка; HTML — старая схема с номерами.</li>
+<li>Прямые участки: Figma — <code>mini-straight</code> (2 строки, обрезан 592 → 342); HTML — <code>sx-run</code> с переключателем 3 ситуаций.</li>
+<li>Шире кадра 390 в Figma (не адаптированы): «Стол — mini-straight» 592, «Стол — mini-tu» 546 (1531:16858), «Стол — mini-thr» 507 (1527:15557), «Стол — mini-err» 592 (1538:20511). В HTML ТУ и порог перестроены, график погрешности — ужат.</li>
+<li>Сезон 390: в Figma «ЛИСТАЙТЕ» дважды и один пункт легенды; в HTML легенда из 4 пунктов.</li>
+<li>Этапы 390: в Figma подпись «от теплосети» наезжает на трубу.</li>
+<li>Hero 390: в Figma лейблы над H1 (решение ещё не принято) и подсказка «← листается →» у цифр; в HTML нет ни того, ни другого.</li>
+<li>Установка: кадры 1523:17083/17146 построены на компонентах; HTML ещё не сверялся с ними после «готово» агента (HANDOFF, пункт 0).</li>
+</ul></div>
+
+<h2 id="lib">Библиотека <code>biblioteka-grafiki.html</code></h2>
+<div class="box"><ul>
+<li>26 карточек, рамки 390 и 768 с касанием: переполнения нет ни в одном состоянии; все группы состояний переключаются (уз. 10, услуги 8, этапы 7, подход 9, ГОСТ 4, монтаж 9, датчик 8, сезон 13, ремонт 3×7).</li>
+<li>Тап по точке в рамке 390 меняет карточку: узел, ИТП, ГОСТ, монтаж, датчик, опломбирование, сезон — ок. Ремонт в библиотеке — проверка неоднозначна (вторая точка принадлежит скрытому состоянию); на странице ремонт проверен — ок.</li>
+<li>Высота: сезон 1125–1221 (прыжок 96), услуги 917–1455 (аккордеон, нормально), монтаж/датчик +22–25 на 390.</li>
+<li><b>Расхождение с рекомендациями:</b> карточка «ГОСТ» в библиотеке собрана из фрагмента с точками, а на странице Проектирования — старая схема; «Прямые участки» (<code>sxrun</code>) в библиотеке — старая версия, как на странице. После правок по П1 пересобрать библиотеку (<code>teplo-graphics/library/build.py</code>).</li>
+<li>В библиотеке переключатель «touch» на рамке 1024 даст тот же мёртвый тап, что и на сайте (общий CSS).</li>
+</ul></div>
+
+<h2 id="asm">Допущения</h2>
+<div class="box"><ul>
+<li>«Режим касания на 1024» проверен эмуляцией Chromium (<code>hasTouch</code>, без мыши) — медиа <code>(hover:none)</code> срабатывает; на реальном iPad ожидаю так же, живым устройством не проверял.</li>
+<li>Кегль считается по <code>font-size × масштаб</code> SVG; для <code>&lt;img&gt;</code>-SVG — по минимальному <code>font-size</code> в файле и viewBox. Декор/смысл разделены мной по содержанию подписи.</li>
+<li>1440 — та же десктопная раскладка, что 1920 (масштаб rem); отдельные скрины 1440 не делал, цифры есть в <code>measure.json</code>.</li>
+<li>Figma сверял по скринам кадров 390 и списку узлов 768/390 (только чтение). Кадры 768 глазами не смотрел.</li>
+<li>Кейсы «Объекты / …» не проверялись (адаптива нет по плану).</li>
+<li>На скринах <code>adaptiv/audit/shots/</code> местами виден липкий заголовок — артефакт съёмки, не дефект.</li>
+</ul></div>
+
+<h2>План работ (порядок)</h2>
+<div class="box"><ol>
+<li>П1, мелочь: <code>uslugi-b.css</code> — добавить <code>, (hover:none)</code> к медиа карточки/легенды схем (вместе с остальными «≤1023» правилами режима касания).</li>
+<li>П1: ГОСТ-схема — заменить <code>sx-node</code> на фрагмент с точками из библиотеки.</li>
+<li>П1: «Прямые участки» — свежий экспорт <code>mini-straight</code>, мобильная компоновка стопкой (и в Figma 390).</li>
+<li>П1: «Датчик в трубе» — мобильный кадр (фрагмент зоны погружения) + подписи Ду в HTML-слое.</li>
+<li>П2: правило подписей на десктопе 1024–1440 (декор скрывать, смысловые — не меньше 12), график погрешности (min-width/прокрутка), фикс. высота карточки сезона, пиктограммы объектов без текста, схема узла 390 → прокрутка.</li>
+<li>П3: подсказка у ленты цифр hero, правки Figma (обрезанные mini-*, двойное «ЛИСТАЙТЕ», подпись этапов).</li>
+</ol></div>
+
+</div></body></html>
