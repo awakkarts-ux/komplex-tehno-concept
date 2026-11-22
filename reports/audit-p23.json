@@ -1,0 +1,2268 @@
+{
+  "date": "2026-11-21",
+  "baseline": "8d3ee96768698f238bd8a78e0a93d0730157056b",
+  "pages": {
+    "pages": [
+      {
+        "file": "index",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "uzel__sc",
+            "w": 374,
+            "scroll": 1333
+          }
+        ],
+        "season": [],
+        "ap": [
+          {
+            "class": "ap-ind",
+            "w": 342,
+            "scroll": 342
+          },
+          {
+            "class": "ap-ind__pipe",
+            "w": 342,
+            "scroll": 342
+          }
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc hvs__sc--wide is-scroll",
+            "w": 318,
+            "scroll": 1120
+          },
+          {
+            "class": "hvs__sc hvs__sc--err is-scroll",
+            "w": 342,
+            "scroll": 592
+          },
+          {
+            "class": "hvs__sc is-scroll",
+            "w": 342,
+            "scroll": 576
+          }
+        ],
+        "season": [
+          {
+            "text": "Отопительный период",
+            "size": 11.999544171875
+          },
+          {
+            "text": "Межсезонье",
+            "size": 11.999544171875
+          },
+          {
+            "text": "Отопительный период",
+            "size": 11.999544171875
+          },
+          {
+            "text": "ЯНВ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ФЕВ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "МАР",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "АПР",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "МАЙ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ИЮН",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ИЮЛ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "АВГ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "СЕН",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ОКТ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "НОЯ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ДЕК",
+            "size": 12.280208333333334
+          }
+        ],
+        "ap": []
+      },
+      {
+        "file": "obsledovanie",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc is-scroll",
+            "w": 342,
+            "scroll": 736
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "ustanovka",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc is-scroll",
+            "w": 342,
+            "scroll": 736
+          },
+          {
+            "class": "hvs__sc is-scroll",
+            "w": 342,
+            "scroll": 640
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "proektirovanie",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc is-scroll",
+            "w": 342,
+            "scroll": 960
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "remont",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc is-scroll",
+            "w": 342,
+            "scroll": 544
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "uslugi",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "obekty",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "kontakty",
+        "width": 390,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "index",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "uzel__sc",
+            "w": 752,
+            "scroll": 752
+          }
+        ],
+        "season": [],
+        "ap": [
+          {
+            "class": "ap-ind",
+            "w": 438,
+            "scroll": 438
+          },
+          {
+            "class": "ap-ind__pipe",
+            "w": 438,
+            "scroll": 438
+          }
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc hvs__sc--wide is-scroll",
+            "w": 656,
+            "scroll": 1120
+          },
+          {
+            "class": "hvs__sc hvs__sc--err",
+            "w": 656,
+            "scroll": 656
+          },
+          {
+            "class": "hvs__sc",
+            "w": 704,
+            "scroll": 704
+          }
+        ],
+        "season": [
+          {
+            "text": "Отопительный период",
+            "size": 11.999544171875
+          },
+          {
+            "text": "Межсезонье",
+            "size": 11.999544171875
+          },
+          {
+            "text": "Отопительный период",
+            "size": 11.999544171875
+          },
+          {
+            "text": "ЯНВ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ФЕВ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "МАР",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "АПР",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "МАЙ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ИЮН",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ИЮЛ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "АВГ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "СЕН",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ОКТ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "НОЯ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ДЕК",
+            "size": 12.280208333333334
+          }
+        ],
+        "ap": []
+      },
+      {
+        "file": "obsledovanie",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 704,
+            "scroll": 704
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "ustanovka",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 704,
+            "scroll": 704
+          },
+          {
+            "class": "hvs__sc",
+            "w": 704,
+            "scroll": 704
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "proektirovanie",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc is-scroll",
+            "w": 704,
+            "scroll": 960
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "remont",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 704,
+            "scroll": 704
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "uslugi",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "obekty",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "kontakty",
+        "width": 768,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "index",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "uzel__sc",
+            "w": 1008,
+            "scroll": 1008
+          }
+        ],
+        "season": [],
+        "ap": [
+          {
+            "class": "ap-ind",
+            "w": 438,
+            "scroll": 438
+          },
+          {
+            "class": "ap-ind__pipe",
+            "w": 438,
+            "scroll": 438
+          }
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc hvs__sc--wide is-scroll",
+            "w": 912,
+            "scroll": 1120
+          },
+          {
+            "class": "hvs__sc hvs__sc--err",
+            "w": 592,
+            "scroll": 592
+          },
+          {
+            "class": "hvs__sc",
+            "w": 640,
+            "scroll": 640
+          }
+        ],
+        "season": [
+          {
+            "text": "Отопительный период",
+            "size": 11.999544171875
+          },
+          {
+            "text": "Межсезонье",
+            "size": 11.999544171875
+          },
+          {
+            "text": "Отопительный период",
+            "size": 11.999544171875
+          },
+          {
+            "text": "ЯНВ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ФЕВ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "МАР",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "АПР",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "МАЙ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ИЮН",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ИЮЛ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "АВГ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "СЕН",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ОКТ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "НОЯ",
+            "size": 12.280208333333334
+          },
+          {
+            "text": "ДЕК",
+            "size": 12.280208333333334
+          }
+        ],
+        "ap": []
+      },
+      {
+        "file": "obsledovanie",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 960,
+            "scroll": 960
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "ustanovka",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 960,
+            "scroll": 960
+          },
+          {
+            "class": "hvs__sc",
+            "w": 640,
+            "scroll": 640
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "proektirovanie",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 960,
+            "scroll": 960
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "remont",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 960,
+            "scroll": 960
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "uslugi",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "obekty",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "kontakty",
+        "width": 1024,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "index",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "uzel__sc",
+            "w": 1355,
+            "scroll": 1355
+          }
+        ],
+        "season": [],
+        "ap": [
+          {
+            "class": "ap-ind",
+            "w": 312,
+            "scroll": 312
+          },
+          {
+            "class": "ap-ind__pipe",
+            "w": 312,
+            "scroll": 312
+          }
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc hvs__sc--wide",
+            "w": 1241,
+            "scroll": 1241
+          },
+          {
+            "class": "hvs__sc hvs__sc--err",
+            "w": 859,
+            "scroll": 859
+          },
+          {
+            "class": "hvs__sc",
+            "w": 859,
+            "scroll": 859
+          }
+        ],
+        "season": [
+          {
+            "text": "Отопительный период",
+            "size": 12.244687500000001
+          },
+          {
+            "text": "Межсезонье",
+            "size": 12.244687500000001
+          },
+          {
+            "text": "Отопительный период",
+            "size": 12.244687500000001
+          },
+          {
+            "text": "ЯНВ",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "ФЕВ",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "МАР",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "АПР",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "МАЙ",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "ИЮН",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "ИЮЛ",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "АВГ",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "СЕН",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "ОКТ",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "НОЯ",
+            "size": 13.605208333333334
+          },
+          {
+            "text": "ДЕК",
+            "size": 13.605208333333334
+          }
+        ],
+        "ap": []
+      },
+      {
+        "file": "obsledovanie",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1298,
+            "scroll": 1298
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "ustanovka",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1298,
+            "scroll": 1298
+          },
+          {
+            "class": "hvs__sc",
+            "w": 859,
+            "scroll": 859
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "proektirovanie",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1298,
+            "scroll": 1298
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "remont",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1298,
+            "scroll": 1298
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "uslugi",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "obekty",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "kontakty",
+        "width": 1366,
+        "touch": true,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "index",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "uzel__sc",
+            "w": 1008,
+            "scroll": 1008
+          }
+        ],
+        "season": [],
+        "ap": [
+          {
+            "class": "ap-ind",
+            "w": 438,
+            "scroll": 438
+          },
+          {
+            "class": "ap-ind__pipe",
+            "w": 438,
+            "scroll": 438
+          }
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc hvs__sc--wide",
+            "w": 912,
+            "scroll": 912
+          },
+          {
+            "class": "hvs__sc hvs__sc--err",
+            "w": 592,
+            "scroll": 592
+          },
+          {
+            "class": "hvs__sc",
+            "w": 640,
+            "scroll": 640
+          }
+        ],
+        "season": [
+          {
+            "text": "Отопительный период",
+            "size": 12
+          },
+          {
+            "text": "Межсезонье",
+            "size": 12
+          },
+          {
+            "text": "Отопительный период",
+            "size": 12
+          },
+          {
+            "text": "ЯНВ",
+            "size": 12
+          },
+          {
+            "text": "ФЕВ",
+            "size": 12
+          },
+          {
+            "text": "МАР",
+            "size": 12
+          },
+          {
+            "text": "АПР",
+            "size": 12
+          },
+          {
+            "text": "МАЙ",
+            "size": 12
+          },
+          {
+            "text": "ИЮН",
+            "size": 12
+          },
+          {
+            "text": "ИЮЛ",
+            "size": 12
+          },
+          {
+            "text": "АВГ",
+            "size": 12
+          },
+          {
+            "text": "СЕН",
+            "size": 12
+          },
+          {
+            "text": "ОКТ",
+            "size": 12
+          },
+          {
+            "text": "НОЯ",
+            "size": 12
+          },
+          {
+            "text": "ДЕК",
+            "size": 12
+          }
+        ],
+        "ap": []
+      },
+      {
+        "file": "obsledovanie",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 960,
+            "scroll": 960
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "ustanovka",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 960,
+            "scroll": 960
+          },
+          {
+            "class": "hvs__sc",
+            "w": 640,
+            "scroll": 640
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "proektirovanie",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 960,
+            "scroll": 960
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "remont",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 960,
+            "scroll": 960
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "uslugi",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "obekty",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "kontakty",
+        "width": 1024,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "index",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "uzel__sc",
+            "w": 1190,
+            "scroll": 1190
+          }
+        ],
+        "season": [],
+        "ap": [
+          {
+            "class": "ap-ind",
+            "w": 274,
+            "scroll": 274
+          },
+          {
+            "class": "ap-ind__pipe",
+            "w": 274,
+            "scroll": 274
+          }
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc hvs__sc--wide",
+            "w": 1090,
+            "scroll": 1090
+          },
+          {
+            "class": "hvs__sc hvs__sc--err",
+            "w": 755,
+            "scroll": 755
+          },
+          {
+            "class": "hvs__sc",
+            "w": 755,
+            "scroll": 755
+          }
+        ],
+        "season": [
+          {
+            "text": "Отопительный период",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "Межсезонье",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "Отопительный период",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "ЯНВ",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "ФЕВ",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "МАР",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "АПР",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "МАЙ",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "ИЮН",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "ИЮЛ",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "АВГ",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "СЕН",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "ОКТ",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "НОЯ",
+            "size": 11.999264119791667
+          },
+          {
+            "text": "ДЕК",
+            "size": 11.999264119791667
+          }
+        ],
+        "ap": []
+      },
+      {
+        "file": "obsledovanie",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1140,
+            "scroll": 1140
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "ustanovka",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1140,
+            "scroll": 1140
+          },
+          {
+            "class": "hvs__sc",
+            "w": 755,
+            "scroll": 755
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "proektirovanie",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1140,
+            "scroll": 1140
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "remont",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1140,
+            "scroll": 1140
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "uslugi",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "obekty",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "kontakty",
+        "width": 1200,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "index",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "uzel__sc",
+            "w": 1428,
+            "scroll": 1428
+          }
+        ],
+        "season": [],
+        "ap": [
+          {
+            "class": "ap-ind",
+            "w": 329,
+            "scroll": 330
+          },
+          {
+            "class": "ap-ind__pipe",
+            "w": 329,
+            "scroll": 330
+          }
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc hvs__sc--wide",
+            "w": 1308,
+            "scroll": 1308
+          },
+          {
+            "class": "hvs__sc hvs__sc--err",
+            "w": 906,
+            "scroll": 906
+          },
+          {
+            "class": "hvs__sc",
+            "w": 906,
+            "scroll": 906
+          }
+        ],
+        "season": [
+          {
+            "text": "Отопительный период",
+            "size": 12.907499999999999
+          },
+          {
+            "text": "Межсезонье",
+            "size": 12.907499999999999
+          },
+          {
+            "text": "Отопительный период",
+            "size": 12.907499999999999
+          },
+          {
+            "text": "ЯНВ",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "ФЕВ",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "МАР",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "АПР",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "МАЙ",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "ИЮН",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "ИЮЛ",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "АВГ",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "СЕН",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "ОКТ",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "НОЯ",
+            "size": 14.341666666666665
+          },
+          {
+            "text": "ДЕК",
+            "size": 14.341666666666665
+          }
+        ],
+        "ap": []
+      },
+      {
+        "file": "obsledovanie",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1368,
+            "scroll": 1368
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "ustanovka",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1368,
+            "scroll": 1368
+          },
+          {
+            "class": "hvs__sc",
+            "w": 906,
+            "scroll": 906
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "proektirovanie",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1368,
+            "scroll": 1368
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "remont",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1368,
+            "scroll": 1368
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "uslugi",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "obekty",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "kontakty",
+        "width": 1440,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "index",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "uzel__sc",
+            "w": 1904,
+            "scroll": 1904
+          }
+        ],
+        "season": [],
+        "ap": [
+          {
+            "class": "ap-ind",
+            "w": 438,
+            "scroll": 440
+          },
+          {
+            "class": "ap-ind__pipe",
+            "w": 438,
+            "scroll": 440
+          }
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc hvs__sc--wide",
+            "w": 1744,
+            "scroll": 1744
+          },
+          {
+            "class": "hvs__sc hvs__sc--err",
+            "w": 1208,
+            "scroll": 1208
+          },
+          {
+            "class": "hvs__sc",
+            "w": 1208,
+            "scroll": 1208
+          }
+        ],
+        "season": [
+          {
+            "text": "Отопительный период",
+            "size": 17.2096875
+          },
+          {
+            "text": "Межсезонье",
+            "size": 17.2096875
+          },
+          {
+            "text": "Отопительный период",
+            "size": 17.2096875
+          },
+          {
+            "text": "ЯНВ",
+            "size": 19.121875
+          },
+          {
+            "text": "ФЕВ",
+            "size": 19.121875
+          },
+          {
+            "text": "МАР",
+            "size": 19.121875
+          },
+          {
+            "text": "АПР",
+            "size": 19.121875
+          },
+          {
+            "text": "МАЙ",
+            "size": 19.121875
+          },
+          {
+            "text": "ИЮН",
+            "size": 19.121875
+          },
+          {
+            "text": "ИЮЛ",
+            "size": 19.121875
+          },
+          {
+            "text": "АВГ",
+            "size": 19.121875
+          },
+          {
+            "text": "СЕН",
+            "size": 19.121875
+          },
+          {
+            "text": "ОКТ",
+            "size": 19.121875
+          },
+          {
+            "text": "НОЯ",
+            "size": 19.121875
+          },
+          {
+            "text": "ДЕК",
+            "size": 19.121875
+          }
+        ],
+        "ap": []
+      },
+      {
+        "file": "obsledovanie",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1824,
+            "scroll": 1824
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "ustanovka",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1824,
+            "scroll": 1824
+          },
+          {
+            "class": "hvs__sc",
+            "w": 1208,
+            "scroll": 1208
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "proektirovanie",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1824,
+            "scroll": 1824
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "remont",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [
+          {
+            "class": "hvs__sc",
+            "w": 1824,
+            "scroll": 1824
+          }
+        ],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "uslugi",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "obekty",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      },
+      {
+        "file": "kontakty",
+        "width": 1920,
+        "touch": false,
+        "overflow": 0,
+        "sc": [],
+        "season": [],
+        "ap": []
+      }
+    ],
+    "interactions": [
+      {
+        "file": "index",
+        "width": 390,
+        "state": 0,
+        "stage": 0,
+        "dots": 19,
+        "passed": 19,
+        "heightRange": [
+          185,
+          185
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 390,
+        "state": 0,
+        "stage": 0,
+        "dots": 4,
+        "passed": 4,
+        "heightRange": [
+          205,
+          205
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 390,
+        "seasonHeight": [
+          346,
+          346,
+          346,
+          346,
+          346,
+          346,
+          346,
+          346,
+          346,
+          346,
+          346,
+          346
+        ]
+      },
+      {
+        "file": "obsledovanie",
+        "width": 390,
+        "state": 0,
+        "stage": 0,
+        "dots": 6,
+        "passed": 6,
+        "heightRange": [
+          205,
+          205
+        ]
+      },
+      {
+        "file": "ustanovka",
+        "width": 390,
+        "state": 0,
+        "stage": 0,
+        "dots": 12,
+        "passed": 12,
+        "heightRange": [
+          208,
+          208
+        ]
+      },
+      {
+        "file": "ustanovka",
+        "width": 390,
+        "state": 0,
+        "stage": 1,
+        "dots": 7,
+        "passed": 7,
+        "heightRange": [
+          205,
+          205
+        ]
+      },
+      {
+        "file": "proektirovanie",
+        "width": 390,
+        "state": 0,
+        "stage": 0,
+        "dots": 5,
+        "passed": 5,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 390,
+        "state": 0,
+        "stage": 0,
+        "dots": 5,
+        "passed": 5,
+        "heightRange": [
+          248,
+          248
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 390,
+        "state": 1,
+        "stage": 0,
+        "dots": 4,
+        "passed": 4,
+        "heightRange": [
+          248,
+          248
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 390,
+        "state": 2,
+        "stage": 0,
+        "dots": 6,
+        "passed": 6,
+        "heightRange": [
+          248,
+          248
+        ]
+      },
+      {
+        "file": "index",
+        "width": 768,
+        "state": 0,
+        "stage": 0,
+        "dots": 19,
+        "passed": 19,
+        "heightRange": [
+          185,
+          185
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 768,
+        "state": 0,
+        "stage": 0,
+        "dots": 4,
+        "passed": 4,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 768,
+        "seasonHeight": [
+          226,
+          226,
+          226,
+          226,
+          226,
+          226,
+          226,
+          226,
+          226,
+          226,
+          226,
+          226
+        ]
+      },
+      {
+        "file": "obsledovanie",
+        "width": 768,
+        "state": 0,
+        "stage": 0,
+        "dots": 6,
+        "passed": 6,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "ustanovka",
+        "width": 768,
+        "state": 0,
+        "stage": 0,
+        "dots": 12,
+        "passed": 12,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "ustanovka",
+        "width": 768,
+        "state": 0,
+        "stage": 1,
+        "dots": 7,
+        "passed": 7,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "proektirovanie",
+        "width": 768,
+        "state": 0,
+        "stage": 0,
+        "dots": 5,
+        "passed": 5,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 768,
+        "state": 0,
+        "stage": 0,
+        "dots": 5,
+        "passed": 5,
+        "heightRange": [
+          226,
+          226
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 768,
+        "state": 1,
+        "stage": 0,
+        "dots": 4,
+        "passed": 4,
+        "heightRange": [
+          226,
+          226
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 768,
+        "state": 2,
+        "stage": 0,
+        "dots": 6,
+        "passed": 6,
+        "heightRange": [
+          226,
+          226
+        ]
+      },
+      {
+        "file": "index",
+        "width": 1024,
+        "state": 0,
+        "stage": 0,
+        "dots": 19,
+        "passed": 19,
+        "heightRange": [
+          185,
+          185
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1024,
+        "state": 0,
+        "stage": 0,
+        "dots": 4,
+        "passed": 4,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1024,
+        "seasonHeight": [
+          202,
+          202,
+          202,
+          202,
+          202,
+          202,
+          202,
+          202,
+          202,
+          202,
+          202,
+          202
+        ]
+      },
+      {
+        "file": "obsledovanie",
+        "width": 1024,
+        "state": 0,
+        "stage": 0,
+        "dots": 6,
+        "passed": 6,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "ustanovka",
+        "width": 1024,
+        "state": 0,
+        "stage": 0,
+        "dots": 12,
+        "passed": 12,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "ustanovka",
+        "width": 1024,
+        "state": 0,
+        "stage": 1,
+        "dots": 7,
+        "passed": 7,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "proektirovanie",
+        "width": 1024,
+        "state": 0,
+        "stage": 0,
+        "dots": 5,
+        "passed": 5,
+        "heightRange": [
+          183,
+          183
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 1024,
+        "state": 0,
+        "stage": 0,
+        "dots": 5,
+        "passed": 5,
+        "heightRange": [
+          226,
+          226
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 1024,
+        "state": 1,
+        "stage": 0,
+        "dots": 4,
+        "passed": 4,
+        "heightRange": [
+          226,
+          226
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 1024,
+        "state": 2,
+        "stage": 0,
+        "dots": 6,
+        "passed": 6,
+        "heightRange": [
+          226,
+          226
+        ]
+      },
+      {
+        "file": "index",
+        "width": 1366,
+        "state": 0,
+        "stage": 0,
+        "dots": 19,
+        "passed": 19,
+        "heightRange": [
+          145,
+          145
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1366,
+        "state": 0,
+        "stage": 0,
+        "dots": 4,
+        "passed": 4,
+        "heightRange": [
+          167,
+          167
+        ]
+      },
+      {
+        "file": "servis",
+        "width": 1366,
+        "seasonHeight": [
+          158,
+          158,
+          158,
+          158,
+          158,
+          158,
+          158,
+          158,
+          158,
+          158,
+          158,
+          158
+        ]
+      },
+      {
+        "file": "obsledovanie",
+        "width": 1366,
+        "state": 0,
+        "stage": 0,
+        "dots": 6,
+        "passed": 6,
+        "heightRange": [
+          167,
+          167
+        ]
+      },
+      {
+        "file": "ustanovka",
+        "width": 1366,
+        "state": 0,
+        "stage": 0,
+        "dots": 12,
+        "passed": 12,
+        "heightRange": [
+          167,
+          167
+        ]
+      },
+      {
+        "file": "ustanovka",
+        "width": 1366,
+        "state": 0,
+        "stage": 1,
+        "dots": 7,
+        "passed": 7,
+        "heightRange": [
+          167,
+          167
+        ]
+      },
+      {
+        "file": "proektirovanie",
+        "width": 1366,
+        "state": 0,
+        "stage": 0,
+        "dots": 5,
+        "passed": 5,
+        "heightRange": [
+          167,
+          167
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 1366,
+        "state": 0,
+        "stage": 0,
+        "dots": 5,
+        "passed": 5,
+        "heightRange": [
+          210,
+          210
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 1366,
+        "state": 1,
+        "stage": 0,
+        "dots": 4,
+        "passed": 4,
+        "heightRange": [
+          210,
+          210
+        ]
+      },
+      {
+        "file": "remont",
+        "width": 1366,
+        "state": 2,
+        "stage": 0,
+        "dots": 6,
+        "passed": 6,
+        "heightRange": [
+          210,
+          210
+        ]
+      }
+    ],
+    "failures": [],
+    "errors": [],
+    "library": []
+  },
+  "desktop": [
+    {
+      "file": "index",
+      "selector": "#uzel",
+      "before": [
+        1904,
+        1041
+      ],
+      "after": [
+        1904,
+        1041
+      ],
+      "differentPixels": 0
+    },
+    {
+      "file": "index",
+      "selector": ".ap-ind",
+      "before": [
+        438,
+        59
+      ],
+      "after": [
+        438,
+        59
+      ],
+      "differentPixels": 0
+    },
+    {
+      "file": "index",
+      "selector": ".hero-a",
+      "before": [
+        1904,
+        734
+      ],
+      "after": [
+        1904,
+        734
+      ],
+      "differentPixels": 0
+    },
+    {
+      "file": "index",
+      "selector": ".stgg",
+      "before": [
+        1904,
+        577
+      ],
+      "after": [
+        1904,
+        577
+      ],
+      "differentPixels": 0
+    },
+    {
+      "file": "servis",
+      "selector": ".hvs--season",
+      "before": [
+        1904,
+        596
+      ],
+      "after": [
+        1904,
+        596
+      ],
+      "differentPixels": 0
+    },
+    {
+      "file": "servis",
+      "selector": ".hvs--err",
+      "before": [
+        1208,
+        511
+      ],
+      "after": [
+        1208,
+        511
+      ],
+      "differentPixels": 0
+    },
+    {
+      "file": "servis",
+      "selector": "#oplomb",
+      "before": [
+        1208,
+        1886
+      ],
+      "after": [
+        1208,
+        1886
+      ],
+      "differentPixels": 0
+    },
+    {
+      "file": "ustanovka",
+      "selector": "#scheme",
+      "before": [
+        1904,
+        890
+      ],
+      "after": [
+        1904,
+        890
+      ],
+      "differentPixels": 0
+    },
+    {
+      "file": "obsledovanie",
+      "selector": "[data-hvs]",
+      "before": [
+        1824,
+        995
+      ],
+      "after": [
+        1824,
+        995
+      ],
+      "differentPixels": 0
+    }
+  ]
+}

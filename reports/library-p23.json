@@ -1,0 +1,473 @@
+{
+  "results": [
+    {
+      "id": "uzel",
+      "w": 390,
+      "states": 10,
+      "problems": []
+    },
+    {
+      "id": "svc",
+      "w": 390,
+      "states": 8,
+      "problems": []
+    },
+    {
+      "id": "stgg",
+      "w": 390,
+      "states": 7,
+      "problems": []
+    },
+    {
+      "id": "ap",
+      "w": 390,
+      "states": 9,
+      "problems": []
+    },
+    {
+      "id": "itp",
+      "w": 390,
+      "states": 7,
+      "problems": []
+    },
+    {
+      "id": "sxrun",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "chain",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "tu",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sx2",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "gost",
+      "w": 390,
+      "states": 4,
+      "problems": []
+    },
+    {
+      "id": "thr",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sheets",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "montazh",
+      "w": 390,
+      "states": 9,
+      "problems": []
+    },
+    {
+      "id": "datchik",
+      "w": 390,
+      "states": 8,
+      "problems": []
+    },
+    {
+      "id": "trial",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "oplomb",
+      "w": 390,
+      "states": 4,
+      "problems": []
+    },
+    {
+      "id": "season",
+      "w": 390,
+      "states": 13,
+      "problems": []
+    },
+    {
+      "id": "err",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "remont",
+      "w": 390,
+      "states": 10,
+      "problems": []
+    },
+    {
+      "id": "ic-svc",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-ap",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-card",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-obj",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "divs",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "parts",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sym",
+      "w": 390,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "uzel",
+      "w": 768,
+      "states": 10,
+      "problems": []
+    },
+    {
+      "id": "svc",
+      "w": 768,
+      "states": 8,
+      "problems": []
+    },
+    {
+      "id": "stgg",
+      "w": 768,
+      "states": 7,
+      "problems": []
+    },
+    {
+      "id": "ap",
+      "w": 768,
+      "states": 9,
+      "problems": []
+    },
+    {
+      "id": "itp",
+      "w": 768,
+      "states": 7,
+      "problems": []
+    },
+    {
+      "id": "sxrun",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "chain",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "tu",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sx2",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "gost",
+      "w": 768,
+      "states": 4,
+      "problems": []
+    },
+    {
+      "id": "thr",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sheets",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "montazh",
+      "w": 768,
+      "states": 9,
+      "problems": []
+    },
+    {
+      "id": "datchik",
+      "w": 768,
+      "states": 8,
+      "problems": []
+    },
+    {
+      "id": "trial",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "oplomb",
+      "w": 768,
+      "states": 4,
+      "problems": []
+    },
+    {
+      "id": "season",
+      "w": 768,
+      "states": 13,
+      "problems": []
+    },
+    {
+      "id": "err",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "remont",
+      "w": 768,
+      "states": 10,
+      "problems": []
+    },
+    {
+      "id": "ic-svc",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-ap",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-card",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-obj",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "divs",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "parts",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sym",
+      "w": 768,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "uzel",
+      "w": 1920,
+      "states": 10,
+      "problems": []
+    },
+    {
+      "id": "svc",
+      "w": 1920,
+      "states": 8,
+      "problems": []
+    },
+    {
+      "id": "stgg",
+      "w": 1920,
+      "states": 7,
+      "problems": []
+    },
+    {
+      "id": "ap",
+      "w": 1920,
+      "states": 9,
+      "problems": []
+    },
+    {
+      "id": "itp",
+      "w": 1920,
+      "states": 7,
+      "problems": []
+    },
+    {
+      "id": "sxrun",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "chain",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "tu",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sx2",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "gost",
+      "w": 1920,
+      "states": 4,
+      "problems": []
+    },
+    {
+      "id": "thr",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sheets",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "montazh",
+      "w": 1920,
+      "states": 9,
+      "problems": []
+    },
+    {
+      "id": "datchik",
+      "w": 1920,
+      "states": 8,
+      "problems": []
+    },
+    {
+      "id": "trial",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "oplomb",
+      "w": 1920,
+      "states": 4,
+      "problems": []
+    },
+    {
+      "id": "season",
+      "w": 1920,
+      "states": 13,
+      "problems": []
+    },
+    {
+      "id": "err",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "remont",
+      "w": 1920,
+      "states": 10,
+      "problems": []
+    },
+    {
+      "id": "ic-svc",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-ap",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-card",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "ic-obj",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "divs",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "parts",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    },
+    {
+      "id": "sym",
+      "w": 1920,
+      "states": 1,
+      "problems": []
+    }
+  ],
+  "errors": []
+}

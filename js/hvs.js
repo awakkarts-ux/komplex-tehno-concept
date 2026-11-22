@@ -7,6 +7,25 @@
   function $$(sel, root) { return [].slice.call((root || document).querySelectorAll(sel)); }
   function pad2(n) { return String(n).padStart(2, '0'); }
   var NS = 'http://www.w3.org/2000/svg';
+  var fitters = [];
+  // Reserve the tallest state at the actual width and with the loaded fonts.
+  // Measuring an inert clone avoids changing the selected item or live announcements.
+  function stableInfo(info, items, render) {
+    function measure() {
+      info.style.minHeight = '';
+      if (!touchMQ.matches || !info.clientWidth) return;
+      var probe = info.cloneNode(true), max = 0;
+      probe.removeAttribute('data-hvs-info'); probe.removeAttribute('data-season-info');
+      probe.setAttribute('aria-hidden', 'true'); probe.inert = true;
+      probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;min-height:0;height:auto;width:' + info.getBoundingClientRect().width + 'px';
+      info.after(probe);
+      items.forEach(function (it) { render(probe, it); max = Math.max(max, probe.getBoundingClientRect().height); });
+      probe.remove(); info.style.minHeight = Math.ceil(max) + 'px';
+    }
+    fitters.push(measure); measure(); addEventListener('resize', measure);
+    touchMQ.addEventListener('change', measure);
+    if (document.fonts) document.fonts.ready.then(measure);
+  }
 
   $$('[data-hvs]').forEach(function (stage) {
     var ITEMS = JSON.parse(stage.getAttribute('data-items'));
@@ -48,7 +67,7 @@
       var ds = Math.min(3.4, Math.max(1, 1 / k));
       dots.forEach(function (d) { d.firstChild.setAttribute('transform', 'scale(' + ds.toFixed(2) + ')'); });
     }
-    fit(); addEventListener('resize', fit);
+    fit(); fitters.push(fit); addEventListener('resize', fit);
 
     function mark(el) {
       var n = hits.indexOf(el);
@@ -114,6 +133,10 @@
     });
     function syncMode() { clearAll(); fit(); if (touchMQ.matches && info) select(order[curK]); }
     touchMQ.addEventListener('change', syncMode); syncMode();
+    if (info) stableInfo(info, ITEMS, function (p, it) {
+      p.querySelector('.hvs__info-t').textContent = it.t;
+      p.querySelector('.hvs__info-d').textContent = it.d;
+    });
   });
 
 
@@ -129,6 +152,14 @@
     var TIPS = JSON.parse(box.getAttribute('data-tips')), svg = box.querySelector('svg.hvs__svg'), tip = box.querySelector('.hvs__tip');
     var root = box.closest('.hvs'), info = root.querySelector('[data-season-info]');
     var mos = $$('.mo', svg), cur = 5, pinned = null;
+    var texts = $$('text', svg);
+    texts.forEach(function (t) { t.dataset.seasonFs = t.getAttribute('font-size') || getComputedStyle(t).fontSize; });
+    function fitSeason() {
+      var k = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
+      if (!k) return;
+      texts.forEach(function (t) { var fs = parseFloat(t.dataset.seasonFs); t.style.fontSize = (innerWidth < 1920 ? Math.max(fs, 12 / k) : fs) + 'px'; });
+    }
+    fitSeason(); addEventListener('resize', fitSeason); touchMQ.addEventListener('change', fitSeason);
     function rows(d) { return d.r.map(function (r) { return '<li><i>' + SICO[r[0]] + '</i><div><strong>' + r[1] + '</strong> <span>— ' + r[2] + '</span></div></li>'; }).join(''); }
     function mark(g) { mos.forEach(function (x) { x.classList.toggle('on', x === g); }); }
     function show(g) {
@@ -163,7 +194,23 @@
     $$('[data-hvs-step]', info).forEach(function (b) { b.addEventListener('click', function () { select(cur + +b.getAttribute('data-hvs-step')); }); });
     function syncMode() { pinned = null; tip.classList.remove('on'); mark(null); if (touchMQ.matches) select(cur); }
     touchMQ.addEventListener('change', syncMode); syncMode();
+    stableInfo(info, TIPS, function (p, d) {
+      p.querySelector('.hvs__info-t').textContent = d.t + ' · ' + d.p;
+      p.querySelector('.hvs__info-r').innerHTML = rows(d);
+    });
   });
+
+  // Also covers non-interactive diagrams, including the error chart and season.
+  function fitScrollHints() {
+    $$('.hvs__sc').forEach(function (sc) {
+      var scrolls = sc.scrollWidth > sc.clientWidth + 2;
+      sc.classList.toggle('is-scroll', scrolls);
+      var hint = sc.nextElementSibling;
+      if (hint && hint.classList.contains('hvs__swipe')) hint.classList.toggle('is-scroll', scrolls);
+    });
+  }
+  fitScrollHints(); addEventListener('resize', fitScrollHints); addEventListener('load', fitScrollHints);
+  if (document.fonts) document.fonts.ready.then(fitScrollHints);
 
   /* ---------- Ремонт: сегмент «Было / Стало / Реконструкция» ---------- */
   $$('[data-hvs-seg]').forEach(function (seg) {
@@ -172,6 +219,7 @@
       b.addEventListener('click', function () {
         btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
         $$('[data-s]', wrap).forEach(function (e) { e.classList.toggle('is-off', e.getAttribute('data-s') !== b.getAttribute('data-s')); });
+        fitters.forEach(function (fit) { fit(); }); fitScrollHints();
       });
     });
   });

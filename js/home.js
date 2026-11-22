@@ -14,6 +14,15 @@
     var svg = stage.querySelector('.uzel__svg'), tip = stage.querySelector('.uzel__tip');
     var hits = $$('.hit', svg), dots = $$('.dot', svg), lbls = $$('text.lbl', svg);
     var VW = 1320;
+    var sc = stage.querySelector('.uzel__sc');
+    if (!sc) {
+      sc = document.createElement('div'); sc.className = 'uzel__sc';
+      svg.before(sc); sc.appendChild(svg);
+      var swipe = document.createElement('p'); swipe.className = 'uzel__swipe';
+      swipe.textContent = '← Схема листается →'; sc.after(swipe);
+    }
+    sc.setAttribute('tabindex', '0'); sc.setAttribute('role', 'region');
+    sc.setAttribute('aria-label', 'Схема узла: горизонтальная прокрутка');
     // точки: обёртка для масштаба (на узком экране точка не меньше ~10 px)
     dots.forEach(function (d) {
       var g = document.createElementNS('http://www.w3.org/2000/svg', 'g'); g.setAttribute('class', 'dot-s');
@@ -23,6 +32,7 @@
     var deco = $$('text:not(.lbl)', svg).filter(function (t) { return t.getAttribute('font-size'); });
     deco.forEach(function (t) { t.dataset.fs = t.getAttribute('font-size'); });
     function fit() {
+      stage.classList.toggle('is-scroll', sc.scrollWidth > sc.clientWidth + 2);
       var k = svg.getBoundingClientRect().width / VW || 1;
       // подписи схемы не мельче 12 px после масштаба (на ≤1023 они скрыты — вместо них легенда над схемой)
       lbls.forEach(function (t) { var fs = +t.dataset.fs; t.style.fontSize = (fs * k < 12 ? (12 / k).toFixed(2) : fs) + 'px'; });
@@ -73,6 +83,10 @@
       infoT.textContent = it.t; infoD.textContent = it.d;
       cnt.textContent = pad2(k + 1) + ' / ' + pad2(ITEMS.length);
       mark(h);
+      if (touchMQ.matches && sc.scrollWidth > sc.clientWidth + 2) {
+        var d = dots[i] || h, r = d.getBoundingClientRect(), c = sc.getBoundingClientRect();
+        if (r.left < c.left + 24 || r.right > c.right - 24) sc.scrollBy({ left: r.left + r.width / 2 - c.left - c.width / 2, behavior: reduce ? 'auto' : 'smooth' });
+      }
     }
     function centers(list) { return list.map(function (e) { var r = e.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }); }
     function nearest(list, x, y, rad) {
@@ -90,8 +104,28 @@
     $$('[data-uzel-step]', info).forEach(function (b) {
       b.addEventListener('click', function () { select(order[(curK + +b.dataset.uzelStep + ITEMS.length) % ITEMS.length]); });
     });
-    function syncMode() { clearAll(); if (touchMQ.matches) select(order[curK]); }
+    function reserveInfo() {
+      info.style.minHeight = '';
+      if (!touchMQ.matches || !info.clientWidth) return;
+      var probe = info.cloneNode(true), max = 0;
+      probe.removeAttribute('data-uzel-info'); probe.setAttribute('aria-hidden', 'true'); probe.inert = true;
+      probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;min-height:0;height:auto;width:' + info.getBoundingClientRect().width + 'px';
+      info.after(probe);
+      ITEMS.forEach(function (it) { probe.querySelector('.uzel__info-t').textContent = it.t; probe.querySelector('.uzel__info-d').textContent = it.d; max = Math.max(max, probe.getBoundingClientRect().height); });
+      probe.remove(); info.style.minHeight = Math.ceil(max) + 'px';
+    }
+    function syncMode() { clearAll(); fit(); reserveInfo(); if (touchMQ.matches) select(order[curK]); }
     touchMQ.addEventListener('change', syncMode); syncMode();
+    addEventListener('resize', reserveInfo);
+    if (document.fonts) document.fonts.ready.then(reserveInfo);
+  }
+
+  var facts = document.querySelector('.hero-a__facts');
+  if (facts) {
+    var factsHint = document.createElement('p'); factsHint.className = 'hero-a__swipe';
+    factsHint.textContent = '← Листайте цифры →'; facts.after(factsHint);
+    function fitFacts() { factsHint.hidden = !matchMedia('(max-width: 767px)').matches || facts.scrollWidth <= facts.clientWidth + 2; }
+    fitFacts(); addEventListener('resize', fitFacts);
   }
 
   /* ---------- Услуги: кадр чертежа следит за открытой / наведённой строкой ---------- */

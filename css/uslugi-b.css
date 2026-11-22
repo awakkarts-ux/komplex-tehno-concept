@@ -173,7 +173,7 @@
   .hvs--season { padding: 1rem; } .hvs__stol { padding: .75rem; } .hvs__stol--err { padding: 0; }
   .hvs__sleg { grid-template-columns: minmax(0, 1fr); }
   .hvs__sc--err { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
-  .hvs__sc--err .hvs__err { width: max(100%, var(--hvs-min, 37rem)); }
+  .hvs__sc--err .hvs__err { width: max(100%, var(--hvs-min, 37rem)); max-width: none; }
   .sv2 .sv2-label--ic { font-size: 1.0625rem; } .sv2 .sv2-label--ic img { width: 2.5rem; height: 2.5rem; }
 }
 
@@ -262,3 +262,18 @@
 .sx-stamp { width: max(8.5rem, 136px); height: max(8.5rem, 136px); }
 /* 20.11, аудит П2: пиктограммы объектов — подпись ИТП/ВВОД/В СЕТЬ (10 px в SVG, на экране 7–11,6 px) не показываем */
 .sv2-obj svg text.ta { display: none; }
+
+/* Only show a swipe prompt when that particular diagram really overflows. */
+.hvs .hvs__sc:not(.is-scroll) > .hvs__swipe,
+.hvs .hvs__sc + .hvs__swipe:not(.is-scroll) { display: none; }
+
+/* audit-wide-touch:start — rem scaling must not shrink touch cards or controls. */
+@media (min-width: 1024px) and (hover: none) {
+  .hvs__info { font-size: max(1rem, 15px); }
+  .hvs__info-d { font-size: max(.9375rem, 15px); }
+  .hvs__info-t { font-size: max(1.5rem, 22px); }
+  .hvs__cnt, .hvs__lg { font-size: max(.8125rem, 13px); }
+  .hvs__btn { width: max(2.75rem, 44px); height: max(2.75rem, 44px); }
+  .hvs__btn .ic { width: max(1.25rem, 20px); height: max(1.25rem, 20px); }
+}
+/* audit-wide-touch:end */
