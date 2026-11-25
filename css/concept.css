@@ -363,6 +363,9 @@ img { transition: opacity .4s ease; }
 .footer li + li { margin-top: .25rem; }
 .footer li a { display: inline-block; padding: .25rem 0; min-height: 24px; }   /* цель клика от 24px */
 .footer a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.footer__grid > .hl-wrap > .hl { background: rgba(255, 255, 255, .16); }
+.footer__grid > .hl-wrap > ul > li > a:hover { text-decoration: none; }
+@media (prefers-reduced-motion: reduce) { .footer__grid > .hl-wrap > .hl { transition: none; } }
 .footer__bottom { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .25); font-size: max(.875rem, 13px); opacity: .8; }
 
 /* ---------- Попап «Получить консультацию» — без формы, как на учетстоках ---------- */

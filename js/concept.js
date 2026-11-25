@@ -274,6 +274,9 @@
     var rem = function (v) { return function () { return parseFloat(getComputedStyle(document.documentElement).fontSize) * v; }; };
     var nav = document.querySelector('.nav');
     if (nav) highlight(nav, ':scope > a, :scope > .mnav__trigger', rem(.875), rem(0));   // у пунктов свои поля .5rem
+    document.querySelectorAll('.footer__grid > div:has(> ul)').forEach(function (column) {
+      highlight(column, ':scope > ul > li > a', rem(.875), rem(0));
+    });
     document.querySelectorAll('.mnav__panel').forEach(function (m) { highlight(m, 'a.mnav__feature, a.mnav__link, a.mnav__also, .dir-link', rem(0), rem(0)); });
     // оглавление страниц услуг — как боковое меню unlumen-ui: шкала рисок слева, плашка под пунктом с курсором
     document.querySelectorAll('.sp-toc__list').forEach(function (l) { highlight(l, ':scope > li > a', rem(0), rem(0)); });
